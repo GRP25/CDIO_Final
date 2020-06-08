@@ -1,0 +1,25 @@
+@startuml
+class "PrescriptionResource" as preres {
+    + getPrescription(int)\t\t\t\t:Response
+    + getPrescriptionList()\t\t\t\t:Response
+    + createPrescription(PrescriptionDTO)\t:Response
+    + updatePrescription(PrescriptionDTO)\t:Response
+}
+class "PrescriptionDAO" as predao {
+    + getPrescription(int)\t\t\t\t:PrescriptionDTO
+    + getPrescriptionList()\t\t\t\t:PrescriptionDTO[]
+    + createPrescription(PrescriptionDTO)\t:void
+    + updatePrescription(PrescriptionDTO)\t:void
+}
+class "PrescriptionService" as preser {
+}
+interface "IPrescriptionDAO" as ipredao {
+    + getPrescription(int)\t\t\t\t:PrescriptionDTO
+    + getPrescriptionList()\t\t\t\t:PrescriptionDTO[]
+    + createPrescription(PrescriptionDTO)\t:void
+    + updatePrescription(PrescriptionDTO)\t:void
+}
+ipredao -d- predao
+ipredao -u- preser
+preres -d- preser
+@enduml

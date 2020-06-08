@@ -1,0 +1,26 @@
+@startuml
+class "UserDAO" as usrdao {
+    + getUser(int)\t\t:UserDTO
+    + getUserList()\t\t:UserDTO[]
+    + createUser(userDTO)\t:void
+    + updateUser(userDTO)\t:void
+}
+interface "IUserDAO" as iusrdao {
+    + getUser(int)\t\t:UserDTO
+    + getUserList()\t\t:UserDTO[]
+    + createUser(userDTO)\t:void
+    + updateUser(userDTO)\t:void
+}
+class "UserService" as usrser {
+}
+class "UserResource" as usrres {
+    + getUser(int)\t\t:Response
+    + getUserList()\t\t:Response
+    + createUser(userDTO)\t:Response
+    + updateUser(userDTO)\t:Response
+    
+}
+iusrdao -d- usrdao
+iusrdao -u- usrser
+usrres -d- usrser
+@enduml

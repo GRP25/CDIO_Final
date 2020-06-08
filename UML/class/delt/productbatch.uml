@@ -1,0 +1,26 @@
+@startuml
+class "ProductBatchDAO" as prodao {
+    + getProductBatch(int)\t\t\t:ProductBatchDTO
+    + getProductBatchList()\t\t\t:ProductBatchDTO[]
+    + createProductBatch(ProductBatchDTO)\t:void
+    + updateProductBatch(ProductBatchDTO)\t:void
+}
+interface "IProductBatchDAO" as iprodao {
+    + getProductBatch(int)\t\t\t:ProductBatchDTO
+    + getProductBatchList()\t\t\t:ProductBatchDTO[]
+    + createProductBatch(ProductBatchDTO)\t:void
+    + updateProductBatch(ProductBatchDTO)\t:void
+}
+class "ProductBatchService" as prbser {
+}
+class "ProductBatchResource" as prbres {
+    + getProductBatch(int)\t\t\t\t:Response
+    + getProductBatchList()\t\t\t\t:Response
+    + createProductBatch(ProductBatchDTO)\t:Response
+    + updateProductBatch(ProductBatchDTO)\t:Response
+}
+
+iprodao -d- prodao
+prbres -d- prbser
+iprodao -u- prbser
+@enduml

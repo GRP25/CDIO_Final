@@ -1,0 +1,28 @@
+@startuml
+class "CommodityBatchResource" as cobres {
+    + getCommodityBatch(int)\t\t\t\t\t:Response
+    + getCommodityBatchList()\t\t\t\t\t:Response
+    + getCommodityBatchList(int)\t\t\t\t\t:Response
+    + createCommodityBatch(CommodityBatchDTO)\t:Response
+    + updateCommodityBatch(CommodityBatchDTO)\t:Response
+}
+interface "ICommodityBatchDAO" as icobdao {
+    + getCommodityBatch(int)\t\t\t\t\t:CommodityBatchDTO
+    + getCommodityBatchList()\t\t\t\t\t:CommodityBatchDTO[]
+    + getCommodityBatchList(int)\t\t\t\t\t:CommodityBatchDTO[]
+    + createCommodityBatch(CommodityBatchDTO)\t:void
+    + updateCommodityBatch(CommodityBatchDTO)\t:void
+}
+class "CommodityBatchDAO" as cobdao {
+    + getCommodityBatch(int)\t\t\t\t\t:CommodityBatchDTO
+    + getCommodityBatchList()\t\t\t\t\t:CommodityBatchDTO[]
+    + getCommodityBatchList(int)\t\t\t\t\t:CommodityBatchDTO[]
+    + createCommodityBatch(CommodityBatchDTO)\t:void
+    + updateCommodityBatch(CommodityBatchDTO)\t:void
+}
+class "CommodityBatchService" as cobser {
+}
+icobdao -d- cobdao
+icobdao -u- cobser
+cobres -d- cobser
+@enduml

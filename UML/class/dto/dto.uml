@@ -1,0 +1,54 @@
+@startuml
+class "UserDTO" as brudto {
+    - userId\t:int
+    - firstname\t:String
+    - surname\t:String
+    - cpr\t\t:String
+    - initials\t:String
+    - roles\t\t:String[]
+}
+
+class "CommodityDTO" as rvadto {
+    - commodityId\t\t:int
+    - commodityName\t\t:String
+    - supplier\t\t\t:String
+}
+class "CommodityBatchDTO" as rvbdto {
+    - commodityBatchId\t:int
+    - commodityId\t\t:int
+    - weight\t\t\t:double
+}
+
+class "PrescriptionDTO" as recdto {
+    - prescriptionId\t\t:int
+    - prescriptionName\t:String
+}
+
+class "PrescriptionCompDTO" as rccdto {
+    - prescriptionId\t:int
+    - commodityId\t:int
+    - nomNetto\t\t:double
+    - tollerance\t\t:double
+
+}
+
+class "ProductBatchDTO" as prodto {
+    - productBatchId\t:int
+    - status\t\t:int
+    - prescriptionId\t:int
+}
+class "ProductBatchCompDTO" as prcdto {
+    - productBatchId\t:int
+    - commodityId\t:int
+    - userId\t\t:int
+    - tara\t\t\t:double
+    - netto\t\t\t:double
+
+}
+prcdto -d- brudto
+prcdto -u- rvadto
+rvbdto -r- rvadto
+rccdto -l- recdto
+rccdto -d- rvadto
+recdto -l- prodto
+@enduml

@@ -49,45 +49,45 @@ rectangle "Softwaresystem" {
         - netto\t\t\t:double
 
     }
-    class "IUserDAO" as usrdao {
+    class "UserDAO" as usrdao {
         + getUser(int)\t\t:UserDTO
         + getUserList()\t\t:UserDTO[]
         + createUser(userDTO)\t:void
         + updateUser(userDTO)\t:void
     }
-    class "ICommodityDAO" as comdao {
+    class "CommodityDAO" as comdao {
         + getCommodity(int)\t\t\t\t:CommodityDTO
         + getCommodityList()\t\t\t\t:CommodityDTO[]
         + createCommodity(CommodityDTO)\t:void
         + updateCommodity(CommodityDTO)\t:void
     }
-    class "ICommodityBatchDAO" as cobdao {
+    class "CommodityBatchDAO" as cobdao {
         + getCommodityBatch(int)\t\t\t\t\t:CommodityBatchDTO
         + getCommodityBatchList()\t\t\t\t\t:CommodityBatchDTO[]
         + getCommodityBatchList(int)\t\t\t\t\t:CommodityBatchDTO[]
         + createCommodityBatch(CommodityBatchDTO)\t:void
         + updateCommodityBatch(CommodityBatchDTO)\t:void
     }
-    class "IPrescriptionDAO" as predao {
+    class "PrescriptionDAO" as predao {
         + getPrescription(int)\t\t\t\t:PrescriptionDTO
         + getPrescriptionList()\t\t\t\t:PrescriptionDTO[]
         + createPrescription(PrescriptionDTO)\t:void
         + updatePrescription(PrescriptionDTO)\t:void
     }
-    class "IPrescriptionCompDAO" as prcdao {
+    class "PrescriptionCompDAO" as prcdao {
         + getPrescriptionComp(int)\t\t\t\t\t:PrescriptionCompDTO
         + getPrescriptionCompList()\t\t\t\t\t:PrescriptionCompDTO[]
         + createPrescriptionComp(PrescriptionCompDTO)\t:void
         + updatePrescriptionComp(PrescriptionCompDTO)\t:void
         + getPrescriptionCompList(int)\t\t\t\t\t:PrescriptionDTO[]
     }
-    class "IProductBatchDAO" as prodao {
+    class "ProductBatchDAO" as prodao {
         + getProductBatch(int)\t\t\t:ProductBatchDTO
         + getProductBatchList()\t\t\t:ProductBatchDTO[]
         + createProductBatch(ProductBatchDTO)\t:void
         + updateProductBatch(ProductBatchDTO)\t:void
     }
-    class "IProductBatchCompDAO" as prbdao{
+    class "ProductBatchCompDAO" as prbdao{
         + getProductBatchComp(int)\t\t\t\t:ProductBatchCompDTO
         + getProductBatchCompList()\t\t\t\t:ProductBatchCompDTO[]
         + createProductBatchComp(ProductBatchCompDTO)\t:void
@@ -139,11 +139,81 @@ rectangle "Softwaresystem" {
         + updateProductBatchComp(ProductBatchCompDTO)\t:void
         + getProductBatchCompList(int)\t\t\t\t\t:ProductBatchCompDTO[]
     }
-    class "DatabaseHandler" as idbhdlr {
-        static connect()\t\t:Connection
+    class "DatabaseHandler" as dbhdlr {
+        + static connect()\t\t:Connection
     }
 
-    
+    class "Validation" as valida {
+        login(int)\t\t:boolean
+        nameValidator(String)\t:String
+        cprValidator(String)\t:String
+        weightValidation(double)\t:String
+    }
+    class "Conversion" as conver {
+        nameConversion(String)\t:String
+    }
+    class "UserService" as usrser {
+    }
+    class "CommodityService" as comser {
+    }
+    class "CommodityBatchService" as cobser {
+    }
+    class "PrescriptionService" as preser {
+    }
+    class "PrescriptionCompService" as prcser {
+    }
+    class "ProductBatchService" as prbser {
+    }
+    class "ProductBatchCompService" as pbcser {
+    }
+
+    class "UserResource" as usrres {
+        + getUser(int)\t\t:Response
+        + getUserList()\t\t:Response
+        + createUser(userDTO)\t:Response
+        + updateUser(userDTO)\t:Response
+        
+    }
+    class "CommodityResource" as comres {
+        + getCommodity(int)\t\t\t\t:Response
+        + getCommodityList()\t\t\t\t:Response
+        + createCommodity(CommodityDTO)\t:Response
+        + updateCommodity(CommodityDTO)\t:Response
+    }
+    class "CommodityBatchResource" as cobres {
+        + getCommodityBatch(int)\t\t\t\t\t:Response
+        + getCommodityBatchList()\t\t\t\t\t:Response
+        + getCommodityBatchList(int)\t\t\t\t\t:Response
+        + createCommodityBatch(CommodityBatchDTO)\t:Response
+        + updateCommodityBatch(CommodityBatchDTO)\t:Response
+
+    }
+    class "PrescriptionResource" as preres {
+        + getPrescription(int)\t\t\t\t:Response
+        + getPrescriptionList()\t\t\t\t:Response
+        + createPrescription(PrescriptionDTO)\t:Response
+        + updatePrescription(PrescriptionDTO)\t:Response
+    }
+    class "PrescriptionCompResource" as prcres {
+        + getPrescriptionComp(int)\t\t\t\t\t:Response
+        + getPrescriptionCompList()\t\t\t\t\t:Response
+        + createPrescriptionComp(PrescriptionCompDTO)\t:Response
+        + updatePrescriptionComp(PrescriptionCompDTO)\t:Response
+        + getPrescriptionCompList(int)\t\t\t\t\t:Response
+    }
+    class "ProductBatchResource" as prbres {
+        + getProductBatch(int)\t\t\t\t:Response
+        + getProductBatchList()\t\t\t\t:Response
+        + createProductBatch(ProductBatchDTO)\t:Response
+        + updateProductBatch(ProductBatchDTO)\t:Response
+    }
+    class "ProductBatchCompResource" as pbcres {
+        + getProductBatchComp(int)\t\t\t\t\t:Response
+        + getProductBatchCompList()\t\t\t\t\t:Response
+        + createProductBatchComp(ProductBatchCompDTO)\t:Response
+        + updateProductBatchComp(ProductBatchCompDTO)\t:Response
+        + getProductBatchCompList(int)\t\t\t\t:Response
+    }
 }
 prcdto -d- brudto
 prcdto -u- rvadto
@@ -152,11 +222,52 @@ rccdto -l- recdto
 rccdto -d- rvadto
 recdto -l- prodto
 
-iusrdao - usrdao
-icomdao - comdao
-icobdao - cobdao
-ipredao - predao
-iprcdao - prcdto
-iprodao - prodao
-iprbdao - prbdao
+iusrdao -d- usrdao
+icomdao -d- comdao
+icobdao -d- cobdao
+ipredao -d- predao
+iprcdao -d- prcdao
+iprodao -d- prodao
+iprbdao -d- prbdao
+
+iusrdao -u- usrser
+icomdao -u- comser
+icobdao -u- cobser
+ipredao -u- preser
+iprcdao -u- prcser
+iprodao -u- pbcser
+iprbdao -u- prbser
+
+usrres -d- usrser
+comres -d- comser
+cobres -d- cobser
+preres -d- preser
+prcres -d- prcser
+pbcres -d- pbcser
+prbres -d- prbser
+
+dbhdlr -u- usrdao
+dbhdlr -u- comdao
+dbhdlr -u- cobdao
+dbhdlr -u- predao
+dbhdlr -u- prcdao
+dbhdlr -u- prodao
+dbhdlr -u- prbdao
+
+usrres -u- valida
+comres -u- valida
+cobres -u- valida
+preres -u- valida
+prcres -u- valida
+pbcres -u- valida
+prbres -u- valida
+
+usrres -u- conver
+comres -u- conver
+cobres -u- conver
+preres -u- conver
+prcres -u- conver
+pbcres -u- conver
+prbres -u- conver
+
 @enduml

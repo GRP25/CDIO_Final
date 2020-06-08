@@ -1,0 +1,29 @@
+@startuml
+class "ProductBatchCompDAO" as prbdao{
+    + getProductBatchComp(int)\t\t\t\t:ProductBatchCompDTO
+    + getProductBatchCompList()\t\t\t\t:ProductBatchCompDTO[]
+    + createProductBatchComp(ProductBatchCompDTO)\t:void
+    + updateProductBatchComp(ProductBatchCompDTO)\t:void
+    + getProductBatchCompList(int)\t\t\t\t\t:ProductBatchCompDTO[]
+}
+interface "IProductBatchCompDAO" as iprbdao{
+    + getProductBatchComp(int)\t\t\t\t:ProductBatchCompDTO
+    + getProductBatchCompList()\t\t\t\t:ProductBatchCompDTO[]
+    + createProductBatchComp(ProductBatchCompDTO)\t:void
+    + updateProductBatchComp(ProductBatchCompDTO)\t:void
+    + getProductBatchCompList(int)\t\t\t\t\t:ProductBatchCompDTO[]
+}
+class "ProductBatchCompService" as pbcser {
+}
+class "ProductBatchCompResource" as pbcres {
+    + getProductBatchComp(int)\t\t\t\t\t:Response
+    + getProductBatchCompList()\t\t\t\t\t:Response
+    + createProductBatchComp(ProductBatchCompDTO)\t:Response
+    + updateProductBatchComp(ProductBatchCompDTO)\t:Response
+    + getProductBatchCompList(int)\t\t\t\t:Response
+}
+
+iprbdao -d- prbdao
+iprbdao -u- pbcser
+pbcres -d- pbcser
+@enduml

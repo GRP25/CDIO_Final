@@ -1,0 +1,25 @@
+@startuml
+class "CommodityDAO" as comdao {
+    + getCommodity(int)\t\t\t\t:CommodityDTO
+    + getCommodityList()\t\t\t\t:CommodityDTO[]
+    + createCommodity(CommodityDTO)\t:void
+    + updateCommodity(CommodityDTO)\t:void
+}
+interface "ICommodityDAO" as icomdao {
+    + getCommodity(int)\t\t\t\t:CommodityDTO
+    + getCommodityList()\t\t\t\t:CommodityDTO[]
+    + createCommodity(CommodityDTO)\t:void
+    + updateCommodity(CommodityDTO)\t:void
+}
+class "CommodityService" as comser {
+}
+class "CommodityResource" as comres {
+    + getCommodity(int)\t\t\t\t:Response
+    + getCommodityList()\t\t\t\t:Response
+    + createCommodity(CommodityDTO)\t:Response
+    + updateCommodity(CommodityDTO)\t:Response
+}
+icomdao -u- comser
+icomdao -d- comdao
+comres -d- comser
+@enduml
