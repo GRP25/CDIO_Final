@@ -10,7 +10,7 @@
 
 ## Use case arbejde
 
--Martin og Oliver
+- Martin og Oliver
   - Bruger admin og Afvejning
 - Thomas og Daniel
   - Råvare og Råvarebatch
