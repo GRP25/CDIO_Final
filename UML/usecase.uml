@@ -1,0 +1,19 @@
+@startuml
+title Usecase diagram
+left to right direction
+actor "Bruger" as act
+rectangle "Softwaresystem" {
+    (Brugeradministation) as bru
+    (Råvareadministration) as rva
+    (Receptadministration) as rec
+    (Råvarebatchadministration) as rvb
+    (Produktbatchadministration) as pro
+    (Afvejning) as vej
+}
+act -- bru
+act -- rva
+act -- rec
+act -- rvb
+act -- pro
+act -- vej
+@enduml

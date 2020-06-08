@@ -1,0 +1,39 @@
+@startuml
+title Domain model
+skinparam linetype ortho
+rectangle "Medicinalvirksomhed"{
+    object "Softwaresystem" as sys {
+    }
+
+    object "Dokumentation" as dok {
+    }
+
+    object "Leverandør" as lev {
+    }
+
+    object "Råvare" as rva {
+    }
+
+    object "Bruger" as bru {
+        type
+        rettigheder
+    }
+
+    object "Lager" as lag {
+    }
+
+    object "Recept" as rec {
+    }
+    
+    object "Produkt" as pro {
+    }
+}
+rec -d- rva : Indeholder
+sys -d- pro : Laver
+sys -u- dok : Printer
+rva -d- lev : Levere
+sys -r- bru : Administrere/bruger
+lag -l- rva : Indeholder
+sys -l- rec : Laver
+pro -d- rva : Indeholder
+@enduml

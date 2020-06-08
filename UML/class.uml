@@ -1,0 +1,162 @@
+@startuml
+skinparam linetype ortho
+title Klasse diagram
+rectangle "Softwaresystem" {
+
+    class "UserDTO" as brudto {
+        - userId\t:int
+        - firstname\t:String
+        - surname\t:String
+        - cpr\t\t:String
+        - initials\t:String
+        - roles\t\t:String[]
+    }
+
+    class "CommodityDTO" as rvadto {
+        - commodityId\t\t:int
+        - commodityName\t\t:String
+        - supplier\t\t\t:String
+    }
+    class "CommodityBatchDTO" as rvbdto {
+        - commodityBatchId\t:int
+        - commodityId\t\t:int
+        - weight\t\t\t:double
+    }
+
+    class "PrescriptionDTO" as recdto {
+        - prescriptionId\t\t:int
+        - prescriptionName\t:String
+    }
+
+    class "PrescriptionCompDTO" as rccdto {
+        - prescriptionId\t:int
+        - commodityId\t:int
+        - nomNetto\t\t:double
+        - tollerance\t\t:double
+
+    }
+
+    class "ProductBatchDTO" as prodto {
+        - productBatchId\t:int
+        - status\t\t:int
+        - prescriptionId\t:int
+    }
+    class "ProductBatchCompDTO" as prcdto {
+        - productBatchId\t:int
+        - commodityId\t:int
+        - userId\t\t:int
+        - tara\t\t\t:double
+        - netto\t\t\t:double
+
+    }
+    class "IUserDAO" as usrdao {
+        + getUser(int)\t\t:UserDTO
+        + getUserList()\t\t:UserDTO[]
+        + createUser(userDTO)\t:void
+        + updateUser(userDTO)\t:void
+    }
+    class "ICommodityDAO" as comdao {
+        + getCommodity(int)\t\t\t\t:CommodityDTO
+        + getCommodityList()\t\t\t\t:CommodityDTO[]
+        + createCommodity(CommodityDTO)\t:void
+        + updateCommodity(CommodityDTO)\t:void
+    }
+    class "ICommodityBatchDAO" as cobdao {
+        + getCommodityBatch(int)\t\t\t\t\t:CommodityBatchDTO
+        + getCommodityBatchList()\t\t\t\t\t:CommodityBatchDTO[]
+        + getCommodityBatchList(int)\t\t\t\t\t:CommodityBatchDTO[]
+        + createCommodityBatch(CommodityBatchDTO)\t:void
+        + updateCommodityBatch(CommodityBatchDTO)\t:void
+    }
+    class "IPrescriptionDAO" as predao {
+        + getPrescription(int)\t\t\t\t:PrescriptionDTO
+        + getPrescriptionList()\t\t\t\t:PrescriptionDTO[]
+        + createPrescription(PrescriptionDTO)\t:void
+        + updatePrescription(PrescriptionDTO)\t:void
+    }
+    class "IPrescriptionCompDAO" as prcdao {
+        + getPrescriptionComp(int)\t\t\t\t\t:PrescriptionCompDTO
+        + getPrescriptionCompList()\t\t\t\t\t:PrescriptionCompDTO[]
+        + createPrescriptionComp(PrescriptionCompDTO)\t:void
+        + updatePrescriptionComp(PrescriptionCompDTO)\t:void
+        + getPrescriptionCompList(int)\t\t\t\t\t:PrescriptionDTO[]
+    }
+    class "IProductBatchDAO" as prodao {
+        + getProductBatch(int)\t\t\t:ProductBatchDTO
+        + getProductBatchList()\t\t\t:ProductBatchDTO[]
+        + createProductBatch(ProductBatchDTO)\t:void
+        + updateProductBatch(ProductBatchDTO)\t:void
+    }
+    class "IProductBatchCompDAO" as prbdao{
+        + getProductBatchComp(int)\t\t\t\t:ProductBatchCompDTO
+        + getProductBatchCompList()\t\t\t\t:ProductBatchCompDTO[]
+        + createProductBatchComp(ProductBatchCompDTO)\t:void
+        + updateProductBatchComp(ProductBatchCompDTO)\t:void
+        + getProductBatchCompList(int)\t\t\t\t\t:ProductBatchCompDTO[]
+    }
+    interface "IUserDAO" as iusrdao {
+        + getUser(int)\t\t:UserDTO
+        + getUserList()\t\t:UserDTO[]
+        + createUser(userDTO)\t:void
+        + updateUser(userDTO)\t:void
+    }
+    interface "ICommodityDAO" as icomdao {
+        + getCommodity(int)\t\t\t\t:CommodityDTO
+        + getCommodityList()\t\t\t\t:CommodityDTO[]
+        + createCommodity(CommodityDTO)\t:void
+        + updateCommodity(CommodityDTO)\t:void
+    }
+    interface "ICommodityBatchDAO" as icobdao {
+        + getCommodityBatch(int)\t\t\t\t\t:CommodityBatchDTO
+        + getCommodityBatchList()\t\t\t\t\t:CommodityBatchDTO[]
+        + getCommodityBatchList(int)\t\t\t\t\t:CommodityBatchDTO[]
+        + createCommodityBatch(CommodityBatchDTO)\t:void
+        + updateCommodityBatch(CommodityBatchDTO)\t:void
+    }
+    interface "IPrescriptionDAO" as ipredao {
+        + getPrescription(int)\t\t\t\t:PrescriptionDTO
+        + getPrescriptionList()\t\t\t\t:PrescriptionDTO[]
+        + createPrescription(PrescriptionDTO)\t:void
+        + updatePrescription(PrescriptionDTO)\t:void
+    }
+    interface "IPrescriptionCompDAO" as iprcdao {
+        + getPrescriptionComp(int)\t\t\t\t\t:PrescriptionCompDTO
+        + getPrescriptionCompList()\t\t\t\t\t:PrescriptionCompDTO[]
+        + createPrescriptionComp(PrescriptionCompDTO)\t:void
+        + updatePrescriptionComp(PrescriptionCompDTO)\t:void
+        + getPrescriptionCompList(int)\t\t\t\t\t:PrescriptionDTO[]
+    }
+    interface "IProductBatchDAO" as iprodao {
+        + getProductBatch(int)\t\t\t:ProductBatchDTO
+        + getProductBatchList()\t\t\t:ProductBatchDTO[]
+        + createProductBatch(ProductBatchDTO)\t:void
+        + updateProductBatch(ProductBatchDTO)\t:void
+    }
+    interface "IProductBatchCompDAO" as iprbdao{
+        + getProductBatchComp(int)\t\t\t\t:ProductBatchCompDTO
+        + getProductBatchCompList()\t\t\t\t:ProductBatchCompDTO[]
+        + createProductBatchComp(ProductBatchCompDTO)\t:void
+        + updateProductBatchComp(ProductBatchCompDTO)\t:void
+        + getProductBatchCompList(int)\t\t\t\t\t:ProductBatchCompDTO[]
+    }
+    class "DatabaseHandler" as idbhdlr {
+        static connect()\t\t:Connection
+    }
+
+    
+}
+prcdto -d- brudto
+prcdto -u- rvadto
+rvbdto -r- rvadto
+rccdto -l- recdto
+rccdto -d- rvadto
+recdto -l- prodto
+
+iusrdao - usrdao
+icomdao - comdao
+icobdao - cobdao
+ipredao - predao
+iprcdao - prcdto
+iprodao - prodao
+iprbdao - prbdao
+@enduml
