@@ -23,4 +23,8 @@ class "ProductBatchResource" as prbres {
 iprodao -d- prodao
 prbres -d- prbser
 iprodao -u- prbser
+comdao --() DatabaseHandler 
+comres -() Validation
+Exceptions ()- comres
+Conversion ()-- comres
 @enduml

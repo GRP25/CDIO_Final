@@ -22,4 +22,8 @@ interface "IPrescriptionDAO" as ipredao {
 ipredao -d- predao
 ipredao -u- preser
 preres -d- preser
+comdao --() DatabaseHandler 
+comres -() Validation
+Exceptions ()- comres
+Conversion ()-- comres
 @enduml

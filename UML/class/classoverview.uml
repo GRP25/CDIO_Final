@@ -1,0 +1,57 @@
+@startuml
+skinparam linetype ortho
+title Klasse diagram
+rectangle "Softwaresystem" {
+
+    rectangle "User" as usr{
+    }
+    rectangle "Commodity" as com{
+    }
+    rectangle "CommodityBatch" as cob{
+    }
+    rectangle "Prescription" as pre {
+    }
+    rectangle "PrescriptionComp" as prc{
+    }
+    rectangle "ProductBatch" as pro {
+    }
+    rectangle "ProductBatchComp" as prb{
+    }
+    class "DatabaseHandler" as dbhdlr {
+        + static connect()\t\t:Connection
+    }
+
+    rectangle "Functonality" as fun {
+        class "Validation" as valida {
+            login(int)\t\t:boolean
+            nameValidator(String)\t:String
+            cprValidator(String)\t:String
+            weightValidation(double)\t:String
+        }
+        class "Conversion" as conver {
+            nameConversion(String)\t:String
+        }
+        rectangle "Exceptions" as exe {
+            class "NotAValidNameException" as exenam
+            class "NotAValidCPRException" as execpr
+        }
+    }
+}
+
+
+usr -u- fun
+com -u- fun
+cob -u- fun
+pre -u- fun
+prc -u- fun
+pro -u- fun
+prb -u- fun
+
+usr -u- dbhdlr
+com -u- dbhdlr
+cob -u- dbhdlr
+pre -u- dbhdlr
+prc -u- dbhdlr
+pro -u- dbhdlr
+prb -u- dbhdlr
+@enduml

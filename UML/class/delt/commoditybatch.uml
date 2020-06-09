@@ -25,4 +25,8 @@ class "CommodityBatchService" as cobser {
 icobdao -d- cobdao
 icobdao -u- cobser
 cobres -d- cobser
+comdao --() DatabaseHandler 
+comres -() Validation
+Exceptions ()- comres
+Conversion ()-- comres
 @enduml

@@ -25,5 +25,9 @@
 prcres -d- prcser
 iprcdao -d- prcdao
 iprcdao -u- prcser
+comdao --() DatabaseHandler 
+comres -() Validation
+Exceptions ()- comres
+Conversion ()-- comres
 
 @enduml
