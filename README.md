@@ -16,3 +16,13 @@
   - Råvare og Råvarebatch
 - Andrey og Mohamad
   - Pruduktionsbatch og Recept
+
+## TODO inden milestone 1
+- Klasse diagram skal være "færdigt"
+- Plan over forløbet (Gantt)
+    - Deadline (hvornår skal al kode være færdigt?)
+
+## Anden TODO
+- Implementering begynder med datalag Onsdag
+    - Skal vi dele elementerne op mellem os.? (Users/Commodities/Prescriptions osv.)
+- Skriv ned i slutningen af dagen hvad man har lavet og hvor mange timer man har brugt (evt)
