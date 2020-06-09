@@ -1,5 +1,23 @@
 @startuml
-actor ":User" as u
+actor ":Scientist" as u
 participant ":System" as s
+
+u -> s : logs in with userID
+return Success
+u -> s : picks a productbatch (ID) to produce
+return Ask for tara
+u -> s : register tara
+return Tara saved in productBatchComp
+loop while prescription has comp
+    s -> s : register userID in comp
+    s -> s : register tara in comp
+    loop while comp weight not in tollerance
+        s -> u : ask for comp weight
+        u -> s : input comp weight
+        s -> s : check tollerance
+    end loop
+    s -> s : save productBatchComp
+end loop
+
 
 @enduml
