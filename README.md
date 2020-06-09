@@ -1,5 +1,7 @@
 # CDIO_Final
-
+## Vigtige links
+[Opgavebeskrivelsen](https://docs.google.com/document/d/1QrAzcQmpb-4YLtxR1y-2_UD1ep6b3zqIt3s0HpE95iM/edit)
+[Gantt diagram](https://docs.google.com/spreadsheets/d/1CNBKCBNwR9ypWmpiL89Cq-r3YfgAK80_uBcye_2FB7k/edit?fbclid=IwAR1zHT7rFR00NNegIhTMGHC9Neyvlbj9UqFP4hxhQvGWHG5SgxCR0BYLT04#gid=0)
 
 
 ## Sprøgsmål til hjælpelære
