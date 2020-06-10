@@ -7,7 +7,7 @@ CREATE TABLE Users (
     cpr varchar(10),
     PRIMARY KEY (userId)
 );
-
+// hooo
 CREATE TABLE Roles (
     roleName VARCHAR(36) NOT NULL,
     PRIMARY KEY ( roleName )
