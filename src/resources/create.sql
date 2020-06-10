@@ -37,17 +37,6 @@ CREATE TABLE CommodityBatch (
     FOREIGN KEY (commodityId) REFERENCES Commodity(commodityId)
 );
 
-CREATE TABLE ProduktBatchComp (
-    productBatchId int NOT NULL,
-    commodityBatchId int,
-    userId int,
-    tara double,
-    netto double,
-    PRIMARY KEY (productBatchId, commodityBatchId),
-    FOREIGN KEY (productBatchId) REFERENCES ProduktBatch(productBatchId),
-    FOREIGN KEY (commodityBatchId) REFERENCES CommodityBatch(commodityBatchId),
-    FOREIGN KEY (userId) REFERENCES Users(userId)
-);
 
 CREATE TABLE Prescription (
     prescriptionId int NOT NULL,
@@ -65,6 +54,18 @@ CREATE TABLE ProduktBatch (
     FOREIGN KEY (prescriptionId) REFERENCES Prescription(prescriptionId)
 );
 
+CREATE TABLE ProduktBatchComp (
+    productBatchId int NOT NULL,
+    commodityBatchId int,
+    userId int,
+    tara double,
+    netto double,
+    PRIMARY KEY (productBatchId, commodityBatchId),
+    FOREIGN KEY (productBatchId) REFERENCES ProduktBatch(productBatchId),
+    FOREIGN KEY (commodityBatchId) REFERENCES CommodityBatch(commodityBatchId),
+    FOREIGN KEY (userId) REFERENCES Users(userId)
+);
+
 CREATE TABLE PrescriptionComp (
     prescriptionId int NOT NULL,
     commodityId int,
@@ -75,4 +76,4 @@ CREATE TABLE PrescriptionComp (
     FOREIGN KEY (commodityId) REFERENCES Commodity(commodityId)
 );
 
-INSERT INTO roles (roleName) VALUES ('Admin'), ('Pharmaceut'), ('Produktionsleder'), ('Laborant')
+INSERT INTO Roles (roleName) VALUES ('Admin'), ('Pharmaceut'), ('Produktionsleder'), ('Laborant')
