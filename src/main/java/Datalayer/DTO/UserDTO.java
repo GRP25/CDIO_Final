@@ -10,14 +10,16 @@ public class UserDTO {
     private String cpr;
     private String initials;
     private ArrayList<String> roles;
+    private int status;
 
-    public UserDTO(int userID, String firstName, String surname, String cpr, String initials, ArrayList<String> roles) {
+    public UserDTO(int userID, String firstName, String surname, String cpr, String initials, ArrayList<String> roles, int status) {
         this.userID = userID;
         this.firstName = firstName;
         this.surname = surname;
         this.cpr = cpr;
         this.initials = initials;
         this.roles = roles;
+        this.status = status;
     }
 
     public UserDTO(){
@@ -70,5 +72,13 @@ public class UserDTO {
 
     public ArrayList<String> getRoles() {
         return roles;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

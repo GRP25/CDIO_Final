@@ -14,7 +14,7 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public void createUser(UserDTO user) {
-        String sql = "INSERT INTO user (user_name,user_init,user_cpr,user_password) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO Users (firstname, surname, initials, cpr) values (?,?,?,?);";
 
         try {
             Connection conn = connect();
@@ -92,7 +92,7 @@ public class UserDAO implements IUserDAO {
     @Override
     public UserDTO getUser(int ID) {
         UserDTO user = new UserDTO();
-        String sql = "SELECT * FROM user WHERE user_id = ?;";
+        String sql = "SELECT * FROM user WHERE userId = ?;";
 
         try
          {
@@ -102,9 +102,10 @@ public class UserDAO implements IUserDAO {
             ResultSet rs = pstmt.executeQuery();
              if(rs.next()) {
                  user.setUserID(ID);
-                 user.setName(rs.getString("user_name"));
-                 user.setInitials(rs.getString("user_init"));
-                 user.setCpr(rs.getString("user_cpr"));
+                 user.setFirstName(rs.getString("firstname"));
+                 user.setSurname(rs.getString("surname"));
+                 user.setInitials(rs.getString("initials"));
+                 user.setCpr(rs.getString("cpr"));
                  user.setRoles(get_user_roles(ID, pstmt));
              }
             rs.close();
@@ -118,27 +119,28 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public void updateUser(UserDTO user) {
-        String sql = "UPDATE user SET user_name = ? , "
-                + "user_init = ? , "
-                + "user_cpr = ? , "
-                + "user_password = ? "
-                + "WHERE user_id = ?";
+        String sql = "UPDATE user SET firstname = ? , "
+                + "surname = ? ,"
+                + "initials = ? , "
+                + "cpr = ? , "
+                + "WHERE userId = ?";
 
         try {
             Connection conn = connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             // set the corresponding param
-            pstmt.setString(1, user.getName());
-            pstmt.setString(2, user.getInitials());
-            pstmt.setString(3, user.getCpr());
-            pstmt.setInt(4, user.getUserID());
+            pstmt.setString(1, user.getFirstName());
+            pstmt.setString(2,user.getSurname());
+            pstmt.setString(3, user.getInitials());
+            pstmt.setString(4, user.getCpr());
+            pstmt.setInt(5, user.getUserID());
             // update
             pstmt.executeUpdate();
 
             // assigning roles to user
-            sql = "DELETE FROM has_roles WHERE user_id = "+user.getUserID();
+            sql = "DELETE FROM has_roles WHERE userId = "+user.getUserID();
             pstmt.executeQuery(sql);
-            sql = "INSERT INTO has_roles (user_id, roles_title) VALUES ";
+            sql = "INSERT INTO has_roles (userId, roles_title) VALUES ";
             for (String role :  user.getRoles()) {
                 sql += "('" + user.getUserID() + "', '" + role + "'),";
             }
@@ -150,8 +152,8 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public void deleteUser(int id) {
-        String sql = "DELETE from user WHERE user_id = ?";
+    public void deactivateUser(int id) {
+        String sql = "UPDATE user set status = ?";
         try (
                 Connection conn = connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)
@@ -164,7 +166,7 @@ public class UserDAO implements IUserDAO {
         }
     }
 
-    @Override
+    /*@Override
     public boolean exists(int id) {
         String sql = "SELECT from user WHERE user_id = ?";
         try (
@@ -192,15 +194,15 @@ public class UserDAO implements IUserDAO {
             return false;
         }
         return true;
-    }
+    }*/
 
     private ArrayList<String> get_user_roles(int id, Statement stmt) throws SQLException{
-        String sql = "SELECT roles_title FROM has_roles WHERE user_id=" + id;
+        String sql = "SELECT roleName FROM UserRole WHERE userId=" + id;
         ResultSet rs = stmt.executeQuery(sql);
         ArrayList<String> roleList = new ArrayList<>();
 
         while (rs.next()) {
-            roleList.add(rs.getString("roles_title"));
+            roleList.add(rs.getString("roleName"));
         }
 
         return roleList;
