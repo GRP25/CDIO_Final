@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Datalayer.DTO.commodityDTO;
 
-interface ICommodityDAO {
+public interface ICommodityDAO {
 
 	commodityDTO getCommodity(int commodity_id);
 

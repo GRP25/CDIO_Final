@@ -3,7 +3,7 @@ package Datalayer.Interfaces;
 import Datalayer.DTO.prescriptionCompDTO;
 import java.util.ArrayList;
 
-interface IPrescriptionCompDAO {
+public interface IPrescriptionCompDAO {
 
 	prescriptionCompDTO getPrescriptionComp(int prescription_id);
 

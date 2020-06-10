@@ -7,7 +7,7 @@ import Datalayer.DTO.prescriptionDTO;
 /**
  * IPrescriptionDAO
  */
-interface IPrescriptionDAO {
+public interface IPrescriptionDAO {
 
 	prescriptionDTO getPrescription(int prescription_id);
 

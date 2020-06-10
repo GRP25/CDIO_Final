@@ -1,12 +1,12 @@
 package Datalayer.DTO;
 
-public class prescriptionKompDTO {
+public class prescriptionCompDTO {
 	private int prescription_id;
 	private int commodity_id;
 	private double nomNetto;
 	private double tolerance;
 
-	public prescriptionKompDTO(int prescription_id, int commodity_id, double nomNetto, double tolerance) {
+	public prescriptionCompDTO(int prescription_id, int commodity_id, double nomNetto, double tolerance) {
 		this.prescription_id = prescription_id;
 		this.commodity_id = commodity_id;
 		this.nomNetto = nomNetto;

@@ -1,13 +1,13 @@
 package Datalayer.DTO;
 
-public class productBatchKompDTO {
+public class productBatchCompDTO {
 	private int productBatch_id;
 	private int commodity_id;
 	private int user_id;
 	private double tara;
 	private double netto;
 
-	public productBatchKompDTO(int productBatch_id, int commodity_id, int user_id, double tara, double netto) {
+	public productBatchCompDTO(int productBatch_id, int commodity_id, int user_id, double tara, double netto) {
 		this.productBatch_id = productBatch_id;
 		this.commodity_id = commodity_id;
 		this.user_id = user_id;
