@@ -38,3 +38,5 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
 - Skriv ned i slutningen af dagen hvad man har lavet og hvor mange timer man har brugt (evt)
 
 - Ret ProductBatchComp diagrammet til at kunne tage endnu et parameter ind i IProduktBatchKompDAO 
+
+- Tilføj supplier til commodityBatch i klasse diagram
