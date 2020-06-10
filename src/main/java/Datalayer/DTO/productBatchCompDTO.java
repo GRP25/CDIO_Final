@@ -1,6 +1,6 @@
 package Datalayer.DTO;
 
-public class productBatchCompDTO {
+public class ProductBatchCompDTO {
 	private int productBatch_id;
 	private int commodity_id;
 	private int user_id;
