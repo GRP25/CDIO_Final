@@ -40,5 +40,4 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
 ## Ændringer til Klasse diagram
 
 - Ret ProductBatchComp diagrammet til at kunne tage endnu et parameter ind i IProduktBatchKompDAO 
-
 - Tilføj supplier til commodityBatch i klasse diagram
