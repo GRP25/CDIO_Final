@@ -1,17 +1,17 @@
 @startuml
 title ProductBatchComp
 class "ProductBatchCompDAO" as prbdao{
-    + getProductBatchComp(int)\t\t\t\t:ProductBatchCompDTO
-    + getProductBatchCompList()\t\t\t\t:ProductBatchCompDTO[]
-    + createProductBatchComp(ProductBatchCompDTO)\t:void
-    + updateProductBatchComp(ProductBatchCompDTO)\t:void
+    + getProductBatchComp(int int)\t\t\t\t\t:ProductBatchCompDTO
+    + getProductBatchCompList()\t\t\t\t\t\t:ProductBatchCompDTO[]
+    + createProductBatchComp(ProductBatchCompDTO)\t\t:void
+    + updateProductBatchComp(ProductBatchCompDTO)\t\t:void
     + getProductBatchCompList(int)\t\t\t\t\t:ProductBatchCompDTO[]
 }
 interface "IProductBatchCompDAO" as iprbdao{
-    + getProductBatchComp(int)\t\t\t\t:ProductBatchCompDTO
-    + getProductBatchCompList()\t\t\t\t:ProductBatchCompDTO[]
-    + createProductBatchComp(ProductBatchCompDTO)\t:void
-    + updateProductBatchComp(ProductBatchCompDTO)\t:void
+    + getProductBatchComp(int)\t\t\t\t\t\t:ProductBatchCompDTO
+    + getProductBatchCompList()\t\t\t\t\t\t:ProductBatchCompDTO[]
+    + createProductBatchComp(ProductBatchCompDTO)\t\t:void
+    + updateProductBatchComp(ProductBatchCompDTO)\t\t:void
     + getProductBatchCompList(int)\t\t\t\t\t:ProductBatchCompDTO[]
 }
 class "ProductBatchCompService" as pbcser {

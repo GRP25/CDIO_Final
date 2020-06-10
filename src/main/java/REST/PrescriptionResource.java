@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import Datalayer.DAO.*;
 import Datalayer.DTO.*;
+import Datalayer.Interfaces.IPrescriptionCompDAO;
 import Datalayer.Interfaces.IPrescriptionDAO;
 /*
 *   Create Prescription
@@ -20,9 +21,10 @@ import Datalayer.Interfaces.IPrescriptionDAO;
 public class PrescriptionResource {
     
     IPrescriptionDAO presDAO = new PrescriptionDAO();
+    IPrescriptionCompDAO presCompDAO = new PrescriptionCompDAO();
 
     // Create Prescription function
-    @Path("/Create")
+    //@Path("/Create")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void createPrescription(PrescriptionDTO presDTO) {
@@ -38,11 +40,30 @@ public class PrescriptionResource {
 
 
     // Get Spicific Prescription funktion
-    @Path("/{PrescriptionID}")
+    @Path("/ID/{PrescriptionID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public PrescriptionDTO getPrescription(@PathParam("PrescriptionID") int presID) {
         return presDAO.getPrescription(presID);
    }
 
+
+   // ---------------------------- Compound ------------------------------------
+   // add Prescription Compount
+   @Path("/Comp")
+   @POST
+   @Consumes(MediaType.APPLICATION_JSON)
+   public void addPrescriptionComp(PrescriptionCompDTO presCompDTO) {
+       presCompDAO.createPrescriptionComp(presCompDTO);
+   }
+
+
+   // get comp list
+   @Path("/Comp/{PresID}")
+   @GET
+   @Produces(MediaType.APPLICATION_JSON)
+   public ArrayList<PrescriptionCompDTO> getPrescriptionCompList(@PathParam("PresID") int presID) {
+       return presCompDAO.getPrescriptionCompList(presID);
+   }
+   
 }
