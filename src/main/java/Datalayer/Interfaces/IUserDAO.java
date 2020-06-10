@@ -13,4 +13,6 @@ public interface IUserDAO{
     void createUser(UserDTO user);
 
     void updateUser(UserDTO user);
+
+    void deactivateUser(int userID);
 }
