@@ -1,5 +1,7 @@
+/*
 package data.sql;
 
+import DB.DBUtil;
 import data.IUserDAO;
 import data.UserDTO;
 
@@ -206,5 +208,7 @@ public class UserDAO implements IUserDAO {
 
         return roleList;
     }
+
 }
 
+*/
