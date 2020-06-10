@@ -1,4 +1,5 @@
 @startuml
+title CommodityBatch
 class "CommodityBatchResource" as cobres {
     + getCommodityBatch(int)\t\t\t\t\t:Response
     + getCommodityBatchList()\t\t\t\t\t:Response
@@ -25,8 +26,8 @@ class "CommodityBatchService" as cobser {
 icobdao -d- cobdao
 icobdao -u- cobser
 cobres -d- cobser
-comdao --() DatabaseHandler 
-comres -() Validation
-Exceptions ()- comres
-Conversion ()-- comres
+cobdao --() DatabaseHandler 
+cobres -() Validation
+Exceptions ()- cobres
+Conversion ()-- cobres
 @enduml

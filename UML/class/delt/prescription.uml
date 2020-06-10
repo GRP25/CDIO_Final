@@ -1,4 +1,5 @@
 @startuml
+title Prescription
 class "PrescriptionResource" as preres {
     + getPrescription(int)\t\t\t\t:Response
     + getPrescriptionList()\t\t\t\t:Response
@@ -22,8 +23,8 @@ interface "IPrescriptionDAO" as ipredao {
 ipredao -d- predao
 ipredao -u- preser
 preres -d- preser
-comdao --() DatabaseHandler 
-comres -() Validation
-Exceptions ()- comres
-Conversion ()-- comres
+predao --() DatabaseHandler 
+preres -() Validation
+Exceptions ()- preres
+Conversion ()-- preres
 @enduml

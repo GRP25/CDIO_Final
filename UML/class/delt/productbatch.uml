@@ -1,4 +1,5 @@
 @startuml
+title ProductBatch
 class "ProductBatchDAO" as prodao {
     + getProductBatch(int)\t\t\t:ProductBatchDTO
     + getProductBatchList()\t\t\t:ProductBatchDTO[]
@@ -23,8 +24,8 @@ class "ProductBatchResource" as prbres {
 iprodao -d- prodao
 prbres -d- prbser
 iprodao -u- prbser
-comdao --() DatabaseHandler 
-comres -() Validation
-Exceptions ()- comres
-Conversion ()-- comres
+prodao --() DatabaseHandler 
+prbres -() Validation
+Exceptions ()- prbres
+Conversion ()-- prbres
 @enduml

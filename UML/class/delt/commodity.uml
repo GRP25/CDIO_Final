@@ -1,6 +1,6 @@
 @startuml
-skinparam linetype ortho
 title Commodity
+rectangle {
 class "CommodityDAO" as comdao {
     + getCommodity(int)\t\t\t\t:CommodityDTO
     + getCommodityList()\t\t\t\t:CommodityDTO[]
@@ -28,4 +28,5 @@ comdao --() DatabaseHandler
 comres -() Validation
 Exceptions ()- comres
 Conversion ()-- comres
+}
 @enduml

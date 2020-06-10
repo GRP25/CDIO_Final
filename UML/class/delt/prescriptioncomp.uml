@@ -1,33 +1,34 @@
 @startuml
-    interface "IPrescriptionCompDAO" as iprcdao {
-        + getPrescriptionComp(int)\t\t\t\t\t:PrescriptionCompDTO
-        + getPrescriptionCompList()\t\t\t\t\t:PrescriptionCompDTO[]
-        + createPrescriptionComp(PrescriptionCompDTO)\t:void
-        + updatePrescriptionComp(PrescriptionCompDTO)\t:void
-        + getPrescriptionCompList(int)\t\t\t\t\t:PrescriptionDTO[]
-    }
-    class "PrescriptionCompDAO" as prcdao {
-        + getPrescriptionComp(int)\t\t\t\t\t:PrescriptionCompDTO
-        + getPrescriptionCompList()\t\t\t\t\t:PrescriptionCompDTO[]
-        + createPrescriptionComp(PrescriptionCompDTO)\t:void
-        + updatePrescriptionComp(PrescriptionCompDTO)\t:void
-        + getPrescriptionCompList(int)\t\t\t\t\t:PrescriptionDTO[]
-    }
-    class "PrescriptionCompService" as prcser {
-    }
-    class "PrescriptionCompResource" as prcres {
-        + getPrescriptionComp(int)\t\t\t\t\t:Response
-        + getPrescriptionCompList()\t\t\t\t\t:Response
-        + createPrescriptionComp(PrescriptionCompDTO)\t:Response
-        + updatePrescriptionComp(PrescriptionCompDTO)\t:Response
-        + getPrescriptionCompList(int)\t\t\t\t\t:Response
-    }
+title PrescriptionComp
+interface "IPrescriptionCompDAO" as iprcdao {
+    + getPrescriptionComp(int)\t\t\t\t\t:PrescriptionCompDTO
+    + getPrescriptionCompList()\t\t\t\t\t:PrescriptionCompDTO[]
+    + createPrescriptionComp(PrescriptionCompDTO)\t:void
+    + updatePrescriptionComp(PrescriptionCompDTO)\t:void
+    + getPrescriptionCompList(int)\t\t\t\t\t:PrescriptionDTO[]
+}
+class "PrescriptionCompDAO" as prcdao {
+    + getPrescriptionComp(int)\t\t\t\t\t:PrescriptionCompDTO
+    + getPrescriptionCompList()\t\t\t\t\t:PrescriptionCompDTO[]
+    + createPrescriptionComp(PrescriptionCompDTO)\t:void
+    + updatePrescriptionComp(PrescriptionCompDTO)\t:void
+    + getPrescriptionCompList(int)\t\t\t\t\t:PrescriptionDTO[]
+}
+class "PrescriptionCompService" as prcser {
+}
+class "PrescriptionCompResource" as prcres {
+    + getPrescriptionComp(int)\t\t\t\t\t:Response
+    + getPrescriptionCompList()\t\t\t\t\t:Response
+    + createPrescriptionComp(PrescriptionCompDTO)\t:Response
+    + updatePrescriptionComp(PrescriptionCompDTO)\t:Response
+    + getPrescriptionCompList(int)\t\t\t\t\t:Response
+}
 prcres -d- prcser
 iprcdao -d- prcdao
 iprcdao -u- prcser
-comdao --() DatabaseHandler 
-comres -() Validation
-Exceptions ()- comres
-Conversion ()-- comres
+prcdao --() DatabaseHandler 
+prcres -() Validation
+Exceptions ()- prcres
+Conversion ()-- prcres
 
 @enduml

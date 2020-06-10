@@ -1,4 +1,5 @@
 @startuml
+title ProductBatchComp
 class "ProductBatchCompDAO" as prbdao{
     + getProductBatchComp(int)\t\t\t\t:ProductBatchCompDTO
     + getProductBatchCompList()\t\t\t\t:ProductBatchCompDTO[]
@@ -26,4 +27,8 @@ class "ProductBatchCompResource" as pbcres {
 iprbdao -d- prbdao
 iprbdao -u- pbcser
 pbcres -d- pbcser
+prbdao --() DatabaseHandler 
+pbcres -() Validation
+Exceptions ()- pbcres
+Conversion ()-- pbcres
 @enduml
