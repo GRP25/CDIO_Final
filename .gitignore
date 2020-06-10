@@ -31,4 +31,4 @@ hs_err_pid*
 # jetbrains stuff
 .idea
 .idea/*
-
+/target/
