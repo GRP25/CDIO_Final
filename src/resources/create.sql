@@ -25,7 +25,6 @@ CREATE TABLE UserRole (
 CREATE TABLE Commodity (
     commodityId int NOT NULL,
     commodityName varchar(20),
-    supplier varchar(20),
     PRIMARY KEY (commodityId)
 );
 
@@ -33,6 +32,7 @@ CREATE TABLE CommodityBatch (
     commodityBatchId int NOT NULL,
     commodityId int,
     weight double,
+    supplier varchar(20),
     PRIMARY KEY (commodityBatchId),
     FOREIGN KEY (commodityId) REFERENCES Commodity(commodityId)
 );
@@ -77,3 +77,31 @@ CREATE TABLE PrescriptionComp (
 );
 
 INSERT INTO Roles (roleName) VALUES ('Admin'), ('Pharmaceut'), ('Produktionsleder'), ('Laborant')
+
+--Testdatj
+--Users
+INSERT INTO Users (firstname, surname, initials, cpr) values ('Peter','Olsen', 'PO','1102911234');
+INSERT INTO Users (firstname, surname, initials, cpr) values ('Ole','Petersen', 'OP','1102921234');
+
+--Userroles
+INSERT INTO UserRole (userId, roleName) values (1, 'Admin');
+INSERT INTO UserRole (userId, roleName) values (1, 'Pharmaceut');
+INSERT INTO UserRole (userId, roleName) values (1, 'Produktionsleder');
+INSERT INTO UserRole (userId, roleName) values (2, 'Produktionsleder');
+INSERT INTO UserRole (userId, roleName) values (2, 'Laborant');
+
+INSERT INTO Commodity (commodityName) values ("A");
+INSERT INTO Commodity (commodityName) values ("B");
+
+INSERT INTO CommodityBatch (commodityId, weight, supplier ) values(1, 2.3, "MD Exports");
+
+INSERT INTO ProduktBatch (status, prescriptionId) values (1, 1);
+INSERT INTO ProduktBatch (status, prescriptionId) values (1, 2);
+
+INSERT INTO  ProduktBatchComp (commodityId, userId, tara, netto) values (1, 1, 2.4, 5.5);
+INSERT INTO  ProduktBatchComp (commodityId, userId, tara, netto) values (1, 1, 3.4, 3.5);
+
+INSERT INTO  Prescription (prescriptionName) values("LemonWithWater");
+INSERT INTO  Prescription (prescriptionName) values("MelonWithWater");
+
+INSERT INTO PrescriptionComp (commodityId, nomNetto, tollerance) values (1, 2.3, 4.5);

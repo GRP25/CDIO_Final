@@ -15,7 +15,7 @@ public class PropertiesLoader {
 
         Properties properties = new Properties();
 
-        try (InputStream inputStream = Properties.class.getClassLoader().getResourceAsStream( "app.properties" )) {
+        try (InputStream inputStream = PropertiesLoader.class.getClassLoader().getResourceAsStream( "app.properties" )) {
 
             properties.load( inputStream );
 

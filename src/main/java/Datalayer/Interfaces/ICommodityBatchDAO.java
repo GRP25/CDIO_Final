@@ -1,20 +1,21 @@
 package Datalayer.Interfaces;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import Datalayer.DAO.DALException;
-import Datalayer.DTO.commodityBatchDTO;
+import Datalayer.DTO.CommodityBatchDTO;
 
 public interface ICommodityBatchDAO {
 
-	commodityBatchDTO getCommodityBatch(int commodityBatch_id) throws DALException;
+	CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws DALException;
 
-	ArrayList<commodityBatchDTO> getCommodityBatchList() throws DALException;
+	List<CommodityBatchDTO> getCommodityBatchList() throws DALException;
 
-	ArrayList<commodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws DALException;
+	List<CommodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws DALException;
 
-	void createCommodityBatch(commodityBatchDTO batch) throws DALException;
+	void createCommodityBatch(CommodityBatchDTO batch) throws DALException;
 
-	void updateCommodityBatch(commodityBatchDTO batch) throws DALException;
+	void updateCommodityBatch(CommodityBatchDTO batch) throws DALException;
 
 }
