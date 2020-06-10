@@ -16,7 +16,7 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
     __det er nok en god ide men ikke et krav.__
 - Login med id eller roller eller hvad fanden?
     __det bestemmer vi selv.__
-- Spørg om funktionalitetslag (UserService) skal den være der?
+- Spørg om funktionalitetslag (UserService) skal den være der?.
 
 ## Use case arbejde
 
