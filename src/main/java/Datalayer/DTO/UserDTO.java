@@ -1,20 +1,27 @@
 package Datalayer.DTO;
 
-public class userDTO {
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class UserDTO {
     private int userID;
     private String firstName;
     private String surname;
     private String cpr;
     private String initials;
-    private String[] roles;
+    private ArrayList<String> roles;
 
-    public userDTO(int userID, String firstName, String surname, String cpr, String initials, String[] roles) {
+    public UserDTO(int userID, String firstName, String surname, String cpr, String initials, ArrayList<String> roles) {
         this.userID = userID;
         this.firstName = firstName;
         this.surname = surname;
         this.cpr = cpr;
         this.initials = initials;
         this.roles = roles;
+    }
+
+    public UserDTO(){
+
     }
 
     public void setUserID(int userID) {
@@ -37,7 +44,7 @@ public class userDTO {
         this.initials = initials;
     }
 
-    public void setRoles(String[] roles) {
+    public void setRoles(ArrayList<String> roles) {
         this.roles = roles;
     }
 
@@ -61,7 +68,7 @@ public class userDTO {
         return initials;
     }
 
-    public String[] getRoles() {
+    public ArrayList<String> getRoles() {
         return roles;
     }
 }

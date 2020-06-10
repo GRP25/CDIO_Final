@@ -10,7 +10,7 @@ import java.util.Arrays;
 @RequestScoped
 public class Ctrl {
 
-    static Connection connect() {
+    public static Connection connect() {
         String user, pass, url;
         //TODO make a configuration file
         user = "cdio";
