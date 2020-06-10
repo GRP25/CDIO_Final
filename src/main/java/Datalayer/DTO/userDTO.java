@@ -1,6 +1,6 @@
 package Datalayer.DTO;
 
-public class userDTO{
+public class userDTO {
     private int userID;
     private String firstName;
     private String surname;
