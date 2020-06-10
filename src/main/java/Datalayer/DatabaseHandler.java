@@ -1,4 +1,4 @@
-package data.sql;
+package Datalayer;
 
 import javax.enterprise.context.RequestScoped;
 import java.sql.Connection;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @RequestScoped
-public class Ctrl {
+public class DatabaseHandler{
 
     public static Connection connect() {
         String user, pass, url;
