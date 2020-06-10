@@ -1,12 +1,17 @@
 package Datalayer.DTO;
 
-public class commodityBatchDTO {
+public class CommodityBatchDTO {
 	private int commodityBatch_id;
 	private int commodity_id;
 	private double weight;
 	private String supplier;
 
-	public commodityBatchDTO(int commodityBatch_id, int commodity_id, double weight, String supplier) {
+	/** Default constructor for DBUtil.resultSetToObject purpose */
+	public CommodityBatchDTO() {
+
+	}
+
+	public CommodityBatchDTO(int commodityBatch_id, int commodity_id, double weight, String supplier) {
 		this.commodityBatch_id = commodityBatch_id;
 		this.commodity_id = commodity_id;
 		this.weight = weight;
