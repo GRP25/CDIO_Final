@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1deefcf-cc80-4bd9-a9b9-f307b7fca9e6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/DBUtil/PropertiesLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DB/DBUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBUtil/PropertiesLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DB/PropertiesLoader.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,8 +56,16 @@
       <option name="presentableId" value="Default" />
       <updated>1591779047406</updated>
       <workItem from="1591779049997" duration="3350000" />
-      <workItem from="1591784442359" duration="443000" />
+      <workItem from="1591784442359" duration="1026000" />
     </task>
+    <task id="LOCAL-00001" summary="PropertiesLoader class">
+      <created>1591784912491</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1591784912491</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -73,5 +83,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="PropertiesLoader class" />
+    <option name="LAST_COMMIT_MESSAGE" value="PropertiesLoader class" />
   </component>
 </project>

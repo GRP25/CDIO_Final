@@ -1,4 +1,4 @@
-package DBUtil;
+package DB;
 
 import java.io.IOException;
 import java.util.Properties;
