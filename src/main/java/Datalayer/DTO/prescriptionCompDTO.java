@@ -1,7 +1,7 @@
 package Datalayer.DTO;
 
 public class PrescriptionCompDTO {
-	private int prescription_id;
+	private int prescription_id; 
 	private int commodity_id;
 	private double nomNetto;
 	private double tolerance;

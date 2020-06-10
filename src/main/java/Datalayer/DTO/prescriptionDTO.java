@@ -1,7 +1,7 @@
 package Datalayer.DTO;
 
 public class PrescriptionDTO {
-	private int prescription_id;
+	private int prescription_id; 
 	private String prescription_name;
 
 	public PrescriptionDTO(int prescription_id, String prescription_name) {
