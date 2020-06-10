@@ -7,7 +7,7 @@ CREATE TABLE Users (
     cpr varchar(10),
     PRIMARY KEY (userId)
 );
-
+// hooo
 CREATE TABLE Roles (
     roleName VARCHAR(36) NOT NULL,
     PRIMARY KEY ( roleName )
@@ -25,7 +25,6 @@ CREATE TABLE UserRole (
 CREATE TABLE Commodity (
     commodityId int NOT NULL,
     commodityName varchar(20),
-    supplier varchar(20),
     PRIMARY KEY (commodityId)
 );
 
@@ -33,10 +32,10 @@ CREATE TABLE CommodityBatch (
     commodityBatchId int NOT NULL,
     commodityId int,
     weight double,
+    supplier varchar(20),
     PRIMARY KEY (commodityBatchId),
     FOREIGN KEY (commodityId) REFERENCES Commodity(commodityId)
 );
-
 
 CREATE TABLE Prescription (
     prescriptionId int NOT NULL,
