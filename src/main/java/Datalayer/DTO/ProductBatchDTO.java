@@ -1,11 +1,11 @@
 package Datalayer.DTO;
 
-public class productBatchDTO {
+public class ProductBatchDTO {
 	private int productBatch_id;
 	private int prescription_id;
 	private int status;
 
-	public productBatchDTO(int productBatch_id, int prescription_id, int status) {
+	public ProductBatchDTO(int productBatch_id, int prescription_id, int status) {
 		this.productBatch_id = productBatch_id;
 		this.prescription_id = prescription_id;
 		this.status = status;
