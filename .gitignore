@@ -27,3 +27,7 @@ hs_err_pid*
 .settings
 .classpath
 .project
+
+# jetbrains stuff
+.idea
+.idea/*
