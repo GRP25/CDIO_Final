@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javax.enterprise.context.RequestScoped;
 
-import Datalayer.DTO.productBatchDTO;
+import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchDAO;
 
 /**
@@ -14,25 +14,25 @@ import Datalayer.Interfaces.IProductBatchDAO;
 public class ProductBatchDAO implements IProductBatchDAO {
 
 	@Override
-	public productBatchDTO getProductBatchDTO(int productBatch_id) {
+	public ProductBatchDTO getProductBatchDTO(int productBatch_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<productBatchDTO> getProductBatchDTOList() {
+	public ArrayList<ProductBatchDTO> getProductBatchDTOList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void createProductBatch(productBatchDTO productBatch) {
+	public void createProductBatch(ProductBatchDTO productBatch) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void updateProductBatch(productBatchDTO productBatch) {
+	public void updateProductBatch(ProductBatchDTO productBatch) {
 		// TODO Auto-generated method stub
 
 	}
