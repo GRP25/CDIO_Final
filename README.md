@@ -16,7 +16,7 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
     __det er nok en god ide men ikke et krav.__
 - Login med id eller roller eller hvad fanden?
     __det bestemmer vi selv.__
-- Spørg om funktionalitetslag (UserService) skal den være der?
+- Spørg om funktionalitetslag (UserService) skal den være der?.
 
 ## Use case arbejde
 
@@ -37,4 +37,5 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
     - Skal vi dele elementerne op mellem os.? (Users/Commodities/Prescriptions osv.)
 - Skriv ned i slutningen af dagen hvad man har lavet og hvor mange timer man har brugt (evt)
 
+- Ret ProductBatchComp diagrammet til at kunne tage endnu et parameter ind i IProduktBatchKompDAO 
 - Tilføj supplier til commodityBatch i klasse diagram
