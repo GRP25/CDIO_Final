@@ -5,6 +5,7 @@ class "UserDTO" as brudto {
     - surname\t:String
     - cpr\t\t:String
     - initials\t:String
+    - status\t:int
     - roles\t\t:String[]
 }
 
