@@ -37,7 +37,6 @@ CREATE TABLE CommodityBatch (
     FOREIGN KEY (commodityId) REFERENCES Commodity(commodityId)
 );
 
-
 CREATE TABLE Prescription (
     prescriptionId int NOT NULL,
     prescriptionName varchar(20),
