@@ -36,3 +36,5 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
 - Implementering begynder med datalag Onsdag
     - Skal vi dele elementerne op mellem os.? (Users/Commodities/Prescriptions osv.)
 - Skriv ned i slutningen af dagen hvad man har lavet og hvor mange timer man har brugt (evt)
+
+- Tilføj supplier til commodityBatch i klasse diagram
