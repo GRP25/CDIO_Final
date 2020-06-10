@@ -2,18 +2,18 @@ package Datalayer.Interfaces;
 
 import java.util.ArrayList;
 
-import Datalayer.DTO.prescriptionDTO;
+import Datalayer.DTO.PrescriptionDTO;
 
 /**
  * IPrescriptionDAO
  */
 public interface IPrescriptionDAO {
 
-	prescriptionDTO getPrescription(int prescription_id);
+	PrescriptionDTO getPrescription(int prescription_id);
 
-	ArrayList<prescriptionDTO> getPrescriptionList();
+	ArrayList<PrescriptionDTO> getPrescriptionList();
 
-	void createPrescription(prescriptionDTO prescription);
+	void createPrescription(PrescriptionDTO prescription);
 
-	void updatePrescription(prescriptionDTO prescription);
+	void updatePrescription(PrescriptionDTO prescription);
 }

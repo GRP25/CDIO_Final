@@ -1,10 +1,10 @@
 package Datalayer.DTO;
 
-public class prescriptionDTO {
+public class PrescriptionDTO {
 	private int prescription_id;
 	private String prescription_name;
 
-	public prescriptionDTO(int prescription_id, String prescription_name) {
+	public PrescriptionDTO(int prescription_id, String prescription_name) {
 		this.prescription_id = prescription_id;
 		this.prescription_name = prescription_name;
 	}
