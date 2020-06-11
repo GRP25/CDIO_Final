@@ -38,7 +38,14 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
     public static void main(String[] args) throws DALException {
         Datalayer.Interfaces.ICommodityBatchDAO commodityBatchDAO = new Datalayer.DAO.CommodityBatchDAO();
 //        System.out.println(commodityBatchDAO.getCommodityBatch( 1 ));
-        Datalayer.DTO.CommodityBatchDTO commodityBatchDAO1 = new Datalayer.DTO.CommodityBatchDTO(3,3,5.4,"MD");
-        commodityBatchDAO.createCommodityBatch( commodityBatchDAO1 );
+//        Datalayer.DTO.CommodityBatchDTO commodityBatchDAO1 = new Datalayer.DTO.CommodityBatchDTO(3,3,5.4,"MD");
+//        commodityBatchDAO.createCommodityBatch( commodityBatchDAO1 );
+        for (CommodityBatchDTO commodityBatchDTO : commodityBatchDAO.getCommodityBatchList()) {
+            System.out.print( commodityBatchDTO.getCommodity_id() + " " );
+            System.out.print( commodityBatchDTO.getCommodityBatch_id() + " " );
+            System.out.print( commodityBatchDTO.getWeight() + " " );
+            System.out.print( commodityBatchDTO.getSupplier() + " " );
+            System.out.println();
+        };
     }
 }

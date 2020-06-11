@@ -99,11 +99,8 @@ public class DBUtil {
                                                            throws SQLException {
         PreparedStatement preparedStatement = getPrepareStatement( query );
         fillOutStatement( preparedStatement, objects );
-        try {
-            preparedStatement.executeUpdate(); // TODO
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+            preparedStatement.executeUpdate();
 
     }
 
@@ -163,8 +160,8 @@ public class DBUtil {
 
     public static Object resultSetToObject(ResultSet resultSet, Class classObject)
                                                                 throws SQLException{
-
-        if (classObject.getSimpleName().equalsIgnoreCase( "CommodityBatch" )) {
+        System.out.println(classObject.getSimpleName());
+        if (classObject.getSimpleName().equalsIgnoreCase( "CommodityBatchDTO" )) {
 
             CommodityBatchDTO comDto = new CommodityBatchDTO();
 
