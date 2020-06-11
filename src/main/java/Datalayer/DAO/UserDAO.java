@@ -195,7 +195,7 @@ public class UserDAO implements IUserDAO {
             return false;
         }
         return true;
-    }*/
+    }
 
     private ArrayList<String> get_user_roles(int id, Statement stmt) throws SQLException{
         String sql = "SELECT roleName FROM UserRole WHERE userId=" + id;
