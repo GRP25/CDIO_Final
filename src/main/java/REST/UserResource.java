@@ -4,7 +4,6 @@ import Datalayer.DTO.UserDTO;
 import Funclayer.UserService;
 import Funclayer.IUserService;
 import Funclayer.exceptions.UserException;
-import REST.Services.Interfaces.IUserRecource;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,7 +13,7 @@ import static Funclayer.exceptions.Validation.validateUser;
 
 
 @Path("userresource")
-public class UserResource implements IUserRecource {
+public class UserResource {
     IUserService userService = new UserService();
 
     @Path("/{userID}")
