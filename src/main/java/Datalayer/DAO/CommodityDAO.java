@@ -8,9 +8,9 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import DB.DBUtil;
-import Datalayer.DTO.CommodityBatchDTO;
 import Datalayer.DTO.commodityDTO;
 import Datalayer.Interfaces.ICommodityDAO;
+
 
 @RequestScoped
 public class CommodityDAO implements ICommodityDAO {
