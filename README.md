@@ -30,3 +30,4 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
 ## Agenda til kl 16:30
 - getCommodityBatchList Mangler der ikke en condition i sql statement?
 - Snak omkring mappe struktur
+- Bliv enige om at det skal være ArrayList eller bare List
