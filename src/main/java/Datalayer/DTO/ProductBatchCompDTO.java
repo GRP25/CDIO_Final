@@ -55,4 +55,14 @@ public class ProductBatchCompDTO {
 		return netto;
 	}
 
+	@Override
+	public String toString() {
+		return "ProductBatchCompDTO{" +
+				"productBatch_id=" + productBatch_id +
+				", commodity_id=" + commodity_id +
+				", user_id=" + user_id +
+				", tara=" + tara +
+				", netto=" + netto +
+				'}';
+	}
 }

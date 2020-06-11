@@ -25,4 +25,11 @@ public class PrescriptionDTO {
 		return prescription_name;
 	}
 
+	@Override
+	public String toString() {
+		return "PrescriptionDTO{" +
+				"prescription_id=" + prescription_id +
+				", prescription_name='" + prescription_name + '\'' +
+				'}';
+	}
 }
