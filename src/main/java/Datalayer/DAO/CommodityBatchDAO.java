@@ -16,7 +16,7 @@ import Datalayer.Interfaces.ICommodityBatchDAO;
 public class CommodityBatchDAO implements ICommodityBatchDAO {
 
 	@Override
-	public CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws DALException {
+	public CommodityBatchDTO getCommodityBatch(int commodityBatch_id) {
 
 		String query = "SELECT * FROM CommodityBatch WHERE commodityBatchId = ?";
 
@@ -37,7 +37,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 	}
 
 	@Override
-	public List<CommodityBatchDTO> getCommodityBatchList() throws DALException {
+	public List<CommodityBatchDTO> getCommodityBatchList() {
 		String query = "SELECT * FROM CommodityBatch";
 
 		    ResultSet resultSet = DBUtil.executeSelectQuery( query, null );
@@ -58,10 +58,10 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 	}
 
 	@Override
-	public List<CommodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws DALException {
+	public List<CommodityBatchDTO> getCommodityBatchList(int commodity_id) {
 		String query = "SELECT * FROM CommodityBatch WHERE commodityBatchId = ?";
 
-		    ResultSet resultSet = DBUtil.executeSelectQuery( query, DBUtil.convertTOObject( commodityBatch_id ) );
+		    ResultSet resultSet = DBUtil.executeSelectQuery( query, DBUtil.convertTOObject( commodity_id ) );
 		    List<CommodityBatchDTO> listOfCommodityBatchDTO = null; // Instead of implementing same as getCommodityBatchList out parameter
 		    try {
 		        CommodityBatchDTO commodityBatchDTO;
@@ -78,7 +78,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 	}
 
 	@Override
-	public void createCommodityBatch(CommodityBatchDTO batch) throws DALException {
+	public void createCommodityBatch(CommodityBatchDTO batch) {
 		String query = "INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier) VALUES (?, ?, ?, ?)";
 		Object[] parameter = DBUtil.convertTOObject( batch );
 
@@ -91,7 +91,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 	}
 
 	@Override
-	public void updateCommodityBatch(CommodityBatchDTO batch) throws DALException {
+	public void updateCommodityBatch(CommodityBatchDTO batch)  {
 		String query = "UPDATE CommodityBatch SET commodityBatchId=?, commodityId=?, weight=?, supplier=? WHERE commodityBatchId=?";
 
 		    try {

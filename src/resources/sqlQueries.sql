@@ -36,7 +36,7 @@ CREATE TABLE CommodityBatch (
     commodityId int,
     weight double,
     supplier varchar(20),
---     PRIMARY KEY (commodityBatchId),
+    PRIMARY KEY (commodityBatchId),
     FOREIGN KEY (commodityId) REFERENCES Commodity(commodityId)
 );
 
@@ -96,6 +96,7 @@ INSERT INTO Commodity (commodityId, commodityName) values (2, "B");
 
 INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier ) values(1,1, 2.3, "MD Exports");
 INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier ) values(1,2, 3.3, "MD Exports2");
+INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier ) values(2,2, 3.3, "MD Exports2");
 
 
 INSERT INTO ProduktBatch (productBatchId, prescriptionId, status) values (1, 1, 2);
