@@ -1,9 +1,10 @@
-package Datalayer.Interfaces;
+package REST.Services.Interfaces;
 
 import Datalayer.DTO.PrescriptionCompDTO;
+
 import java.util.List;
 
-public interface IPrescriptionCompDAO {
+public interface IPrescriptionCompService {
 
 	PrescriptionCompDTO getPrescriptionComp(int prescription_id, int commodity_id);
 
@@ -11,7 +12,7 @@ public interface IPrescriptionCompDAO {
 
 	List<PrescriptionCompDTO> getPrescriptionCompList(int prescription_id);
 
-	void createPrescriptionComp(PrescriptionCompDTO prescription);
+	String createPrescriptionComp(PrescriptionCompDTO prescription);
 
-	void updatePrescriptionComp(PrescriptionCompDTO prescription);
+	String updatePrescriptionComp(PrescriptionCompDTO prescription);
 }
