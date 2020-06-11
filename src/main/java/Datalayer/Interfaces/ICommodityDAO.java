@@ -1,17 +1,18 @@
 package Datalayer.Interfaces;
+import java.util.List;
 
-import java.util.ArrayList;
-
+import Datalayer.DAO.DALException;
 import Datalayer.DTO.commodityDTO;
+
 
 public interface ICommodityDAO {
 
-	commodityDTO getCommodity(int commodity_id);
+	commodityDTO getCommodity(int commodity_id) throws DALException;
 
-	ArrayList<commodityDTO> getCommodityList();
+	List<commodityDTO> getCommodityList() throws DALException;
 
-	void createCommodity(commodityDTO commodity);
+	void createCommodity(commodityDTO commodity) throws DALException;
 
-	void updateCommodity(commodityDTO commodity);
+	void updateCommodity(commodityDTO commodity) throws DALException;
 
 }

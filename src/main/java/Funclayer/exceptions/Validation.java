@@ -69,3 +69,4 @@ public class Validation {
         cprValidator(user.getCpr());
     }
 }
+

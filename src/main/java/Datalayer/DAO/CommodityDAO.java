@@ -35,11 +35,11 @@ public class CommodityDAO implements ICommodityDAO {
 	}
 
 	@Override
-	public ArrayList<commodityDTO> getCommodityList() {
+	public List<commodityDTO> getCommodityList() {
 		String query = "SELECT * FROM Commodity";
 
 		ResultSet resultSet = DBUtil.executeSelectQuery( query, null );
-		ArrayList<commodityDTO> listOfCommodityDTO = null;
+		List<commodityDTO> listOfCommodityDTO = null;
 		try {
 			commodityDTO comdDTO;
 			listOfCommodityDTO = new ArrayList<>();
