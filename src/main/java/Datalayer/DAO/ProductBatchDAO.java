@@ -3,6 +3,7 @@ package Datalayer.DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 
@@ -38,7 +39,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
 	}
 
 	@Override
-	public ArrayList<ProductBatchDTO> getProductBatchDTOList() {
+	public List<ProductBatchDTO> getProductBatchDTOList() {
 		// SELECT * FROM ProductBatch
 
 		ArrayList<ProductBatchDTO> productDTOList = new ArrayList<>();

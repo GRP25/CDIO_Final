@@ -21,18 +21,21 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void updateUser(UserDTO user) {
+    public String updateUser(UserDTO user) {
         userDao.updateUser( user );
+        return "Update query executed successfully";
     }
 
     @Override
-    public void createUser(UserDTO user) {
+    public String createUser(UserDTO user) {
         userDao.createUser( user );
+        return "Insert query executed successfully";
     }
 
     @Override
-    public void deleteUser(int userID) {
+    public String deleteUser(int userID) {
         //userDao.deactivateUser( userID );
+        return "Update query executed successfully";
     }
 
     @Override
