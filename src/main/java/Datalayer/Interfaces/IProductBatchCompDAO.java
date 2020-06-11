@@ -2,21 +2,21 @@ package Datalayer.Interfaces;
 
 import java.util.ArrayList;
 
-import Datalayer.DTO.productBatchCompDTO;
+import Datalayer.DTO.ProductBatchCompDTO;
 
 /**
  * IProductBatchCompDAO
  */
 public interface IProductBatchCompDAO {
 
-	productBatchCompDTO getProductBatchComp(int productBatch_id, int commodityBatch_id);
+	ProductBatchCompDTO getProductBatchComp(int productBatch_id, int commodityBatch_id);
 
-	ArrayList<productBatchCompDTO> getProductBatchCompList();
+	ArrayList<ProductBatchCompDTO> getProductBatchCompList();
 
-	ArrayList<productBatchCompDTO> getProductBatchCompList(int productBatch_id);
+	ArrayList<ProductBatchCompDTO> getProductBatchCompList(int productBatch_id);
 
-	void createProductBatchComp(productBatchCompDTO productBatchComp);
+	void createProductBatchComp(ProductBatchCompDTO productBatchComp);
 
-	void updateProductBatchComp(productBatchCompDTO productBatchComp);
+	void updateProductBatchComp(ProductBatchCompDTO productBatchComp);
 
 }

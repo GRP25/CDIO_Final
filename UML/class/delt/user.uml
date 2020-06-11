@@ -5,12 +5,14 @@ class "UserDAO" as usrdao {
     + getUserList()\t\t:UserDTO[]
     + createUser(userDTO)\t:void
     + updateUser(userDTO)\t:void
+    + deactivateUser(int)\t:void
 }
 interface "IUserDAO" as iusrdao {
     + getUser(int)\t\t:UserDTO
     + getUserList()\t\t:UserDTO[]
     + createUser(userDTO)\t:void
     + updateUser(userDTO)\t:void
+    + deactivateUser(int)\t:void
 }
 class "UserService" as usrser {
 }

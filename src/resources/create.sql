@@ -7,7 +7,7 @@ CREATE TABLE Users (
     cpr varchar(10),
     PRIMARY KEY (userId)
 );
-
+// hooo
 CREATE TABLE Roles (
     roleName VARCHAR(36) NOT NULL,
     PRIMARY KEY ( roleName )
@@ -36,7 +36,6 @@ CREATE TABLE CommodityBatch (
     PRIMARY KEY (commodityBatchId),
     FOREIGN KEY (commodityId) REFERENCES Commodity(commodityId)
 );
-
 
 CREATE TABLE Prescription (
     prescriptionId int NOT NULL,
