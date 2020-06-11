@@ -1,7 +1,9 @@
 package Datalayer.DAO;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 
@@ -21,8 +23,21 @@ public class CommodityDAO implements ICommodityDAO {
 
 	@Override
 	public ArrayList<commodityDTO> getCommodityList() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM Commodity";
+
+		ResultSet resultSet = DBUtil.executeSelectQuery( query, null );
+		ArrayList<commodityDTO> listOfCommodityDTO = null;
+		try {
+			commodityDTO cmdtDTO;
+			listOfCommodityDTO = new ArrayList<>();
+			while (resultSet.next()) {
+				cmdtDTO = (commodityDTO) DBUtil.resultSetToObject(resultSet, commodityDTO.class);
+				listOfCommodityDTO.add(cmdtDTO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listOfCommodityDTO;
 	}
 
 	@Override
@@ -37,24 +52,16 @@ public class CommodityDAO implements ICommodityDAO {
 		}
 	}
 
-
 	@Override
-	public void createCommodityBatch(CommodityBatchDTO batch) throws DALException {
-		String query = "INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier) VALUES (?, ?, ?, ?)";
-		Object[] parameter = DBUtil.convertTOObject( batch );
+	public void updateCommodity(commodityDTO commodity) {
+		String query = "UPDATE CommodityBatch SET commodityId=?, commodityBatchId=? WHERE commodityId=?";
+		Object[] parameter = DBUtil.convertTOObject( commodity );
 
 		try {
 			DBUtil.executeCreateAndUpdate( query, parameter );
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-	}
-
-
-	@Override
-	public void updateCommodity(commodityDTO commodity) {
-		// TODO Auto-generated method stub
 
 	}
 
