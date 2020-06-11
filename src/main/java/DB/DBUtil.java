@@ -12,6 +12,7 @@ package DB;
  * fillOutStatement(pstmt: PreparedStatement, objects: Object[])                   *
  * convertTOObject(parameter: Object...):                        Object[]          *
  * resultSetToObject(ResultSet resultSet, Class classObject)     Object            *
+ * remainingParameter(objects: Object[], objectIndex: int, parameter: Object...)   *
  ***********************************************************************************/
 
 import Datalayer.DTO.CommodityBatchDTO;

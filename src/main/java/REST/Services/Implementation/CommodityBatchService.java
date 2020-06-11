@@ -41,7 +41,7 @@ public class CommodityBatchService implements ICommodityBatchService {
 
     public static void main(String[] args) throws DALException {
         ICommodityBatchDAO commodityBatchDAO = new CommodityBatchDAO();
-//        System.out.println(commodityBatchDAO.getCommodityBatch( 1 ));
+//        System.out.println(commodityBatchDAO.getCommodityBatch( 1 )); TODO fix the problem
 
 
         // Test createCommodityBatch
