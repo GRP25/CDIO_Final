@@ -15,4 +15,8 @@ public interface IUserDAO{
     void updateUser(UserDTO user);
 
     void deactivateUser(int userID);
+
+    boolean exists(String cpr);
+
+    boolean exists(int id);
 }

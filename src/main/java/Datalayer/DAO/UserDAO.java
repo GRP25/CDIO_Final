@@ -100,16 +100,17 @@ public class UserDAO implements IUserDAO {
         }
     }
 
-    /*@Override
+    @Override
     public boolean exists(int id) {
-        String sql = "SELECT from user WHERE user_id = ?";
-        try (
-                Connection conn = connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)
-        ) {
-            pstmt.setInt(1, id);
-            pstmt.executeUpdate();
+        String query = "SELECT from user WHERE user_id = ?";
+        ResultSet rs = DBUtil.executeSelectQuery(query, DBUtil.convertTOObject( id ));
+        try {
+            rs.first();
+
+        } catch (SQLDataException e) {
+            return false;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -117,18 +118,19 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean exists(String cpr) {
-        String sql = "SELECT from user WHERE user_cpr = ?";
-        try (
-                Connection conn = connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)
-        ) {
-            pstmt.setString(1, cpr);
-            pstmt.executeUpdate();
+        String query = "SELECT from user WHERE user_cpr = ?";
+        ResultSet rs = DBUtil.executeSelectQuery(query, DBUtil.convertTOObject( cpr ));
+        try {
+            rs.first();
+
+        } catch (SQLDataException e) {
+            return false;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
         return true;
-    }*/
+    }
 
     private ArrayList<String> get_user_roles(int id, Statement stmt) throws SQLException{
         String sql = "SELECT roleName FROM UserRole WHERE userId=" + id;
