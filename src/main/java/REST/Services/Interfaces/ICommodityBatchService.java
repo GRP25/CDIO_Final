@@ -1,6 +1,5 @@
 package REST.Services.Interfaces;
 
-import Datalayer.DAO.DALException;
 import Datalayer.DTO.CommodityBatchDTO;
 
 import java.util.List;

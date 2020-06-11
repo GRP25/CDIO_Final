@@ -1,5 +1,7 @@
-import DB.DBUtil;
 package Datalayer.DAO;
+
+import DB.DBUtil;
+
 
 import Datalayer.Interfaces.IUserDAO;
 import Datalayer.DTO.UserDTO;
@@ -8,7 +10,8 @@ import javax.enterprise.context.RequestScoped;
 import java.sql.*;
 import java.util.ArrayList;
 
-import static data.sql.Ctrl.*;
+import static Datalayer.DatabaseHandler.connect;
+//import static data.sql.Ctrl.*;
 
 @RequestScoped
 public class UserDAO implements IUserDAO {
@@ -35,7 +38,7 @@ public class UserDAO implements IUserDAO {
             while (rs.next()) {
                 ID = rs.getString("LAST_INSERT_ID()");
             }
-            
+
             // assigning roles to user
             sql = "INSERT INTO has_roles (user_id, roles_title) VALUES ";
             for (String role :  user.getRoles()) {
@@ -69,7 +72,7 @@ public class UserDAO implements IUserDAO {
                 user.setSurname(rs.getString("surname"));
                 user.setInitials(rs.getString("initials"));
                 user.setCpr(rs.getString("cpr"));
-            //    user.setRoles(stringToGroup(rs.getString("user_groups")));
+                //    user.setRoles(stringToGroup(rs.getString("user_groups")));
                 users.add(user);
             }
 
@@ -82,7 +85,7 @@ public class UserDAO implements IUserDAO {
             conn.close();
             stmt.close();
             rs.close();
-        } 
+        }
         catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -96,19 +99,19 @@ public class UserDAO implements IUserDAO {
         String sql = "SELECT * FROM user WHERE userId = ?;";
 
         try
-         {
+        {
             Connection conn = connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, ID);
             ResultSet rs = pstmt.executeQuery();
-             if(rs.next()) {
-                 user.setUserID(ID);
-                 user.setFirstName(rs.getString("firstname"));
-                 user.setSurname(rs.getString("surname"));
-                 user.setInitials(rs.getString("initials"));
-                 user.setCpr(rs.getString("cpr"));
-                 user.setRoles(get_user_roles(ID, pstmt));
-             }
+            if(rs.next()) {
+                user.setUserID(ID);
+                user.setFirstName(rs.getString("firstname"));
+                user.setSurname(rs.getString("surname"));
+                user.setInitials(rs.getString("initials"));
+                user.setCpr(rs.getString("cpr"));
+                user.setRoles(get_user_roles(ID, pstmt));
+            }
             rs.close();
             pstmt.close();
             conn.close();
@@ -181,7 +184,6 @@ public class UserDAO implements IUserDAO {
         }
         return true;
     }
-
     @Override
     public boolean exists(String cpr) {
         String sql = "SELECT from user WHERE user_cpr = ?";
@@ -195,7 +197,7 @@ public class UserDAO implements IUserDAO {
             return false;
         }
         return true;
-    }
+    }*/
 
     private ArrayList<String> get_user_roles(int id, Statement stmt) throws SQLException{
         String sql = "SELECT roleName FROM UserRole WHERE userId=" + id;

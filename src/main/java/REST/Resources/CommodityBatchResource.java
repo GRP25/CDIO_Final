@@ -1,6 +1,5 @@
 package REST.Resources;
 
-import Datalayer.DAO.DALException;
 import Datalayer.DTO.CommodityBatchDTO;
 import REST.Services.Implementation.CommodityBatchService;
 import REST.Services.Interfaces.ICommodityBatchService;
@@ -19,7 +18,7 @@ public class CommodityBatchResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCommodityBatchList() throws DALException {
+    public Response getCommodityBatchList() {
         Response response;
         List<CommodityBatchDTO> commodityBatchDTOList = commodityBatchService.getCommodityBatchList();
 
@@ -34,7 +33,7 @@ public class CommodityBatchResource {
     @PUT
     @Consumes( MediaType.APPLICATION_JSON )
     @Produces ( MediaType.APPLICATION_JSON )
-    public Response createCommodityBatch(CommodityBatchDTO commodityBatchDTO) throws DALException {
+    public Response createCommodityBatch(CommodityBatchDTO commodityBatchDTO) {
 
         Response response;
         String createResult = commodityBatchService.createCommodityBatch( commodityBatchDTO );

@@ -3,7 +3,6 @@ package Datalayer.Interfaces;
 
 import java.util.List;
 
-import Datalayer.DAO.DALException;
 import Datalayer.DTO.CommodityBatchDTO;
 
 public interface ICommodityBatchDAO {
