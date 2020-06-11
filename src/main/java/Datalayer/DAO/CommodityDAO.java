@@ -17,8 +17,21 @@ public class CommodityDAO implements ICommodityDAO {
 
 	@Override
 	public commodityDTO getCommodity(int commodity_id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		String query = "SELECT * FROM Commodity WHERE commodityId = ?";
+
+		ResultSet resultSet = DBUtil.executeSelectQuery( query, DBUtil.convertTOObject( commodity_id ));
+
+		commodityDTO commoDTO = null;
+
+		try {
+			resultSet.first();
+			commoDTO = (commodityDTO) DBUtil.resultSetToObject( resultSet, commodityDTO.class);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return commoDTO;
 	}
 
 	@Override
@@ -28,11 +41,11 @@ public class CommodityDAO implements ICommodityDAO {
 		ResultSet resultSet = DBUtil.executeSelectQuery( query, null );
 		ArrayList<commodityDTO> listOfCommodityDTO = null;
 		try {
-			commodityDTO cmdtDTO;
+			commodityDTO comdDTO;
 			listOfCommodityDTO = new ArrayList<>();
 			while (resultSet.next()) {
-				cmdtDTO = (commodityDTO) DBUtil.resultSetToObject(resultSet, commodityDTO.class);
-				listOfCommodityDTO.add(cmdtDTO);
+				comdDTO = (commodityDTO) DBUtil.resultSetToObject(resultSet, commodityDTO.class);
+				listOfCommodityDTO.add(comdDTO);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

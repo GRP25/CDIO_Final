@@ -16,6 +16,7 @@ package DB;
  ***********************************************************************************/
 
 import Datalayer.DTO.CommodityBatchDTO;
+import Datalayer.DTO.commodityDTO;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -154,6 +155,18 @@ public class DBUtil {
 
             return objects;
         }
+        else if (parameter[0] instanceof commodityDTO) {
+            commodityDTO commoDTO = (commodityDTO) parameter[0];
+
+            objects = new Object[2 + parameter.length -1];
+
+            objects[0] = commoDTO.getCommodity_id();
+            objects[1] = commoDTO.getCommodity_Name();
+
+            remainingParameter(objects, 2, parameter);
+
+            return objects;
+        }
 
 
         // If the parameter is integer, double , String or so on.
@@ -173,8 +186,8 @@ public class DBUtil {
         }
     }
 
-    public static Object resultSetToObject(ResultSet resultSet, Class classObject)
-                                                                throws SQLException{
+    public static Object resultSetToObject(ResultSet resultSet, Class classObject) throws SQLException{
+
         System.out.println(classObject.getSimpleName());
         if (classObject.getSimpleName().equalsIgnoreCase( "CommodityBatchDTO" )) {
 
