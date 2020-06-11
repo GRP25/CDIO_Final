@@ -6,6 +6,7 @@ import Datalayer.Interfaces.IUserDAO;
 
 import javax.enterprise.context.RequestScoped;
 import java.util.ArrayList;
+import java.util.List;
 
 @RequestScoped
 public class UserService implements IUserService {
@@ -35,7 +36,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ArrayList<UserDTO> getUserList() {
+    public List<UserDTO> getUserList() {
         return userDao.getUserList();
     }
 }
