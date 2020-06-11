@@ -53,4 +53,14 @@ public class ProductBatchDTO {
 		return status;
 	}
 
+	@Override
+	public String toString() {
+		return "ProductBatchDTO{" +
+				"productBatch_id=" + productBatch_id +
+				", prescription_id=" + prescription_id +
+				", startDate='" + startDate + '\'' +
+				", endDate='" + endDate + '\'' +
+				", status=" + status +
+				'}';
+	}
 }
