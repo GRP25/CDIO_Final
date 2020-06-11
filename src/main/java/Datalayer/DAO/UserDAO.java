@@ -1,5 +1,7 @@
-import DB.DBUtil;
 package Datalayer.DAO;
+
+import DB.DBUtil;
+
 
 import Datalayer.Interfaces.IUserDAO;
 import Datalayer.DTO.UserDTO;
@@ -8,7 +10,8 @@ import javax.enterprise.context.RequestScoped;
 import java.sql.*;
 import java.util.ArrayList;
 
-import static data.sql.Ctrl.*;
+import static Datalayer.DatabaseHandler.connect;
+//import static data.sql.Ctrl.*;
 
 @RequestScoped
 public class UserDAO implements IUserDAO {
@@ -35,7 +38,7 @@ public class UserDAO implements IUserDAO {
             while (rs.next()) {
                 ID = rs.getString("LAST_INSERT_ID()");
             }
-            
+
             // assigning roles to user
             sql = "INSERT INTO has_roles (user_id, roles_title) VALUES ";
             for (String role :  user.getRoles()) {
@@ -82,7 +85,7 @@ public class UserDAO implements IUserDAO {
             conn.close();
             stmt.close();
             rs.close();
-        } 
+        }
         catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -111,7 +111,7 @@ public class DBUtil {
     }
 
     private static void fillOutStatement(PreparedStatement pstmt, Object[] objects)
-                                        throws SQLException, NumberFormatException {
+                                            throws SQLException, NumberFormatException {
         int index = 1;
         if (objects != null) {
 
@@ -159,7 +159,7 @@ public class DBUtil {
         // If the parameter is integer, double , String or so on.
         int index = 0;
         objects = new Object[parameter.length];
-        for (Object o : objects) {
+        for (Object o : parameter) {
             objects[index++] = o;
         }
 

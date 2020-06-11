@@ -18,7 +18,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 	@Override
 	public CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws DALException {
 
-		String query = "SELECT * FORM CommodityBatch WHERE commodityBatchId = ?";
+		String query = "SELECT * FROM CommodityBatch WHERE commodityBatchId = ?";
 
 			ResultSet resultSet = DBUtil.executeSelectQuery( query, DBUtil.convertTOObject( commodityBatch_id ) );
 
