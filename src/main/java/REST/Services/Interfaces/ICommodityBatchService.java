@@ -13,8 +13,8 @@ public interface ICommodityBatchService {
 
         List<CommodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws DALException;
 
-        void createCommodityBatch(CommodityBatchDTO batch) throws DALException;
+        String createCommodityBatch(CommodityBatchDTO batch) throws DALException;
 
-        void updateCommodityBatch(CommodityBatchDTO batch) throws DALException;
+        String updateCommodityBatch(CommodityBatchDTO batch) throws DALException;
 
 }

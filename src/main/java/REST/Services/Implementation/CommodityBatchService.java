@@ -28,13 +28,15 @@ public class CommodityBatchService implements ICommodityBatchService {
     }
 
     @Override
-    public void createCommodityBatch(CommodityBatchDTO batch) throws DALException {
+    public String createCommodityBatch(CommodityBatchDTO batch) throws DALException {
         commodityBatchDAO.createCommodityBatch( batch );
+        return "Insert query executed successfully";
     }
 
     @Override
-    public void updateCommodityBatch(CommodityBatchDTO batch) throws DALException {
+    public String updateCommodityBatch(CommodityBatchDTO batch) throws DALException {
         commodityBatchDAO.updateCommodityBatch( batch );
+        return "Update query executed successfully";
     }
 
     public static void main(String[] args) throws DALException {
