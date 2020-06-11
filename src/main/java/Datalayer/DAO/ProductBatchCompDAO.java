@@ -61,9 +61,26 @@ public class ProductBatchCompDAO implements IProductBatchCompDAO {
 
 	@Override
 	public List<ProductBatchCompDTO> getProductBatchCompList(int productBatch_id) {
+		String sql = "SELECT * FROM ProduktBatchComp WHERE productBatchId = ?";
 
+		Object[] parameter = DBUtil.convertTOObject(productBatch_id);
+		ResultSet resultSet = DBUtil.executeSelectQuery(sql,parameter);
+		List<ProductBatchCompDTO> productBatchCompDTOList;
+
+		try{
+			ProductBatchCompDTO productBatchCompDTO;
+			productBatchCompDTOList = new ArrayList<>();
+
+			while (resultSet.next()){
+				productBatchCompDTO = (ProductBatchCompDTO) DBUtil.resultSetToObject(resultSet, ProductBatchCompDTO.class);
+				productBatchCompDTOList.add(productBatchCompDTO);
+			}
+		}catch (SQLException e){
+			e.printStackTrace();
+			return null;
+		}
 		// TODO Auto-generated method stub
-		return null;
+		return productBatchCompDTOList;
 	}
 
 	@Override
