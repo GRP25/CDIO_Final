@@ -94,7 +94,6 @@ public class ProductBatchCompDAO implements IProductBatchCompDAO {
 			e.printStackTrace();
 		}
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
