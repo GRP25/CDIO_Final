@@ -1,7 +1,6 @@
 package REST.Services.Implementation;
 
 import Datalayer.DAO.CommodityDAO;
-import Datalayer.DAO.DALException;
 import Datalayer.DTO.commodityDTO;
 import Datalayer.Interfaces.ICommodityDAO;
 import REST.Services.Interfaces.ICommodityService;
@@ -12,30 +11,29 @@ public class CommodityService implements ICommodityService {
     ICommodityDAO commodityDAO = new CommodityDAO();
 
     @Override
-    public commodityDTO getCommodity(int commodity_id) throws DALException {
+    public commodityDTO getCommodity(int commodity_id) {
         return commodityDAO.getCommodity(commodity_id);
     }
 
     @Override
-    public List<commodityDTO> getCommodityList() throws DALException{
+    public List<commodityDTO> getCommodityList() {
         return commodityDAO.getCommodityList();
     }
 
     @Override
-    public String createCommodity(commodityDTO commodity) throws DALException{
+    public String createCommodity(commodityDTO commodity) {
         commodityDAO.createCommodity(commodity);
         return "Insert query executed successfully";
     }
 
     @Override
-    public String updateCommodity(commodityDTO commodity) throws DALException{
+    public String updateCommodity(commodityDTO commodity) {
         commodityDAO.updateCommodity(commodity);
         return "Update query executed successfully";
     }
 
 
-
-    public static void main(String[] args) throws DALException {
+    public static void main(String[] args) {
         ICommodityDAO commodityDAO = new CommodityDAO();
 
 

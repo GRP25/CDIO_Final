@@ -1,7 +1,6 @@
 package REST.Services.Implementation;
 
 import Datalayer.DAO.CommodityBatchDAO;
-import Datalayer.DAO.DALException;
 import Datalayer.DTO.CommodityBatchDTO;
 import Datalayer.Interfaces.ICommodityBatchDAO;
 import REST.Services.Interfaces.ICommodityBatchService;
