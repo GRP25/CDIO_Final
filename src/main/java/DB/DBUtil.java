@@ -186,17 +186,9 @@ public class DBUtil {
             comDto.setSupplier( resultSet.getString( 4 ) );
 
             return comDto;
-
         }
-
         return null;
     }
-
-
-
-
-
-
 }
 
 

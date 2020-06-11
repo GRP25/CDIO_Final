@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Datalayer.DatabaseHandler;
+import com.sun.mail.imap.protocol.ID;
 
 @RequestScoped
 public class UserDAO implements IUserDAO {
@@ -38,6 +39,7 @@ public class UserDAO implements IUserDAO {
             while(resultset.next()){
                 userDTO = (UserDTO) DBUtil.resultSetToObject(resultset,UserDTO.class);
                 users.add(userDTO);
+                get_user_roles(userDTO.getUserID());
             }
         } 
         catch (SQLException e) {
@@ -59,6 +61,7 @@ public class UserDAO implements IUserDAO {
         try {
             resultSet.first();
             user = (UserDTO) DBUtil.resultSetToObject(resultSet, UserDTO.class);
+            get_user_roles(ID);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,15 +91,12 @@ public class UserDAO implements IUserDAO {
     @Override
     public void deactivateUser(int id) {
         String sql = "UPDATE user set status = ?";
-        try (
-                Connection conn = DatabaseHandler.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)
-        ) {
-            pstmt.setInt(1, id);
-            pstmt.executeUpdate();
-            System.out.println("User succsessfully deleted");
+        Object[] parameter = DBUtil.convertTOObject(id);
+
+        try {
+            DBUtil.executeCreateAndUpdate(sql,parameter);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -132,13 +132,13 @@ public class UserDAO implements IUserDAO {
         return true;
     }
 
-    private ArrayList<String> get_user_roles(int id, Statement stmt) throws SQLException{
+    private ArrayList<String> get_user_roles(int id) throws SQLException{
         String sql = "SELECT roleName FROM UserRole WHERE userId=" + id;
-        ResultSet rs = stmt.executeQuery(sql);
+        ResultSet resultSet = DBUtil.executeSelectQuery(sql,null);
         ArrayList<String> roleList = new ArrayList<>();
 
-        while (rs.next()) {
-            roleList.add(rs.getString("roleName"));
+        while (resultSet.next()) {
+            roleList.add(resultSet.getString("roleName"));
         }
 
         return roleList;
