@@ -1,14 +1,15 @@
-import DB.DBUtil;
 package Datalayer.DAO;
 
+import DB.DBUtil;
 import Datalayer.Interfaces.IUserDAO;
 import Datalayer.DTO.UserDTO;
 
 import javax.enterprise.context.RequestScoped;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
-import static data.sql.Ctrl.*;
+import Datalayer.DatabaseHandler;
 
 @RequestScoped
 public class UserDAO implements IUserDAO {
@@ -16,75 +17,32 @@ public class UserDAO implements IUserDAO {
     @Override
     public void createUser(UserDTO user) {
         String sql = "INSERT INTO Users (firstname, surname, initials, cpr) values (?,?,?,?);";
+        Object[] parameter = DBUtil.convertTOObject(user);
 
         try {
-            Connection conn = connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-
-            pstmt.setString(1, user.getFirstName());
-            pstmt.setString(2,user.getSurname());
-            pstmt.setString(3, user.getInitials());
-            pstmt.setString(4, user.getCpr());
-            pstmt.executeUpdate();
-
-            // getting id from last inserted user
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT LAST_INSERT_ID();");
-
-            String ID = "";
-            while (rs.next()) {
-                ID = rs.getString("LAST_INSERT_ID()");
-            }
-            
-            // assigning roles to user
-            sql = "INSERT INTO has_roles (user_id, roles_title) VALUES ";
-            for (String role :  user.getRoles()) {
-                sql += "('" + ID + "', '" + role + "'),";
-            }
-            sql = sql.substring(0,sql.length() - 1);
-            stmt.executeQuery(sql);
-
+            DBUtil.executeCreateAndUpdate(sql,parameter);
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
     @Override
-    public ArrayList<UserDTO> getUserList() {
+    public List<UserDTO> getUserList() {
         String sql = "SELECT * FROM user";
-        ArrayList<UserDTO> users = new ArrayList<>();
+
+        ResultSet resultset = DBUtil.executeSelectQuery(sql,null);
+        List<UserDTO> users = new ArrayList<>();
+
         try {
-            Connection conn = connect();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            // loop through the result set
-            UserDTO user;
-            int     id;
-            while (rs.next()) {
-                user = new UserDTO();
-                id = rs.getInt("userId");
-                user.setUserID(id);
-                user.setFirstName(rs.getString("firstname"));
-                user.setSurname(rs.getString("surname"));
-                user.setInitials(rs.getString("initials"));
-                user.setCpr(rs.getString("cpr"));
-            //    user.setRoles(stringToGroup(rs.getString("user_groups")));
-                users.add(user);
+            UserDTO userDTO;
+            while(resultset.next()){
+                userDTO = (UserDTO) DBUtil.resultSetToObject(resultset,UserDTO.class);
+                users.add(userDTO);
             }
-
-            for (UserDTO userTemp : users) {
-                stmt = conn.createStatement();
-                userTemp.setRoles(get_user_roles(userTemp.getUserID(), stmt));
-            }
-
-            // closing connections
-            conn.close();
-            stmt.close();
-            rs.close();
         } 
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;
         }
 
         return users;
@@ -92,28 +50,19 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public UserDTO getUser(int ID) {
-        UserDTO user = new UserDTO();
         String sql = "SELECT * FROM user WHERE userId = ?;";
 
-        try
-         {
-            Connection conn = connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, ID);
-            ResultSet rs = pstmt.executeQuery();
-             if(rs.next()) {
-                 user.setUserID(ID);
-                 user.setFirstName(rs.getString("firstname"));
-                 user.setSurname(rs.getString("surname"));
-                 user.setInitials(rs.getString("initials"));
-                 user.setCpr(rs.getString("cpr"));
-                 user.setRoles(get_user_roles(ID, pstmt));
-             }
-            rs.close();
-            pstmt.close();
-            conn.close();
+        Object[] parameter = DBUtil.convertTOObject(ID);
+        ResultSet resultSet = DBUtil.executeSelectQuery(sql,parameter);
+        UserDTO user;
+
+        try {
+            resultSet.first();
+            user = (UserDTO) DBUtil.resultSetToObject(resultSet, UserDTO.class);
+
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;
         }
         return user;
     }
@@ -125,30 +74,14 @@ public class UserDAO implements IUserDAO {
                 + "initials = ? , "
                 + "cpr = ? , "
                 + "WHERE userId = ?";
+        Object[] parameter = DBUtil.convertTOObject(user);
+
 
         try {
-            Connection conn = connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            // set the corresponding param
-            pstmt.setString(1, user.getFirstName());
-            pstmt.setString(2,user.getSurname());
-            pstmt.setString(3, user.getInitials());
-            pstmt.setString(4, user.getCpr());
-            pstmt.setInt(5, user.getUserID());
-            // update
-            pstmt.executeUpdate();
+            DBUtil.executeCreateAndUpdate(sql,parameter);
 
-            // assigning roles to user
-            sql = "DELETE FROM has_roles WHERE userId = "+user.getUserID();
-            pstmt.executeQuery(sql);
-            sql = "INSERT INTO has_roles (userId, roles_title) VALUES ";
-            for (String role :  user.getRoles()) {
-                sql += "('" + user.getUserID() + "', '" + role + "'),";
-            }
-            sql = sql.substring(0,sql.length() - 1);
-            pstmt.executeQuery(sql);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -156,7 +89,7 @@ public class UserDAO implements IUserDAO {
     public void deactivateUser(int id) {
         String sql = "UPDATE user set status = ?";
         try (
-                Connection conn = connect();
+                Connection conn = DatabaseHandler.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)
         ) {
             pstmt.setInt(1, id);

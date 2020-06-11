@@ -2,13 +2,13 @@ package Datalayer.Interfaces;
 
 import Datalayer.DTO.UserDTO;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IUserDAO{
 
     UserDTO getUser(int userID);
 
-    ArrayList<UserDTO> getUserList();
+    List<UserDTO> getUserList();
 
     void createUser(UserDTO user);
 
