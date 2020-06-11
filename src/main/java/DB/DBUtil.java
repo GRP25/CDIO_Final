@@ -199,16 +199,22 @@ public class DBUtil {
             comDto.setSupplier( resultSet.getString( 4 ) );
 
             return comDto;
+        }
 
+        else if (classObject.getSimpleName().equalsIgnoreCase("commodityDTO")) {
+
+            commodityDTO commoDTO = new commodityDTO();
+
+            commoDTO.setCommodity_id( resultSet.getInt( 1));
+            commoDTO.setCommodity_Name( resultSet.getString( 2));
+
+            return commoDTO;
         }
 
         return null;
     }
 
-
-
-
-
+    
 
 }
 

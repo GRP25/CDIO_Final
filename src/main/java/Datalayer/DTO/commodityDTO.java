@@ -4,6 +4,9 @@ public class commodityDTO {
 	private int commodity_id;
 	private String commodity_Name;
 
+	public commodityDTO() {
+	}
+
 	public commodityDTO(int commodity_id, String commodity_Name) {
 		this.commodity_id = commodity_id;
 		this.commodity_Name = commodity_Name;
