@@ -132,30 +132,44 @@ public class DBUtil {
 
 
     public static Object[] convertTOObject(Object... parameter){
-        Object[] object;
+        Object[] objects;
         if (parameter[0] instanceof CommodityBatchDTO){
 
             CommodityBatchDTO comDto =  (CommodityBatchDTO) parameter[0];
 
-            object = new Object[4]; // TODO
+            // parameter.length -1 because when update method is invoked from CommodityBatchDAO
+            // It will have two parameter.length = 2(Object, Object.id), and the objects[5] will
+            // have the Object.id and assign the Object.id to WHERE in sql query, but create method
+            // Is invoked it will have just one parameter (Object), and INSERT query doesn't require WHERE
+            objects = new Object[4 + parameter.length -1];
 
-            object[0] = comDto.getCommodity_id();
-            object[1] = comDto.getCommodityBatch_id();
-            object[2] = comDto.getWeight();
-            object[3] = comDto.getSupplier();
+            objects[0] = comDto.getCommodity_id();
+            objects[1] = comDto.getCommodityBatch_id();
+            objects[2] = comDto.getWeight();
+            objects[3] = comDto.getSupplier();
 
-            return object;
+            // To assign Object.id to Objects[lastIndex]
+            remainingParameter(objects, 4, parameter);
+
+            return objects;
         }
 
 
         // If the parameter is integer, double , String or so on.
         int index = 0;
-        object = new Object[parameter.length];
-        for (Object o : object) {
-            object[index++] = o;
+        objects = new Object[parameter.length];
+        for (Object o : objects) {
+            objects[index++] = o;
         }
 
-        return object;
+        return objects;
+    }
+
+    /** To assign values to WHERE's sql query*/
+    private static void remainingParameter(Object[] objects, int objectIndex, Object... parameter) {
+        for (int parameterIndex = 1; parameterIndex < parameter.length; objectIndex++, parameterIndex++) {
+            objects[objectIndex] = parameter[parameterIndex];
+        }
     }
 
     public static Object resultSetToObject(ResultSet resultSet, Class classObject)

@@ -92,10 +92,10 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 
 	@Override
 	public void updateCommodityBatch(CommodityBatchDTO batch) throws DALException {
-		String query = "UPDATE CommodityBatch SET commodityId=?, weight=?, supplier=?) WHERE commodityBatchId=?";
+		String query = "UPDATE CommodityBatch SET commodityBatchId=?, commodityId=?, weight=?, supplier=? WHERE commodityBatchId=?";
 
 		    try {
-		        DBUtil.executeCreateAndUpdate( query, DBUtil.convertTOObject( batch ) );
+		        DBUtil.executeCreateAndUpdate( query, DBUtil.convertTOObject( batch, batch.getCommodity_id() ) );
             } catch (SQLException e) {
 		        e.printStackTrace();
             }

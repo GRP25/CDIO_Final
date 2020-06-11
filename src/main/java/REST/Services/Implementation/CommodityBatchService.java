@@ -40,7 +40,7 @@ public class CommodityBatchService implements ICommodityBatchService {
     }
 
     public static void main(String[] args) throws DALException {
-        Datalayer.Interfaces.ICommodityBatchDAO commodityBatchDAO = new Datalayer.DAO.CommodityBatchDAO();
+        ICommodityBatchDAO commodityBatchDAO = new CommodityBatchDAO();
 //        System.out.println(commodityBatchDAO.getCommodityBatch( 1 ));
 
 
