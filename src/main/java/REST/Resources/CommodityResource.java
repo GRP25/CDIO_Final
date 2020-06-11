@@ -1,6 +1,5 @@
 package REST.Resources;
 
-import Datalayer.DTO.CommodityBatchDTO;
 import Datalayer.DTO.commodityDTO;
 import REST.Services.Implementation.CommodityService;
 import REST.Services.Interfaces.ICommodityService;
