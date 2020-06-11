@@ -41,7 +41,8 @@ public class CommodityBatchService implements ICommodityBatchService {
 
     public static void main(String[] args) throws DALException {
         ICommodityBatchDAO commodityBatchDAO = new CommodityBatchDAO();
-        System.out.println(commodityBatchDAO.getCommodityBatch( 1 ).getSupplier()); // TODO fix the problem
+        // Test getCommodityBatch
+//        System.out.println(commodityBatchDAO.getCommodityBatch( 1 ).getSupplier());
 
 
         // Test createCommodityBatch
@@ -56,6 +57,16 @@ public class CommodityBatchService implements ICommodityBatchService {
             System.out.print( commodityBatchDTO.getSupplier() + " " );
             System.out.println();
         };*/
+
+        // Test commodityBatchList
+        for (CommodityBatchDTO commodityBatchDTO : commodityBatchDAO.getCommodityBatchList(1)) {
+            System.out.print( commodityBatchDTO.getCommodity_id() + " " );
+            System.out.print( commodityBatchDTO.getCommodityBatch_id() + " " );
+            System.out.print( commodityBatchDTO.getWeight() + " " );
+            System.out.print( commodityBatchDTO.getSupplier() + " " );
+            System.out.println();
+        };
+
 
         // Test updateCommodityBatch
 //        CommodityBatchDTO commodityBatchDAO1 = new CommodityBatchDTO(3,3,9.4,"Update");
