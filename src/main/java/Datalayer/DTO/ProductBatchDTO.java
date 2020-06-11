@@ -3,6 +3,8 @@ package Datalayer.DTO;
 public class ProductBatchDTO {
 	private int productBatch_id;
 	private int prescription_id;
+	private String startDate;
+	private String endDate;
 	private int status;
 
 	public ProductBatchDTO(int productBatch_id, int prescription_id, int status) {
@@ -25,6 +27,22 @@ public class ProductBatchDTO {
 
 	public int getPrescription_id() {
 		return prescription_id;
+	}
+
+	public void setStartDate(String date) {
+		this.startDate = date;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setEndDate(String date) {
+		this.endDate = date;
+	}
+
+	public String getEndDate() {
+		return endDate;
 	}
 
 	public void setStatus(int status) {
