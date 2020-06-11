@@ -1,3 +1,4 @@
+import DB.DBUtil;
 package Datalayer.DAO;
 
 import Datalayer.Interfaces.IUserDAO;
@@ -207,5 +208,5 @@ public class UserDAO implements IUserDAO {
 
         return roleList;
     }
-}
 
+}

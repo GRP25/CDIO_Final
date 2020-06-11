@@ -10,10 +10,10 @@ INSERT INTO UserRole (userId, roleName) values (1, 'Produktionsleder');
 INSERT INTO UserRole (userId, roleName) values (2, 'Produktionsleder');
 INSERT INTO UserRole (userId, roleName) values (2, 'Laborant');
 
-INSERT INTO Commodity (commodityName, supplier) values ("A", "ABC Exports");
-INSERT INTO Commodity (commodityName, supplier) values ("B", "MD Exports");
+INSERT INTO Commodity (commodityName) values ("A");
+INSERT INTO Commodity (commodityName) values ("B");
 
-INSERT INTO CommodityBatch (commodityId, weight ) values(1,2.3);
+INSERT INTO CommodityBatch (commodityId, weight, supplier ) values(1, 2.3, "MD Exports");
 
 INSERT INTO ProduktBatch (status, prescriptionId) values (1, 1);
 INSERT INTO ProduktBatch (status, prescriptionId) values (1, 2);
