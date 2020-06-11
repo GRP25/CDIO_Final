@@ -26,3 +26,6 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
 - Ret ProductBatchComp diagrammet til at kunne tage endnu et parameter ind i IProduktBatchKompDAO 
 - Tilføj supplier til commodityBatch i klasse diagram
 - start og slut dato i ProductBatch
+
+## Spørgsmål til 14:00
+- getCommodityBatchList Mangler der ikke en condition i sql statement?
