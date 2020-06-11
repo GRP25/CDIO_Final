@@ -36,8 +36,8 @@ CREATE TABLE CommodityBatch (
     commodityId int,
     weight double,
     supplier varchar(20),
-    PRIMARY KEY (commodityBatchId),
-    FOREIGN KEY (commodityId) REFERENCES Commodity(commodityId)
+    PRIMARY KEY (commodityBatchId)
+--     ,FOREIGN KEY (commodityId) REFERENCES Commodity(commodityId)
 );
 
 

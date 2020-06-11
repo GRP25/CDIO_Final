@@ -101,4 +101,40 @@ public class CommodityBatchResource {
 
     }
 
+
+
+    public static void main(String[] args) {
+        ICommodityBatchService commodityBatchService = new CommodityBatchService();
+        // Test getCommodityBatch
+//        System.out.println(commodityBatchService.getCommodityBatch( 1 ).getSupplier());
+
+
+        // Test commodityBatchList
+//        for (CommodityBatchDTO commodityBatchDTO : commodityBatchService.getCommodityBatchList()) {
+//            System.out.print( commodityBatchDTO.getCommodity_id() + " " );
+//            System.out.print( commodityBatchDTO.getCommodityBatch_id() + " " );
+//            System.out.print( commodityBatchDTO.getWeight() + " " );
+//            System.out.print( commodityBatchDTO.getSupplier() + " " );
+//            System.out.println();
+//        };
+
+        // Test commodityBatchList
+//        for (CommodityBatchDTO commodityBatchDTO : commodityBatchService.getCommodityBatchList(1)) {
+//            System.out.print( commodityBatchDTO.getCommodity_id() + " " );
+//            System.out.print( commodityBatchDTO.getCommodityBatch_id() + " " );
+//            System.out.print( commodityBatchDTO.getWeight() + " " );
+//            System.out.print( commodityBatchDTO.getSupplier() + " " );
+//            System.out.println();
+//        };
+
+
+        // Test updateCommodityBatch
+//        CommodityBatchDTO commodityBatchDAO1 = new CommodityBatchDTO(2,2,9.4,"Update");
+//        commodityBatchService.updateCommodityBatch( commodityBatchDAO1 );
+
+        // Test createCommodityBatch
+        Datalayer.DTO.CommodityBatchDTO commodityBatchDAO1 = new Datalayer.DTO.CommodityBatchDTO(5,1,5.4,"MD");
+        commodityBatchService.createCommodityBatch( commodityBatchDAO1 ); // todo get: Duplicate entry '1' for key 'commoditybatch.PRIMARY' Error
+    }
+
 }

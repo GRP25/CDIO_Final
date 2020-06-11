@@ -37,38 +37,4 @@ public class CommodityBatchService implements ICommodityBatchService {
         commodityBatchDAO.updateCommodityBatch( batch );
         return "Update query executed successfully";
     }
-
-    public static void main(String[] args) {
-        ICommodityBatchDAO commodityBatchDAO = new CommodityBatchDAO();
-        // Test getCommodityBatch
-//        System.out.println(commodityBatchDAO.getCommodityBatch( 1 ).getSupplier());
-
-
-        // Test createCommodityBatch
-/*        Datalayer.DTO.CommodityBatchDTO commodityBatchDAO1 = new Datalayer.DTO.CommodityBatchDTO(3,3,5.4,"MD");
-        commodityBatchDAO.createCommodityBatch( commodityBatchDAO1 );*/
-
-        // Test commodityBatchList
-        /*for (CommodityBatchDTO commodityBatchDTO : commodityBatchDAO.getCommodityBatchList()) {
-            System.out.print( commodityBatchDTO.getCommodity_id() + " " );
-            System.out.print( commodityBatchDTO.getCommodityBatch_id() + " " );
-            System.out.print( commodityBatchDTO.getWeight() + " " );
-            System.out.print( commodityBatchDTO.getSupplier() + " " );
-            System.out.println();
-        };*/
-
-        // Test commodityBatchList
-        for (CommodityBatchDTO commodityBatchDTO : commodityBatchDAO.getCommodityBatchList(1)) {
-            System.out.print( commodityBatchDTO.getCommodity_id() + " " );
-            System.out.print( commodityBatchDTO.getCommodityBatch_id() + " " );
-            System.out.print( commodityBatchDTO.getWeight() + " " );
-            System.out.print( commodityBatchDTO.getSupplier() + " " );
-            System.out.println();
-        };
-
-
-        // Test updateCommodityBatch
-//        CommodityBatchDTO commodityBatchDAO1 = new CommodityBatchDTO(3,3,9.4,"Update");
-//        commodityBatchDAO.updateCommodityBatch( commodityBatchDAO1 );
-    }
 }

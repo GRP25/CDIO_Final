@@ -59,7 +59,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 
 	@Override
 	public List<CommodityBatchDTO> getCommodityBatchList(int commodity_id) {
-		String query = "SELECT * FROM CommodityBatch WHERE commodityBatchId = ?";
+		String query = "SELECT * FROM CommodityBatch WHERE commodityId = ?";
 
 		    ResultSet resultSet = DBUtil.executeSelectQuery( query, DBUtil.convertTOObject( commodity_id ) );
 		    List<CommodityBatchDTO> listOfCommodityBatchDTO = null; // Instead of implementing same as getCommodityBatchList out parameter
