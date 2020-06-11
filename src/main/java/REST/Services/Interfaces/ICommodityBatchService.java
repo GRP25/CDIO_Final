@@ -5,7 +5,7 @@ import Datalayer.DTO.CommodityBatchDTO;
 
 import java.util.List;
 
-public interface ICommodityBatchDAO {
+public interface ICommodityBatchService {
 
         CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws DALException;
 

@@ -1,14 +1,16 @@
 package REST.Services.Implementation;
 
+import Datalayer.DAO.CommodityBatchDAO;
 import Datalayer.DAO.DALException;
 import Datalayer.DTO.CommodityBatchDTO;
-import REST.Services.Interfaces.ICommodityBatchDAO;
+import Datalayer.Interfaces.ICommodityBatchDAO;
+import REST.Services.Interfaces.ICommodityBatchService;
 
 import java.util.List;
 
-public class CommodityBatchDAO implements ICommodityBatchDAO {
+public class CommodityBatchService implements ICommodityBatchService {
 
-    Datalayer.Interfaces.ICommodityBatchDAO commodityBatchDAO = new Datalayer.DAO.CommodityBatchDAO();
+    ICommodityBatchDAO commodityBatchDAO = new CommodityBatchDAO();
 
     @Override
     public CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws DALException {
@@ -38,14 +40,23 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
     public static void main(String[] args) throws DALException {
         Datalayer.Interfaces.ICommodityBatchDAO commodityBatchDAO = new Datalayer.DAO.CommodityBatchDAO();
 //        System.out.println(commodityBatchDAO.getCommodityBatch( 1 ));
-//        Datalayer.DTO.CommodityBatchDTO commodityBatchDAO1 = new Datalayer.DTO.CommodityBatchDTO(3,3,5.4,"MD");
-//        commodityBatchDAO.createCommodityBatch( commodityBatchDAO1 );
-        for (CommodityBatchDTO commodityBatchDTO : commodityBatchDAO.getCommodityBatchList()) {
+
+
+        // Test createCommodityBatch
+/*        Datalayer.DTO.CommodityBatchDTO commodityBatchDAO1 = new Datalayer.DTO.CommodityBatchDTO(3,3,5.4,"MD");
+        commodityBatchDAO.createCommodityBatch( commodityBatchDAO1 );*/
+
+        // Test commodityBatchList
+        /*for (CommodityBatchDTO commodityBatchDTO : commodityBatchDAO.getCommodityBatchList()) {
             System.out.print( commodityBatchDTO.getCommodity_id() + " " );
             System.out.print( commodityBatchDTO.getCommodityBatch_id() + " " );
             System.out.print( commodityBatchDTO.getWeight() + " " );
             System.out.print( commodityBatchDTO.getSupplier() + " " );
             System.out.println();
-        };
+        };*/
+
+        // Test updateCommodityBatch
+        CommodityBatchDTO commodityBatchDAO1 = new CommodityBatchDTO(3,3,9.4,"Update");
+        commodityBatchDAO.updateCommodityBatch( commodityBatchDAO1 );
     }
 }
