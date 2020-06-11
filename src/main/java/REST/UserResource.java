@@ -8,7 +8,6 @@ import REST.Services.Interfaces.IUserRecource;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
 import java.util.List;
 
 import static Funclayer.exceptions.Validation.validateUser;
