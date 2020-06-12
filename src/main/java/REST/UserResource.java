@@ -7,7 +7,6 @@ import Funclayer.exceptions.UserException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.sql.SQLException;
 import java.util.List;
 
 import static Funclayer.exceptions.Validation.validateUser;

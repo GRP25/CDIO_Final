@@ -2,7 +2,6 @@ package Datalayer.Interfaces;
 
 import Datalayer.DTO.UserDTO;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface IUserDAO {

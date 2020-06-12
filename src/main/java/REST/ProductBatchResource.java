@@ -1,6 +1,7 @@
 package REST;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -36,7 +37,7 @@ public class ProductBatchResource {
     // get all product batches
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<ProductBatchDTO> getAllProducts() {
+    public List<ProductBatchDTO> getAllProducts() {
         return productDAO.getProductBatchDTOList();
     }
 
@@ -61,8 +62,7 @@ public class ProductBatchResource {
     @Path("/Comp/{ProductID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<ProductBatchCompDTO> getCompountsForProduct(@PathParam("ProductID") int productID) {
+    public List<ProductBatchCompDTO>  getCompountsForProduct(@PathParam("ProductID") int productID) {
         return productCompDAO.getProductBatchCompList(productID);
     }
-
 }

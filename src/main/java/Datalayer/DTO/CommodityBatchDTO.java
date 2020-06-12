@@ -49,4 +49,14 @@ public class CommodityBatchDTO {
 	public String getSupplier() {
 		return supplier;
 	}
+
+	@Override
+	public String toString() {
+		return "CommodityBatchDTO{" +
+				"commodityBatch_id=" + commodityBatch_id +
+				", commodity_id=" + commodity_id +
+				", weight=" + weight +
+				", supplier='" + supplier + '\'' +
+				'}';
+	}
 }

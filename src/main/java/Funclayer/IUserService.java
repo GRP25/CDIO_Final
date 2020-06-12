@@ -2,8 +2,6 @@ package Funclayer;
 
 import Datalayer.DTO.UserDTO;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IUserService
@@ -13,5 +11,6 @@ public interface IUserService
     void createUser(UserDTO user) throws SQLException;
     void deleteUser(int userID) throws SQLException;
     List<UserDTO> getUserList() throws SQLException;
+
 
 }
