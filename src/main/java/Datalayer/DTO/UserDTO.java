@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import Datalayer.DTO.IDTO.IDTO;
 
@@ -13,11 +14,10 @@ public class UserDTO implements IDTO {
     private String surname;
     private String cpr;
     private String initials;
-    private ArrayList<String> roles;
+    private List<String> roles;
     private int status;
 
-    public UserDTO(int userID, String firstName, String surname, String cpr, String initials, ArrayList<String> roles,
-            int status) {
+    public UserDTO(int userID, String firstName, String surname, String cpr, String initials, List<String> roles, int status) {
         this.userID = userID;
         this.firstName = firstName;
         this.surname = surname;
@@ -99,7 +99,7 @@ public class UserDTO implements IDTO {
         return initials;
     }
 
-    public ArrayList<String> getRoles() {
+    public List<String> getRoles() {
         return roles;
     }
 

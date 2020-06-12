@@ -8,6 +8,7 @@ import Funclayer.exceptions.UserException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
+import java.util.List;
 
 import static Funclayer.exceptions.Validation.validateUser;
 
@@ -46,7 +47,7 @@ public class UserResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<UserDTO> getUserList() {
+    public List<UserDTO> getUserList() {
         return userService.getUserList();
     }
 

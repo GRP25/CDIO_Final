@@ -3,6 +3,7 @@ package Funclayer;
 import Datalayer.DTO.UserDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IUserService
 {
@@ -10,6 +11,6 @@ public interface IUserService
     void updateUser(UserDTO user);
     void createUser(UserDTO user);
     void deleteUser(int userID);
-    ArrayList<UserDTO> getUserList();
+    List<UserDTO> getUserList();
 
 }
