@@ -7,7 +7,9 @@ import Funclayer.exceptions.UserException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static Funclayer.exceptions.Validation.validateUser;
 
@@ -19,34 +21,34 @@ public class UserResource {
     @Path("/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public UserDTO getUser(@PathParam("userID") int userID) {
+    public UserDTO getUser(@PathParam("userID") int userID) throws SQLException {
 
         return userService.getUser(userID);
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateUser(UserDTO user) throws UserException {
+    public void updateUser(UserDTO user) throws UserException, SQLException {
         validateUser(user);
         userService.updateUser(user);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createUser(UserDTO user) throws UserException{
+    public void createUser(UserDTO user) throws UserException, SQLException{
         validateUser(user);
         userService.createUser(user);
     }
 
     @Path("/{userID}")
     @DELETE
-    public void deleteUser(@PathParam("userID") int userID) {
+    public void deleteUser(@PathParam("userID") int userID) throws SQLException {
         userService.deleteUser(userID);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<UserDTO> getUserList() {
+    public List<UserDTO> getUserList() throws SQLException {
         return userService.getUserList();
     }
 

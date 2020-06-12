@@ -41,27 +41,24 @@ public class DBUtil {
 
     /** Registering the Driver */
     public static void main(String[] args) {
-        InputStream inputStream = DBUtil.class.getClassLoader().
-                        getResourceAsStream( "sqlQueries.sql" );
+        InputStream inputStream = DBUtil.class.getClassLoader().getResourceAsStream("sqlQueries.sql");
         Connection connection = getConnection();
 
         // Test
         System.out.println("Connection established");
 
         // Initialize the script runner
-        ScriptRunner scriptRunner = new ScriptRunner( connection );
+        ScriptRunner scriptRunner = new ScriptRunner(connection);
 
         // Creating a reader object
-        Reader reader = new InputStreamReader( inputStream );
+        Reader reader = new InputStreamReader(inputStream);
 
         // Running the script
-        scriptRunner.runScript( reader );
+        scriptRunner.runScript(reader);
 
     }
 
-
-
-    private static Connection getConnection() {
+    public static Connection getConnection() {
 
         if (connection == null)
             try{
@@ -80,28 +77,24 @@ public class DBUtil {
         return connection;
     }
 
-
-    public static ResultSet executeSelectQuery(String query, Object[] objects) {
+    public static ResultSet executeSelectQuery(String query, Object[] parameter, Connection connection) {
         try {
-            PreparedStatement pstmt = getPrepareStatement(query);
+            PreparedStatement pstmt = connection.prepareStatement(query);
 
-            fillOutStatement( pstmt, objects);
+            fillOutStatement(pstmt, parameter);
 
             return pstmt.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
-
     }
 
+    public static void executeCreateAndUpdate(String query, Object[] objects) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        fillOutStatement(preparedStatement, objects);
 
-    public static void executeCreateAndUpdate(String query, Object[] objects)
-                                                           throws SQLException {
-        PreparedStatement preparedStatement = getPrepareStatement( query );
-        fillOutStatement( preparedStatement, objects );
-
-            preparedStatement.executeUpdate();
+        preparedStatement.executeUpdate();
 
     }
 
@@ -118,11 +111,11 @@ public class DBUtil {
             for (Object object : objects) {
 
                 if (object instanceof Integer) {
-                    pstmt.setInt( index++, Integer.parseInt( object.toString() ) );
-                }else if(object instanceof Double) {
-                    pstmt.setDouble( index++, Double.parseDouble( object.toString() ) );
-                }else if (object instanceof String) {
-                    pstmt.setString( index++, object.toString() );
+                    pstmt.setInt(index++, Integer.parseInt(object.toString()));
+                } else if (object instanceof Double) {
+                    pstmt.setDouble(index++, Double.parseDouble(object.toString()));
+                } else if (object instanceof String) {
+                    pstmt.setString(index++, object.toString());
                 }
 
             }
@@ -131,18 +124,21 @@ public class DBUtil {
 
     }
 
-
-    public static Object[] convertTOObject(Object... parameter){
+    public static Object[] convertTOObject(Object... parameter) {
         Object[] objects;
-        if (parameter[0] instanceof CommodityBatchDTO){
+        if (parameter[0] instanceof CommodityBatchDTO) {
 
-            CommodityBatchDTO comDto =  (CommodityBatchDTO) parameter[0];
+            CommodityBatchDTO comDto = (CommodityBatchDTO) parameter[0];
 
-            // parameter.length -1 because when update method is invoked from CommodityBatchDAO
-            // It will have two parameter.length = 2(Object, Object.id), and the objects[5] will
-            // have the Object.id and assign the Object.id to WHERE in sql query, but create method
-            // Is invoked it will have just one parameter (Object), and INSERT query doesn't require WHERE
-            objects = new Object[4 + parameter.length -1];
+            // parameter.length -1 because when update method is invoked from
+            // CommodityBatchDAO
+            // It will have two parameter.length = 2(Object, Object.id), and the objects[5]
+            // will
+            // have the Object.id and assign the Object.id to WHERE in sql query, but create
+            // method
+            // Is invoked it will have just one parameter (Object), and INSERT query doesn't
+            // require WHERE
+            objects = new Object[4 + parameter.length - 1];
 
             objects[0] = comDto.getCommodity_id();
             objects[1] = comDto.getCommodityBatch_id();
@@ -155,35 +151,33 @@ public class DBUtil {
             return objects;
         }
 
-
         // If the parameter is integer, double , String or so on.
         int index = 0;
         objects = new Object[parameter.length];
-        for (Object o : objects) {
+        for (Object o : parameter) {
             objects[index++] = o;
         }
 
         return objects;
     }
 
-    /** To assign values to WHERE's sql query*/
+    /** To assign values to WHERE's sql query */
     private static void remainingParameter(Object[] objects, int objectIndex, Object... parameter) {
         for (int parameterIndex = 1; parameterIndex < parameter.length; objectIndex++, parameterIndex++) {
             objects[objectIndex] = parameter[parameterIndex];
         }
     }
 
-    public static Object resultSetToObject(ResultSet resultSet, Class classObject)
-                                                                throws SQLException{
+    public static Object resultSetToObject(ResultSet resultSet, Class classObject) throws SQLException {
         System.out.println(classObject.getSimpleName());
-        if (classObject.getSimpleName().equalsIgnoreCase( "CommodityBatchDTO" )) {
+        if (classObject.getSimpleName().equalsIgnoreCase("CommodityBatchDTO")) {
 
             CommodityBatchDTO comDto = new CommodityBatchDTO();
 
-            comDto.setCommodity_id( resultSet.getInt( 1 ) );
-            comDto.setCommodityBatch_id( resultSet.getInt( 2 ) );
-            comDto.setWeight( resultSet.getInt( 3 ) );
-            comDto.setSupplier( resultSet.getString( 4 ) );
+            comDto.setCommodity_id(resultSet.getInt(1));
+            comDto.setCommodityBatch_id(resultSet.getInt(2));
+            comDto.setWeight(resultSet.getInt(3));
+            comDto.setSupplier(resultSet.getString(4));
 
             return comDto;
 
@@ -192,11 +186,4 @@ public class DBUtil {
         return null;
     }
 
-
-
-
-
-
 }
-
-
