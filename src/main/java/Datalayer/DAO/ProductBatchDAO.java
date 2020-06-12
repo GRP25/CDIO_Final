@@ -1,3 +1,5 @@
+
+/*
 package Datalayer.DAO;
 
 import java.sql.ResultSet;
@@ -12,10 +14,9 @@ import DB.DBUtil;
 import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchDAO;
 
-/**
- * ProductBatchDAO
- */
-@RequestScoped
+
+  ProductBatchDAO
+
 public class ProductBatchDAO implements IProductBatchDAO {
 
 	@Override
@@ -62,7 +63,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
 
 	@Override
 	public void createProductBatch(ProductBatchDTO productBatch) {
-		// TODO Auto-generated method stub
+
 		// INSERT INTO ProductBatch VALUES (?,?,?,?,?)
 
 		String query = "INSERT INTO ProductBatch VALUES (?,?,?,?,?)";
@@ -78,7 +79,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
 
 	@Override
 	public void updateProductBatch(ProductBatchDTO productBatch) {
-		// TODO Auto-generated method stub
+
 		// UPDATE ProductBatch SET prescriptionId = ?, startDate = ?, endDate = ?, status = ? WHERE productBatchId = ?
 
 		String query = "UPDATE ProductBatch SET prescriptionId = ?, startDate = ?, endDate = ?, status = ? WHERE productBatchId = ?";
@@ -93,3 +94,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
 	}
 
 }
+
+
+
+ */

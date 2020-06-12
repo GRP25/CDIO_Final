@@ -1,3 +1,5 @@
+/*
+
 package REST;
 
 import java.util.ArrayList;
@@ -12,13 +14,13 @@ import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchCompDAO;
 import Datalayer.Interfaces.IProductBatchDAO;
 
-/*
+
 * Get productbatch
 * Post productbatch
 *
 * Get productbatch compound
 * Post productbatch compound
-*/
+
 
 @Path("ProductBatchs")
 public class ProductBatchResource {
@@ -66,3 +68,4 @@ public class ProductBatchResource {
     }
 
 }
+*/

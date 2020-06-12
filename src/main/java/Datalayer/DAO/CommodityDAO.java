@@ -77,4 +77,6 @@ public class CommodityDAO implements ICommodityDAO {
 
 	}
 
+
+
 }

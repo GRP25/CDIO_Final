@@ -1,4 +1,4 @@
-package REST.Resources;
+/*package REST.Resources;
 
 import Datalayer.DTO.CommodityBatchDTO;
 import REST.Services.Implementation.CommodityBatchService;
@@ -47,3 +47,5 @@ public class CommodityBatchResource {
     }
 
 }
+
+ */

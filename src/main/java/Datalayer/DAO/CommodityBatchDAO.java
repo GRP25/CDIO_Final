@@ -1,3 +1,4 @@
+/*
 package Datalayer.DAO;
 
 import java.sql.ResultSet;
@@ -16,11 +17,11 @@ import Datalayer.Interfaces.ICommodityBatchDAO;
 public class CommodityBatchDAO implements ICommodityBatchDAO {
 
 	@Override
-	public CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws DALException {
+	public CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws SQLException {
 
 		String query = "SELECT * FORM CommodityBatch WHERE commodityBatchId = ?";
 
-			ResultSet resultSet = DBUtil.executeSelectQuery( query, DBUtil.convertTOObject( commodityBatch_id ) );
+			ResultSet resultSet = DBUtil.executeSelectQuery( query, DBUtil.convertTOObject( commodityBatch_id ), );
 
             CommodityBatchDTO commodityBatchDTO;
 
@@ -37,7 +38,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 	}
 
 	@Override
-	public List<CommodityBatchDTO> getCommodityBatchList() throws DALException {
+	public List<CommodityBatchDTO> getCommodityBatchList() throws SQLException {
 		String query = "SELECT * FROM CommodityBatch";
 
 		    ResultSet resultSet = DBUtil.executeSelectQuery( query, null );
@@ -58,7 +59,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 	}
 
 	@Override
-	public List<CommodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws DALException {
+	public List<CommodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws SQLException {
 		String query = "SELECT * FROM CommodityBatch";
 
 		    ResultSet resultSet = DBUtil.executeSelectQuery( query, DBUtil.convertTOObject( commodityBatch_id ) );
@@ -78,7 +79,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 	}
 
 	@Override
-	public void createCommodityBatch(CommodityBatchDTO batch) throws DALException {
+	public void createCommodityBatch(CommodityBatchDTO batch) throws SQLException {
 		String query = "INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier) VALUES (?, ?, ?, ?)";
 		Object[] parameter = DBUtil.convertTOObject( batch );
 
@@ -91,7 +92,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 	}
 
 	@Override
-	public void updateCommodityBatch(CommodityBatchDTO batch) throws DALException {
+	public void updateCommodityBatch(CommodityBatchDTO batch) throws SQLException {
 		String query = "UPDATE CommodityBatch SET commodityBatchId=?, commodityId=?, weight=?, supplier=? WHERE commodityBatchId=?";
 
 		    try {
@@ -101,4 +102,4 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
             }
 
 	}
-}
+}*/
