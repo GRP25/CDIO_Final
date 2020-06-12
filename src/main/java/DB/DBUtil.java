@@ -39,44 +39,16 @@ public class DBUtil {
         }
     }
 
-    /** Registering the Driver */
-    public static void main(String[] args) {
-        InputStream inputStream = DBUtil.class.getClassLoader().
-                        getResourceAsStream( "sqlQueries.sql" );
-        Connection connection = getConnection();
-
-        // Test
-        System.out.println("Connection established");
-
-        // Initialize the script runner
-        ScriptRunner scriptRunner = new ScriptRunner( connection );
-
-        // Creating a reader object
-        Reader reader = new InputStreamReader( inputStream );
-
-        // Running the script
-        scriptRunner.runScript( reader );
-
-    }
-
-
-
     public static Connection getConnection() {
-
         if (connection == null)
             try{
-
                 connection = DriverManager.getConnection( PropertiesLoader.jdbcUrl,
                             PropertiesLoader.dbUserName, PropertiesLoader.dbPassword );
                 return connection;
-
             } catch (SQLException e) {
-
                 e.printStackTrace();
                 return connection;
-
             }
-
         return connection;
     }
 
