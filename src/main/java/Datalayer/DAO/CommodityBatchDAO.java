@@ -1,6 +1,6 @@
-/*
 package Datalayer.DAO;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,90 +16,88 @@ import Datalayer.Interfaces.ICommodityBatchDAO;
 @RequestScoped
 public class CommodityBatchDAO implements ICommodityBatchDAO {
 
-	@Override
-	public CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws SQLException {
+    @Override
+    public CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws SQLException {
+        Connection connection = DBUtil.getConnection();
 
-		String query = "SELECT * FORM CommodityBatch WHERE commodityBatchId = ?";
+        String query = "SELECT * FROM CommodityBatch WHERE commodityBatchId = ?";
+        Object[] parameters = DBUtil.convertTOObject( commodityBatch_id ); // Todo Think about this
 
-			ResultSet resultSet = DBUtil.executeSelectQuery( query, DBUtil.convertTOObject( commodityBatch_id ), );
+        ResultSet resultSet = DBUtil.executeSelectQuery( query, parameters, connection );
+        CommodityBatchDTO commodityBatchDTO = new CommodityBatchDTO( );
+        resultSet.first(); //todo Test if need if statement
 
-            CommodityBatchDTO commodityBatchDTO;
+        commodityBatchDTO.interpretResultSet( resultSet ) ;
 
-				try {
-					resultSet.first();
-                    commodityBatchDTO = (CommodityBatchDTO) DBUtil.resultSetToObject( resultSet,  CommodityBatchDTO.class);
-				} catch (SQLException e) {
-					e.printStackTrace();
-					return null;
-				}
+        connection.close();
+        return commodityBatchDTO;
+    }
 
+    @Override
+    public List<CommodityBatchDTO> getCommodityBatchList() throws SQLException {
+        Connection connection = DBUtil.getConnection();
 
-		return commodityBatchDTO;
-	}
+        String query = "SELECT * FROM CommodityBatch";
 
-	@Override
-	public List<CommodityBatchDTO> getCommodityBatchList() throws SQLException {
-		String query = "SELECT * FROM CommodityBatch";
+        ResultSet resultSet = DBUtil.executeSelectQuery( query, null, connection);
+        List<CommodityBatchDTO> listOfCommodityBatchDTO = new ArrayList<>();
 
-		    ResultSet resultSet = DBUtil.executeSelectQuery( query, null );
-		    List<CommodityBatchDTO> listOfCommodityBatchDTO;
-		    try {
-		        CommodityBatchDTO commodityBatchDTO;
-		        listOfCommodityBatchDTO = new ArrayList<>();
-		        while (resultSet.next()) {
-		            commodityBatchDTO = (CommodityBatchDTO) DBUtil.resultSetToObject( resultSet, CommodityBatchDTO.class );
-		            listOfCommodityBatchDTO.add(commodityBatchDTO);
-                }
-            } catch (SQLException e) {
-		        e.printStackTrace();
-		        return null;
-            }
+        CommodityBatchDTO commodityBatchDTO;
 
-		return listOfCommodityBatchDTO;
-	}
+        while (resultSet.next()) {
+            commodityBatchDTO = new CommodityBatchDTO( );
+            commodityBatchDTO.interpretResultSet( resultSet );
+            listOfCommodityBatchDTO.add(commodityBatchDTO);
+        }
 
-	@Override
-	public List<CommodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws SQLException {
-		String query = "SELECT * FROM CommodityBatch";
+        connection.close();
+        return listOfCommodityBatchDTO;
+    }
 
-		    ResultSet resultSet = DBUtil.executeSelectQuery( query, DBUtil.convertTOObject( commodityBatch_id ) );
-		    List<CommodityBatchDTO> listOfCommodityBatchDTO = null; // Instead of implementing same as getCommodityBatchList out parameter
-		    try {
-		        CommodityBatchDTO commodityBatchDTO;
-		        listOfCommodityBatchDTO = new ArrayList<>();
-		        while (resultSet.next()) {
-		            commodityBatchDTO = (CommodityBatchDTO) DBUtil.resultSetToObject( resultSet, CommodityBatchDTO.class );
-		            listOfCommodityBatchDTO.add( commodityBatchDTO );
-                }
-            } catch (SQLException e) {
-		        e.printStackTrace();
-            }
+    @Override
+    public List<CommodityBatchDTO> getCommodityBatchList(int commodity_id) throws SQLException {
+        Connection connection = DBUtil.getConnection();
 
-		return listOfCommodityBatchDTO;
-	}
+        String query = "SELECT * FROM CommodityBatch WHERE commodityId = ?";
+        Object[] parameters = DBUtil.convertTOObject( commodity_id );
 
-	@Override
-	public void createCommodityBatch(CommodityBatchDTO batch) throws SQLException {
-		String query = "INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier) VALUES (?, ?, ?, ?)";
-		Object[] parameter = DBUtil.convertTOObject( batch );
+        ResultSet resultSet = DBUtil.executeSelectQuery( query, parameters, connection );
+        List<CommodityBatchDTO> listOfCommodityBatchDTO;
 
-            try {
-                DBUtil.executeCreateAndUpdate( query, parameter );
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        CommodityBatchDTO commodityBatchDTO;
+        listOfCommodityBatchDTO = new ArrayList<>();
 
-	}
+        while (resultSet.next()) {
+            commodityBatchDTO = new CommodityBatchDTO(  );
+            commodityBatchDTO.interpretResultSet( resultSet );
+            listOfCommodityBatchDTO.add( commodityBatchDTO );
+        }
 
-	@Override
-	public void updateCommodityBatch(CommodityBatchDTO batch) throws SQLException {
-		String query = "UPDATE CommodityBatch SET commodityBatchId=?, commodityId=?, weight=?, supplier=? WHERE commodityBatchId=?";
+        connection.close();
+        return listOfCommodityBatchDTO;
+    }
 
-		    try {
-		        DBUtil.executeCreateAndUpdate( query, DBUtil.convertTOObject( batch, batch.getCommodity_id() ) );
-            } catch (SQLException e) {
-		        e.printStackTrace();
-            }
+    @Override
+    public void createCommodityBatch(CommodityBatchDTO batch) throws SQLException {
+        Connection connection = DBUtil.getConnection();
 
-	}
-}*/
+        String query = "INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier) VALUES (?, ?, ?, ?)";
+        Object[] parameters = batch.convertToObject();
+
+        DBUtil.executeCreateAndUpdate( query, parameters, connection );
+
+        connection.close();
+    }
+
+    @Override
+    public void updateCommodityBatch(CommodityBatchDTO batch) throws SQLException {
+        Connection connection = DBUtil.getConnection();
+
+        String query = "UPDATE CommodityBatch SET commodityBatchId=?, commodityId=?, weight=?, supplier=? WHERE commodityBatchId="+batch.getCommodityBatch_id();
+        Object[] parameters = batch.convertToObject();
+
+        DBUtil.executeCreateAndUpdate( query, parameters, connection );
+
+        connection.close();
+    }
+}
