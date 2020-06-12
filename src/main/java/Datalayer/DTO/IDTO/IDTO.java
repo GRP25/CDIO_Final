@@ -7,6 +7,6 @@ public interface IDTO {
 
 	IDTO interpretResultSet(ResultSet resultSet) throws SQLException;
 
-	Object[] convertToObject();
+	Object convertToObject();
 
 }
