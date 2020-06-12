@@ -1,6 +1,5 @@
 package Datalayer.DAO;
 
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +8,7 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 
-import DB.DBUtil;
+import Datalayer.DBUtil;
 import Datalayer.DTO.PrescriptionDTO;
 import Datalayer.Interfaces.IPrescriptionDAO;
 

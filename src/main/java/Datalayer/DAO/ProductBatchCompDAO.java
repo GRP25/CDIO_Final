@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 
-import DB.DBUtil;
+import Datalayer.DBUtil;
 import Datalayer.DTO.ProductBatchCompDTO;
 import Datalayer.Interfaces.IProductBatchCompDAO;
 

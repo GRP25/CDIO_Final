@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import javax.enterprise.context.RequestScoped;
 
-import DB.DBUtil;
+import Datalayer.DBUtil;
 import Datalayer.DTO.PrescriptionCompDTO;
 import Datalayer.Interfaces.IPrescriptionCompDAO;
 

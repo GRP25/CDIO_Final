@@ -8,9 +8,7 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 
-import com.mysql.cj.protocol.Resultset;
-
-import DB.DBUtil;
+import Datalayer.DBUtil;
 import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchDAO;
 

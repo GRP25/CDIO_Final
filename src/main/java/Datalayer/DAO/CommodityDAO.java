@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 
-import DB.DBUtil;
+import Datalayer.DBUtil;
 import Datalayer.DTO.commodityDTO;
 import Datalayer.Interfaces.ICommodityDAO;
 

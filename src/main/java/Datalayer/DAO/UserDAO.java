@@ -1,6 +1,6 @@
 package Datalayer.DAO;
 
-import DB.DBUtil;
+import Datalayer.DBUtil;
 import Datalayer.Interfaces.IUserDAO;
 import Datalayer.DTO.UserDTO;
 
@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Datalayer.DatabaseHandler;
-import com.sun.mail.imap.protocol.ID;
 
 
 @RequestScoped
