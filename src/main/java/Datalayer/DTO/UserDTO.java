@@ -34,13 +34,11 @@ public class UserDTO implements IDTO {
     @Override
     public Object[] convertToObject() {
         Object[] object = new Object[6];
-        object[0] = this.userID;
-        object[1] = this.firstName;
-        object[2] = this.surname;
-        object[3] = this.cpr;
-        object[4] = this.initials;
-        object[6] = this.status;
-
+        object[0] = this.firstName;
+        object[1] = this.surname;
+        object[2] = this.cpr;
+        object[3] = this.initials;
+        object[4] = this.status;
         return object;
     }
 
@@ -52,6 +50,7 @@ public class UserDTO implements IDTO {
         this.setCpr(resultSet.getString(4));
         this.setStatus(resultSet.getInt(5));
         return this;
+
     }
 
     public void setUserID(int userID) {
