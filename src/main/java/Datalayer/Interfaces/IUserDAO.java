@@ -11,7 +11,7 @@ public interface IUserDAO {
 
     List<UserDTO> getUserList() throws SQLException;
 
-    void createUser(UserDTO user) throws SQLException;
+    void createUser(UserDTO user) throws SQLException, SQLException;
 
     void updateUser(UserDTO user) throws SQLException;
 

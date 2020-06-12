@@ -33,9 +33,7 @@ public class DBUtil {
             DriverManager.registerDriver( new com.mysql.cj.jdbc.Driver() );
 
         } catch (SQLException e) {
-
             e.printStackTrace();
-
         }
     }
 
@@ -180,9 +178,7 @@ public class DBUtil {
             comDto.setSupplier(resultSet.getString(4));
 
             return comDto;
-
         }
-
         return null;
     }
 

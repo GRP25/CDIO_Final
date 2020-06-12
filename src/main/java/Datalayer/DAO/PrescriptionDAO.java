@@ -28,13 +28,11 @@ public class PrescriptionDAO implements IPrescriptionDAO {
 	@Override
 	public void createPrescription(PrescriptionDTO prescription) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void updatePrescription(PrescriptionDTO prescription) {
 		// TODO Auto-generated method stub
-
 	}
 
 }

@@ -9,6 +9,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Datalayer.DatabaseHandler;
+import com.sun.mail.imap.protocol.ID;
+
+
 @RequestScoped
 public class UserDAO implements IUserDAO {
 
@@ -70,23 +74,13 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public void updateUser(UserDTO user) throws SQLException {
-        String query = "UPDATE Users SET firstname = ? , surname = ? , cpr = ?, initials = ? , status = ? WHERE userId = "+user.getUserID();
+        String query = "UPDATE Users SET firstname = ? , surname = ? , cpr = ?, initials = ? , status = ? WHERE userId = " + user.getUserID();
         Connection connection = DBUtil.getConnection();
         Object[] parameter = user.convertToObject();
         ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
         if (rs.next()) {
             user.interpretResultSet(rs);
         }
-
-        DBUtil.executeSelectQuery("DELETE FROM UserRole WHERE userId = "+user.getUserID()+";",null, connection);
-        // assignong roles to user
-        query = "INSERT INTO UserRole (UserId, roleName) VALUES ";
-        for (String role : user.getRoles()) {
-            query += "('" + user.getUserID() + "', '" + role + "'),";
-        }
-        query = query.substring(0, query.length() - 1);
-        DBUtil.executeSelectQuery(query, null, connection);
-        connection.close();
     }
 
     @Override
