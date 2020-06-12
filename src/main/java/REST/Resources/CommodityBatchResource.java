@@ -67,7 +67,7 @@ public class CommodityBatchResource {
 
     }
 
-    @PUT
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createCommodityBatch(CommodityBatchDTO commodityBatchDTO) throws SQLException {
