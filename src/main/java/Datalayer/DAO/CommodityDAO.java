@@ -75,7 +75,6 @@ public class CommodityDAO implements ICommodityDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
