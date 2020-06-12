@@ -7,6 +7,8 @@ import Funclayer.exceptions.UserException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 import java.util.List;
 
 import static Funclayer.exceptions.Validation.validateUser;
@@ -19,35 +21,37 @@ public class UserResource {
     @Path("/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public UserDTO getUser(@PathParam("userID") int userID) throws SQLException {
-
-        return userService.getUser(userID);
+    public Response getUser(@PathParam("userID") int userID) throws SQLException {
+        return Response.status(Response.Status.OK).entity(userService.getUser(userID)).build();
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateUser(UserDTO user) throws UserException, SQLException {
+    public Response updateUser(UserDTO user) throws UserException, SQLException {
         validateUser(user);
         userService.updateUser(user);
+        return Response.status(Response.Status.OK).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createUser(UserDTO user) throws UserException, SQLException{
+    public Response createUser(UserDTO user) throws UserException, SQLException{
         validateUser(user);
         userService.createUser(user);
+        return Response.status(Response.Status.OK).build();
     }
 
     @Path("/{userID}")
     @DELETE
-    public void deleteUser(@PathParam("userID") int userID) throws SQLException {
+    public Response deleteUser(@PathParam("userID") int userID) throws SQLException {
         userService.deleteUser(userID);
+        return Response.status(Response.Status.OK).build();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<UserDTO> getUserList() throws SQLException {
-        return userService.getUserList();
+    public Response getUserList() throws SQLException {
+        return Response.status(Response.Status.OK).entity(userService.getUserList()).build();
     }
 
 }
