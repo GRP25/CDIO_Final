@@ -35,7 +35,7 @@ public class CommodityBatchResource {
     }
 
     @GET
-    @Path( "{commodity_id}" )
+    @Path( "list/{commodity_id}" )
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCommodityBatchList(@PathParam( "commodity_id" ) int commodity_id) throws SQLException {
 
