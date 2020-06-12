@@ -1,5 +1,6 @@
 package REST.Resources;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.ws.rs.*;
@@ -7,13 +8,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import Datalayer.DTO.*;
-import REST.Services.Implementation.PrescriptionService;
-/*
-*   Create Prescription
-*   Get prescriptions
-*   Get specific presciption by ID
-*/
-import REST.Services.Interfaces.IPrescriptionService;
+import Funclayer.implementation.PrescriptionService;
+import Funclayer.interfaces.IPrescriptionService;
 
 @Path("Prescriptions")
 public class PrescriptionResource {
@@ -24,7 +20,7 @@ public class PrescriptionResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createPrescription(PrescriptionDTO prescriptionDTO) {
+	public Response createPrescription(PrescriptionDTO prescriptionDTO) throws SQLException {
 		Response response;
 
 		String createResult = prescriptionService.createPrescription(prescriptionDTO);
@@ -41,7 +37,7 @@ public class PrescriptionResource {
 	// Update prescription
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updatePrescription(PrescriptionDTO prescriptionDTO) {
+	public Response updatePrescription(PrescriptionDTO prescriptionDTO) throws SQLException {
 		Response response;
 
 		String updateResult = prescriptionService.updatePrescription(prescriptionDTO);
@@ -58,7 +54,7 @@ public class PrescriptionResource {
 	// Get all Prescription function
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPrescriptionList() {
+	public Response getPrescriptionList() throws SQLException {
 		Response response;
 
 		List<PrescriptionDTO> prescriptionDTOList = prescriptionService.getPrescriptionList();
@@ -75,7 +71,7 @@ public class PrescriptionResource {
 	@Path("/ID/{PrescriptionID}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPrescription(@PathParam("PrescriptionID") int presID) {
+	public Response getPrescription(@PathParam("PrescriptionID") int presID) throws SQLException {
 		Response response;
 
 		PrescriptionDTO prescriptionDTO = prescriptionService.getPrescription(presID);

@@ -1,17 +1,16 @@
 package REST.Resources;
 
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
-
-import Datalayer.DTO.PrescriptionCompDTO;
-
-import java.util.List;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.Produces;
 
-import REST.Services.Implementation.PrescriptionCompService;
-import REST.Services.Interfaces.IPrescriptionCompService;
+import Datalayer.DTO.PrescriptionCompDTO;
+import Funclayer.interfaces.IPrescriptionCompService;
+import Funclayer.implementation.PrescriptionCompService;
+
+import java.sql.SQLException;
+import java.util.List;
 
 @Path("PrescriptionComp")
 public class PrescriptionCompResource {
@@ -21,7 +20,8 @@ public class PrescriptionCompResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createPrescriptionComp(PrescriptionCompDTO presCompDTO) {
+
+	public Response createPrescriptionComp(PrescriptionCompDTO presCompDTO) throws SQLException {
 		Response response;
 
 		String createResult = prescriptionCompService.createPrescriptionComp(presCompDTO);
@@ -38,7 +38,7 @@ public class PrescriptionCompResource {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updatePrescriptionComp(PrescriptionCompDTO presCompDTO) {
+	public Response updatePrescriptionComp(PrescriptionCompDTO presCompDTO) throws SQLException {
 		Response response;
 
 		String updateResult = prescriptionCompService.updatePrescriptionComp(presCompDTO);
@@ -54,7 +54,7 @@ public class PrescriptionCompResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPrescriptionCompList() {
+	public Response getPrescriptionCompList() throws SQLException {
 		Response response;
 		List<PrescriptionCompDTO> prescriptionCompDTOList = prescriptionCompService.getPrescriptionCompList();
 
@@ -71,7 +71,7 @@ public class PrescriptionCompResource {
 	@Path("/{presID}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPrescriptionCompList(@PathParam("presID") int presID) {
+	public Response getPrescriptionCompList(@PathParam("presID") int presID) throws SQLException {
 		Response response;
 
 		List<PrescriptionCompDTO> prescriptionCompList = prescriptionCompService.getPrescriptionCompList(presID);
@@ -89,7 +89,8 @@ public class PrescriptionCompResource {
 	@Path("/component")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPrescriptionComp(@QueryParam("presID") int presID, @QueryParam("comID") int comID) {
+	public Response getPrescriptionComp(@QueryParam("presID") int presID, @QueryParam("comID") int comID)
+			throws SQLException {
 		Response response;
 
 		PrescriptionCompDTO prescriptionCompDTO = prescriptionCompService.getPrescriptionComp(presID, comID);
