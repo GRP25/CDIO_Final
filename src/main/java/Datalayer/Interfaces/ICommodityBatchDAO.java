@@ -1,21 +1,21 @@
 package Datalayer.Interfaces;
 
 
+import java.sql.SQLException;
 import java.util.List;
 
-import Datalayer.DAO.DALException;
 import Datalayer.DTO.CommodityBatchDTO;
 
 public interface ICommodityBatchDAO {
 
-	CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws DALException;
+	CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws SQLException;
 
-	List<CommodityBatchDTO> getCommodityBatchList() throws DALException;
+	List<CommodityBatchDTO> getCommodityBatchList() throws SQLException;
 
-	List<CommodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws DALException;
+	List<CommodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws SQLException;
 
-	void createCommodityBatch(CommodityBatchDTO batch) throws DALException;
+	void createCommodityBatch(CommodityBatchDTO batch) throws SQLException;
 
-	void updateCommodityBatch(CommodityBatchDTO batch) throws DALException;
+	void updateCommodityBatch(CommodityBatchDTO batch) throws SQLException;
 
 }
