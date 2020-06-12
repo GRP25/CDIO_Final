@@ -1,13 +1,14 @@
-package Funclayer;
+package Funclayer.implementation;
 
 import Datalayer.DAO.ProductBatchDAO;
 import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchDAO;
+import Funclayer.interfaces.IProductBatchService;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class ProductBatchService implements IProductBatchService{
+public class ProductBatchService implements IProductBatchService {
 
     IProductBatchDAO productBatchDAO = new ProductBatchDAO();
 

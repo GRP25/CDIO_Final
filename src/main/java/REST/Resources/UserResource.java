@@ -1,15 +1,14 @@
 package REST.Resources;
 
 import Datalayer.DTO.UserDTO;
-import Funclayer.UserService;
-import Funclayer.IUserService;
+import Funclayer.implementation.UserService;
+import Funclayer.interfaces.IUserService;
 import Funclayer.exceptions.UserException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
-import java.util.List;
 
 import static Funclayer.exceptions.Validation.validateUser;
 

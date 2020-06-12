@@ -1,4 +1,4 @@
-package Funclayer;
+package Funclayer.interfaces;
 
 import Datalayer.DTO.ProductBatchCompDTO;
 

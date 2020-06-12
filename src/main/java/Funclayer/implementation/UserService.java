@@ -1,12 +1,12 @@
-package Funclayer;
+package Funclayer.implementation;
 
 import Datalayer.DAO.UserDAO;
 import Datalayer.DTO.UserDTO;
 import Datalayer.Interfaces.IUserDAO;
+import Funclayer.interfaces.IUserService;
 
 import javax.enterprise.context.RequestScoped;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestScoped

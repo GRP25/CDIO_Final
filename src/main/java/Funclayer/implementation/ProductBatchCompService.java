@@ -1,8 +1,9 @@
-package Funclayer;
+package Funclayer.implementation;
 
 import Datalayer.DAO.ProductBatchCompDAO;
 import Datalayer.DTO.ProductBatchCompDTO;
 import Datalayer.Interfaces.IProductBatchCompDAO;
+import Funclayer.interfaces.IProductBatchCompService;
 
 import java.sql.SQLException;
 import java.util.List;
