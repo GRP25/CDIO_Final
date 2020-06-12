@@ -55,7 +55,7 @@ public class ProductBatchResource {
     @Path("/Comp")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addProductComp(ProductBatchCompDTO pCompDTO) {
+    public void addProductComp(ProductBatchCompDTO pCompDTO) throws SQLException {
         productCompDAO.createProductBatchComp(pCompDTO);
     }
 
@@ -63,7 +63,7 @@ public class ProductBatchResource {
     @Path("/Comp/{ProductID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ProductBatchCompDTO>  getCompountsForProduct(@PathParam("ProductID") int productID) {
+    public List<ProductBatchCompDTO>  getCompountsForProduct(@PathParam("ProductID") int productID) throws SQLException {
         return productCompDAO.getProductBatchCompList(productID);
     }
 }
