@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Path( "commodityBatch" )
@@ -19,7 +20,7 @@ public class CommodityBatchResource {
     @GET
     @Path("{commodityBatch_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCommodityBatch(@PathParam( "commodityBatch_id" ) int commodityBatch_id){
+    public Response getCommodityBatch(@PathParam( "commodityBatch_id" ) int commodityBatch_id) throws SQLException {
 
         Response response;
         CommodityBatchDTO commodityBatchDTO = commodityBatchService.getCommodityBatch( commodityBatch_id );
@@ -36,7 +37,7 @@ public class CommodityBatchResource {
     @GET
     @Path( "{commodity_id}" )
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCommodityBatchList(@PathParam( "commodity_id" ) int commodity_id) {
+    public Response getCommodityBatchList(@PathParam( "commodity_id" ) int commodity_id) throws SQLException {
 
         Response response;
         List<CommodityBatchDTO> commodityBatchDTOList = commodityBatchService.getCommodityBatchList(commodity_id);
@@ -52,7 +53,7 @@ public class CommodityBatchResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCommodityBatchList() {
+    public Response getCommodityBatchList() throws SQLException {
 
         Response response;
         List<CommodityBatchDTO> commodityBatchDTOList = commodityBatchService.getCommodityBatchList();
@@ -69,7 +70,7 @@ public class CommodityBatchResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createCommodityBatch(CommodityBatchDTO commodityBatchDTO) {
+    public Response createCommodityBatch(CommodityBatchDTO commodityBatchDTO) throws SQLException {
 
         Response response;
         String createResult = commodityBatchService.createCommodityBatch( commodityBatchDTO );
@@ -87,7 +88,7 @@ public class CommodityBatchResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateCommodityBatch(CommodityBatchDTO commodityBatchDTO) {
+    public Response updateCommodityBatch(CommodityBatchDTO commodityBatchDTO) throws SQLException {
 
         Response response;
         String updateResult = commodityBatchService.updateCommodityBatch( commodityBatchDTO );
@@ -103,7 +104,7 @@ public class CommodityBatchResource {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         ICommodityBatchService commodityBatchService = new CommodityBatchService();
         // Test getCommodityBatch
 //        System.out.println(commodityBatchService.getCommodityBatch( 1 ).getSupplier());
@@ -129,12 +130,12 @@ public class CommodityBatchResource {
 
 
         // Test updateCommodityBatch
-//        CommodityBatchDTO commodityBatchDAO1 = new CommodityBatchDTO(2,2,9.4,"Update");
+//        CommodityBatchDTO commodityBatchDAO1 = new CommodityBatchDTO(2,1,9.4,"UpdateMethod");
 //        commodityBatchService.updateCommodityBatch( commodityBatchDAO1 );
 
         // Test createCommodityBatch
-        Datalayer.DTO.CommodityBatchDTO commodityBatchDAO1 = new Datalayer.DTO.CommodityBatchDTO(5,1,5.4,"MD");
-        commodityBatchService.createCommodityBatch( commodityBatchDAO1 ); // todo get: Duplicate entry '1' for key 'commoditybatch.PRIMARY' Error
+//        CommodityBatchDTO commodityBatchDAO1 = new CommodityBatchDTO(4,1,5.4,"CreateMethod");
+//        System.out.println(commodityBatchService.createCommodityBatch( commodityBatchDAO1 ));
     }
 
 }

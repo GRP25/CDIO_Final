@@ -61,7 +61,7 @@ public class DBUtil {
 
 
 
-    private static Connection getConnection() {
+    public static Connection getConnection() {
 
         if (connection == null)
             try{
@@ -81,13 +81,13 @@ public class DBUtil {
     }
 
 
-    public static ResultSet executeSelectQuery(String query, Object[] objects) {
+    public static ResultSet executeSelectQuery(String query, Object[] parameter, Connection connection) {
         try {
-            PreparedStatement pstmt = getPrepareStatement(query);
+            PreparedStatement pstmt = connection.prepareStatement(query);
 
-            fillOutStatement( pstmt, objects);
+            fillOutStatement( pstmt, parameter);
 
-            return pstmt.executeQuery();
+            return pstmt.executeQuery(); // todo
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -96,9 +96,9 @@ public class DBUtil {
     }
 
 
-    public static void executeCreateAndUpdate(String query, Object[] objects)
+    public static void executeCreateAndUpdate(String query, Object[] objects, Connection connection)
                                                            throws SQLException {
-        PreparedStatement preparedStatement = getPrepareStatement( query );
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
         fillOutStatement( preparedStatement, objects );
 
             preparedStatement.executeUpdate();

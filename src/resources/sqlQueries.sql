@@ -95,7 +95,6 @@ INSERT INTO Commodity (commodityId, commodityName) values (1, "A");
 INSERT INTO Commodity (commodityId, commodityName) values (2, "B");
 
 INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier ) values(1,1, 2.3, "MD Exports");
-INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier ) values(1,2, 3.3, "MD Exports2");
 INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier ) values(2,2, 3.3, "MD Exports2");
 
 
