@@ -33,7 +33,7 @@ public class UserService implements IUserService {
 
     @Override
     public void deleteUser(int userID) throws SQLException {
-        //userDao.deactivateUser( userID );
+        userDao.deactivateUser( userID );
     }
 
     @Override

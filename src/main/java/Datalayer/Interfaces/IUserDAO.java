@@ -9,7 +9,7 @@ public interface IUserDAO {
 
     UserDTO getUser(int userID) throws SQLException;
 
-    List<UserDTO> getUserList();
+    List<UserDTO> getUserList() throws SQLException;
 
     void createUser(UserDTO user) throws SQLException;
 
