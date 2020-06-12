@@ -5,7 +5,9 @@ import Datalayer.DTO.UserDTO;
 import Datalayer.Interfaces.IUserDAO;
 
 import javax.enterprise.context.RequestScoped;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 @RequestScoped
 public class UserService implements IUserService {
@@ -15,27 +17,27 @@ public class UserService implements IUserService {
 
 
     @Override
-    public UserDTO getUser(int userID) {
+    public UserDTO getUser(int userID) throws SQLException {
          return userDao.getUser( userID );
     }
 
     @Override
-    public void updateUser(UserDTO user) {
+    public void updateUser(UserDTO user) throws SQLException {
         userDao.updateUser( user );
     }
 
     @Override
-    public void createUser(UserDTO user) {
+    public void createUser(UserDTO user) throws SQLException {
         userDao.createUser( user );
     }
 
     @Override
-    public void deleteUser(int userID) {
-        //userDao.deactivateUser( userID );
+    public void deleteUser(int userID) throws SQLException {
+        userDao.deactivateUser( userID );
     }
 
     @Override
-    public ArrayList<UserDTO> getUserList() {
+    public List<UserDTO> getUserList() throws SQLException {
         return userDao.getUserList();
     }
 }

@@ -1,8 +1,8 @@
-/*
-
 package REST;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,13 +14,13 @@ import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchCompDAO;
 import Datalayer.Interfaces.IProductBatchDAO;
 
-
+/*
 * Get productbatch
 * Post productbatch
 *
 * Get productbatch compound
 * Post productbatch compound
-
+*/
 
 @Path("ProductBatchs")
 public class ProductBatchResource {
@@ -31,14 +31,14 @@ public class ProductBatchResource {
     // create produkt batch
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createProductBatch(ProductBatchDTO productDTO) {
+    public void createProductBatch(ProductBatchDTO productDTO) throws SQLException {
         productDAO.createProductBatch(productDTO);
     }
 
     // get all product batches
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<ProductBatchDTO> getAllProducts() {
+    public List<ProductBatchDTO> getAllProducts() throws SQLException {
         return productDAO.getProductBatchDTOList();
     }
 
@@ -46,7 +46,7 @@ public class ProductBatchResource {
     @Path("/ID/{ProductID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ProductBatchDTO getProductBatchByID(@PathParam("ProductID") int productID) {
+    public ProductBatchDTO getProductBatchByID(@PathParam("ProductID") int productID) throws SQLException {
         return productDAO.getProductBatchDTO(productID);
     }
 
@@ -55,7 +55,7 @@ public class ProductBatchResource {
     @Path("/Comp")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addProductComp(ProductBatchCompDTO pCompDTO) {
+    public void addProductComp(ProductBatchCompDTO pCompDTO) throws SQLException {
         productCompDAO.createProductBatchComp(pCompDTO);
     }
 
@@ -63,9 +63,7 @@ public class ProductBatchResource {
     @Path("/Comp/{ProductID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<ProductBatchCompDTO> getCompountsForProduct(@PathParam("ProductID") int productID) {
+    public List<ProductBatchCompDTO>  getCompountsForProduct(@PathParam("ProductID") int productID) throws SQLException {
         return productCompDAO.getProductBatchCompList(productID);
     }
-
 }
-*/

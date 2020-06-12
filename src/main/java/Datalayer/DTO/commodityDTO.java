@@ -43,4 +43,12 @@ public class commodityDTO {
 	public String getCommodity_Name() {
 		return commodity_Name;
 	}
+
+	@Override
+	public String toString() {
+		return "commodityDTO{" +
+				"commodity_id=" + commodity_id +
+				", commodity_Name='" + commodity_Name + '\'' +
+				'}';
+	}
 }

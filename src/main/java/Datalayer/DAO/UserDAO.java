@@ -1,214 +1,104 @@
 package Datalayer.DAO;
 
 import DB.DBUtil;
-
-
 import Datalayer.Interfaces.IUserDAO;
 import Datalayer.DTO.UserDTO;
 
 import javax.enterprise.context.RequestScoped;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
-import static Datalayer.DatabaseHandler.connect;
-//import static data.sql.Ctrl.*;
+import Datalayer.DatabaseHandler;
+import com.sun.mail.imap.protocol.ID;
+
 
 @RequestScoped
 public class UserDAO implements IUserDAO {
 
     @Override
-    public void createUser(UserDTO user) {
-        String sql = "INSERT INTO Users (firstname, surname, initials, cpr) values (?,?,?,?);";
-
-        try {
-            Connection conn = connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-
-            pstmt.setString(1, user.getFirstName());
-            pstmt.setString(2,user.getSurname());
-            pstmt.setString(3, user.getInitials());
-            pstmt.setString(4, user.getCpr());
-            pstmt.executeUpdate();
-
-            // getting id from last inserted user
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT LAST_INSERT_ID();");
-
-            String ID = "";
-            while (rs.next()) {
-                ID = rs.getString("LAST_INSERT_ID()");
-            }
-
-            // assigning roles to user
-            sql = "INSERT INTO has_roles (user_id, roles_title) VALUES ";
-            for (String role :  user.getRoles()) {
-                sql += "('" + ID + "', '" + role + "'),";
-            }
-            sql = sql.substring(0,sql.length() - 1);
-            stmt.executeQuery(sql);
-
-        } catch (SQLException e) {
-            System.out.println(e);
+    public void createUser(UserDTO user) throws SQLException{
+        String query = "INSERT INTO Users (firstname, surname, cpr, initials, status) values (?,?,?,?,?);";
+        Connection connection = DBUtil.getConnection();
+        Object[] parameter = user.convertToObject();
+        DBUtil.executeSelectQuery(query, parameter, connection);
+        ResultSet rs = DBUtil.executeSelectQuery("SELECT LAST_INSERT_ID()", null, connection);
+        String ID = "";
+        while (rs.next()) {
+            ID = rs.getString("LAST_INSERT_ID()");
         }
+        // assigning role to user
+        query = "INSERT INTO UserRole (userId, roleName) VALUES ";
+        for (String role : user.getRoles()) {
+            query += "('" + ID + "', '" + role + "'),";
+        }
+        query = query.substring(0, query.length() - 1);
+        DBUtil.executeSelectQuery(query, null, connection);
+        connection.close();
     }
 
     @Override
-    public ArrayList<UserDTO> getUserList() {
-        String sql = "SELECT * FROM user";
-        ArrayList<UserDTO> users = new ArrayList<>();
-        try {
-            Connection conn = connect();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            // loop through the result set
-            UserDTO user;
-            int     id;
-            while (rs.next()) {
-                user = new UserDTO();
-                id = rs.getInt("userId");
-                user.setUserID(id);
-                user.setFirstName(rs.getString("firstname"));
-                user.setSurname(rs.getString("surname"));
-                user.setInitials(rs.getString("initials"));
-                user.setCpr(rs.getString("cpr"));
-                //    user.setRoles(stringToGroup(rs.getString("user_groups")));
-                users.add(user);
-            }
-
-            for (UserDTO userTemp : users) {
-                stmt = conn.createStatement();
-                userTemp.setRoles(get_user_roles(userTemp.getUserID(), stmt));
-            }
-
-            // closing connections
-            conn.close();
-            stmt.close();
-            rs.close();
+    public List<UserDTO> getUserList() throws SQLException {
+        String query = "SELECT * FROM Users";
+        Connection connection = DBUtil.getConnection();
+        ResultSet rs = DBUtil.executeSelectQuery(query, null, connection);
+        List<UserDTO> users = new ArrayList<>();
+        UserDTO user;
+        while (rs.next()) {
+            user = new UserDTO();
+            user.interpretResultSet(rs);
+            users.add(user);
         }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
+        for (UserDTO userTemp : users) {
+            userTemp.setRoles(get_user_roles(userTemp.getUserID(), connection));
         }
-
+        // closing connections
+        connection.close();
         return users;
     }
 
     @Override
-    public UserDTO getUser(int ID) {
+    public UserDTO getUser(int ID) throws SQLException {
         UserDTO user = new UserDTO();
-        String sql = "SELECT * FROM user WHERE userId = ?;";
-
-        try
-        {
-            Connection conn = connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, ID);
-            ResultSet rs = pstmt.executeQuery();
-            if(rs.next()) {
-                user.setUserID(ID);
-                user.setFirstName(rs.getString("firstname"));
-                user.setSurname(rs.getString("surname"));
-                user.setInitials(rs.getString("initials"));
-                user.setCpr(rs.getString("cpr"));
-                user.setRoles(get_user_roles(ID, pstmt));
-            }
-            rs.close();
-            pstmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        String query = "SELECT * FROM Users WHERE userId = ?;";
+        Connection connection = DBUtil.getConnection();
+        Object[] parameter = DBUtil.convertTOObject(ID);
+        ResultSet rs = DBUtil.executeSelectQuery(query,parameter,connection);
+        if (rs.next()) {
+            user.interpretResultSet(rs);
+            user.setRoles(get_user_roles(ID, connection));
         }
+        connection.close();
         return user;
     }
 
     @Override
-    public void updateUser(UserDTO user) {
-        String sql = "UPDATE user SET firstname = ? , "
-                + "surname = ? ,"
-                + "initials = ? , "
-                + "cpr = ? , "
-                + "WHERE userId = ?";
-
-        try {
-            Connection conn = connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            // set the corresponding param
-            pstmt.setString(1, user.getFirstName());
-            pstmt.setString(2,user.getSurname());
-            pstmt.setString(3, user.getInitials());
-            pstmt.setString(4, user.getCpr());
-            pstmt.setInt(5, user.getUserID());
-            // update
-            pstmt.executeUpdate();
-
-            // assigning roles to user
-            sql = "DELETE FROM has_roles WHERE userId = "+user.getUserID();
-            pstmt.executeQuery(sql);
-            sql = "INSERT INTO has_roles (userId, roles_title) VALUES ";
-            for (String role :  user.getRoles()) {
-                sql += "('" + user.getUserID() + "', '" + role + "'),";
-            }
-            sql = sql.substring(0,sql.length() - 1);
-            pstmt.executeQuery(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    public void updateUser(UserDTO user) throws SQLException {
+        String query = "UPDATE Users SET firstname = ? , surname = ? , cpr = ?, initials = ? , status = ? WHERE userId = " + user.getUserID();
+        Connection connection = DBUtil.getConnection();
+        Object[] parameter = user.convertToObject();
+        ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
+        if (rs.next()) {
+            user.interpretResultSet(rs);
         }
     }
 
     @Override
-    public void deactivateUser(int id) {
-        String sql = "UPDATE user set status = ?";
-        try (
-                Connection conn = connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)
-        ) {
-            pstmt.setInt(1, id);
-            pstmt.executeUpdate();
-            System.out.println("User succsessfully deleted");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+    public void deactivateUser(int id) throws SQLException {
+        String query = "UPDATE Users set status = ? WHERE userId = ?;";
+        Connection connection = DBUtil.getConnection();
+        Object[] parameter = { 0, id };
+            DBUtil.executeSelectQuery(query, parameter, connection);
+            connection.close();
     }
 
-    /*@Override
-    public boolean exists(int id) {
-        String sql = "SELECT from user WHERE user_id = ?";
-        try (
-                Connection conn = connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)
-        ) {
-            pstmt.setInt(1, id);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }
-    @Override
-    public boolean exists(String cpr) {
-        String sql = "SELECT from user WHERE user_cpr = ?";
-        try (
-                Connection conn = connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)
-        ) {
-            pstmt.setString(1, cpr);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }*/
-
-    private ArrayList<String> get_user_roles(int id, Statement stmt) throws SQLException{
-        String sql = "SELECT roleName FROM UserRole WHERE userId=" + id;
-        ResultSet rs = stmt.executeQuery(sql);
+    private ArrayList<String> get_user_roles(int id, Connection connection) throws SQLException {
+        String query = "SELECT roleName FROM UserRole WHERE userId=" + id;
+        ResultSet rs = DBUtil.executeSelectQuery(query, null, connection);
         ArrayList<String> roleList = new ArrayList<>();
-
         while (rs.next()) {
             roleList.add(rs.getString("roleName"));
         }
-
         return roleList;
     }
-
 }

@@ -43,7 +43,7 @@ CREATE TABLE Prescription (
     PRIMARY KEY (prescriptionId)
 );
 
-CREATE TABLE ProduktBatch (
+CREATE TABLE ProductBatch (
     productBatchId int NOT NULL,
     prescriptionId int,
     startDate date,
