@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.List;
 
+@Path("productbatchcomp")
 public class ProductBatchCompResource {
     IProductBatchCompDAO productBatchCompDAO = new ProductBatchCompDAO();
 
