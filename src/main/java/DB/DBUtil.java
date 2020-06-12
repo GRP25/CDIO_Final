@@ -155,6 +155,18 @@ public class DBUtil {
 
             return objects;
         }
+        else if (parameter[0] instanceof commodityDTO) {
+            commodityDTO commoDTO = (commodityDTO) parameter[0];
+
+            objects = new Object[2 + parameter.length -1];
+
+            objects[0] = commoDTO.getCommodity_id();
+            objects[1] = commoDTO.getCommodity_Name();
+
+            remainingParameter(objects, 2, parameter);
+
+            return objects;
+        }
 
         // If the parameter is integer, double , String or so on.
         int index = 0;
