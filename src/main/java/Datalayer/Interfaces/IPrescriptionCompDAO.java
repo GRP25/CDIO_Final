@@ -1,17 +1,19 @@
 package Datalayer.Interfaces;
 
 import Datalayer.DTO.PrescriptionCompDTO;
-import java.util.ArrayList;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public interface IPrescriptionCompDAO {
 
-	PrescriptionCompDTO getPrescriptionComp(int prescription_id);
+	PrescriptionCompDTO getPrescriptionComp(int prescription_id, int commodity_id) throws SQLException;
 
-	ArrayList<PrescriptionCompDTO> getPrescriptionCompList();
+	List<PrescriptionCompDTO> getPrescriptionCompList() throws SQLException;
 
-	ArrayList<PrescriptionCompDTO> getPrescriptionCompList(int prescription_id);
+	List<PrescriptionCompDTO> getPrescriptionCompList(int prescription_id) throws SQLException;
 
-	void createPrescriptionComp(PrescriptionCompDTO prescription);
+	void createPrescriptionComp(PrescriptionCompDTO prescription) throws SQLException;
 
-	void updatePrescriptionComp(PrescriptionCompDTO prescription);
+	void updatePrescriptionComp(PrescriptionCompDTO prescription) throws SQLException;
 }
