@@ -30,7 +30,7 @@ public class DBUtil {
 
         try {
 
-            DriverManager.registerDriver( new com.mysql.cj.jdbc.Driver() );
+            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 
         } catch (SQLException e) {
 
@@ -61,10 +61,10 @@ public class DBUtil {
     public static Connection getConnection() {
 
         if (connection == null)
-            try{
+            try {
 
-                connection = DriverManager.getConnection( PropertiesLoader.jdbcUrl,
-                            PropertiesLoader.dbUserName, PropertiesLoader.dbPassword );
+                connection = DriverManager.getConnection(PropertiesLoader.jdbcUrl, PropertiesLoader.dbUserName,
+                        PropertiesLoader.dbPassword);
                 return connection;
 
             } catch (SQLException e) {
@@ -98,13 +98,8 @@ public class DBUtil {
 
     }
 
-    private static PreparedStatement getPrepareStatement(String query)
-                                                     throws SQLException {
-        return  getConnection().prepareStatement( query );
-    }
-
     private static void fillOutStatement(PreparedStatement pstmt, Object[] objects)
-                                        throws SQLException, NumberFormatException {
+            throws SQLException, NumberFormatException {
         int index = 1;
         if (objects != null) {
 

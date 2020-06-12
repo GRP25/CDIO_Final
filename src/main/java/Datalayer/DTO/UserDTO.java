@@ -17,7 +17,8 @@ public class UserDTO implements IDTO {
     private List<String> roles;
     private int status;
 
-    public UserDTO(int userID, String firstName, String surname, String cpr, String initials, List<String> roles, int status) {
+    public UserDTO(int userID, String firstName, String surname, String cpr, String initials, List<String> roles,
+            int status) {
         this.userID = userID;
         this.firstName = firstName;
         this.surname = surname;
@@ -33,7 +34,7 @@ public class UserDTO implements IDTO {
 
     @Override
     public Object[] convertToObject() {
-        Object[] object = new Object[6];
+        Object[] object = new Object[5];
         object[0] = this.firstName;
         object[1] = this.surname;
         object[2] = this.cpr;

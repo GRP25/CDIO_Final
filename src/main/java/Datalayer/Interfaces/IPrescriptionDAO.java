@@ -1,6 +1,8 @@
 package Datalayer.Interfaces;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import Datalayer.DTO.PrescriptionDTO;
 
@@ -9,11 +11,11 @@ import Datalayer.DTO.PrescriptionDTO;
  */
 public interface IPrescriptionDAO {
 
-	PrescriptionDTO getPrescription(int prescription_id);
+	PrescriptionDTO getPrescription(int prescription_id) throws SQLException;
 
-	ArrayList<PrescriptionDTO> getPrescriptionList();
+	List<PrescriptionDTO> getPrescriptionList() throws SQLException;
 
-	void createPrescription(PrescriptionDTO prescription);
+	void createPrescription(PrescriptionDTO prescription) throws SQLException;
 
-	void updatePrescription(PrescriptionDTO prescription);
+	void updatePrescription(PrescriptionDTO prescription) throws SQLException;
 }
