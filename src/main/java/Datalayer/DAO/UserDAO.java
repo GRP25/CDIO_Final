@@ -9,9 +9,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import Datalayer.DatabaseHandler;
-
-
 @RequestScoped
 public class UserDAO implements IUserDAO {
 
