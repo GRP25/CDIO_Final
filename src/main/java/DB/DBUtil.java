@@ -33,9 +33,7 @@ public class DBUtil {
             DriverManager.registerDriver( new com.mysql.cj.jdbc.Driver() );
 
         } catch (SQLException e) {
-
             e.printStackTrace();
-
         }
     }
 

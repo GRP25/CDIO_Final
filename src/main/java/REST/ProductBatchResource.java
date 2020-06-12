@@ -37,7 +37,7 @@ public class ProductBatchResource {
     // get all product batches
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<ProductBatchDTO> getAllProducts() {
+    public List<ProductBatchDTO> getAllProducts() {
         return productDAO.getProductBatchDTOList();
     }
 
@@ -65,5 +65,4 @@ public class ProductBatchResource {
     public List<ProductBatchCompDTO>  getCompountsForProduct(@PathParam("ProductID") int productID) {
         return productCompDAO.getProductBatchCompList(productID);
     }
-
 }
