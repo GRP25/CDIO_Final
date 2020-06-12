@@ -1,6 +1,11 @@
 package Datalayer.DTO;
 
-public class ProductBatchCompDTO {
+import Datalayer.DTO.IDTO.IDTO;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class ProductBatchCompDTO implements IDTO {
 	private int productBatch_id;
 	private int commodity_id;
 	private int user_id;
@@ -64,5 +69,26 @@ public class ProductBatchCompDTO {
 				", tara=" + tara +
 				", netto=" + netto +
 				'}';
+	}
+
+	@Override
+	public IDTO interpretResultSet(ResultSet resultSet) throws SQLException {
+		this.setProductBatch_id(resultSet.getInt("productBatchId"));
+		this.setCommodity_id(resultSet.getInt("commodityBatchId"));
+		this.setUser_id(resultSet.getInt("userId"));
+		this.setTara(resultSet.getDouble("tara"));
+		this.setNetto(resultSet.getDouble("netto"));
+		return null;
+	}
+
+	@Override
+	public Object[] convertToObject() {
+		Object[] objects = new Object[5];
+		objects[0] = this.productBatch_id;
+		objects[1] = this.commodity_id;
+		objects[2] = this.user_id;
+		objects[3] = this.tara;
+		objects[4] = this.netto;
+		return objects;
 	}
 }

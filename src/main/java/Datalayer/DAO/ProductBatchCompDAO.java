@@ -1,8 +1,10 @@
 package Datalayer.DAO;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -17,97 +19,88 @@ import Datalayer.Interfaces.IProductBatchCompDAO;
 @RequestScoped
 public class ProductBatchCompDAO implements IProductBatchCompDAO {
 
-	@Override
-	public ProductBatchCompDTO getProductBatchComp(int productBatch_id, int commodityBatch_id) {
-		String sql = "SELECT * FROM ProduktBatchComp WHERE productBatchId = ? AND WHERE commodityBatchId = ?";
+    @Override
+    public ProductBatchCompDTO getProductBatchComp(int productBatch_id, int commodityBatch_id) throws SQLException {
+        String query = "SELECT * FROM ProduktBatchComp WHERE productBatchId = ? AND WHERE commodityBatchId = ?";
+        Connection connection = DBUtil.getConnection();
+        Object[] parameter = DBUtil.convertTOObject(productBatch_id, commodityBatch_id);
+        ResultSet resultSet = DBUtil.executeSelectQuery(query, parameter, connection);
+        ProductBatchCompDTO productBatchCompDTO;
 
-		Object[] parameter = DBUtil.convertTOObject(productBatch_id, commodityBatch_id);
-		ResultSet resultSet = DBUtil.executeSelectQuery(sql,parameter);
 
-		ProductBatchCompDTO productBatchCompDTO;
+        resultSet.first();
+        productBatchCompDTO = (ProductBatchCompDTO) DBUtil.resultSetToObject(resultSet, ProductBatchCompDTO.class);
 
-		try{
-			resultSet.first();
-			productBatchCompDTO = (ProductBatchCompDTO) DBUtil.resultSetToObject(resultSet, ProductBatchCompDTO.class);
-		}catch (SQLException e){
-			e.printStackTrace();
-			return null;
-		}
-		// TODO Auto-generated method stub
-		return productBatchCompDTO;
-	}
+        connection.close();
 
-	@Override
-	public List<ProductBatchCompDTO> getProductBatchCompList() {
-		String sql = "SELECT * FROM ProduktBatchComp";
+        // TODO Auto-generated method stub
+        return productBatchCompDTO;
+    }
 
-		ResultSet resultSet = DBUtil.executeSelectQuery(sql,null);
-		List<ProductBatchCompDTO> productBatchCompDAOList;
+    @Override
+    public List<ProductBatchCompDTO> getProductBatchCompList() throws SQLException {
+        String sql = "SELECT * FROM ProduktBatchComp";
+        Connection connection = DBUtil.getConnection();
+        ResultSet resultSet = DBUtil.executeSelectQuery(sql, null, connection);
+        List<ProductBatchCompDTO> productBatchCompDAOList;
 
-		try{
-			ProductBatchCompDTO productBatchCompDTO;
-			productBatchCompDAOList = new ArrayList<>();
-			while (resultSet.next()){
-				productBatchCompDTO = (ProductBatchCompDTO) DBUtil.resultSetToObject(resultSet, ProductBatchCompDTO.class);
-				productBatchCompDAOList.add(productBatchCompDTO);
-			}
-		}catch (SQLException e){
-			e.printStackTrace();
-			return null;
-		}
-		// TODO Auto-generated method stub
-		return productBatchCompDAOList;
-	}
+        ProductBatchCompDTO productBatchCompDTO;
+        productBatchCompDAOList = new ArrayList<>();
 
-	@Override
-	public List<ProductBatchCompDTO> getProductBatchCompList(int productBatch_id) {
-		String sql = "SELECT * FROM ProduktBatchComp WHERE productBatchId = ?";
+        while (resultSet.next()) {
+            productBatchCompDTO = (ProductBatchCompDTO) DBUtil.resultSetToObject(resultSet, ProductBatchCompDTO.class);
+            productBatchCompDAOList.add(productBatchCompDTO);
+        }
 
-		Object[] parameter = DBUtil.convertTOObject(productBatch_id);
-		ResultSet resultSet = DBUtil.executeSelectQuery(sql,parameter);
-		List<ProductBatchCompDTO> productBatchCompDTOList;
+        connection.close();
+        // TODO Auto-generated method stub
+        return productBatchCompDAOList;
+    }
 
-		try{
-			ProductBatchCompDTO productBatchCompDTO;
-			productBatchCompDTOList = new ArrayList<>();
+    @Override
+    public List<ProductBatchCompDTO> getProductBatchCompList(int productBatch_id) throws SQLException {
+        String sql = "SELECT * FROM ProduktBatchComp WHERE productBatchId = ?";
+        Connection connection = DBUtil.getConnection();
+        Object[] parameter = DBUtil.convertTOObject(productBatch_id);
+        ResultSet resultSet = DBUtil.executeSelectQuery(sql, parameter, connection);
+        List<ProductBatchCompDTO> productBatchCompDTOList;
 
-			while (resultSet.next()){
-				productBatchCompDTO = (ProductBatchCompDTO) DBUtil.resultSetToObject(resultSet, ProductBatchCompDTO.class);
-				productBatchCompDTOList.add(productBatchCompDTO);
-			}
-		}catch (SQLException e){
-			e.printStackTrace();
-			return null;
-		}
-		// TODO Auto-generated method stub
-		return productBatchCompDTOList;
-	}
+        ProductBatchCompDTO productBatchCompDTO;
+        productBatchCompDTOList = new ArrayList<>();
 
-	@Override
-	public void createProductBatchComp(ProductBatchCompDTO productBatchComp) {
-		String sql = "INSERT INTO  ProduktBatchComp (commodityId, userId, tara, netto) values (?, ?, ?, ?);";
-		Object[] parameter = DBUtil.convertTOObject(productBatchComp);
+        while (resultSet.next()) {
+            productBatchCompDTO = (ProductBatchCompDTO) DBUtil.resultSetToObject(resultSet, ProductBatchCompDTO.class);
+            productBatchCompDTOList.add(productBatchCompDTO);
+        }
 
-		try{
-			DBUtil.executeCreateAndUpdate(sql,parameter);
-		}catch (SQLException e){
-			e.printStackTrace();
-		}
-		// TODO Auto-generated method stub
-	}
+        connection.close();
+        // TODO Auto-generated method stub
+        return productBatchCompDTOList;
+    }
 
-	@Override
-	public void updateProductBatchComp(ProductBatchCompDTO productBatchComp) {
-		String sql = "UPDATE ProduktBatchComp SET productBatchId = ?, commodityBatchId = ?, userId = ?, tara = ?, netto = ?";
-		Object[] parameter = DBUtil.convertTOObject(productBatchComp);
+    @Override
+    public void createProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException {
+        String query = "INSERT INTO  ProduktBatchComp (productBatchId, commodityId, userId, tara, netto) values (?, ?, ?, ?, ?);";
+        Object[] parameter = DBUtil.convertTOObject(productBatchComp);
+        Connection connection = DBUtil.getConnection();
 
-		try{
-			DBUtil.executeCreateAndUpdate(sql,parameter);
-		}catch (SQLException e){
-			e.printStackTrace();
-		}
-		// TODO Auto-generated method stub
+        DBUtil.executeSelectQuery(query, parameter, connection);
+        connection.close();
+        // TODO Auto-generated method stub
+    }
 
-	}
+    @Override
+    public void updateProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException {
+        String sql = "UPDATE ProduktBatchComp SET productBatchId = ?, commodityBatchId = ?, userId = ?, tara = ?, netto = ?";
+        Object[] parameter = DBUtil.convertTOObject(productBatchComp);
+        Connection connection = DBUtil.getConnection();
+
+
+        DBUtil.executeSelectQuery(sql, parameter, connection);
+        connection.close();
+
+        // TODO Auto-generated method stub
+
+    }
 
 }

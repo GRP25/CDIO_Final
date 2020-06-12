@@ -24,13 +24,11 @@ public class UserService implements IUserService {
     @Override
     public void updateUser(UserDTO user) throws SQLException {
         userDao.updateUser( user );
-        return "Update query executed successfully";
     }
 
     @Override
     public void createUser(UserDTO user) throws SQLException {
         userDao.createUser( user );
-        return "Insert query executed successfully";
     }
 
     @Override

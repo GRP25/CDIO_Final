@@ -2,6 +2,7 @@ package Datalayer.Interfaces;
 
 import Datalayer.DTO.UserDTO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface IUserDAO {
@@ -10,7 +11,7 @@ public interface IUserDAO {
 
     List<UserDTO> getUserList() throws SQLException;
 
-    void createUser(UserDTO user) throws SQLException;
+    void createUser(UserDTO user) throws SQLException, SQLException;
 
     void updateUser(UserDTO user) throws SQLException;
 

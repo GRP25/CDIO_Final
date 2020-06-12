@@ -74,13 +74,14 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public void updateUser(UserDTO user) throws SQLException {
-        String query = "UPDATE Users SET firstname = ? , surname = ? , cpr = ?, initials = ? , status = ? WHERE userId = "+user.getUserID();
+        String query = "UPDATE Users SET firstname = ? , surname = ? , cpr = ?, initials = ? , status = ? WHERE userId = " + user.getUserID();
         Connection connection = DBUtil.getConnection();
         Object[] parameter = user.convertToObject();
         ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
         if (rs.next()) {
             user.interpretResultSet(rs);
         }
+    }
 
     @Override
     public void deactivateUser(int id) throws SQLException {

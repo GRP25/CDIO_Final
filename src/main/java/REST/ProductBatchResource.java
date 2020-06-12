@@ -1,5 +1,6 @@
 package REST;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,14 +31,14 @@ public class ProductBatchResource {
     // create produkt batch
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createProductBatch(ProductBatchDTO productDTO) {
+    public void createProductBatch(ProductBatchDTO productDTO) throws SQLException {
         productDAO.createProductBatch(productDTO);
     }
 
     // get all product batches
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ProductBatchDTO> getAllProducts() {
+    public List<ProductBatchDTO> getAllProducts() throws SQLException {
         return productDAO.getProductBatchDTOList();
     }
 
@@ -45,7 +46,7 @@ public class ProductBatchResource {
     @Path("/ID/{ProductID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ProductBatchDTO getProductBatchByID(@PathParam("ProductID") int productID) {
+    public ProductBatchDTO getProductBatchByID(@PathParam("ProductID") int productID) throws SQLException {
         return productDAO.getProductBatchDTO(productID);
     }
 
