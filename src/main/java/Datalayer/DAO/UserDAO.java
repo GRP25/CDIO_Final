@@ -13,59 +13,43 @@ import java.util.List;
 public class UserDAO implements IUserDAO {
 
     @Override
-    public void createUser(UserDTO user) {
+    public void createUser(UserDTO user) throws SQLException{
         String query = "INSERT INTO Users (firstname, surname, cpr, initials, status) values (?,?,?,?,?);";
         Connection connection = DBUtil.getConnection();
         Object[] parameter = user.convertToObject();
-
-        try {
-            DBUtil.executeSelectQuery(query, parameter, connection);
-            ResultSet rs = DBUtil.executeSelectQuery("SELECT LAST_INSERT_ID()", null, connection);
-
-            String ID = "";
-            while (rs.next()) {
-                ID = rs.getString("LAST_INSERT_ID()");
-            }
-
-            // assigning role to user
-            query = "INSERT INTO UserRole (userId, roleName) VALUES ";
-            for (String role : user.getRoles()) {
-                query += "('" + ID + "', '" + role + "'),";
-            }
-            query = query.substring(0, query.length() - 1);
-
-            DBUtil.executeSelectQuery(query, null, connection);
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        DBUtil.executeSelectQuery(query, parameter, connection);
+        ResultSet rs = DBUtil.executeSelectQuery("SELECT LAST_INSERT_ID()", null, connection);
+        String ID = "";
+        while (rs.next()) {
+            ID = rs.getString("LAST_INSERT_ID()");
         }
+        // assigning role to user
+        query = "INSERT INTO UserRole (userId, roleName) VALUES ";
+        for (String role : user.getRoles()) {
+            query += "('" + ID + "', '" + role + "'),";
+        }
+        query = query.substring(0, query.length() - 1);
+        DBUtil.executeSelectQuery(query, null, connection);
+        connection.close();
     }
 
     @Override
-    public List<UserDTO> getUserList() {
+    public List<UserDTO> getUserList() throws SQLException {
         String query = "SELECT * FROM Users";
         Connection connection = DBUtil.getConnection();
-
         ResultSet rs = DBUtil.executeSelectQuery(query, null, connection);
         List<UserDTO> users = new ArrayList<>();
         UserDTO user;
-        try {
-            while (rs.next()) {
-                user = new UserDTO();
-                user.interpretResultSet(rs);
-                users.add(user);
-            }
-
-            for (UserDTO userTemp : users) {
-                userTemp.setRoles(get_user_roles(userTemp.getUserID(), connection));
-            }
-
-            // closing connections
-            connection.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        while (rs.next()) {
+            user = new UserDTO();
+            user.interpretResultSet(rs);
+            users.add(user);
         }
-
+        for (UserDTO userTemp : users) {
+            userTemp.setRoles(get_user_roles(userTemp.getUserID(), connection));
+        }
+        // closing connections
+        connection.close();
         return users;
     }
 
