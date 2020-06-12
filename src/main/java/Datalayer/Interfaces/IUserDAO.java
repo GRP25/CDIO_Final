@@ -4,19 +4,15 @@ import Datalayer.DTO.UserDTO;
 
 import java.util.List;
 
-public interface IUserDAO{
+public interface IUserDAO {
 
-    UserDTO getUser(int userID);
+    UserDTO getUser(int userID) throws SQLException;
 
-    List<UserDTO> getUserList();
+    List<UserDTO> getUserList() throws SQLException;
 
-    void createUser(UserDTO user);
+    void createUser(UserDTO user) throws SQLException;
 
-    void updateUser(UserDTO user);
+    void updateUser(UserDTO user) throws SQLException;
 
-    void deactivateUser(int userID);
-
-    boolean exists(String cpr);
-
-    boolean exists(int id);
+    void deactivateUser(int userID) throws SQLException;
 }

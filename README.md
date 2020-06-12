@@ -25,7 +25,13 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
 
 - Ret ProductBatchComp diagrammet til at kunne tage endnu et parameter ind i IProduktBatchKompDAO 
 - Tilføj supplier til commodityBatch i klasse diagram
+
+## Things i want to do before i graduate
+- Find på noget smart til de roles
+
 - start og slut dato i ProductBatch
 
-## Spørgsmål til 14:00
+## Agenda til kl 16:30
 - getCommodityBatchList Mangler der ikke en condition i sql statement?
+- Snak omkring mappe struktur
+- Bliv enige om at det skal være ArrayList eller bare List
