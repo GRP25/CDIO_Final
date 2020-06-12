@@ -1,17 +1,18 @@
 package Datalayer.Interfaces;
-
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.List;
 
 import Datalayer.DTO.commodityDTO;
 
+
 public interface ICommodityDAO {
 
-	commodityDTO getCommodity(int commodity_id);
+	commodityDTO getCommodity(int commodity_id) throws SQLException;
 
-	ArrayList<commodityDTO> getCommodityList();
+	List<commodityDTO> getCommodityList() throws SQLException;
 
-	void createCommodity(commodityDTO commodity);
+	void createCommodity(commodityDTO commodity) throws SQLException;
 
-	void updateCommodity(commodityDTO commodity);
+	void updateCommodity(commodityDTO commodity) throws SQLException;
 
 }
