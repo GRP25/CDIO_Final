@@ -74,4 +74,13 @@ public class PrescriptionCompDTO implements IDTO {
 		return tolerance;
 	}
 
+	@Override
+	public String toString() {
+		return "PrescriptionCompDTO{" +
+				"prescription_id=" + prescription_id +
+				", commodity_id=" + commodity_id +
+				", nomNetto=" + nomNetto +
+				", tolerance=" + tolerance +
+				'}';
+	}
 }
