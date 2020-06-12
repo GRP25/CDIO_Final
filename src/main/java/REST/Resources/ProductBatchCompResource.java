@@ -1,4 +1,4 @@
-package REST;
+package REST.Resources;
 
 import Datalayer.DAO.ProductBatchCompDAO;
 import Datalayer.DTO.ProductBatchCompDTO;

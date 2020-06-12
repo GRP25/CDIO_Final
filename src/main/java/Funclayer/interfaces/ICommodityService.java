@@ -1,4 +1,4 @@
-package REST.Services.Interfaces;
+package Funclayer.interfaces;
 
 import Datalayer.DTO.commodityDTO;
 

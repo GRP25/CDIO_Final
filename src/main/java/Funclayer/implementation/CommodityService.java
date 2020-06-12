@@ -1,10 +1,10 @@
 
-package REST.Services.Implementation;
+package Funclayer.implementation;
 
 import Datalayer.DAO.CommodityDAO;
 import Datalayer.DTO.commodityDTO;
 import Datalayer.Interfaces.ICommodityDAO;
-import REST.Services.Interfaces.ICommodityService;
+import Funclayer.interfaces.ICommodityService;
 
 import java.sql.SQLException;
 import java.util.List;

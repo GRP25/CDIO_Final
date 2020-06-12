@@ -1,4 +1,4 @@
-package REST;
+package REST.Resources;
 
 import Datalayer.DTO.UserDTO;
 import Funclayer.UserService;

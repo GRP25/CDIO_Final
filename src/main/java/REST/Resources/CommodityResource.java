@@ -1,8 +1,8 @@
 package REST.Resources;
 
 import Datalayer.DTO.commodityDTO;
-import REST.Services.Implementation.CommodityService;
-import REST.Services.Interfaces.ICommodityService;
+import Funclayer.implementation.CommodityService;
+import Funclayer.interfaces.ICommodityService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

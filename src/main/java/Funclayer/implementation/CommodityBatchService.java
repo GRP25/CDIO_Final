@@ -1,9 +1,9 @@
-package REST.Services.Implementation;
+package Funclayer.implementation;
 
 import Datalayer.DAO.CommodityBatchDAO;
 import Datalayer.DTO.CommodityBatchDTO;
 import Datalayer.Interfaces.ICommodityBatchDAO;
-import REST.Services.Interfaces.ICommodityBatchService;
+import Funclayer.interfaces.ICommodityBatchService;
 
 import java.sql.SQLException;
 import java.util.List;

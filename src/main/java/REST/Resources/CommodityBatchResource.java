@@ -1,8 +1,8 @@
 package REST.Resources;
 
 import Datalayer.DTO.CommodityBatchDTO;
-import REST.Services.Implementation.CommodityBatchService;
-import REST.Services.Interfaces.ICommodityBatchService;
+import Funclayer.implementation.CommodityBatchService;
+import Funclayer.interfaces.ICommodityBatchService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
