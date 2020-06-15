@@ -15,11 +15,11 @@
                  <div class="p-2 flex justify-end" >
                      <input type="text" class="rounded-full">
                      <button class="m-4 bg-blue-300 rounded-full">SØG</button>
-                     <button class="m-4 bg-blue-300 rounded-full">OPRET</button>
+                     <button onclick="addElement()" class="m-4 bg-blue-300 rounded-full">OPRET</button>
                  </div>
 
                     <!--Body-->
-                 <div class="text-black px-2">
+                 <div class="text-black">
                      <div id="commodityBatch-list">
 
                      </div>
@@ -28,6 +28,66 @@
 
 
         </div>
+
+    <script>
+
+
+        let elements =  [
+            {
+                commodityBatch_id: 1,
+                commodity_id: 1,
+                weight: 1.5,
+                supplier: "AM"
+            },
+
+            {
+                commodityBatch_id: 2,
+                commodity_id: 2,
+                weight: 2.5,
+                supplier: "BM"
+            }]
+        ;
+
+        function addElement() {
+            showElementsAuto(elements)
+
+        }
+
+        /** To Show all elements */
+        function showElementsAuto(elements) {
+            const single_element = document.getElementById('commodityBatch-list');
+
+
+            let color = true;
+            let element;
+
+            for (element of elements) {
+
+                if(color) {
+                    single_element.insertAdjacentHTML('beforebegin', '<!--First id\'s row-->\n' +
+                        '                             <div class="bg-gray-400 flex">\n' +
+                        '                                 <div onclick="" class=" "> </div>\n' +
+                        '                                 <div class="ml-auto">\n' +
+                        '                                     <button class="text-green-600">U</button>\n' +
+                        '                                     <button class="text-red-600">X</button>\n' +
+                        '                                 </div>\n' +
+                        '                             </div>')
+                    color = false;
+                } else {
+                    single_element.insertAdjacentHTML('beforebegin', '<!--Second id\'s row-->\n' +
+                        '                             <div class="bg-gray-100 flex">\n' +
+                        '                                 <div onclick="" class=" ">commodityBatch-id</div>\n' +
+                        '                                 <div class="ml-auto">\n' +
+                        '                                     <button class="text-green-600">U</button>\n' +
+                        '                                     <button class="text-red-600">X</button>\n' +
+                        '                                 </div>\n' +
+                        '                             </div>')
+                    color = true;
+                }
+            }
+
+        }
+    </script>
 
 
     </body>
