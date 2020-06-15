@@ -19,7 +19,7 @@ public class ProductBatchDTO implements IDTO {
 		this.status = status;
 	}
 
-	public ProductBatchDTO(){
+	public ProductBatchDTO() {
 
 	}
 

@@ -26,7 +26,7 @@ public class PrescriptionCompResource {
 
 		String createResult = prescriptionCompService.createPrescriptionComp(presCompDTO);
 
-		if (createResult.equalsIgnoreCase("Insert query executed succesfully")) {
+		if (createResult.equalsIgnoreCase("Insert query executed successfully")) {
 			response = Response.status(Response.Status.OK).entity(createResult).build();
 		} else {
 			response = Response.status(Response.Status.BAD_REQUEST).entity(createResult).build();
@@ -43,7 +43,7 @@ public class PrescriptionCompResource {
 
 		String updateResult = prescriptionCompService.updatePrescriptionComp(presCompDTO);
 
-		if (updateResult.equalsIgnoreCase("Insert query executed succesfully")) {
+		if (updateResult.equalsIgnoreCase("Insert query executed successfully")) {
 			response = Response.status(Response.Status.OK).entity(updateResult).build();
 		} else {
 			response = Response.status(Response.Status.BAD_REQUEST).entity(updateResult).build();

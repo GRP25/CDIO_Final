@@ -65,7 +65,8 @@ public class PrescriptionDAO implements IPrescriptionDAO {
 
 	@Override
 	public void updatePrescription(PrescriptionDTO prescription) throws SQLException {
-		String query = "UPDATE Prescription SET prescriptionId = ?, prescriptionName =? WHERE prescriptionId = ?";
+		String query = "UPDATE Prescription SET prescriptionId = ?, prescriptionName =? WHERE prescriptionId ="
+				+ prescription.getPrescription_id();
 		Connection connection = DBUtil.getConnection();
 		Object[] parameter = prescription.convertToObject();
 		DBUtil.executeSelectQuery(query, parameter, connection);

@@ -48,8 +48,10 @@ CREATE TABLE Users
     supplier varchar
     (20),
     PRIMARY KEY
-    (commodityBatchId)
---     ,FOREIGN KEY (commodityId) REFERENCES Commodity(commodityId)
+    (commodityBatchId),
+    FOREIGN KEY
+    (commodityId) REFERENCES Commodity
+    (commodityId)
 );
 
 
@@ -60,7 +62,7 @@ CREATE TABLE Users
         PRIMARY KEY (prescriptionId)
     );
 
-    CREATE TABLE ProduktBatch
+    CREATE TABLE ProductBatch
     (
         productBatchId int NOT NULL,
         prescriptionId int,
@@ -70,7 +72,7 @@ CREATE TABLE Users
         PRIMARY KEY (productBatchId)
     );
 
-    CREATE TABLE ProduktBatchComp (
+    CREATE TABLE ProductBatchComp (
     productBatchId int NOT NULL,
     commodityBatchId int,
     userId int,
@@ -90,7 +92,7 @@ CREATE TABLE Users
     prescriptionId int NOT NULL,
     commodityId int,
     nomNetto double,
-    tollerance double,
+    tolerance double,
     PRIMARY KEY
     (prescriptionId, commodityId),
     FOREIGN KEY
@@ -137,19 +139,19 @@ CREATE TABLE Users
     INSERT INTO CommodityBatch
         (commodityBatchId, commodityId, weight, supplier )
     values(2, 2, 3.3, "MD Exports2");
-    INSERT INTO ProduktBatch
+    INSERT INTO ProductBatch
         (productBatchId, prescriptionId, status)
     values
         (1, 1, 2);
-    INSERT INTO ProduktBatch
+    INSERT INTO ProductBatch
         (productBatchId, prescriptionId, status)
     values
         (2, 2, 1);
-    INSERT INTO  ProduktBatchComp
+    INSERT INTO  ProductBatchComp
         (productBatchId, commodityBatchId, userId, tara, netto)
     values
         (1, 1, 1, 2.4, 5.5);
-    INSERT INTO  ProduktBatchComp
+    INSERT INTO  ProductBatchComp
         (productBatchId, commodityBatchId, userId, tara, netto)
     values
         (2, 1, 2, 3.4, 3.5);
@@ -160,6 +162,6 @@ CREATE TABLE Users
         (prescriptionId, prescriptionName)
     values(2, "MelonWithWater");
     INSERT INTO PrescriptionComp
-        (prescriptionId, commodityId, nomNetto, tollerance)
+        (prescriptionId, commodityId, nomNetto, tolerance)
     values
         (1, 1, 2.3, 4.5);

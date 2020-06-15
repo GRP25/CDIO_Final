@@ -25,7 +25,7 @@ public class PrescriptionResource {
 
 		String createResult = prescriptionService.createPrescription(prescriptionDTO);
 
-		if (createResult.equalsIgnoreCase("Insert query executed successfully")) {
+		if (createResult.equalsIgnoreCase("Insert query executed succesfully")) {
 			response = Response.status(Response.Status.OK).entity(prescriptionDTO).build();
 		} else {
 			response = Response.status(Response.Status.BAD_REQUEST).entity("Error").build();

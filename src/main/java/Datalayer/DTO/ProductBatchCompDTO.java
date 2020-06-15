@@ -12,6 +12,10 @@ public class ProductBatchCompDTO implements IDTO {
 	private double tara;
 	private double netto;
 
+	public ProductBatchCompDTO() {
+
+	}
+
 	public ProductBatchCompDTO(int productBatch_id, int commodity_id, int user_id, double tara, double netto) {
 		this.productBatch_id = productBatch_id;
 		this.commodity_id = commodity_id;
@@ -62,13 +66,8 @@ public class ProductBatchCompDTO implements IDTO {
 
 	@Override
 	public String toString() {
-		return "ProductBatchCompDTO{" +
-				"productBatch_id=" + productBatch_id +
-				", commodity_id=" + commodity_id +
-				", user_id=" + user_id +
-				", tara=" + tara +
-				", netto=" + netto +
-				'}';
+		return "ProductBatchCompDTO{" + "productBatch_id=" + productBatch_id + ", commodity_id=" + commodity_id
+				+ ", user_id=" + user_id + ", tara=" + tara + ", netto=" + netto + '}';
 	}
 
 	@Override

@@ -23,13 +23,13 @@ public class ProductBatchDAO implements IProductBatchDAO {
         // SELECT * FROM ProductBatch WHERE productBatchId = ?
 
         Connection connection = DBUtil.getConnection();
-        ProductBatchDTO productDTO;
+        ProductBatchDTO productDTO = new ProductBatchDTO();
         String query = "SELECT * FROM ProductBatch WHERE productBatchId = ?";
-        Object[] parameter = DBUtil.convertTOObject(productBatch_id);
+        Object[] parameter = { productBatch_id };
         ResultSet result = DBUtil.executeSelectQuery(query, parameter, connection);
 
         result.first();
-        productDTO = (ProductBatchDTO) DBUtil.resultSetToObject(result, ProductBatchDTO.class);
+        productDTO.interpretResultSet(result);
         connection.close();
 
         return productDTO;
@@ -42,18 +42,17 @@ public class ProductBatchDAO implements IProductBatchDAO {
         Connection connection = DBUtil.getConnection();
         List<ProductBatchDTO> productDTOList = new ArrayList<>();
         String query = "SELECT * FROM ProductBatch";
-        ProductBatchDTO productDTOTemp;
-
 
         ResultSet result = DBUtil.executeSelectQuery(query, null, connection);
+        ProductBatchDTO productDTOTemp;
 
         while (result.next()) {
-            productDTOTemp = (ProductBatchDTO) DBUtil.resultSetToObject(result, ProductBatchDTO.class);
+            productDTOTemp = new ProductBatchDTO();
+            productDTOTemp.interpretResultSet(result);
             productDTOList.add(productDTOTemp);
         }
 
         connection.close();
-
         return productDTOList;
     }
 
@@ -63,19 +62,20 @@ public class ProductBatchDAO implements IProductBatchDAO {
         // INSERT INTO ProductBatch VALUES (?,?,?,?,?)
 
         Connection connection = DBUtil.getConnection();
-        String query = "INSERT INTO ProductBatch VALUES (?,?,?,?,?);";
-        Object[] parameter = DBUtil.convertTOObject(productBatch);
+        String query = "INSERT INTO ProductBatch (productBatchId,prescriptionId,status) VALUES (?,?,?);";
+        Object[] parameter = productBatch.convertToObject();
         DBUtil.executeSelectQuery(query, parameter, connection);
     }
 
     @Override
     public void updateProductBatch(ProductBatchDTO productBatch) throws SQLException {
         // TODO Auto-generated method stub
-        // UPDATE ProductBatch SET prescriptionId = ?, startDate = ?, endDate = ?, status = ? WHERE productBatchId = ?
+        // UPDATE ProductBatch SET prescriptionId = ?, startDate = ?, endDate = ?,
+        // status = ? WHERE productBatchId = ?
 
         String query = "UPDATE ProductBatch SET prescriptionId = ?, startDate = ?, endDate = ?, status = ? WHERE productBatchId = ?";
         Connection connection = DBUtil.getConnection();
-        Object[] parameter = DBUtil.convertTOObject(productBatch);
+        Object[] parameter = productBatch.convertToObject();
 
         DBUtil.executeSelectQuery(query, parameter, connection);
 

@@ -76,11 +76,7 @@ public class PrescriptionCompDTO implements IDTO {
 
 	@Override
 	public String toString() {
-		return "PrescriptionCompDTO{" +
-				"prescription_id=" + prescription_id +
-				", commodity_id=" + commodity_id +
-				", nomNetto=" + nomNetto +
-				", tolerance=" + tolerance +
-				'}';
+		return "PrescriptionCompDTO{" + "prescription_id=" + prescription_id + ", commodity_id=" + commodity_id
+				+ ", nomNetto=" + nomNetto + ", tolerance=" + tolerance + '}';
 	}
 }

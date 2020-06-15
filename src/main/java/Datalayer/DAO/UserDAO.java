@@ -9,12 +9,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @RequestScoped
 public class UserDAO implements IUserDAO {
 
     @Override
-    public void createUser(UserDTO user) throws SQLException{
+    public void createUser(UserDTO user) throws SQLException {
         String query = "INSERT INTO Users (firstname, surname, cpr, initials, status) values (?,?,?,?,?);";
         Connection connection = DBUtil.getConnection();
         Object[] parameter = user.convertToObject();
@@ -60,7 +59,7 @@ public class UserDAO implements IUserDAO {
         String query = "SELECT * FROM Users WHERE userId = ?;";
         Connection connection = DBUtil.getConnection();
         Object[] parameter = DBUtil.convertTOObject(ID);
-        ResultSet rs = DBUtil.executeSelectQuery(query,parameter,connection);
+        ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
         if (rs.next()) {
             user.interpretResultSet(rs);
             user.setRoles(get_user_roles(ID, connection));
@@ -71,13 +70,24 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public void updateUser(UserDTO user) throws SQLException {
-        String query = "UPDATE Users SET firstname = ? , surname = ? , cpr = ?, initials = ? , status = ? WHERE userId = " + user.getUserID();
+        String query = "UPDATE Users SET firstname = ? , surname = ? , cpr = ?, initials = ? , status = ? WHERE userId = "
+                + user.getUserID();
         Connection connection = DBUtil.getConnection();
         Object[] parameter = user.convertToObject();
         ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
         if (rs.next()) {
             user.interpretResultSet(rs);
+
         }
+        query = "DELETE FROM UserRole WHERE userId =" + user.getUserID();
+        DBUtil.executeSelectQuery(query, null, connection);
+        query = "INSERT INTO UserRole (userId, roleName) VALUES ";
+        for (String role : user.getRoles()) {
+            query += "('" + user.getUserID() + "', '" + role + "'),";
+        }
+        query = query.substring(0, query.length() - 1);
+        DBUtil.executeSelectQuery(query, null, connection);
+        connection.close();
     }
 
     @Override
