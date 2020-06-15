@@ -56,6 +56,7 @@ public class UserResource {
     @Path("/{userID}")
     @DELETE
     public Response deleteUser(@PathParam("userID") int userID) throws SQLException {
+        validateUserId(userID);
         userService.deleteUser(userID);
         SuccessMessage msg = new SuccessMessage("Deleted", 3, "https://mama.sh/doc");
         return Response.status(Response.Status.OK).entity(msg).build();
