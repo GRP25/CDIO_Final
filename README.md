@@ -82,4 +82,4 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
 
 ## Fejl fundet gennem Postman
 - StartDate og EndDate i ProductBatch
-- Manger Resource til ProductBatchUpdate
+- Lav et rework af ProductBatch og ProductBatchComp
