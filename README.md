@@ -84,3 +84,4 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
 - StartDate og EndDate i ProductBatch
 - Lav et rework af ProductBatch og ProductBatchComp
 - Få fikset Response når der oprettet en Prescription
+- Roller kan ikke blive fjernet i update
