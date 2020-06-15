@@ -1,4 +1,48 @@
 # CDIO_Final
+## Endpoints
+### Prescription Comp
+GET     https://api.mama.sh/api/PrescriptionComp
+POST    https://api.mama.sh/api/PrescriptionComp
+PUT     https://api.mama.sh/api/PrescriptionComp
+GET     https://api.mama.sh/api/PrescriptionComp/component
+GET     https://api.mama.sh/api/PrescriptionComp/{presID}
+### Prescriptions
+GET     https://api.mama.sh/api/Prescriptions
+POST    https://api.mama.sh/api/Prescriptions
+PUT     https://api.mama.sh/api/Prescriptions
+GET     https://api.mama.sh/api/Prescriptions/ID/{PrescriptionID}
+### Productbatch
+GET     https://api.mama.sh/api/ProductBatchs
+POST    https://api.mama.sh/api/ProductBatchs
+### Productbatch Comp
+POST    https://api.mama.sh/api/ProductBatchs/Comp
+GET     https://api.mama.sh/api/ProductBatchs/Comp/{ProductID}
+GET     https://api.mama.sh/api/ProductBatchs/ID/{ProductID}
+### Aner ikke hvad det her er??
+GET     https://api.mama.sh/api/application.wadl
+### Commodity
+GET     https://api.mama.sh/api/commodity
+POST    https://api.mama.sh/api/commodity
+PUT     https://api.mama.sh/api/commodity
+GET     https://api.mama.sh/api/commodity/{commodity_id}
+### Commodity Batch
+GET     https://api.mama.sh/api/commodityBatch
+POST    https://api.mama.sh/api/commodityBatch
+PUT     https://api.mama.sh/api/commodityBatch
+GET     https://api.mama.sh/api/commodityBatch/list/{commodity_id}
+GET     https://api.mama.sh/api/commodityBatch/{commodityBatch_id}
+### ProductBatch Comp igen??
+GET     https://api.mama.sh/api/productbatchcomp
+POST    https://api.mama.sh/api/productbatchcomp
+GET     https://api.mama.sh/api/productbatchcomp/ID/{ProductID}
+### User Resource
+GET     https://api.mama.sh/api/userresource
+POST    https://api.mama.sh/api/userresource
+PUT     https://api.mama.sh/api/userresource
+DELETE  https://api.mama.sh/api/userresource/{userID}
+GET     https://api.mama.sh/api/userresource/{userID}
+
+
 ## Vigtige links
 [Opgavebeskrivelsen](https://docs.google.com/document/d/1QrAzcQmpb-4YLtxR1y-2_UD1ep6b3zqIt3s0HpE95iM/edit)
 
