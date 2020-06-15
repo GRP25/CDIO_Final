@@ -13,6 +13,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!-- our custom style sheet-->
 <link rel="stylesheet" href="style.css">
 <script src="script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <body class="w3-light-grey">
 
@@ -60,7 +61,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <header class="w3-container" style="padding-top:22px">
     <h5><b> Bruger Administration</b></h5>
     <button id="CreateBtn" class="w3-button w3-dark-grey">Tilføj   <i class="fa fa-plus"></i></button>
-    <button id="Refresh" class="w3-button w3-dark-grey">Refresh List <i class="fa fa-plus"></i></button>
+    <button id="Refresh" onclick="listUsers()" class="w3-button w3-dark-grey">Refresh List <i class="fa fa-plus"></i></button>
   </header>
 
 
@@ -70,11 +71,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <table id="ListOfUsersTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
       <tr id="user0">
         <td id="userName">United States</td>
-        <td><button class="w3-dark-grey list-item-btn">Inaktiver <i class="fa fa-close"></i></button> <button id="EditBtn" class="w3-dark-grey list-item-btn">Updater <i class="fa fa-cog fa-fw"></i></button></td>
+        <td><button class="w3-dark-grey list-item-btn">Inaktiver <i class="fa fa-close"></i></button> <button onclick="getUser(1);" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>
       </tr>
       <tr>
         <td>UK</td>
-        <td><button class="w3-dark-grey list-item-btn">Inaktiver   <i class="fa fa-close"></i></button> <button id="EditBtn" class="w3-dark-grey list-item-btn">Updater <i class="fa fa-cog fa-fw"></i></button></td>
+        <td><button class="w3-dark-grey list-item-btn">Inaktiver   <i class="fa fa-close"></i></button> <button id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>
       </tr>
     </table><br>
     <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
@@ -93,12 +94,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       </div>
 
               <!-- Popup windows for edditing  a commodity one-->
-              <div id="EditCommodityWindow" class="modal">
-                <div id="EditCommodityWindow" class="modal-content">
+              <div id="EditUserWindow" class="modal">
+                <div id="EditUserWindow" class="modal-content">
                     <h2>Opret en råvare</h2>
-                    <label>ID: </label><input id="CommodityIDTxtIn"> </input><br />
-                    <label>Navn: </label> <input id="CommodityNameTxtIn"></input> <br />
-                    <label>Leverandør: </label> <input id="CommoditySupplierTxt"> </input> <br />
+                    <label>Bruger ID: </label><input id="UserIDTxt"> </input><br />
+                    <label>Fornavn: </label> <input id="UserFirstNameTxt"></input> <br />
+                    <label>Efternavn: </label> <input id="UserLastName"> </input> <br />
+                    <label>Initialer: </label> <input id="UserIniTxt"> </input> <br />
+                    <label>Roller: </label> <input id="UserRolesTxt"> </input> <br />
                     <button class="close">Updater  Bruger</button>
                 </div>
             </div>
@@ -133,7 +136,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         }
 
                 // Get the modal
-        var editModal = document.getElementById("EditCommodityWindow");
+        var editModal = document.getElementById("EditUserWindow");
         
         // Get the button that opens the modal
         var editBtn = document.getElementById("EditBtn");
