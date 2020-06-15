@@ -1,6 +1,7 @@
 package REST.Resources;
 
 import Datalayer.DTO.UserDTO;
+import Funclayer.exceptions.ErrorMessage;
 import Funclayer.implementation.UserService;
 import Funclayer.interfaces.IUserService;
 import Funclayer.exceptions.UserException;
@@ -21,8 +22,14 @@ public class UserResource {
     @Path("/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("userID") int userID) throws SQLException {
-        return Response.status(Response.Status.OK).entity(userService.getUser(userID)).build();
+    public Response getUser(@PathParam("userID") int userID){
+        try {
+            UserDTO response = userService.getUser(userID);
+            return Response.status(Response.Status.OK).entity(response).build();
+        } catch (SQLException e) {
+            ErrorMessage response = new ErrorMessage(e.getMessage(),e.getErrorCode(),"https://mama.sh/");
+            return Response.status(Response.Status.OK).entity(response).build();
+        }
     }
 
     @PUT
