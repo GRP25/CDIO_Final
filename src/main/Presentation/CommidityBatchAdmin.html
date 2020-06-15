@@ -9,25 +9,53 @@
     <body>
 
         <div class="container">
-
              <div class="h-auto w-full bg-gray-800 my-10 ">
                  <!--Search Bar-->
                  <div class="p-2 flex justify-end" >
                      <input type="text" class="rounded-full">
                      <button class="m-4 bg-blue-300 rounded-full">SØG</button>
-                     <button onclick="addElement()" class="m-4 bg-blue-300 rounded-full">OPRET</button>
+                     <button onclick="showModal()" class="m-4 bg-blue-300 rounded-full">OPRET</button>
                  </div>
-
-                    <!--Body-->
+                    <!--Body showElementsAuto()-->
                  <div class="text-black">
                      <div id="commodityBatch-list">
 
                      </div>
                  </div>
              </div>
+        </div>
+
+        <!--Add information by user to commodityBatch-->
+        <div id="modal-view" class="hidden">
+            <!--Information field-->
+            <div class="bg-gray-300 w-1/3 p-3">
+                <label>
+                    Commodity Batch Id
+                    <input class="w-full" type="text"  id="commodityBatch_id-input">
+                </label>
+                <label>
+                    Commodity Id
+                    <input class="w-full" type="text"  id="commodity_id-input">
+                </label>
+                <label>
+                    Weight
+                    <input class="w-full" type="text"  id="weight-input">
+                </label>
+                <label>
+                    Supplier
+                    <input class="w-full" type="text"  id="supplier-input">
+                </label>
+            </div>
+
+            <!--Create and Cancel buttons-->
+            <div class="flex justify-end">
+                <button onclick="hideModal()">Cancel</button>
+                <button onclick="addElement()">Add Element</button>
+            </div>
 
 
         </div>
+
 
     <script>
 
@@ -48,9 +76,51 @@
             }]
         ;
 
+        /** Show modal to add an object */
+        function showModal() {
+            document.getElementById('modal-view').style.display = 'flex'
+
+        }
+
+
+        /** Add element to dataBase */
         function addElement() {
+            let elements = [];
+
+            // Store user input in variables
+            let commodityBatch_id = document.getElementById('commodityBatch_id-input').value
+            let commodity_id = document.getElementById('commodity_id-input').value
+            let weight = document.getElementById('weight-input').value
+            let supplier = document.getElementById('supplier-input').value
+
+
+
+            // To add attributes to element if all attributes are not empty
+            if (commodityBatch_id && commodity_id && weight && supplier)
+                elements.push ({
+                        commodityBatch_id: commodityBatch_id,
+                        commodity_id: commodity_id,
+                        weight: weight,
+                        supplier: supplier
+                    });
+
+
+            // Display element
             showElementsAuto(elements)
 
+            // To hide the modal after creating an object
+            hideModal()
+        }
+
+        /** To hide modal and make fields empty */
+        function hideModal() {
+            document.getElementById('modal-view').style.display = 'none'
+
+            // Make the fields empty
+            document.getElementById('commodityBatch_id-input').value = ''
+            document.getElementById('commodity_id-input').value = ''
+            document.getElementById('weight-input').value = ''
+            document.getElementById('supplier-input').value = ''
         }
 
         /** To Show all elements */
@@ -59,34 +129,37 @@
 
 
             let color = true;
-            let element;
+
 
             for (element of elements) {
-
+                console.log(element.weight)
                 if(color) {
-                    single_element.insertAdjacentHTML('beforebegin', '<!--First id\'s row-->\n' +
-                        '                             <div class="bg-gray-400 flex">\n' +
-                        '                                 <div onclick="" class=" "> </div>\n' +
-                        '                                 <div class="ml-auto">\n' +
-                        '                                     <button class="text-green-600">U</button>\n' +
-                        '                                     <button class="text-red-600">X</button>\n' +
-                        '                                 </div>\n' +
-                        '                             </div>')
+                    single_element.insertAdjacentHTML('beforebegin', `
+                                                <div class="bg-gray-400 flex">
+                                                <div onclick="" class=" ">${element.commodityBatch_id} </div>
+                                                <div class="ml-auto">
+                                                <button class="text-green-600">U</button>
+                                                <button class="text-red-600">X</button>
+                                                </div>
+                                                </div>
+                                                `)
                     color = false;
                 } else {
-                    single_element.insertAdjacentHTML('beforebegin', '<!--Second id\'s row-->\n' +
-                        '                             <div class="bg-gray-100 flex">\n' +
-                        '                                 <div onclick="" class=" ">commodityBatch-id</div>\n' +
-                        '                                 <div class="ml-auto">\n' +
-                        '                                     <button class="text-green-600">U</button>\n' +
-                        '                                     <button class="text-red-600">X</button>\n' +
-                        '                                 </div>\n' +
-                        '                             </div>')
+                    single_element.insertAdjacentHTML('beforebegin', `
+                                                <div class="bg-gray-100 flex">
+                                                <div onclick="" class=" ">${element.commodityBatch_id} </div>
+                                                <div class="ml-auto">
+                                                <button class="text-green-600">U</button>
+                                                <button class="text-red-600">X</button>
+                                                </div>
+                                                </div>
+                                                `)
                     color = true;
                 }
             }
-
         }
+
+
     </script>
 
 
