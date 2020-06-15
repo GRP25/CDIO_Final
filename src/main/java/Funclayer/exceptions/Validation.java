@@ -65,7 +65,7 @@ public class Validation {
             return name;
     }
 
-    public static void validateUser(UserDTO user) throws UserException{
+    public static void validateUser(UserDTO user) throws UserException, SQLException{
         nameValidator(nameConversion(user.getFirstName()));
         nameValidator(nameConversion(user.getSurname()));
         cprValidator(user.getCpr());
