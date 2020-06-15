@@ -79,3 +79,6 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
 - getCommodityBatchList Mangler der ikke en condition i sql statement?
 - Snak omkring mappe struktur
 - Bliv enige om at det skal være ArrayList eller bare List
+
+## Fejl fundet gennem Postman
+- StartDate og EndDate i ProductBatch
