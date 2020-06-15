@@ -83,12 +83,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 
         <!-- Popup windows for addeding a new commodity one-->
-        <div id="CreateCommodityWindow" class="modal">
-          <div id="CreateCommodityWindow" class="modal-content">
-              <h2>Opret en råvare</h2>
-              <label>ID: </label><input id="CommodityIDTxtIn"> </input><br />
-              <label>Navn: </label> <input id="CommodityNameTxtIn"></input> <br />
-              <label>Leverandør: </label> <input id="CommoditySupplierTxt"> </input> <br />
+        <div id="CreateUserWindow" class="modal">
+          <div id="CreateUserWindow" class="modal-content">
+              <h2>Opret en bruger</h2>
+              <label>Bruger ID: </label><input id="CreateUserID"> </input><br />
+              <label>Fornavn: </label> <input id="CreateUserFirstName"></input> <br />
+              <label>Efternavn: </label> <input id="CreateUserLastName"> </input> <br />
+              <label>Initialer: </label> <input id="CreateUserIniTxt"> </input> <br />
+              <label>Roller: </label> <input id="CreateUserRolesTxt"> </input> <br />
               <button class="close">Tilføj Bruger</button>
           </div>
       </div>
@@ -96,13 +98,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
               <!-- Popup windows for edditing  a commodity one-->
               <div id="EditUserWindow" class="modal">
                 <div id="EditUserWindow" class="modal-content">
-                    <h2>Opret en råvare</h2>
+                    <h2>Vis eller Opdater en bruger</h2>
                     <label>Bruger ID: </label><input id="UserIDTxt"> </input><br />
                     <label>Fornavn: </label> <input id="UserFirstNameTxt"></input> <br />
                     <label>Efternavn: </label> <input id="UserLastName"> </input> <br />
+                    <label>CPR nummer: </label> <input id="UserCPR"> </input> <br />
                     <label>Initialer: </label> <input id="UserIniTxt"> </input> <br />
                     <label>Roller: </label> <input id="UserRolesTxt"> </input> <br />
-                    <button class="close">Updater  Bruger</button>
+                    <button class="close">Opdater  Bruger</button>
                 </div>
             </div>
 

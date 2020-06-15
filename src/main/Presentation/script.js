@@ -16,7 +16,22 @@ function createUser() {
 
 
 function createUser() {
-    
+    const user = {
+        userID: $("#CreateUserID").val(),
+        firstName: $("#CreateUserFirstName").val(),
+        surname: $("#CreateUserLastName").val(),
+        initials: $("#CreateUserIniTxt").val(), 
+      };
+
+      $.ajax ({
+        url: "https://api.mama.sh/userresource",
+        contentType: "application/json",
+        method: "POST",
+        data: JSON.stringify(user),
+        success: function (response) {
+          
+        }
+      })
 }
 
 function listUsers() {
@@ -51,6 +66,7 @@ function listUsers() {
 }
 
 function getUser(id) {
+    console.log("getuser Started");
     $.ajax({
         url: "https://api.mama.sh/userresource/" + id,
         contentType: "application/json",
@@ -60,8 +76,9 @@ function getUser(id) {
           $("#UserIDTxt").val(response.userID);
           $("#UserFirstNameTxt").val(response.firstName);
           $("#UserLastName").val(response.surname);
-          $("#UserIniTxt").val(response.cpr);
-          console.log("getuser Started");
+          $("#UserIniTxt").val(response.initials);
+          $("#UserCPR").val(response.cpr);
+          
         },
         error: function (jqXHR, text, error) {
           document.getElementById("loaderID").style.display = "none";
@@ -71,7 +88,7 @@ function getUser(id) {
 }
 
 function printUserToTable(id, name, status) {
-    return "<tr><td>" + id + "  " + name + "</td><td><button class=" +'"w3-dark-grey list-item-btn">' + getStatus(status); ' <i class="fa fa-close"></i></button> <button id="EditBtn" class="w3-dark-grey list-item-btn">Updater <i class="fa fa-cog fa-fw"></i></button></td></tr>';
+    return "<tr><td>" + id + "  " + name + "</td><td><button class=" +'"w3-dark-grey list-item-btn">' + getStatus(status); ' <i class="fa fa-close"></i></button> <button id="EditBtn" class="w3-dark-grey list-item-btn">Opdater <i class="fa fa-cog fa-fw"></i></button></td></tr>';
    // document.getElementById("ListOfUsersTable").innerHTML = "<tr><td> My new user</td></tr>";
 }
 
