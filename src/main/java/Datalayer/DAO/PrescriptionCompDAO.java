@@ -20,7 +20,7 @@ public class PrescriptionCompDAO implements IPrescriptionCompDAO {
 
 	@Override
 	public PrescriptionCompDTO getPrescriptionComp(int prescription_id, int commodity_id) throws SQLException {
-		String query = "SELECT * FROM prescriptionComp WHERE prescriptionId = ? AND commodityId = ?";
+		String query = "SELECT * FROM PrescriptionComp WHERE prescriptionId = ? AND commodityId = ?";
 		Connection connection = DBUtil.getConnection();
 		Object[] parameter = { prescription_id, commodity_id };
 		ResultSet resultSet = DBUtil.executeSelectQuery(query, parameter, connection);
@@ -73,7 +73,7 @@ public class PrescriptionCompDAO implements IPrescriptionCompDAO {
 
 	@Override
 	public void createPrescriptionComp(PrescriptionCompDTO prescription) throws SQLException {
-		String query = "INSERT INTO PrescriptionComp (prescriptionId, commodityId, nomNetto, tolerance) VALUES (?,?,?,?)";
+		String query = "INSERT INTO PrescriptionComp (prescriptionId, commodityId, nomNetto, tollerance) VALUES (?,?,?,?)";
 		Connection connection = DBUtil.getConnection();
 		Object[] parameter = prescription.convertToObject();
 		DBUtil.executeSelectQuery(query, parameter, connection);
@@ -83,7 +83,7 @@ public class PrescriptionCompDAO implements IPrescriptionCompDAO {
 
 	@Override
 	public void updatePrescriptionComp(PrescriptionCompDTO prescription) throws SQLException {
-		String query = "UPDATE PrescriptionComp SET prescriptionId=?, commodityId=?, nomNetto=?, tolerance=? WHERE prescriptionId=? AND commodityId=?";
+		String query = "UPDATE PrescriptionComp SET prescriptionId=?, commodityId=?, nomNetto=?, tollerance=? WHERE prescriptionId=? AND commodityId=?";
 		Connection connection = DBUtil.getConnection();
 		Object[] parameter = prescription.convertToObject();
 		DBUtil.executeSelectQuery(query, parameter, connection);

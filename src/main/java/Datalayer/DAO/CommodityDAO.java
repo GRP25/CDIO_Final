@@ -12,7 +12,6 @@ import Datalayer.DBUtil;
 import Datalayer.DTO.commodityDTO;
 import Datalayer.Interfaces.ICommodityDAO;
 
-
 @RequestScoped
 public class CommodityDAO implements ICommodityDAO {
 
@@ -24,7 +23,7 @@ public class CommodityDAO implements ICommodityDAO {
 		Connection connection = DBUtil.getConnection();
 		Object[] parameter = DBUtil.convertTOObject(commodity_id);
 
-		ResultSet resultSet = DBUtil.executeSelectQuery( query, parameter, connection );
+		ResultSet resultSet = DBUtil.executeSelectQuery(query, parameter, connection);
 
 		if (resultSet.next()) {
 			commoDTO.interpretResultSet(resultSet);
@@ -39,7 +38,7 @@ public class CommodityDAO implements ICommodityDAO {
 		String query = "SELECT * FROM Commodity";
 		Connection connection = DBUtil.getConnection();
 
-		ResultSet resultSet = DBUtil.executeSelectQuery( query, null, connection);
+		ResultSet resultSet = DBUtil.executeSelectQuery(query, null, connection);
 		List<commodityDTO> listOfCommodityDTO = new ArrayList<>();
 		commodityDTO commoDTO;
 
@@ -65,7 +64,8 @@ public class CommodityDAO implements ICommodityDAO {
 
 	@Override
 	public void updateCommodity(commodityDTO commodity) throws SQLException {
-		String query = "UPDATE Commodity SET commodityId=?, commodityId=? WHERE commodityId="+commodity.getCommodity_id();
+		String query = "UPDATE Commodity SET commodityId=?, commodityName=? WHERE commodityId="
+				+ commodity.getCommodity_id();
 		Connection connection = DBUtil.getConnection();
 
 		Object[] parameter = commodity.convertToObject();
@@ -76,7 +76,5 @@ public class CommodityDAO implements ICommodityDAO {
 		connection.close();
 
 	}
-
-
 
 }

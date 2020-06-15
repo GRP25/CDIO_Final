@@ -86,7 +86,7 @@ public class PrescriptionCompResource {
 	}
 
 	// example query = /prescriptionComp/component?presID=10&comID=81
-	@Path("/component")
+	@Path("/component/")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPrescriptionComp(@QueryParam("presID") int presID, @QueryParam("comID") int comID)
