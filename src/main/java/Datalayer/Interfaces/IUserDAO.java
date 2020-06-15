@@ -18,4 +18,6 @@ public interface IUserDAO {
     void deactivateUser(int userID) throws SQLException;
 
     boolean exists(String cpr) throws SQLException;
+
+    boolean exists(int id) throws SQLException;
 }

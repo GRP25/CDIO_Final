@@ -40,8 +40,6 @@ public class Validation {
 
     public static String cprValidator(String cpr) throws NotACPRException, SQLException {
         IUserDAO db = new UserDAO();
-        System.out.println(cpr);
-        System.out.println(cpr.length());
         if (cpr.length() != 10)
             throw new NotACPRException("This is not a cpr number it does not have the right amount of digits" );
 
@@ -69,6 +67,12 @@ public class Validation {
         nameValidator(nameConversion(user.getFirstName()));
         nameValidator(nameConversion(user.getSurname()));
         cprValidator(user.getCpr());
+    }
+
+    public static void validateUserId(int id) throws SQLException {
+        IUserDAO db = new UserDAO();
+        if (!db.exists(id))
+            throw new DataLayerException("No user exists with this identification number!");
     }
 }
 

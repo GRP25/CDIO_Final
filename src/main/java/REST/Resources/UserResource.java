@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
 import static Funclayer.exceptions.Validation.validateUser;
+import static Funclayer.exceptions.Validation.validateUserId;
 
 
 @Path("userresource")
@@ -22,7 +23,8 @@ public class UserResource {
     @Path("/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("userID") int userID){
+    public Response getUser(@PathParam("userID") int userID) throws SQLException, UserException {
+        validateUserId(userID);
         try {
             UserDTO response = userService.getUser(userID);
             return Response.status(Response.Status.OK).entity(response).build();
@@ -44,6 +46,7 @@ public class UserResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createUser(UserDTO user) throws UserException, SQLException{
+        System.out.println(user); // Prints the user on the server side!
         validateUser(user);
         userService.createUser(user);
         SuccessMessage msg = new SuccessMessage("Created", 2, "https://mama.sh/doc");
