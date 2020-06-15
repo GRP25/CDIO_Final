@@ -23,15 +23,10 @@ public class UserResource {
     @Path("/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("userID") int userID) throws SQLException, UserException {
+    public Response getUser(@PathParam("userID") int userID) throws SQLException{
         validateUserId(userID);
-        try {
-            UserDTO response = userService.getUser(userID);
-            return Response.status(Response.Status.OK).entity(response).build();
-        } catch (SQLException e) {
-            ErrorMessage response = new ErrorMessage(e.getMessage(),e.getErrorCode(),"https://mama.sh/");
-            return Response.status(Response.Status.OK).entity(response).build();
-        }
+        UserDTO response = userService.getUser(userID);
+        return Response.status(Response.Status.OK).entity(response).build();
     }
 
     @PUT

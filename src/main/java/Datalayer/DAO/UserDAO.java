@@ -92,7 +92,7 @@ public class UserDAO implements IUserDAO {
     @Override
     public boolean exists(String cpr) throws SQLException {
         boolean ret;
-        String query = "SELECT firstname FROM Users WHERE cpr = ?";
+        String query = "SELECT userId FROM Users WHERE cpr = ?";
         Object[] parameter = { cpr };
         Connection connection = DBUtil.getConnection();
         ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
@@ -107,7 +107,7 @@ public class UserDAO implements IUserDAO {
     @Override
     public boolean exists(int id) throws SQLException {
         boolean ret;
-        String query = "SELECT firstname FROM Users WHERE userId = ?";
+        String query = "SELECT userId FROM Users WHERE userId = ?";
         Object[] parameter = { id };
         Connection connection = DBUtil.getConnection();
         ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);

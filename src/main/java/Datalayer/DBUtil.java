@@ -34,18 +34,10 @@ public class DBUtil {
         return connection;
     }
 
-    public static ResultSet executeSelectQuery(String query, Object[] parameter, Connection connection) {
-        try {
-            PreparedStatement pstmt = connection.prepareStatement(query);
-
-            fillOutStatement(pstmt, parameter);
-
-            return pstmt.executeQuery(); // todo
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-
+    public static ResultSet executeSelectQuery(String query, Object[] parameter, Connection connection) throws SQLException {
+        PreparedStatement pstmt = connection.prepareStatement(query);
+        fillOutStatement(pstmt, parameter);
+        return pstmt.executeQuery(); // todo
     }
 
 
