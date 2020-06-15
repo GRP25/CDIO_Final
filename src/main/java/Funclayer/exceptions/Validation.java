@@ -72,7 +72,7 @@ public class Validation {
     public static void validateUserId(int id) throws SQLException {
         IUserDAO db = new UserDAO();
         if (!db.exists(id))
-            throw new DataLayerException("No user exists with this identificationionioion number!");
+            throw new DataLayerException("No user exists with this identification number!");
     }
 }
 
