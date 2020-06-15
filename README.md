@@ -1,46 +1,46 @@
 # CDIO_Final
 ## Endpoints
 ### Prescription Comp
-GET     https://api.mama.sh/api/PrescriptionComp
-POST    https://api.mama.sh/api/PrescriptionComp
-PUT     https://api.mama.sh/api/PrescriptionComp
-GET     https://api.mama.sh/api/PrescriptionComp/component
-GET     https://api.mama.sh/api/PrescriptionComp/{presID}
+GET     https://api.mama.sh/PrescriptionComp
+POST    https://api.mama.sh/PrescriptionComp
+PUT     https://api.mama.sh/PrescriptionComp
+GET     https://api.mama.sh/PrescriptionComp/component
+GET     https://api.mama.sh/PrescriptionComp/{presID}
 ### Prescriptions
-GET     https://api.mama.sh/api/Prescriptions
-POST    https://api.mama.sh/api/Prescriptions
-PUT     https://api.mama.sh/api/Prescriptions
-GET     https://api.mama.sh/api/Prescriptions/ID/{PrescriptionID}
+GET     https://api.mama.sh/Prescriptions
+POST    https://api.mama.sh/Prescriptions
+PUT     https://api.mama.sh/Prescriptions
+GET     https://api.mama.sh/Prescriptions/ID/{PrescriptionID}
 ### Productbatch
-GET     https://api.mama.sh/api/ProductBatchs
-POST    https://api.mama.sh/api/ProductBatchs
+GET     https://api.mama.sh/ProductBatchs
+POST    https://api.mama.sh/ProductBatchs
 ### Productbatch Comp
-POST    https://api.mama.sh/api/ProductBatchs/Comp
-GET     https://api.mama.sh/api/ProductBatchs/Comp/{ProductID}
-GET     https://api.mama.sh/api/ProductBatchs/ID/{ProductID}
+POST    https://api.mama.sh/ProductBatchs/Comp
+GET     https://api.mama.sh/ProductBatchs/Comp/{ProductID}
+GET     https://api.mama.sh/ProductBatchs/ID/{ProductID}
 ### Aner ikke hvad det her er??
-GET     https://api.mama.sh/api/application.wadl
+GET     https://api.mama.sh/application.wadl
 ### Commodity
-GET     https://api.mama.sh/api/commodity
-POST    https://api.mama.sh/api/commodity
-PUT     https://api.mama.sh/api/commodity
-GET     https://api.mama.sh/api/commodity/{commodity_id}
+GET     https://api.mama.sh/commodity
+POST    https://api.mama.sh/commodity
+PUT     https://api.mama.sh/commodity
+GET     https://api.mama.sh/commodity/{commodity_id}
 ### Commodity Batch
-GET     https://api.mama.sh/api/commodityBatch
-POST    https://api.mama.sh/api/commodityBatch
-PUT     https://api.mama.sh/api/commodityBatch
-GET     https://api.mama.sh/api/commodityBatch/list/{commodity_id}
-GET     https://api.mama.sh/api/commodityBatch/{commodityBatch_id}
+GET     https://api.mama.sh/commodityBatch
+POST    https://api.mama.sh/commodityBatch
+PUT     https://api.mama.sh/commodityBatch
+GET     https://api.mama.sh/commodityBatch/list/{commodity_id}
+GET     https://api.mama.sh/commodityBatch/{commodityBatch_id}
 ### ProductBatch Comp igen??
-GET     https://api.mama.sh/api/productbatchcomp
-POST    https://api.mama.sh/api/productbatchcomp
-GET     https://api.mama.sh/api/productbatchcomp/ID/{ProductID}
+GET     https://api.mama.sh/productbatchcomp
+POST    https://api.mama.sh/productbatchcomp
+GET     https://api.mama.sh/productbatchcomp/ID/{ProductID}
 ### User Resource
-GET     https://api.mama.sh/api/userresource
-POST    https://api.mama.sh/api/userresource
-PUT     https://api.mama.sh/api/userresource
-DELETE  https://api.mama.sh/api/userresource/{userID}
-GET     https://api.mama.sh/api/userresource/{userID}
+GET     https://api.mama.sh/userresource
+POST    https://api.mama.sh/userresource
+PUT     https://api.mama.sh/userresource
+DELETE  https://api.mama.sh/userresource/{userID}
+GET     https://api.mama.sh/userresource/{userID}
 
 
 ## Vigtige links
