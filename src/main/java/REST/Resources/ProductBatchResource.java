@@ -51,10 +51,10 @@ public class ProductBatchResource {
     @Path("/ID/{ProductID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProductBatchByID(@PathParam("ProductID") int productID) throws SQLException {
+    public Response getProductBatchByID(@PathParam("ProductID") int productBatchId) throws SQLException {
         Response response;
 
-        ProductBatchDTO productBatchDTO = productBatchService.getProductBatchDTO(productID);
+        ProductBatchDTO productBatchDTO = productBatchService.getProductBatchDTO(productBatchId);
 
         if (productBatchDTO != null) {
             response = Response.status(Response.Status.OK).entity(productBatchDTO).build();

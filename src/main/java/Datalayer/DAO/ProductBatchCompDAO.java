@@ -20,7 +20,7 @@ public class ProductBatchCompDAO implements IProductBatchCompDAO {
 
     @Override
     public ProductBatchCompDTO getProductBatchComp(int productBatch_id, int commodityBatch_id) throws SQLException {
-        String query = "SELECT * FROM ProductBatchComp WHERE productBatchId = ? AND WHERE commodityBatchId = ?";
+        String query = "SELECT * FROM ProductBatchComp WHERE productBatchId = ? AND commodityBatchId = ?";
         Connection connection = DBUtil.getConnection();
         Object[] parameter = { productBatch_id, commodityBatch_id };
         ResultSet resultSet = DBUtil.executeSelectQuery(query, parameter, connection);
@@ -78,7 +78,7 @@ public class ProductBatchCompDAO implements IProductBatchCompDAO {
 
     @Override
     public void createProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException {
-        String query = "INSERT INTO  ProductBatchComp (productBatchId, commodityId, userId, tara, netto) values (?, ?, ?, ?, ?);";
+        String query = "INSERT INTO  ProductBatchComp (productBatchId, commodityBatchId, userId, tara, netto) values (?, ?, ?, ?, ?);";
         Object[] parameter = productBatchComp.convertToObject();
         Connection connection = DBUtil.getConnection();
 
@@ -88,7 +88,9 @@ public class ProductBatchCompDAO implements IProductBatchCompDAO {
 
     @Override
     public void updateProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException {
-        String sql = "UPDATE ProductBatchComp SET productBatchId = ?, commodityBatchId = ?, userId = ?, tara = ?, netto = ?";
+        String sql = "UPDATE ProductBatchComp SET productBatchId = ?, commodityBatchId = ?, userId = ?, tara = ?, netto = ? WHERE productBatchId = "
+                + productBatchComp.getProductBatch_id() + " AND commodityBatchId = "
+                + productBatchComp.getCommodity_id();
         Object[] parameter = productBatchComp.convertToObject();
         Connection connection = DBUtil.getConnection();
 

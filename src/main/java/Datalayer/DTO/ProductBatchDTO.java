@@ -75,12 +75,10 @@ public class ProductBatchDTO implements IDTO {
 
 	@Override
 	public Object[] convertToObject() {
-		Object[] object = new Object[5];
+		Object[] object = new Object[3];
 		object[0] = this.productBatch_id;
 		object[1] = this.prescription_id;
-		object[2] = this.startDate;
-		object[3] = this.endDate;
-		object[4] = this.status;
+		object[2] = this.status;
 		return object;
 	}
 }
