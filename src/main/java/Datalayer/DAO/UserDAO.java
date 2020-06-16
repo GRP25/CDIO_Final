@@ -99,6 +99,36 @@ public class UserDAO implements IUserDAO {
         connection.close();
     }
 
+    @Override
+    public boolean exists(String cpr) throws SQLException {
+        boolean ret;
+        String query = "SELECT userId FROM Users WHERE cpr = ?";
+        Object[] parameter = { cpr };
+        Connection connection = DBUtil.getConnection();
+        ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
+        if (rs.next())
+            ret = true;
+        else
+            ret = false;
+        connection.close();
+        return ret;
+    }
+
+    @Override
+    public boolean exists(int id) throws SQLException {
+        boolean ret;
+        String query = "SELECT userId FROM Users WHERE userId = ?";
+        Object[] parameter = { id };
+        Connection connection = DBUtil.getConnection();
+        ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
+        if (rs.next())
+            ret = true;
+        else
+            ret = false;
+        connection.close();
+        return ret;
+    }
+
     private ArrayList<String> get_user_roles(int id, Connection connection) throws SQLException {
         String query = "SELECT roleName FROM UserRole WHERE userId=" + id;
         ResultSet rs = DBUtil.executeSelectQuery(query, null, connection);

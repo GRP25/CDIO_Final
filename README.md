@@ -1,4 +1,48 @@
 # CDIO_Final
+## Endpoints
+### Prescription Comp
+* GET     https://api.mama.sh/PrescriptionComp
+* POST    https://api.mama.sh/PrescriptionComp
+* PUT     https://api.mama.sh/PrescriptionComp
+* GET     https://api.mama.sh/PrescriptionComp/component
+* GET     https://api.mama.sh/PrescriptionComp/{presID}
+### Prescriptions
+* GET     https://api.mama.sh/Prescriptions
+* POST    https://api.mama.sh/Prescriptions
+* PUT     https://api.mama.sh/Prescriptions
+* GET     https://api.mama.sh/Prescriptions/ID/{PrescriptionID}
+### Productbatch
+* GET     https://api.mama.sh/ProductBatchs
+* POST    https://api.mama.sh/ProductBatchs
+### Productbatch Comp
+* POST    https://api.mama.sh/ProductBatchs/Comp
+* GET     https://api.mama.sh/ProductBatchs/Comp/{ProductID}
+* GET     https://api.mama.sh/ProductBatchs/ID/{ProductID}
+### Aner ikke hvad det her er??
+* GET     https://api.mama.sh/application.wadl
+### Commodity
+* GET     https://api.mama.sh/commodity
+* POST    https://api.mama.sh/commodity
+* PUT     https://api.mama.sh/commodity
+* GET     https://api.mama.sh/commodity/{commodity_id}
+### Commodity Batch
+* GET     https://api.mama.sh/commodityBatch
+* POST    https://api.mama.sh/commodityBatch
+* PUT     https://api.mama.sh/commodityBatch
+* GET     https://api.mama.sh/commodityBatch/list/{commodity_id}
+* GET     https://api.mama.sh/commodityBatch/{commodityBatch_id}
+### ProductBatch Comp igen??
+* GET     https://api.mama.sh/productbatchcomp
+* POST    https://api.mama.sh/productbatchcomp
+* GET     https://api.mama.sh/productbatchcomp/ID/{ProductID}
+### User Resource
+* GET     https://api.mama.sh/userresource - Show
+* POST    https://api.mama.sh/userresource - Create
+* PUT     https://api.mama.sh/userresource - Update
+* DELETE  https://api.mama.sh/userresource/{userID} - Inactivate
+* GET     https://api.mama.sh/userresource/{userID} - Show
+
+
 ## Vigtige links
 [Opgavebeskrivelsen](https://docs.google.com/document/d/1QrAzcQmpb-4YLtxR1y-2_UD1ep6b3zqIt3s0HpE95iM/edit)
 
@@ -35,3 +79,11 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
 - getCommodityBatchList Mangler der ikke en condition i sql statement?
 - Snak omkring mappe struktur
 - Bliv enige om at det skal være ArrayList eller bare List
+
+## Fejl fundet gennem Postman
+- StartDate og EndDate i ProductBatch
+- Lav et rework af ProductBatch og ProductBatchComp
+- Få fikset Response når der oprettet en Prescription
+- Fikse det der returneres i PrescriptionComp (Validation) 
+- Den tilader os at give et prescrioptionID til ProductBatch selvom den ikke eksistere
+- Generelt skal Validations rettes

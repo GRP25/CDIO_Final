@@ -7,10 +7,10 @@ import javax.ws.rs.ext.Provider;
 import java.sql.SQLException;
 
 @Provider
-public class MapDataLayer implements ExceptionMapper<DataLayerException> {
+public class MapSQLException implements ExceptionMapper<SQLException> {
     @Override
-    public Response toResponse(DataLayerException e) {
-        ErrorMessage err = new ErrorMessage(e.getMessage(),5,"https://mama.sh/");
+    public Response toResponse(SQLException e) {
+        ErrorMessage err = new ErrorMessage(e.getMessage(),6,"https://mama.sh/");
         return Response.status(Response.Status.NOT_ACCEPTABLE).entity(err).build();
     }
 }

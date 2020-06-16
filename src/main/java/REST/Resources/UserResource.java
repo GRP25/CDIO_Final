@@ -1,6 +1,7 @@
 package REST.Resources;
 
 import Datalayer.DTO.UserDTO;
+import Funclayer.exceptions.ErrorMessage;
 import Funclayer.implementation.UserService;
 import Funclayer.interfaces.IUserService;
 import Funclayer.exceptions.UserException;
@@ -12,6 +13,7 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
 import static Funclayer.exceptions.Validation.validateUser;
+import static Funclayer.exceptions.Validation.validateUserId;
 
 
 @Path("userresource")
@@ -21,8 +23,10 @@ public class UserResource {
     @Path("/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("userID") int userID) throws SQLException {
-        return Response.status(Response.Status.OK).entity(userService.getUser(userID)).build();
+    public Response getUser(@PathParam("userID") int userID) throws SQLException{
+        validateUserId(userID);
+        UserDTO response = userService.getUser(userID);
+        return Response.status(Response.Status.OK).entity(response).build();
     }
 
     @PUT
@@ -37,6 +41,7 @@ public class UserResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createUser(UserDTO user) throws UserException, SQLException{
+        System.out.println(user); // Prints the user on the server side!
         validateUser(user);
         userService.createUser(user);
         SuccessMessage msg = new SuccessMessage("Created", 2, "https://mama.sh/doc");
@@ -46,6 +51,7 @@ public class UserResource {
     @Path("/{userID}")
     @DELETE
     public Response deleteUser(@PathParam("userID") int userID) throws SQLException {
+        validateUserId(userID);
         userService.deleteUser(userID);
         SuccessMessage msg = new SuccessMessage("Deleted", 3, "https://mama.sh/doc");
         return Response.status(Response.Status.OK).entity(msg).build();
