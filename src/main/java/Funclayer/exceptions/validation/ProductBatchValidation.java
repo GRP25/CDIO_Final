@@ -4,7 +4,6 @@ import Datalayer.DAO.ProductBatchDAO;
 import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchDAO;
 import Funclayer.exceptions.exceptions.DataLayerException;
-import Funclayer.exceptions.exceptions.NotAStatusException;
 import Funclayer.exceptions.exceptions.NotProductBatchExeption;
 import Funclayer.exceptions.validation.template.Validation;
 
@@ -20,6 +19,8 @@ public class ProductBatchValidation extends Validation {
     }
 
     public static void productBatchValidation(ProductBatchDTO productBatchDTO) throws NotProductBatchExeption, SQLException {
+        isDateValidator(productBatchDTO.getStartDate());
+        isDateValidator(productBatchDTO.getEndDate());
         statusValidator(productBatchDTO.getStatus());
         validateProductBatchID(productBatchDTO.getProductBatch_id());
     }

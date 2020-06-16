@@ -43,7 +43,7 @@ public class ProductBatchDTO implements IDTO {
 		this.startDate = date;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
@@ -51,7 +51,7 @@ public class ProductBatchDTO implements IDTO {
 		this.endDate = date;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
