@@ -32,5 +32,4 @@ public class ProductBatchCompResource {
         return productBatchCompDAO.getProductBatchCompList(productBatch_id);
     }
 
-
 }
