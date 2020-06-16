@@ -20,7 +20,34 @@ function createUser() {
         userID: $("#CreateUserID").val(),
         firstName: $("#CreateUserFirstName").val(),
         surname: $("#CreateUserLastName").val(),
-        initials: $("#CreateUserIniTxt").val(), 
+        cpr: $("#CreateUserCPR").val(),
+        initials: $("#CreateUserIniTxt").val(),
+
+        // adding roles
+        roles: function () {
+            var arr = [];
+            if ($("#CreateUserRolesAdmin").checked == true)
+                arr.push("Administrator");
+
+            if ($("#CreateUserFarma").checked == true)
+                arr.push("Farmaceut");
+
+            if ($("#CreateUserRolesProductionleader").checked == true)
+                arr.push("Produktionsleder");
+
+            if (($("#CreateUserRolesLab").checked == true))
+                arr.push("Laborant");
+
+            return arr;
+        },
+
+        // Adding status
+        status: function () {
+            if ($("#CreateUserStatus").checked == true)
+                return "1";
+            else 
+                return "0";
+        }
       };
 
       $.ajax ({
@@ -29,8 +56,12 @@ function createUser() {
         method: "POST",
         data: JSON.stringify(user),
         success: function (response) {
-          
+            alert("Bruger Oprettet");            
+        },
+        error: function (data, text, error) {
+            alert("fejl: bruger ikke oprettet");
         }
+        
       })
 }
 
@@ -73,11 +104,35 @@ function getUser(id) {
         method: "GET",
         success: function (response) {
           document.getElementById("EditUserWindow").style.display = "block";
-          $("#UserIDTxt").val(response.userID);
-          $("#UserFirstNameTxt").val(response.firstName);
-          $("#UserLastName").val(response.surname);
-          $("#UserIniTxt").val(response.initials);
-          $("#UserCPR").val(response.cpr);
+          $("#ShowUserID").val(response.userID);
+          $("#ShowUserFirstName").val(response.firstName);
+          $("#ShowUserLastName").val(response.surname);
+          $("#ShowUserCPR").val(response.cpr);
+          $("#ShowUserIniTxt").val(response.initials);
+          
+          // set user status
+          if (response.status == 0) {
+            $("#ShowUserStatus").checked = false;
+          }
+          else {
+            $("#ShowUserStatus").checked = true;
+          }
+
+          // Show user roles
+          for (const role in response.roles) {
+              if (role == "Administrator") {
+                $("#ShowUserRolesAdmin").checked = true;
+              }
+              else if (role == "Farmaceut") {
+                $("#ShowUserRolesFarma").checked = true;
+              }
+              else if (role == "Produktionsleder") {
+                $("#ShowUserRolesProductionleader").checked = true;
+              }
+              else if (role == "Laborant") {
+                $("#ShowUserRolesLab").checked = true;
+              }
+          }
           
         },
         error: function (jqXHR, text, error) {

@@ -60,7 +60,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
     <h5><b> Bruger Administration</b></h5>
-    <button id="CreateBtn" class="w3-button w3-dark-grey">Tilføj   <i class="fa fa-plus"></i></button>
+    <button id="CreateUserBtn" class="w3-button w3-dark-grey">Tilføj   <i class="fa fa-plus"></i></button>
     <button id="Refresh" onclick="listUsers()" class="w3-button w3-dark-grey">Refresh List <i class="fa fa-plus"></i></button>
   </header>
 
@@ -89,9 +89,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
               <label>Bruger ID: </label><input id="CreateUserID"> </input><br />
               <label>Fornavn: </label> <input id="CreateUserFirstName"></input> <br />
               <label>Efternavn: </label> <input id="CreateUserLastName"> </input> <br />
+              <label>CPR nummer: </label> <input id="CreateUserCPR"> </input> <br />
               <label>Initialer: </label> <input id="CreateUserIniTxt"> </input> <br />
-              <label>Roller: </label> <input id="CreateUserRolesTxt"> </input> <br />
-              <button class="close">Tilføj Bruger</button>
+              <label>Roller: </label> <input type="checkbox" id="CreateUserRolesAdmin"> Administrator</input>, <input type="checkbox" id="CreateUserFarma">Farmaceut</input>, <input type="checkbox" id="CreateUserRolesProductionleader">Produktionsleder</input>, <input type="checkbox" id="CreateUserRolesLab">Laborant</input> <br />
+              <label>Status: </label> <input  type="checkbox" id="CreateUserStatus"> Aktiv </input> <br />
+              <button class="CreateUserClose">Tilføj Bruger</button>
           </div>
       </div>
 
@@ -99,13 +101,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
               <div id="EditUserWindow" class="modal">
                 <div id="EditUserWindow" class="modal-content">
                     <h2>Vis eller Opdater en bruger</h2>
-                    <label>Bruger ID: </label><input id="UserIDTxt"> </input><br />
-                    <label>Fornavn: </label> <input id="UserFirstNameTxt"></input> <br />
-                    <label>Efternavn: </label> <input id="UserLastName"> </input> <br />
-                    <label>CPR nummer: </label> <input id="UserCPR"> </input> <br />
-                    <label>Initialer: </label> <input id="UserIniTxt"> </input> <br />
-                    <label>Roller: </label> <input id="UserRolesTxt"> </input> <br />
-                    <button class="close">Opdater  Bruger</button>
+                    <label>Bruger ID: </label><input id="ShowUserID"> </input><br />
+                    <label>Fornavn: </label> <input id="ShowUserFirstName"></input> <br />
+                    <label>Efternavn: </label> <input id="ShowUserLastName"> </input> <br />
+                    <label>CPR nummer: </label> <input id="ShowUserCPR"> </input> <br />
+                    <label>Initialer: </label> <input id="ShowUserIniTxt"> </input> <br />
+                    <label>Roller: </label> <input type="checkbox" id="ShowUserRolesAdmin"> Administrator</input>, <input type="checkbox" id="ShowUserRolesFarma">Farmaceut</input>, <input type="checkbox" id="ShowUserRolesProductionleader">Produktionsleder</input>, <input type="checkbox" id="ShowUserRolesLab">Laborant</input> <br />
+                    <label>Status: </label> <input  type="checkbox" id="ShowUserStatus"> Aktiv </input> <br />
+                    <button class="UpdateUserClose">Opdater  Bruger</button>
                 </div>
             </div>
 
@@ -113,13 +116,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!--   Popup windows script  -->
       <script>
         // Get the modal
-        var addModal = document.getElementById("CreateCommodityWindow");
+        var addModal = document.getElementById("CreateUserWindow");
         
         // Get the button that opens the modal
-        var addBtn = document.getElementById("CreateBtn");
+        var addBtn = document.getElementById("CreateUserBtn");
         
         // Get the <span> element that closes the modal
-        var addSpan = document.getElementsByClassName("close")[0];
+        var addSpan = document.getElementsByClassName("CreateUserClose")[0];
         
         // When the user clicks the button, open the modal 
         addBtn.onclick = function() {
@@ -145,7 +148,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         var editBtn = document.getElementById("EditBtn");
         
         // Get the <span> element that closes the modal
-        var editSpan = document.getElementsByClassName("close")[0];
+        var editSpan = document.getElementsByClassName("UpdateUserClose")[0];
         
         // When the user clicks the button, open the modal 
         editBtn.onclick = function() {
