@@ -21,7 +21,7 @@ public class CommodityDAO implements ICommodityDAO {
 		commodityDTO commoDTO = new commodityDTO();
 		String query = "SELECT * FROM Commodity WHERE commodityId = ?";
 		Connection connection = DBUtil.getConnection();
-		Object[] parameter = DBUtil.convertTOObject(commodity_id);
+		Object[] parameter = {commodity_id};
 
 		ResultSet resultSet = DBUtil.executeSelectQuery(query, parameter, connection);
 

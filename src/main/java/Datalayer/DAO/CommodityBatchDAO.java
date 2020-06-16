@@ -21,13 +21,13 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
         Connection connection = DBUtil.getConnection();
 
         String query = "SELECT * FROM CommodityBatch WHERE commodityBatchId = ?";
-        Object[] parameters = DBUtil.convertTOObject( commodityBatch_id ); // Todo Think about this
+        Object[] parameters = {commodityBatch_id}; // Todo Think about this
 
         ResultSet resultSet = DBUtil.executeSelectQuery( query, parameters, connection );
         CommodityBatchDTO commodityBatchDTO = new CommodityBatchDTO( );
         resultSet.first(); //todo Test if need if statement
 
-        commodityBatchDTO.interpretResultSet( resultSet ) ;
+        commodityBatchDTO.interpretResultSet( resultSet );
 
         connection.close();
         return commodityBatchDTO;
@@ -59,7 +59,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
         Connection connection = DBUtil.getConnection();
 
         String query = "SELECT * FROM CommodityBatch WHERE commodityId = ?";
-        Object[] parameters = DBUtil.convertTOObject( commodity_id );
+        Object[] parameters = {commodity_id};
 
         ResultSet resultSet = DBUtil.executeSelectQuery( query, parameters, connection );
         List<CommodityBatchDTO> listOfCommodityBatchDTO;
@@ -84,7 +84,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
         String query = "INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier) VALUES (?, ?, ?, ?)";
         Object[] parameters = batch.convertToObject();
 
-        DBUtil.executeCreateAndUpdate( query, parameters, connection );
+        DBUtil.executeSelectQuery( query, parameters, connection );
 
         connection.close();
     }
@@ -96,8 +96,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
         String query = "UPDATE CommodityBatch SET commodityBatchId=?, commodityId=?, weight=?, supplier=? WHERE commodityBatchId="+batch.getCommodityBatch_id();
         Object[] parameters = batch.convertToObject();
 
-        DBUtil.executeCreateAndUpdate( query, parameters, connection );
-
+        DBUtil.executeSelectQuery( query, parameters, connection );
         connection.close();
     }
 }

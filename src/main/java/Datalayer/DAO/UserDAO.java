@@ -58,7 +58,7 @@ public class UserDAO implements IUserDAO {
         UserDTO user = new UserDTO();
         String query = "SELECT * FROM Users WHERE userId = ?;";
         Connection connection = DBUtil.getConnection();
-        Object[] parameter = DBUtil.convertTOObject(ID);
+        Object[] parameter = {ID};
         ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
         if (rs.next()) {
             user.interpretResultSet(rs);
