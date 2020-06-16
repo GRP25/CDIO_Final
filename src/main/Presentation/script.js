@@ -1,21 +1,4 @@
 function createUser() {
-    var userID;
-    var firstName;
-    var surname;
-    var cpr;
-    var initials;
-    var roles;
-    var status;
-
-
-    var xhttp = new XMLHttpRequest;
-    xhttp.open("GET", "/api/users");
-    xhttp.send();
-
-}
-
-
-function createUser() {
     const user = {
         userID: $("#CreateUserID").val(),
         firstName: $("#CreateUserFirstName").val(),
