@@ -192,18 +192,23 @@ function getUser(id) {
 }
 
 function inactiveUser(id) {
-    $.ajax({
-        url: "https://api.mama.sh/userresource/" + id,
-        contentType: "application/json",
-        method: "DELETE",
-        success: function (response) {
-          alert("Bruger er blevet inaktiv");
-        },
-        error: function (jqXHR, text, error) {
-          document.getElementById("loaderID").style.display = "none";
-          alert(jqXHR.status + text + error);
-        },
-      });
+  /*  if (state === "deaktiver") { */
+        $.ajax({
+            url: "https://api.mama.sh/userresource/" + id,
+            contentType: "application/json",
+            method: "DELETE",
+            success: function (response) {
+              alert("Bruger er blevet inaktiv");
+            },
+            error: function (jqXHR, text, error) {
+              document.getElementById("loaderID").style.display = "none";
+              alert(jqXHR.status + text + error);
+            },
+          });
+ /*   }
+   else {
+       // use the update function
+   }*/
 }
 
 function printUserToTable(id, name, status) {
