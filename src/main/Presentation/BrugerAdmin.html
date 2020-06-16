@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Bruger Administration</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -12,8 +12,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 <!-- our custom style sheet-->
 <link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="script.js"></script>
 
 <body class="w3-light-grey">
 
@@ -34,7 +34,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
       <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
       <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
-    </div>
+    </div>rtrtrtrtrtrtrttrtt
   </div>
   <hr> -->
   <div class="w3-container">
@@ -60,8 +60,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
     <h5><b> Bruger Administration</b></h5>
-    <button id="CreateBtn" class="w3-button w3-dark-grey">Tilføj   <i class="fa fa-plus"></i></button>
-    <button id="Refresh" onclick="listUsers()" class="w3-button w3-dark-grey">Refresh List <i class="fa fa-plus"></i></button>
+    <button id="CreateUserBtn" class="w3-button w3-dark-grey">Tilføj   <i class="fa fa-plus"></i></button>
+    <button id="Refresh" onclick="listUsers();" class="w3-button w3-dark-grey">Refresh List <i class="fa fa-plus"></i></button>
   </header>
 
 
@@ -69,40 +69,38 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <h5>Brugere</h5>
     
     <table id="ListOfUsersTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-      <tr id="user0">
-        <td id="userName">United States</td>
-        <td><button class="w3-dark-grey list-item-btn">Inaktiver <i class="fa fa-close"></i></button> <button onclick="getUser(1);" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>
-      </tr>
-      <tr>
-        <td>UK</td>
-        <td><button class="w3-dark-grey list-item-btn">Inaktiver   <i class="fa fa-close"></i></button> <button id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>
-      </tr>
+     
     </table><br>
-    <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
 </div>
 
 
         <!-- Popup windows for addeding a new commodity one-->
-        <div id="CreateCommodityWindow" class="modal">
-          <div id="CreateCommodityWindow" class="modal-content">
-              <h2>Opret en råvare</h2>
-              <label>ID: </label><input id="CommodityIDTxtIn"> </input><br />
-              <label>Navn: </label> <input id="CommodityNameTxtIn"></input> <br />
-              <label>Leverandør: </label> <input id="CommoditySupplierTxt"> </input> <br />
-              <button class="close">Tilføj Bruger</button>
+        <div id="CreateUserWindow" class="modal">
+          <div id="CreateUserWindow" class="modal-content">
+              <h2>Opret en bruger</h2>
+              <label>Bruger ID: </label><input id="CreateUserID"> </input><br />
+              <label>Fornavn: </label> <input id="CreateUserFirstName"></input> <br />
+              <label>Efternavn: </label> <input id="CreateUserLastName"> </input> <br />
+              <label>CPR nummer: </label> <input id="CreateUserCPR"> </input> <br />
+              <label>Initialer: </label> <input id="CreateUserIniTxt"> </input> <br />
+              <label>Roller: </label> <input type="checkbox" id="CreateUserRolesAdmin"> Administrator</input>, <input type="checkbox" id="CreateUserFarma">Farmaceut</input>, <input type="checkbox" id="CreateUserRolesProductionleader">Produktionsleder</input>, <input type="checkbox" id="CreateUserRolesLab">Laborant</input> <br />
+              <label>Status: </label> <input  type="checkbox" id="CreateUserStatus"> Aktiv </input> <br />
+              <button id="CreateUserClose" class="CreateUserClose">Tilføj Bruger</button>
           </div>
       </div>
 
               <!-- Popup windows for edditing  a commodity one-->
               <div id="EditUserWindow" class="modal">
                 <div id="EditUserWindow" class="modal-content">
-                    <h2>Opret en råvare</h2>
-                    <label>Bruger ID: </label><input id="UserIDTxt"> </input><br />
-                    <label>Fornavn: </label> <input id="UserFirstNameTxt"></input> <br />
-                    <label>Efternavn: </label> <input id="UserLastName"> </input> <br />
-                    <label>Initialer: </label> <input id="UserIniTxt"> </input> <br />
-                    <label>Roller: </label> <input id="UserRolesTxt"> </input> <br />
-                    <button class="close">Updater  Bruger</button>
+                    <h2>Vis eller Opdater en bruger</h2>
+                    <label>Bruger ID: </label><input id="ShowUserID"> </input><br />
+                    <label>Fornavn: </label> <input id="ShowUserFirstName"></input> <br />
+                    <label>Efternavn: </label> <input id="ShowUserLastName"> </input> <br />
+                    <label>CPR nummer: </label> <input id="ShowUserCPR"> </input> <br />
+                    <label>Initialer: </label> <input id="ShowUserIniTxt"> </input> <br />
+                    <label>Roller: </label> <input type="checkbox" id="ShowUserRolesAdmin"> Administrator</input>, <input type="checkbox" id="ShowUserRolesFarma">Farmaceut</input>, <input type="checkbox" id="ShowUserRolesProductionleader">Produktionsleder</input>, <input type="checkbox" id="ShowUserRolesLab">Laborant</input> <br />
+                    <label>Status: </label> <input  type="checkbox" id="ShowUserStatus"> Aktiv </input> <br />
+                    <button class="UpdateUserClose">Opdater Bruger</button>
                 </div>
             </div>
 
@@ -110,13 +108,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!--   Popup windows script  -->
       <script>
         // Get the modal
-        var addModal = document.getElementById("CreateCommodityWindow");
+        var addModal = document.getElementById("CreateUserWindow");
         
         // Get the button that opens the modal
-        var addBtn = document.getElementById("CreateBtn");
+        var addBtn = document.getElementById("CreateUserBtn");
         
         // Get the <span> element that closes the modal
-        var addSpan = document.getElementsByClassName("close")[0];
+        var addSpan = document.getElementsByClassName("CreateUserClose")[0];
         
         // When the user clicks the button, open the modal 
         addBtn.onclick = function() {
@@ -125,6 +123,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         
         // When the user clicks on <span> (x), close the modal
         addSpan.onclick = function() {
+          createUser();
           addModal.style.display = "none";
         }
         
@@ -142,7 +141,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         var editBtn = document.getElementById("EditBtn");
         
         // Get the <span> element that closes the modal
-        var editSpan = document.getElementsByClassName("close")[0];
+        var editSpan = document.getElementsByClassName("UpdateUserClose")[0];
         
         // When the user clicks the button, open the modal 
         editBtn.onclick = function() {
