@@ -123,25 +123,6 @@ public class DBUtil {
         }
     }
 
-    public static Object resultSetToObject(ResultSet resultSet, Class classObject)
-            throws SQLException {
-        System.out.println(classObject.getSimpleName());
-        if (classObject.getSimpleName().equalsIgnoreCase("CommodityBatchDTO")) {
-
-            CommodityBatchDTO comDto = new CommodityBatchDTO();
-
-            comDto.setCommodity_id(resultSet.getInt(1));
-            comDto.setCommodityBatch_id(resultSet.getInt(2));
-            comDto.setWeight(resultSet.getInt(3));
-            comDto.setSupplier(resultSet.getString(4));
-
-            return comDto;
-
-        }
-
-        return null;
-    }
-
 
 }
 
