@@ -12,8 +12,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 <!-- our custom style sheet-->
 <link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="script.js"></script>
 
 <body class="w3-light-grey">
 
@@ -61,7 +61,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <header class="w3-container" style="padding-top:22px">
     <h5><b> Bruger Administration</b></h5>
     <button id="CreateUserBtn" class="w3-button w3-dark-grey">Tilføj   <i class="fa fa-plus"></i></button>
-    <button id="Refresh" onclick="listUsers()" class="w3-button w3-dark-grey">Refresh List <i class="fa fa-plus"></i></button>
+    <button id="Refresh" onclick="listUsers();" class="w3-button w3-dark-grey">Refresh List <i class="fa fa-plus"></i></button>
   </header>
 
 
@@ -93,7 +93,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
               <label>Initialer: </label> <input id="CreateUserIniTxt"> </input> <br />
               <label>Roller: </label> <input type="checkbox" id="CreateUserRolesAdmin"> Administrator</input>, <input type="checkbox" id="CreateUserFarma">Farmaceut</input>, <input type="checkbox" id="CreateUserRolesProductionleader">Produktionsleder</input>, <input type="checkbox" id="CreateUserRolesLab">Laborant</input> <br />
               <label>Status: </label> <input  type="checkbox" id="CreateUserStatus"> Aktiv </input> <br />
-              <button class="CreateUserClose">Tilføj Bruger</button>
+              <button id="CreateUserClose" class="CreateUserClose">Tilføj Bruger</button>
           </div>
       </div>
 

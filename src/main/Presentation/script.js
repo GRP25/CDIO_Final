@@ -1,37 +1,76 @@
+/*
+// event liseners
+$(document).ready(function () {
+    $("#CreateUserClose").click (() => {
+        createUser();
+    });
+});
+*/
+
+function ajaxtest() {
+    const user = "hej";
+ //   event.preventDefault();
+    $.ajax ({
+        url: "https://api.mama.sh/userresource",
+        contentType: "application/json",
+        method: "POST",
+        data: JSON.stringify(user),
+        success: function (response) {
+            alert("Bruger Oprettet");            
+        },
+        error: function (data, text, error) {
+            alert("fejl: bruger ikke oprettet");
+        }
+      })
+}
+
+
 function createUser() {
-    const user = {
-        userID: $("#CreateUserID").val(),
+    var roles = function () {
+        var arr = [];
+        if ($("#CreateUserRolesAdmin").checked == true)
+            arr.push("Admin");
+
+        if ($("#CreateUserFarma").checked == true)
+            arr.push("Farmaceut");
+
+        if ($("#CreateUserRolesProductionleader").checked == true)
+            arr.push("Produktionsleder");
+
+        if (($("#CreateUserRolesLab").checked == true))
+            arr.push("Laborant");
+
+        return arr;
+    };
+    var user = {
+        
+      //  userID: $("#CreateUserID").val(),
         firstName: $("#CreateUserFirstName").val(),
         surname: $("#CreateUserLastName").val(),
         cpr: $("#CreateUserCPR").val(),
         initials: $("#CreateUserIniTxt").val(),
-
-        // adding roles
-        roles: function () {
-            var arr = [];
-            if ($("#CreateUserRolesAdmin").checked == true)
-                arr.push("Administrator");
-
-            if ($("#CreateUserFarma").checked == true)
-                arr.push("Farmaceut");
-
-            if ($("#CreateUserRolesProductionleader").checked == true)
-                arr.push("Produktionsleder");
-
-            if (($("#CreateUserRolesLab").checked == true))
-                arr.push("Laborant");
-
-            return arr;
-        },
-
+        roles: roles,
+        
         // Adding status
         status: function () {
             if ($("#CreateUserStatus").checked == true)
-                return "1";
+                return 1;
             else 
-                return "0";
-        }
-      };
+                return 0;
+        },         
+      }; 
+
+/*  // test values
+      var roles = ["Admin"];
+    var user = {
+      firstName: "Martin",
+      surname: "Nitram",
+      initials: "MN",
+      cpr: "1102924444",
+      status: 1,
+      roles: roles,
+    };
+    */
 
       $.ajax ({
         url: "https://api.mama.sh/userresource",
@@ -47,6 +86,8 @@ function createUser() {
         
       })
 }
+
+
 
 function listUsers() {
    // document.getElementById("loaderID").style.display = "block";
@@ -138,3 +179,4 @@ function getStatus(status) {
         return "inaktiver";
     }
 }
+
