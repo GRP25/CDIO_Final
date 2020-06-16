@@ -86,3 +86,4 @@ Hvis vi laver vores egen vægt så skal vi lave brutto kontrol på afvejningen (
 - Få fikset Response når der oprettet en Prescription
 - Fikse det der returneres i PrescriptionComp (Validation) 
 - Den tilader os at give et prescrioptionID til ProductBatch selvom den ikke eksistere
+- Generelt skal Validations rettes
