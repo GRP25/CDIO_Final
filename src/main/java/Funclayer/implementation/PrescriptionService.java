@@ -25,12 +25,12 @@ public class PrescriptionService implements IPrescriptionService {
 	@Override
 	public String createPrescription(PrescriptionDTO prescription) throws SQLException {
 		prescriptionDAO.createPrescription(prescription);
-		return "Insert query executed succesfully";
+		return "Insert query executed successfully";
 	}
 
 	@Override
 	public String updatePrescription(PrescriptionDTO prescription) throws SQLException {
 		prescriptionDAO.updatePrescription(prescription);
-		return "Update query executed succesfully";
+		return "Update query executed successfully";
 	}
 }

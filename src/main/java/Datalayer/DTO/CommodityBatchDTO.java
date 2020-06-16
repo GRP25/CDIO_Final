@@ -31,13 +31,12 @@ public class CommodityBatchDTO {
 	}
 
 	public CommodityBatchDTO interpretResultSet(ResultSet resultSet) throws SQLException {
-		this.setCommodity_id( resultSet.getInt( 1 ) );
-		this.setCommodityBatch_id( resultSet.getInt( 2 ) );
-		this.setWeight( resultSet.getDouble( 3 ) );
-		this.setSupplier( resultSet.getString( 4 ) );
+		this.setCommodityBatch_id(resultSet.getInt(1));
+		this.setCommodity_id(resultSet.getInt(2));
+		this.setWeight(resultSet.getDouble(3));
+		this.setSupplier(resultSet.getString(4));
 		return this;
 	}
-
 
 	public void setCommodityBatch_id(int commodityBatch_id) {
 		this.commodityBatch_id = commodityBatch_id;
@@ -73,11 +72,7 @@ public class CommodityBatchDTO {
 
 	@Override
 	public String toString() {
-		return "CommodityBatchDTO{" +
-				"commodityBatch_id=" + commodityBatch_id +
-				", commodity_id=" + commodity_id +
-				", weight=" + weight +
-				", supplier='" + supplier + '\'' +
-				'}';
+		return "CommodityBatchDTO{" + "commodityBatch_id=" + commodityBatch_id + ", commodity_id=" + commodity_id
+				+ ", weight=" + weight + ", supplier='" + supplier + '\'' + '}';
 	}
 }

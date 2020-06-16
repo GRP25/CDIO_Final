@@ -49,7 +49,8 @@ public class UserDTO implements IDTO {
         this.setFirstName(resultSet.getString(2));
         this.setSurname(resultSet.getString(3));
         this.setCpr(resultSet.getString(4));
-        this.setStatus(resultSet.getInt(5));
+        this.setInitials(resultSet.getString(5));
+        this.setStatus(resultSet.getInt(6));
         return this;
 
     }
@@ -113,14 +114,8 @@ public class UserDTO implements IDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" +
-                "userID=" + userID +
-                ", firstName='" + firstName + '\'' +
-                ", surname='" + surname + '\'' +
-                ", cpr='" + cpr + '\'' +
-                ", initials='" + initials + '\'' +
-                ", roles=" + roles +
-                ", status=" + status +
-                '}';
+        return "UserDTO{" + "userID=" + userID + ", firstName='" + firstName + '\'' + ", surname='" + surname + '\''
+                + ", cpr='" + cpr + '\'' + ", initials='" + initials + '\'' + ", roles=" + roles + ", status=" + status
+                + '}';
     }
 }

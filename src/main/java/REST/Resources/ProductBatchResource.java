@@ -4,8 +4,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.inject.ResolutionException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import Datalayer.DAO.ProductBatchCompDAO;
 import Datalayer.DAO.ProductBatchDAO;
@@ -13,6 +15,8 @@ import Datalayer.DTO.ProductBatchCompDTO;
 import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchCompDAO;
 import Datalayer.Interfaces.IProductBatchDAO;
+import Funclayer.implementation.ProductBatchService;
+import Funclayer.interfaces.IProductBatchService;
 
 /*
 * Get productbatch
@@ -24,46 +28,74 @@ import Datalayer.Interfaces.IProductBatchDAO;
 
 @Path("ProductBatchs")
 public class ProductBatchResource {
-    IProductBatchDAO productDAO = new ProductBatchDAO();
-    IProductBatchCompDAO productCompDAO = new ProductBatchCompDAO();
-
-
-    // create produkt batch
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void createProductBatch(ProductBatchDTO productDTO) throws SQLException {
-        productDAO.createProductBatch(productDTO);
-    }
+    IProductBatchService productBatchService = new ProductBatchService();
 
     // get all product batches
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ProductBatchDTO> getAllProducts() throws SQLException {
-        return productDAO.getProductBatchDTOList();
+    public Response getAllProducts() throws SQLException {
+        Response response;
+
+        List<ProductBatchDTO> productBatchList = productBatchService.getProductBatchDTOList();
+
+        if (productBatchList != null) {
+            response = Response.status(Response.Status.OK).entity(productBatchList).build();
+        } else {
+            response = Response.status(Response.Status.BAD_REQUEST).entity("Error").build();
+
+        }
+        return response;
     }
 
     // get specific product batch
     @Path("/ID/{ProductID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ProductBatchDTO getProductBatchByID(@PathParam("ProductID") int productID) throws SQLException {
-        return productDAO.getProductBatchDTO(productID);
+    public Response getProductBatchByID(@PathParam("ProductID") int productBatchId) throws SQLException {
+        Response response;
+
+        ProductBatchDTO productBatchDTO = productBatchService.getProductBatchDTO(productBatchId);
+
+        if (productBatchDTO != null) {
+            response = Response.status(Response.Status.OK).entity(productBatchDTO).build();
+
+        } else {
+            response = Response.status(Response.Status.BAD_REQUEST).entity("Error").build();
+
+        }
+        return response;
     }
 
-
-    // add product batch compount
-    @Path("/Comp")
+    // create produkt batch
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addProductComp(ProductBatchCompDTO pCompDTO) throws SQLException {
-        productCompDAO.createProductBatchComp(pCompDTO);
+    public Response createProductBatch(ProductBatchDTO productBatch) throws SQLException {
+        Response response;
+
+        String createResult = productBatchService.createProductBatch(productBatch);
+
+        if (createResult.equalsIgnoreCase("Insert query executed successfully")) {
+            response = Response.status(Response.Status.OK).entity(productBatch).build();
+
+        } else {
+            response = Response.status(Response.Status.BAD_REQUEST).entity("Error").build();
+        }
+        return response;
     }
 
-    // add get product compount
-    @Path("/Comp/{ProductID}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<ProductBatchCompDTO>  getCompountsForProduct(@PathParam("ProductID") int productID) throws SQLException {
-        return productCompDAO.getProductBatchCompList(productID);
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateProductBatch(ProductBatchDTO productBatch) throws SQLException {
+        Response response;
+
+        String updateResult = productBatchService.updateProductBatch(productBatch);
+
+        if (updateResult.equalsIgnoreCase("Update query executed successfully")) {
+            response = Response.status(Response.Status.OK).entity(productBatch).build();
+        } else {
+            response = Response.status(Response.Status.BAD_REQUEST).entity(productBatch).build();
+        }
+
+        return response;
     }
 }
