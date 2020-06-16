@@ -35,7 +35,7 @@ public class UserDAO implements IUserDAO {
             while (rs.next()) {
                 ID = rs.getString("LAST_INSERT_ID()");
             }
-            
+
             // assigning roles to user
             sql = "INSERT INTO has_roles (user_id, roles_title) VALUES ";
             for (String role :  user.getRoles()) {
@@ -82,7 +82,7 @@ public class UserDAO implements IUserDAO {
             conn.close();
             stmt.close();
             rs.close();
-        } 
+        }
         catch (SQLException e) {
             System.out.println(e.getMessage());
         }
