@@ -26,31 +26,35 @@ function ajaxtest() {
 
 
 function createUser() {
-    var roles = function () {
-        var arr = [];
-        if ($("#CreateUserRolesAdmin").checked == true)
-            arr.push("Admin");
+    let userRoles = [];//function () {
+        //if ($("#CreateUserRolesAdmin").checked == true) {
+        if(document.getElementById("CreateUserRolesAdmin").checked == true)
+            userRoles.push("Admin");
+        if (document.getElementById("CreateUserFarma").checked == true)
+            userRoles.push("Pharmaceut");
 
-        if ($("#CreateUserFarma").checked == true)
-            arr.push("Farmaceut");
+        if (document.getElementById("CreateUserRolesProductionleader").checked == true)
+            userRoles.push("Produktionsleder");
 
-        if ($("#CreateUserRolesProductionleader").checked == true)
-            arr.push("Produktionsleder");
+        if (document.getElementById("CreateUserRolesLab").checked == true)
+            userRoles.push("Laborant");
 
-        if (($("#CreateUserRolesLab").checked == true))
-            arr.push("Laborant");
 
-        return arr;
-    };
+    //console.log(userRoles);
+/*//    console.log($("#CreateUserID").val());
+  //  console.log($("#CreateUserFirstName").val());
+  //  console.log($("#CreateUserLastName").val());
+  //  console.log($("#CreateUserCPR").val());
+  //  console.log($("#CreateUserIniTxt").val());*/
     var user = {
         
-      //  userID: $("#CreateUserID").val(),
+        userID: $("#CreateUserID").val(),
         firstName: $("#CreateUserFirstName").val(),
         surname: $("#CreateUserLastName").val(),
         cpr: $("#CreateUserCPR").val(),
         initials: $("#CreateUserIniTxt").val(),
-        roles: roles,
-        
+        roles: userRoles,
+
         // Adding status
         status: function () {
             if ($("#CreateUserStatus").checked == true)
@@ -58,19 +62,19 @@ function createUser() {
             else 
                 return 0;
         },         
-      }; 
-
-/*  // test values
-      var roles = ["Admin"];
-    var user = {
-      firstName: "Martin",
-      surname: "Nitram",
+      };
+/*
+  // test values
+      var roles = ["Admin", "Pharmaceut"];
+      var user = {
+      firstName: "thomas",
+      surname: "tobias",
       initials: "MN",
-      cpr: "1102924444",
+      cpr: "1102924440",
       status: 1,
       roles: roles,
-    };
-    */
+    };  */
+    
 
       $.ajax ({
         url: "https://api.mama.sh/userresource",
@@ -103,7 +107,7 @@ function listUsers() {
           jQuery.each(response, (i, item) => {
           html += `<tr>`;
           html += `<td> ${item.userID}  ${item.firstName} ${item.surname}</td>`;
-          html += `<td><button class="w3-dark-grey list-item-btn"> ${getStatus(item.status)} <i class="fa fa-close"></i></button> <button onclick="getUser(${item.userID});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+          html += `<td><button class="w3-dark-grey list-item-btn" onclick="inactiveUser(${item.userID});"> ${getStatus(item.status)} <i class="fa fa-close"></i></button> <button onclick="getUser(${item.userID});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
           html += `</tr>`;
         });
         console.log(html);
@@ -136,28 +140,64 @@ function getUser(id) {
           
           // set user status
           if (response.status == 0) {
-            $("#ShowUserStatus").checked = false;
+            $("#ShowUserStatus").prop('checked', false);
           }
           else {
-            $("#ShowUserStatus").checked = true;
+            $("#ShowUserStatus").prop('checked', true);
           }
 
-          // Show user roles
+      /*    // Show user roles
           for (const role in response.roles) {
-              if (role == "Administrator") {
-                $("#ShowUserRolesAdmin").checked = true;
+              if (role === "Admin") {
+                $("#ShowUserRolesAdmin").prop('checked', true);
               }
-              else if (role == "Farmaceut") {
-                $("#ShowUserRolesFarma").checked = true;
+              else if (role === "Farmaceut") {
+                $("#ShowUserRolesFarma").prop('checked', true);
               }
-              else if (role == "Produktionsleder") {
-                $("#ShowUserRolesProductionleader").checked = true;
+              else if (role.localeCompare("Produktionsleder")) {
+                $("#ShowUserRolesProductionleader").prop('checked', true);
               }
-              else if (role == "Laborant") {
-                $("#ShowUserRolesLab").checked = true;
+              else if (role === "Laborant") {
+                $("#ShowUserRolesLab").prop('checked', true);
               }
-          }
+          }  */
+
+          // setup for roles
+          $("#ShowUserRolesAdmin").prop('checked', false);
+          $("#ShowUserRolesFarma").prop('checked', false);
+          $("#ShowUserRolesProductionleader").prop('checked', false);
+          $("#ShowUserRolesLab").prop('checked', false);
+
+          response.roles.forEach(role => {
+            if (role === "Admin") {
+                $("#ShowUserRolesAdmin").prop('checked', true);
+              }
+              else if (role === "Pharmaceut") {
+                $("#ShowUserRolesFarma").prop('checked', true);
+              }
+              else if (role === "Produktionsleder") {
+                $("#ShowUserRolesProductionleader").prop('checked', true);
+              }
+              else if (role === "Laborant") {
+                $("#ShowUserRolesLab").prop('checked', true);
+              }
+          });
           
+        },
+        error: function (jqXHR, text, error) {
+          document.getElementById("loaderID").style.display = "none";
+          alert(jqXHR.status + text + error);
+        },
+      });
+}
+
+function inactiveUser(id) {
+    $.ajax({
+        url: "https://api.mama.sh/userresource/" + id,
+        contentType: "application/json",
+        method: "DELETE",
+        success: function (response) {
+          alert("Bruger er blevet inaktiv");
         },
         error: function (jqXHR, text, error) {
           document.getElementById("loaderID").style.display = "none";
@@ -176,7 +216,7 @@ function getStatus(status) {
         return "aktiver";
     }
     else {
-        return "inaktiver";
+        return "deaktiver";
     }
 }
 
