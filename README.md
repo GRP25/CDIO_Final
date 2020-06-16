@@ -36,11 +36,11 @@
 * POST    https://api.mama.sh/productbatchcomp
 * GET     https://api.mama.sh/productbatchcomp/ID/{ProductID}
 ### User Resource
-* GET     https://api.mama.sh/userresource
-* POST    https://api.mama.sh/userresource
-* PUT     https://api.mama.sh/userresource
-* DELETE  https://api.mama.sh/userresource/{userID}
-* GET     https://api.mama.sh/userresource/{userID}
+* GET     https://api.mama.sh/userresource - Show
+* POST    https://api.mama.sh/userresource - Create
+* PUT     https://api.mama.sh/userresource - Update
+* DELETE  https://api.mama.sh/userresource/{userID} - Inactivate
+* GET     https://api.mama.sh/userresource/{userID} - Show
 
 
 ## Vigtige links
