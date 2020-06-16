@@ -9,11 +9,11 @@ CREATE TABLE Users
     (10),
     surname varchar
     (10),
+    cpr varchar
+    (10),
     initials varchar
     (4),
     status int NOT NULL DEFAULT 1,
-    cpr varchar
-    (10),
     PRIMARY KEY
     (userId)
 );
