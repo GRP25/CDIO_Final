@@ -1,7 +1,7 @@
-package Funclayer.exceptions;
+package Funclayer.exceptions.exceptions;
 
 public class NotACPRException extends UserException {
-    NotACPRException(String message) {
+    public NotACPRException(String message) {
         super(message);
     }
 }
