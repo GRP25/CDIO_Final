@@ -15,4 +15,7 @@ public interface ICommodityDAO {
 
 	void updateCommodity(commodityDTO commodity) throws SQLException;
 
+	boolean exists(int id) throws SQLException;
+
+
 }

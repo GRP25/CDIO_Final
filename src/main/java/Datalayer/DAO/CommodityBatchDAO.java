@@ -99,4 +99,19 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
         DBUtil.executeSelectQuery( query, parameters, connection );
         connection.close();
     }
+
+    @Override
+    public boolean exists(int id) throws SQLException {
+        boolean ret;
+        String query = "SELECT commodityBatchId FROM CommodityBatch WHERE commodityBatchId = ?";
+        Object[] parameter = { id };
+        Connection connection = DBUtil.getConnection();
+        ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
+        if (rs.next())
+            ret = true;
+        else
+            ret = false;
+        connection.close();
+        return ret;
+    }
 }

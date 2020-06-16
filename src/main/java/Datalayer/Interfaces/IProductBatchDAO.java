@@ -18,4 +18,7 @@ public interface IProductBatchDAO {
 	void createProductBatch(ProductBatchDTO productBatch) throws SQLException;
 
 	void updateProductBatch(ProductBatchDTO productBatch) throws SQLException;
+
+	boolean exists(int id) throws SQLException;
+
 }

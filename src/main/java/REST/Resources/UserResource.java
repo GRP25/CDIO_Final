@@ -1,10 +1,9 @@
 package REST.Resources;
 
 import Datalayer.DTO.UserDTO;
-import Funclayer.exceptions.ErrorMessage;
+import Funclayer.exceptions.exceptions.UserException;
 import Funclayer.implementation.UserService;
 import Funclayer.interfaces.IUserService;
-import Funclayer.exceptions.UserException;
 import REST.SuccessMessage;
 
 import javax.ws.rs.*;
@@ -12,8 +11,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
-import static Funclayer.exceptions.Validation.validateUser;
-import static Funclayer.exceptions.Validation.validateUserId;
+import static Funclayer.exceptions.validation.UserValidation.validateUser;
+import static Funclayer.exceptions.validation.UserValidation.validateUserId;
 
 
 @Path("userresource")

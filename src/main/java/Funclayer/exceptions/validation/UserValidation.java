@@ -27,9 +27,6 @@ public class UserValidation extends Validation {
         return str.matches(".*[a-z].*");
     }
 
-    private static boolean isDateValidator(String date) {
-        return date.matches("^(3[01]|[12][0-9]|0[1-9])(1[0-2]|0[1-9])[0-9]{2}$");
-    }
 
     public static String cprValidator(String cpr) throws NotACPRException, SQLException {
         IUserDAO db = new UserDAO();

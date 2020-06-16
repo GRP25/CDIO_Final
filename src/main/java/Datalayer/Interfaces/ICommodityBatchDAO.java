@@ -18,4 +18,7 @@ public interface ICommodityBatchDAO {
 
 	void updateCommodityBatch(CommodityBatchDTO batch) throws SQLException;
 
+	boolean exists(int id) throws SQLException;
+
+
 }
