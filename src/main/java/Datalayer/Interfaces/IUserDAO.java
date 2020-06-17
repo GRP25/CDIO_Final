@@ -2,17 +2,22 @@ package Datalayer.Interfaces;
 
 import Datalayer.DTO.UserDTO;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.List;
 
-public interface IUserDAO{
+public interface IUserDAO {
 
-    UserDTO getUser(int userID);
+    UserDTO getUser(int userID) throws SQLException;
 
-    ArrayList<UserDTO> getUserList();
+    List<UserDTO> getUserList() throws SQLException;
 
-    void createUser(UserDTO user);
+    void createUser(UserDTO user) throws SQLException, SQLException;
 
-    void updateUser(UserDTO user);
+    void updateUser(UserDTO user) throws SQLException;
 
-    void deactivateUser(int userID);
+    void deactivateUser(int userID) throws SQLException;
+
+    boolean exists(String cpr) throws SQLException;
+
+    boolean exists(int id) throws SQLException;
 }

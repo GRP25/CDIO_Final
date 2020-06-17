@@ -1,5 +1,8 @@
 package Datalayer.DTO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class CommodityBatchDTO {
 	private int commodityBatch_id;
 	private int commodity_id;
@@ -16,6 +19,23 @@ public class CommodityBatchDTO {
 		this.commodity_id = commodity_id;
 		this.weight = weight;
 		this.supplier = supplier;
+	}
+
+	public Object[] convertToObject() {
+		Object[] objects = new Object[4];
+		objects[0] = this.commodityBatch_id;
+		objects[1] = this.commodity_id;
+		objects[2] = this.weight;
+		objects[3] = this.supplier;
+		return objects;
+	}
+
+	public CommodityBatchDTO interpretResultSet(ResultSet resultSet) throws SQLException {
+		this.setCommodityBatch_id(resultSet.getInt(1));
+		this.setCommodity_id(resultSet.getInt(2));
+		this.setWeight(resultSet.getDouble(3));
+		this.setSupplier(resultSet.getString(4));
+		return this;
 	}
 
 	public void setCommodityBatch_id(int commodityBatch_id) {
@@ -48,5 +68,11 @@ public class CommodityBatchDTO {
 
 	public String getSupplier() {
 		return supplier;
+	}
+
+	@Override
+	public String toString() {
+		return "CommodityBatchDTO{" + "commodityBatch_id=" + commodityBatch_id + ", commodity_id=" + commodity_id
+				+ ", weight=" + weight + ", supplier='" + supplier + '\'' + '}';
 	}
 }

@@ -1,7 +1,5 @@
-package StartUp;
+package REST;
 
-
-import DB.DBUtil;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -12,8 +10,9 @@ public class AppInitializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        String[] args = new String[0];
-        DBUtil.main( args );
+        //Denne metode kan bruges til at initializere forskellige ting når vi starter REST op.
+        //String[] args = new String[0];
+        //DBUtil.main( args );
     }
 
 }
