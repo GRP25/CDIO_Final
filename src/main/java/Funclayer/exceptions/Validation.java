@@ -66,7 +66,11 @@ public class Validation {
     public static void validateUser(UserDTO user) throws UserException, SQLException{
         nameValidator(nameConversion(user.getFirstName()));
         nameValidator(nameConversion(user.getSurname()));
-        cprValidator(user.getCpr());
+        try {
+            user.getUserID();
+        } catch (Exception e) {
+            cprValidator(user.getCpr());
+        }
     }
 
     public static void validateUserId(int id) throws SQLException {
