@@ -56,7 +56,7 @@ function createUser() {
   //  console.log($("#CreateUserIniTxt").val());*/
     var user = {
         
-        userID: $("#CreateUserID").val(),
+      //  userID: $("#CreateUserID").val(),
         firstName: $("#CreateUserFirstName").val(),
         surname: $("#CreateUserLastName").val(),
         cpr: $("#CreateUserCPR").val(),
@@ -110,10 +110,10 @@ function updateUser() {
 
     // get status
     var userStatus;
-    if ($("#ShowUserStatus").checked == true)
-      return "1";
+    if (document.getElementById("ShowUserStatus").checked == true)
+      userStatus = "1";
     else 
-      return "0";
+      userStatus = "0";
 
   var user = {
         
@@ -160,7 +160,7 @@ function listUsers() {
           //'<table class="tableOfUsers"> <tr><th>Name</th><th>Id</th></tr>';
           jQuery.each(response, (i, item) => {
           html += `<tr>`;
-          html += `<td> ${item.userID}  ${item.firstName} ${item.surname}</td>`;
+          html += `<td> ${item.userID} | ${item.firstName} ${item.surname} | ${item.roles}</td>`;
           html += `<td><button class="w3-dark-grey list-item-btn" onclick="inactiveUser(${item.userID}, ${item.status});"> ${getStatus(item.status)} <i class="fa fa-close"></i></button> <button onclick="getUser(${item.userID});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
           html += `</tr>`;
         });
@@ -178,14 +178,16 @@ function listUsers() {
    // $("#list").show();  
 }
 
-function getUser(id) {
+function getUser(id, showBox=true) {
     console.log("getuser Started");
     $.ajax({
         url: "https://api.mama.sh/userresource/" + id,
         contentType: "application/json",
         method: "GET",
         success: function (response) {
-          document.getElementById("EditUserWindow").style.display = "block";
+          if (showBox == true) {
+            document.getElementById("EditUserWindow").style.display = "block";
+          }
           $("#ShowUserID").val(response.userID);
           $("#ShowUserFirstName").val(response.firstName);
           $("#ShowUserLastName").val(response.surname);
@@ -262,7 +264,7 @@ function inactiveUser(id, state) {
     }
    else {
        // use the update function
-        getUser(id);
+        getUser(id, false);
         $("#ShowUserStatus").prop('checked', true);
         updateUser();
    }
