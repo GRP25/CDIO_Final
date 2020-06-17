@@ -10,6 +10,8 @@ import Funclayer.interfaces.ICommodityService;
 import java.sql.SQLException;
 import java.util.List;
 
+import static Funclayer.exceptions.validation.CommodityValidation.commodityValidation;
+
 public class CommodityService implements ICommodityService {
 
     ICommodityDAO commodityDAO = new CommodityDAO();
@@ -31,12 +33,14 @@ public class CommodityService implements ICommodityService {
 
     @Override
     public String createCommodity(CommodityDTO commodity) throws SQLException {
+        commodityValidation(commodity);
         commodityDAO.createCommodity(commodity);
         return "Insert query executed successfully";
     }
 
     @Override
     public String updateCommodity(CommodityDTO commodity) throws SQLException {
+        commodityValidation(commodity);
         commodityDAO.updateCommodity(commodity);
         return "Update query executed successfully";
     }

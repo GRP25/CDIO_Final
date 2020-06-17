@@ -101,40 +101,4 @@ public class CommodityBatchResource {
 
     }
 
-
-
-    public static void main(String[] args) throws SQLException { // Todo Delete this later
-        ICommodityBatchService commodityBatchService = new CommodityBatchService();
-        // Test getCommodityBatch
-//        System.out.println(commodityBatchService.getCommodityBatch( 1 ).getSupplier());
-
-
-        // Test commodityBatchList
-//        for (CommodityBatchDTO commodityBatchDTO : commodityBatchService.getCommodityBatchList()) {
-//            System.out.print( commodityBatchDTO.getCommodity_id() + " " );
-//            System.out.print( commodityBatchDTO.getCommodityBatch_id() + " " );
-//            System.out.print( commodityBatchDTO.getWeight() + " " );
-//            System.out.print( commodityBatchDTO.getSupplier() + " " );
-//            System.out.println();
-//        };
-
-        // Test commodityBatchList
-//        for (CommodityBatchDTO commodityBatchDTO : commodityBatchService.getCommodityBatchList(1)) {
-//            System.out.print( commodityBatchDTO.getCommodity_id() + " " );
-//            System.out.print( commodityBatchDTO.getCommodityBatch_id() + " " );
-//            System.out.print( commodityBatchDTO.getWeight() + " " );
-//            System.out.print( commodityBatchDTO.getSupplier() + " " );
-//            System.out.println();
-//        };
-
-
-        // Test updateCommodityBatch
-//        CommodityBatchDTO commodityBatchDAO1 = new CommodityBatchDTO(2,1,8.4,"UpdateMethod");
-//        System.out.println(commodityBatchService.updateCommodityBatch( commodityBatchDAO1 ));
-
-        // Test createCommodityBatch
-//        CommodityBatchDTO commodityBatchDAO1 = new CommodityBatchDTO(4,1,5.4,"CreateMethod");
-//        System.out.println(commodityBatchService.createCommodityBatch( commodityBatchDAO1 ));
-    }
-
 }

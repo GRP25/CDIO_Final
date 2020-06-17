@@ -21,16 +21,16 @@ import static Funclayer.Conversion.nameConversion;
 
 public class ProductBatchCompValidation extends Validation {
 
+    static IProductBatchCompDAO productBatchCompDAO = new ProductBatchCompDAO();
 
     public static void productBatchCompValidation(ProductBatchCompDTO productBatchCompDTO) throws SQLException {
-
-        IProductBatchCompDAO productBatchCompDAO = new ProductBatchCompDAO();
 
         if (!productBatchCompDAO.exists( idValidator( productBatchCompDTO.getUser_id())))
             throw new ObjectException( "Invalid user ID");
 
-        if (!productBatchCompDAO.exists( idValidator( productBatchCompDTO.getCommodity_id())))
-            throw new ObjectException( "Invalid commodity ID");
+        ICommodityDAO commodityDAO = new CommodityDAO();
+        if (!commodityDAO.exists( idValidator( productBatchCompDTO.getCommodity_id() ) ))
+            throw new ObjectException( "Commodity id is not exist" );
 
         if (!productBatchCompDAO.exists( idValidator( productBatchCompDTO.getProductBatch_id())))
             throw new ObjectException( "Invalid product ID");

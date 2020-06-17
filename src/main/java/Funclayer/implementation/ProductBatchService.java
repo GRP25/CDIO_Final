@@ -3,6 +3,7 @@ import Datalayer.DAO.ProductBatchDAO;
 import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchDAO;
 import Funclayer.exceptions.exceptions.NotProductBatchExeption;
+import Funclayer.exceptions.exceptions.ObjectException;
 import Funclayer.interfaces.IProductBatchService;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,8 +15,14 @@ public class ProductBatchService implements IProductBatchService {
 
     @Override
     public ProductBatchDTO getProductBatchDTO(int productBatch_id) throws SQLException {
-        validateProductBatchID(productBatch_id);
-        return productBatchDAO.getProductBatchDTO(productBatch_id);
+
+        ProductBatchDTO productBatchDTO = productBatchDAO.getProductBatchDTO(productBatch_id);
+
+        if (productBatchDTO.getProductBatch_id() == 0)
+            throw new ObjectException("No ProductBatch exists with this ProductBatch ID");
+
+        return productBatchDTO;
+
     }
 
 

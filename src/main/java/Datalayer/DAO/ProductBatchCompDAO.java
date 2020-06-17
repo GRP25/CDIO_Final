@@ -99,5 +99,16 @@ public class ProductBatchCompDAO implements IProductBatchCompDAO {
 
     }
 
+    @Override
+    public boolean exists(int id) throws SQLException {
+        String query = "SELECT productBatchId FROM ProductBatchComp WHERE productBatchId = ?";
+        Object[] parameter = { id };
+        Connection connection = DBUtil.getConnection();
+        ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
+
+        connection.close();
+        return rs.next();
+    }
+
 
 }

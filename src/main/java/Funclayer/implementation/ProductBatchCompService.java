@@ -18,9 +18,13 @@ public class ProductBatchCompService implements IProductBatchCompService {
     @Override
     public ProductBatchCompDTO getProductBatchComp(int productBatch_id, int commodityBatch_id) throws SQLException {
 
+        ProductBatchCompDTO productBatchCompDTO = productBatchCompDAO.getProductBatchComp(productBatch_id,commodityBatch_id);
 
+        if (productBatchCompDTO.getProductBatch_id() == 0)
+            throw new ObjectException("No ProductBatchComp exists with this number as an identification!");
 
-        return productBatchCompDAO.getProductBatchComp(productBatch_id,commodityBatch_id);
+        return productBatchCompDTO;
+
     }
 
 
@@ -32,12 +36,14 @@ public class ProductBatchCompService implements IProductBatchCompService {
 
     @Override
     public List<ProductBatchCompDTO> getProductBatchCompList(int productBatch_id) throws SQLException {
+
         List<ProductBatchCompDTO> productBatchCompDTOList = productBatchCompDAO.getProductBatchCompList(productBatch_id);
 
         if (productBatchCompDTOList.isEmpty())
             throw new ObjectException("No ProductBatchComp exists with this ProductBatch ID");
 
         return productBatchCompDTOList;
+
     }
 
 

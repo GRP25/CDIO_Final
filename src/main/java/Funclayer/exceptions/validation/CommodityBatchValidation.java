@@ -45,12 +45,4 @@ public class CommodityBatchValidation extends Validation {
     }
 
 
-
-    private static boolean weightValidation(String str) {
-        return (str.matches( "[0-9]*.[0-9]" ) ||
-                str.matches( "[0-9]*.[0-9][0-9]" ) ||
-                str.matches( "[0-9]*.[0-9][0-9][0-9]" ));
-    }
-
-
 }

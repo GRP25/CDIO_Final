@@ -85,17 +85,13 @@ public class ProductBatchDAO implements IProductBatchDAO, IValidation {
 
     @Override
     public boolean exists(int id) throws SQLException {
-        boolean ret;
         String query = "SELECT productBatchId FROM ProductBatch WHERE productBatchId = ?";
         Object[] parameter = { id };
         Connection connection = DBUtil.getConnection();
         ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
-        if (rs.next())
-            ret = true;
-        else
-            ret = false;
+
         connection.close();
-        return ret;
+        return rs.next();
     }
 
 }

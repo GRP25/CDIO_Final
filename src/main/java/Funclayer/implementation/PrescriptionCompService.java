@@ -19,7 +19,7 @@ public class PrescriptionCompService implements IPrescriptionCompService {
 	public PrescriptionCompDTO getPrescriptionComp(int prescription_id, int commodity_id) throws SQLException {
 		PrescriptionCompDTO prescriptionCompDTO =  prescriptionCompDAO.getPrescriptionComp(prescription_id, commodity_id);
 
-		if (prescriptionCompDTO.getPrescription_id() == 0)
+		if (prescriptionCompDTO.getPrescription_id() == 0) // TODO how if commodity_batch doesn't exist
 			throw new ObjectException("No PrescriptionComp exists with this number as an identification!");
 
 		return prescriptionCompDTO;
