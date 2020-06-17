@@ -22,11 +22,11 @@ public class CommodityBatchDAO implements ICommodityBatchDAO, IValidation {
         Connection connection = DBUtil.getConnection();
 
         String query = "SELECT * FROM CommodityBatch WHERE commodityBatchId = ?";
-        Object[] parameters = { commodityBatch_id }; // Todo Think about this
+        Object[] parameters = { commodityBatch_id };
 
         ResultSet resultSet = DBUtil.executeSelectQuery(query, parameters, connection);
         CommodityBatchDTO commodityBatchDTO = new CommodityBatchDTO();
-        resultSet.first(); // todo Test if need if statement
+        resultSet.first();
 
         commodityBatchDTO.interpretResultSet(resultSet);
 

@@ -1,5 +1,6 @@
 package Funclayer.exceptions.validation.template;
 
+import Funclayer.exceptions.exceptions.DataLayerException;
 import Funclayer.exceptions.exceptions.NotANameException;
 import Funclayer.exceptions.exceptions.NotAStatusException;
 
@@ -7,15 +8,19 @@ import java.sql.SQLException;
 
 public abstract class Validation {
 
-	private static boolean hasDigit(String str) {
+	protected static boolean hasDigit(String str) {
 		return str.matches(".*[0-9].*");
 	}
 
-	private static boolean hasSpecial(String str) {
+
+
+
+
+	protected static boolean hasSpecial(String str) {
 		return str.matches(".*[!@#$%&*()_+=|<>?{}\\[\\]~-].*");
 	}
 
-	private static boolean lengthValidator(int min, int max, String str) {
+	protected static boolean lengthValidator(int min, int max, String str) {
 		return str.length() < min || str.length() > max;
 	}
 
@@ -40,8 +45,20 @@ public abstract class Validation {
 		}
 	}
 
-    private static boolean hasStr(String str1, String str2) {
-        return str1.matches(".*(?i)" + str2 + ".*");
-    }
+	protected static int idValidator(int id) throws DataLayerException {
+		if (!hasDigit( String.valueOf( id ) ))
+			throw new DataLayerException( "ID should be a number" );
+
+		if (id < 1 || id > 99999999)
+			throw new DataLayerException( "ID should be between 1 - 99999999" );
+
+		return id;
+	}
+
+
+
+
+
+
 
 }
