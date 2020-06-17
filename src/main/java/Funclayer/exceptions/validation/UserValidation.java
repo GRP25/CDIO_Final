@@ -3,7 +3,6 @@ package Funclayer.exceptions.validation;
 import Datalayer.Interfaces.IUserDAO;
 import Funclayer.exceptions.exceptions.DataLayerException;
 import Funclayer.exceptions.exceptions.NotACPRException;
-import Funclayer.exceptions.exceptions.NotANameException;
 import Funclayer.exceptions.exceptions.UserException;
 import Funclayer.exceptions.validation.template.Validation;
 import Datalayer.DTO.UserDTO;
@@ -11,7 +10,6 @@ import Datalayer.DAO.UserDAO;
 
 import java.sql.SQLException;
 
-import static Funclayer.Conversion.cprConversion;
 import static Funclayer.Conversion.nameConversion;
 
 public class UserValidation extends Validation {

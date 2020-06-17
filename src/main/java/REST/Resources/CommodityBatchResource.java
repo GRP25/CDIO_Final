@@ -25,10 +25,8 @@ public class CommodityBatchResource {
         Response response;
         CommodityBatchDTO commodityBatchDTO = commodityBatchService.getCommodityBatch( commodityBatch_id );
 
-        if (commodityBatchDTO != null)
+
             response = Response.status( Response.Status.OK ).entity( commodityBatchDTO ).build();
-        else
-            response = Response.status( Response.Status.OK ).entity( "Exception: from CommodityBatchResource.getCommodityBatch" ).build();
 
         return response;
 
