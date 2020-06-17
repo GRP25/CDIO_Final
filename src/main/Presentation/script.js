@@ -284,3 +284,126 @@ function getStatus(status) {
     }
 }
 
+function CreateProductBatch() {
+
+    var productBatchStatus;
+        if(document.getElementById("InputStatusBegan").checked === "Began")
+            productBatchStatus = "0";
+        else if(document.getElementById("InputStatusBegan").checked === "In Progress")
+            productBatchStatus = "1";
+        else
+            productBatchStatus = "2";
+
+    var productBatch = {
+
+        ProductBatchID: $("#ShowProductBatchID").val(),
+        PrescriptionID: $("#ShowPrescriptionID").val(),
+        status: productBatchStatus
+
+    };
+
+    $.ajax ({
+        url: "https://api.mama.sh/ProductBatchs",
+        contentType: "application/json",
+        method: "POST",
+        data: JSON.stringify(productBatch),
+        success: function (response) {
+            alert("Product Batch Oprettet");
+        },
+        error: function (data, text, error) {
+            alert("Error: Product Batch ikke oprettet");
+        }
+
+    });
+}
+
+function getProductBatch(id) {
+
+    $.ajax({
+        url: "https://api.mama.sh/ProductBatchs/ID/" +id,
+        contentType: "application/json",
+        method: "GET",
+        success: function (response){
+            document.getElementById("EditProductBatchWindow").style.display ="block";
+            $("#ShowProductBatchID").val(response.ProductBatchID);
+            $("#ShowPrescriptionID").val(response.PrescriptionID);
+            $("#ShowStartDate").val(response.startDate);
+            $("#ShowEndDate").val(response.EndDate);
+            $("#ShowProductBatchStatus").val(response.productBatchStatus);
+
+            if(response.productBatchStatus === 0){
+                $("#ShowProductBatchStatus").prop()
+            }
+        },
+        error: function (jqXHR, text, error) {
+            document.getElementById("loaderID").style.display = "none";
+            alert(jqXHR.status + text + error);
+        },
+    })
+    /*
+     console.log("getuser Started");
+    $.ajax({
+        url: "https://api.mama.sh/userresource/" + id,
+        contentType: "application/json",
+        method: "GET",
+        success: function (response) {
+          document.getElementById("EditUserWindow").style.display = "block";
+          $("#ShowUserID").val(response.userID);
+          $("#ShowUserFirstName").val(response.firstName);
+          $("#ShowUserLastName").val(response.surname);
+          $("#ShowUserCPR").val(response.cpr);
+          $("#ShowUserIniTxt").val(response.initials);
+
+          // set user status
+          if (response.status == 0) {
+            $("#ShowUserStatus").prop('checked', false);
+          }
+          else {
+            $("#ShowUserStatus").prop('checked', true);
+          }
+
+      /*    // Show user roles
+          for (const role in response.roles) {
+              if (role === "Admin") {
+                $("#ShowUserRolesAdmin").prop('checked', true);
+              }
+              else if (role === "Farmaceut") {
+                $("#ShowUserRolesFarma").prop('checked', true);
+              }
+              else if (role.localeCompare("Produktionsleder")) {
+                $("#ShowUserRolesProductionleader").prop('checked', true);
+              }
+              else if (role === "Laborant") {
+                $("#ShowUserRolesLab").prop('checked', true);
+              }
+          }
+
+    // setup for roles
+    $("#ShowUserRolesAdmin").prop('checked', false);
+    $("#ShowUserRolesFarma").prop('checked', false);
+    $("#ShowUserRolesProductionleader").prop('checked', false);
+    $("#ShowUserRolesLab").prop('checked', false);
+
+    response.roles.forEach(role => {
+        if (role === "Admin") {
+            $("#ShowUserRolesAdmin").prop('checked', true);
+        }
+        else if (role === "Pharmaceut") {
+            $("#ShowUserRolesFarma").prop('checked', true);
+        }
+        else if (role === "Produktionsleder") {
+            $("#ShowUserRolesProductionleader").prop('checked', true);
+        }
+        else if (role === "Laborant") {
+            $("#ShowUserRolesLab").prop('checked', true);
+        }
+    });
+
+},
+error: function (jqXHR, text, error) {
+    document.getElementById("loaderID").style.display = "none";
+    alert(jqXHR.status + text + error);
+},
+});
+     */
+}
