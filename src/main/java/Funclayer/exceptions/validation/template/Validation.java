@@ -8,12 +8,16 @@ import java.sql.SQLException;
 
 public abstract class Validation {
 
+	protected static boolean isDouble(Object number) {
+		if(number instanceof Double)
+			return true;
+
+		return false;
+	}
+
 	protected static boolean hasDigit(String str) {
 		return str.matches(".*[0-9].*");
 	}
-
-
-
 
 
 	protected static boolean hasSpecial(String str) {
@@ -54,11 +58,6 @@ public abstract class Validation {
 
 		return id;
 	}
-
-
-
-
-
 
 
 }

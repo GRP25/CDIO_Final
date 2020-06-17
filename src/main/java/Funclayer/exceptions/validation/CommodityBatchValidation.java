@@ -48,12 +48,6 @@ public class CommodityBatchValidation extends Validation {
 
     }
 
-    private static boolean isDouble(Object number) {
-        if(number instanceof Double)
-            return true;
-
-        return false;
-    }
 
     private static boolean weightValidation(String str) {
         return (str.matches( "[0-9]*.[0-9]" ) ||

@@ -4,14 +4,15 @@ import Datalayer.DAO.ProductBatchDAO;
 import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchDAO;
 import Funclayer.exceptions.exceptions.DataLayerException;
-import Funclayer.exceptions.exceptions.NotAStatusException;
 import Funclayer.exceptions.exceptions.NotProductBatchExeption;
+import Funclayer.exceptions.exceptions.ObjectException;
 import Funclayer.exceptions.validation.template.Validation;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
+
 
 public class ProductBatchValidation extends Validation {
 
@@ -22,11 +23,13 @@ public class ProductBatchValidation extends Validation {
         }
     }
 
+
     public static void productBatchValidation(ProductBatchDTO productBatchDTO) throws NotProductBatchExeption, SQLException {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String tempStartDate = dateFormat.format(productBatchDTO.getStartDate());
         String tempEndDate = dateFormat.format(productBatchDTO.getEndDate());
+        IProductBatchDAO productBatchDAO = new ProductBatchDAO();
 
         if (!isDateValidator(tempStartDate))
             throw new DateTimeException("Invalid start-date");
@@ -36,13 +39,12 @@ public class ProductBatchValidation extends Validation {
 
         statusValidator(productBatchDTO.getStatus());
 
-        validateProductBatchID(productBatchDTO.getProductBatch_id());
+        if (!productBatchDAO.exists( idValidator( productBatchDTO.getProductBatch_id())))
+            throw new ObjectException( "Invalid productbatch ID");
 
-
+        if (!productBatchDAO.exists( idValidator( productBatchDTO.getPrescription_id())))
+            throw new ObjectException( "Invalid prescription ID");
 
     }
-
-
-
 
 }
