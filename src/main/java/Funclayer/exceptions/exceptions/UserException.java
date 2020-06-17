@@ -1,6 +1,8 @@
 package Funclayer.exceptions.exceptions;
 
-public class UserException extends Exception {
+import java.sql.SQLException;
+
+public class UserException extends SQLException {
     UserException(String message) {
         super(message);
     }

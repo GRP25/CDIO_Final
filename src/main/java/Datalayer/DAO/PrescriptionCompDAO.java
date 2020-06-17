@@ -91,4 +91,16 @@ public class PrescriptionCompDAO implements IPrescriptionCompDAO {
 
 	}
 
+
+	@Override
+	public boolean exists(int id) throws SQLException {
+		String query = "SELECT prescriptionId FROM PrescriptionComp WHERE prescriptionId = ?";
+		Object[] parameter = { id };
+		Connection connection = DBUtil.getConnection();
+		ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
+
+		connection.close();
+		return rs.next();
+	}
+
 }

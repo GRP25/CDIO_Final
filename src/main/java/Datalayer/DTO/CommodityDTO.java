@@ -3,14 +3,14 @@ package Datalayer.DTO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class commodityDTO {
+public class CommodityDTO {
 	private int commodity_id;
 	private String commodity_Name;
 
-	public commodityDTO() {
+	public CommodityDTO() {
 	}
 
-	public commodityDTO(int commodity_id, String commodity_Name) {
+	public CommodityDTO(int commodity_id, String commodity_Name) {
 		this.commodity_id = commodity_id;
 		this.commodity_Name = commodity_Name;
 	}
@@ -22,7 +22,7 @@ public class commodityDTO {
 		return object;
 	}
 
-	public commodityDTO interpretResultSet(ResultSet resultSet) throws SQLException {
+	public CommodityDTO interpretResultSet(ResultSet resultSet) throws SQLException {
 		this.setCommodity_id(resultSet.getInt(1));
 		this.setCommodity_Name(resultSet.getString(2));
 		return this;

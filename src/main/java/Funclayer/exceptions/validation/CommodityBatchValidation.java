@@ -15,7 +15,11 @@ public class CommodityBatchValidation extends Validation {
 
     static ICommodityBatchDAO commodityBatchDAO = new CommodityBatchDAO();
 
-
+    public static void validateCommodityBatchID(int ID) throws SQLException {
+        if(!commodityBatchDAO.exists(idValidator( ID ))){
+            throw new IDException("No CommodityBatch exists with this number as an identification!");
+        }
+    }
 
     public static void commodityBatchValidation(CommodityBatchDTO commodityBatchDTO) throws SQLException {
 
@@ -36,7 +40,6 @@ public class CommodityBatchValidation extends Validation {
 
         if (hasSpecial( commodityBatchDTO.getSupplier()))
             throw new ObjectException( "Invalid Supplier (Out special character)" );
-
 
 
     }

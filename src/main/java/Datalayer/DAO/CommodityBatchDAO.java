@@ -28,7 +28,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO, IValidation {
         CommodityBatchDTO commodityBatchDTO = new CommodityBatchDTO();
 
 
-        if (resultSet.first())
+        if (resultSet.next())
             commodityBatchDTO.interpretResultSet(resultSet);
 
         connection.close();
@@ -105,16 +105,12 @@ public class CommodityBatchDAO implements ICommodityBatchDAO, IValidation {
 
     @Override
     public boolean exists(int id) throws SQLException {
-        boolean ret;
         String query = "SELECT commodityBatchId FROM CommodityBatch WHERE commodityBatchId = ?";
         Object[] parameter = { id };
         Connection connection = DBUtil.getConnection();
         ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
-        if (rs.next())
-            ret = true;
-        else
-            ret = false;
+
         connection.close();
-        return ret;
+        return rs.next();
     }
 }

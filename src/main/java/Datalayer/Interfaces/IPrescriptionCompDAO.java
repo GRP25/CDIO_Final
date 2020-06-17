@@ -17,5 +17,6 @@ public interface IPrescriptionCompDAO {
 
 	void updatePrescriptionComp(PrescriptionCompDTO prescription) throws SQLException;
 
+	boolean exists(int id) throws SQLException;
 
 }

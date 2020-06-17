@@ -1,6 +1,6 @@
 package REST.Resources;
 
-import Datalayer.DTO.commodityDTO;
+import Datalayer.DTO.CommodityDTO;
 import Funclayer.implementation.CommodityService;
 import Funclayer.interfaces.ICommodityService;
 
@@ -22,7 +22,7 @@ public class CommodityResource {
     @GET
     public Response getCommodity(@PathParam("commodity_id") int comID) throws SQLException {
         Response response;
-        commodityDTO commodityItem = commodityService.getCommodity(comID);
+        CommodityDTO commodityItem = commodityService.getCommodity(comID);
 
         if (commodityItem != null)
             response = Response.status( Response.Status.OK ).entity( commodityItem ).build();
@@ -34,7 +34,7 @@ public class CommodityResource {
     @GET
     public Response getCommodityList() throws SQLException {
         Response response;
-        List<commodityDTO> commodityList = commodityService.getCommodityList();
+        List<CommodityDTO> commodityList = commodityService.getCommodityList();
 
         if (commodityList != null)
             response = Response.status( Response.Status.OK ).entity( commodityList ).build();
@@ -44,7 +44,7 @@ public class CommodityResource {
     }
 
     @POST
-    public Response createCommodity(commodityDTO comDTO) throws SQLException {
+    public Response createCommodity(CommodityDTO comDTO) throws SQLException {
 
         Response response;
         String createCommodity = commodityService.createCommodity( comDTO );
@@ -57,7 +57,7 @@ public class CommodityResource {
     }
 
     @PUT
-    public Response updateCommodity(commodityDTO comDTO) throws SQLException {
+    public Response updateCommodity(CommodityDTO comDTO) throws SQLException {
 
         Response response;
         String updateCommodity = commodityService.updateCommodity( comDTO );

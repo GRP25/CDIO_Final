@@ -12,7 +12,6 @@ import Funclayer.implementation.PrescriptionService;
 import Funclayer.interfaces.IPrescriptionService;
 import REST.SuccessMessage;
 
-import static Funclayer.exceptions.validation.PrescriptionValidation.validatePrescription;
 
 @Path("Prescriptions")
 public class PrescriptionResource {
@@ -24,7 +23,6 @@ public class PrescriptionResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createPrescription(PrescriptionDTO prescriptionDTO) throws SQLException {
-		validatePrescription(prescriptionDTO);
 		prescriptionService.createPrescription(prescriptionDTO);
 		SuccessMessage msg = new SuccessMessage("Created new Prescription", 0, "");
 		return Response.status(Response.Status.OK).entity(msg).build();
@@ -34,7 +32,6 @@ public class PrescriptionResource {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updatePrescription(PrescriptionDTO prescriptionDTO) throws SQLException {
-		validatePrescription(prescriptionDTO);
 		prescriptionService.updatePrescription(prescriptionDTO);
 		SuccessMessage msg = new SuccessMessage("Updated Prescription", 1, "");
 		return Response.status(Response.Status.OK).entity(msg).build();

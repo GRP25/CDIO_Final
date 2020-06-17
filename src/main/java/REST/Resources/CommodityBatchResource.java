@@ -23,6 +23,7 @@ public class CommodityBatchResource {
     public Response getCommodityBatch(@PathParam( "commodityBatch_id" ) int commodityBatch_id) throws SQLException {
 
         Response response;
+
         CommodityBatchDTO commodityBatchDTO = commodityBatchService.getCommodityBatch( commodityBatch_id );
 
 
