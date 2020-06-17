@@ -15,10 +15,6 @@ import static Funclayer.Conversion.cprConversion;
 import static Funclayer.Conversion.nameConversion;
 
 public class UserValidation extends Validation {
-    private static boolean hasStr(String str1, String str2) {
-        return str1.matches(".*(?i)" + str2 + ".*");
-    }
-
     private static boolean hasUppercase(String str) {
         return str.matches(".*[A-Z].*");
     }

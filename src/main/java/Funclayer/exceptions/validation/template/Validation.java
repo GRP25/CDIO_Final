@@ -40,5 +40,8 @@ public abstract class Validation {
 		}
 	}
 
+    private static boolean hasStr(String str1, String str2) {
+        return str1.matches(".*(?i)" + str2 + ".*");
+    }
 
 }
