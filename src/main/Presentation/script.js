@@ -40,6 +40,14 @@ function createUser() {
             userRoles.push("Laborant");
 
 
+        
+        // Getting user status
+        var userStatus;
+        if (document.getElementById("CreateUserStatus").checked == true)
+          userStatus = "1";
+        else
+          userStatus = "0";
+      
     //console.log(userRoles);
 /*//    console.log($("#CreateUserID").val());
   //  console.log($("#CreateUserFirstName").val());
@@ -56,12 +64,7 @@ function createUser() {
         roles: userRoles,
 
         // Adding status
-        status: function () {
-            if ($("#CreateUserStatus").checked == true)
-                return 1;
-            else 
-                return 0;
-        },         
+        status: userStatus
       };
 /*
   // test values
@@ -88,10 +91,60 @@ function createUser() {
             alert("fejl: bruger ikke oprettet");
         }
         
-      })
+      });
 }
 
+function updateUser() {
+  let userRoles = [];//function () {
+    //if ($("#CreateUserRolesAdmin").checked == true) {
+    if(document.getElementById("ShowUserRolesAdmin").checked == true)
+        userRoles.push("Admin");
+    if (document.getElementById("ShowUserRolesFarma").checked == true)
+        userRoles.push("Pharmaceut");
 
+    if (document.getElementById("ShowUserRolesProductionleader").checked == true)
+        userRoles.push("Produktionsleder");
+
+    if (document.getElementById("ShowUserRolesLab").checked == true)
+        userRoles.push("Laborant");
+
+
+  var user = {
+        
+    userID: $("#ShowUserID").val(),
+    firstName: $("#ShowUserFirstName").val(),
+    surname: $("#ShowUserLastName").val(),
+    cpr: $("#ShowUserCPR").val(),
+    initials: $("#ShowUserIniTxt").val(),
+    roles: userRoles,
+
+    // Adding status
+    status: function () {
+        if ($("#ShowUserStatus").checked == true)
+            return 1;
+        else 
+            return 0;
+    },         
+  };
+
+  sendUpdateToServer(user);
+}
+
+function sendUpdateToServer(user) {
+  $.ajax ({
+    url: "https://api.mama.sh/userresource",
+    contentType: "application/json",
+    method: "PUT",
+    data: JSON.stringify(user),
+    success: function (response) {
+        alert("Bruger Opdateret");            
+    },
+    error: function (data, text, error) {
+        alert("fejl: bruger ikke opdateres");
+    }
+    
+  });
+}
 
 function listUsers() {
    // document.getElementById("loaderID").style.display = "block";

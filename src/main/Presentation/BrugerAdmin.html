@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<head>
 <title>Bruger Administration</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +15,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <link rel="stylesheet" href="style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="script.js"></script>
-
+</head>
 <body class="w3-light-grey">
 
 <!-- Top container -->
@@ -100,7 +101,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
                     <label>Initialer: </label> <input id="ShowUserIniTxt"> </input> <br />
                     <label>Roller: </label> <input type="checkbox" id="ShowUserRolesAdmin"> Administrator</input>, <input type="checkbox" id="ShowUserRolesFarma">Farmaceut</input>, <input type="checkbox" id="ShowUserRolesProductionleader">Produktionsleder</input>, <input type="checkbox" id="ShowUserRolesLab">Laborant</input> <br />
                     <label>Status: </label> <input  type="checkbox" id="ShowUserStatus"> Aktiv </input> <br />
-                    <button class="UpdateUserClose">Opdater Bruger</button>
+                    <button id="UpdateUserClose" class="UpdateUserClose">Opdater Bruger</button>
                 </div>
             </div>
 
@@ -141,7 +142,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         var editBtn = document.getElementById("EditBtn");
         
         // Get the <span> element that closes the modal
-        var editSpan = document.getElementsByClassName("UpdateUserClose")[0];
+        var editSpan = document.getElementById("UpdateUserClose")[0];
         
         // When the user clicks the button, open the modal 
         editBtn.onclick = function() {
@@ -156,6 +157,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
           if (event.target == editModal) {
+            updateUser();
             editModal.style.display = "none";
           }
         }
