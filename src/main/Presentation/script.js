@@ -375,3 +375,110 @@ function getProductBatch(id) {
         },
     });
 }
+
+/**************** *
+ * CommodityBatch *
+ **************** */
+function getCommodityBatch(id) {
+    console.log("getCommodityBatch method")
+    $.ajax({
+        url  : 'REST/Resources/commodityBatch/' + commodityBatch_id,
+        contentType : "application/json",
+        type : "GET",
+        success : function (response) {
+            document.getElementById('modal-add').style.display = 'none'
+            $('#commodityBatch_id-input').val(response.commodityBatch_id)
+            $('#commodity_id-input').val(response.commodity_id)
+            $('#weight-input').val(response.weight)
+            $('#supplier-input').val(response.supplier)
+        },
+        error: function (jqXHR, text, error) {  
+            alert(jqXHR.status + text + error);
+        }
+    });
+}
+
+
+function getCommodityBatchList() {
+    console.log("getCommodityBatchList method")
+    $.ajax({
+        url  : 'REST/Resources/commodityBatch',
+        contentType : "application/json",
+        type : "GET",
+        success : function (response) {
+
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+    });
+}
+
+function getCommodityBatchList(commodityBatch_id) {
+    console.log("getCommodityBatchList method")
+    $.ajax({
+        url  : 'REST/Resources/commodityBatch/list/' + commodityBatch_id,
+        contentType : "application/json",
+        type : "GET",
+        success : function (response) {
+
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+    });
+}
+
+function createCommodityBatch() {
+    let data = [
+        {
+            commodityBatch_id: $('#commodityBatch_id-input').val(),
+            commodity_id: $('#commodity_id-input').val(),
+            weight: $('#weight-input').val(),
+            supplier: $('#supplier-input')
+        }
+    ];
+
+    console.log("createCommodityBatch method")
+    $.ajax( {
+        url : 'REST/Resources/commodityBatch',
+        contentType : "application/json",
+        type : "POST",
+        data : JSON.stringify(data),
+        success : function (response) {
+            alert("CommodityBatch is being created")
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+
+    });
+}
+
+function updateCommodityBatch() {
+    let data = [
+        {
+            commodityBatch_id: $('#commodityBatch_id-input').val(),
+            commodity_id: $('#commodity_id-input').val(),
+            weight: $('#weight-input').val(),
+            supplier: $('#supplier-input')
+        }
+    ];
+
+    console.log("createCommodityBatch method")
+    $.ajax( {
+        url : 'REST/Resources/commodityBatch',
+        contentType : "application/json",
+        type : "PUT",
+        data : JSON.stringify(data),
+        success : function (response) {
+            alert("CommodityBatch is being created")
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+
+    });
+}
+
+
