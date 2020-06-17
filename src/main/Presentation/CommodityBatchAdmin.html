@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://unpkg.com/tailwindcss@%5E1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="jquery-2.1.1.min.js"></script>
+
+
+</head>
+    <body>
+
+        <div class="container">
+             <div class="h-auto w-full bg-gray-800 my-10 ">
+                 <!--Search Bar-->
+                 <div class="p-2 flex justify-end" >
+                     <input type="text" class="rounded-full">
+                     <button class="m-4 bg-blue-300 rounded-full">SØG</button>
+                     <button onclick="showModal(true)" class="m-4 bg-blue-300 rounded-full">OPRET</button>
+                 </div>
+                    <!--Body showElementsAuto()-->
+                 <div class="text-black">
+                     <div id="commodityBatch-list">
+
+                     </div>
+                 </div>
+             </div>
+        </div>
+
+        <!--Add information by user to commodityBatch-->
+        <div id="modal-view" class="hidden">
+            <!--Information field-->
+            <div class="bg-gray-300 w-1/3 p-3">
+                <label>
+                    Commodity Batch Id
+                    <input class="w-full" type="text"  id="commodityBatch_id-input">
+                </label>
+                <label>
+                    Commodity Id
+                    <input class="w-full" type="text"  id="commodity_id-input">
+                </label>
+                <label>
+                    Weight
+                    <input class="w-full" type="text"  id="weight-input">
+                </label>
+                <label>
+                    Supplier
+                    <input class="w-full" type="text"  id="supplier-input">
+                </label>
+            </div>
+
+            <!--Create and Cancel buttons-->
+            <div class="flex flex-row justify-end">
+                <button onclick="hideModal()" class="bg-red-200">Cancel</button>
+                <button id="modal-add" onclick="addElement()" class="bg-blue-200">Add Element</button>
+                <button id="modal-update" onclick="updateElement(document.getElementById('commodityBatch_id-input').value)"  class="bg-blue-200">Update Element</button>
+
+            </div>
+
+
+        </div>
+
+
+    <script>
+
+
+        let elements =  [
+            // {
+            //     commodityBatch_id: 1,
+            //     commodity_id: 1,
+            //     weight: 1.5,
+            //     supplier: "AM"
+            // },
+            //
+            // {
+            //     commodityBatch_id: 2,
+            //     commodity_id: 2,
+            //     weight: 2.5,
+            //     supplier: "BM"
+            // }
+            ]
+        ;
+
+        /** Show modal to add an object */
+        function showModal(showAddButton) {
+            document.getElementById('modal-view').style.display = 'flex';
+
+
+
+
+            if (showAddButton) {
+                document.getElementById('modal-add').style.display = 'block';
+                document.getElementById('modal-update').style.display = 'none';
+                // To allow user to write in id field
+                document.getElementById('commodityBatch_id-input').disabled = false
+            }
+        }
+
+
+        /** Add element to dataBase */
+        function addElement() {
+
+            let element = [];
+
+            // Store user input in variables
+            let commodityBatch_id = document.getElementById('commodityBatch_id-input').value;
+            let commodity_id = document.getElementById('commodity_id-input').value;
+            let weight = document.getElementById('weight-input').value;
+            let supplier = document.getElementById('supplier-input').value;
+
+            // To add attributes to data base if all attributes are not empty
+            if (commodityBatch_id && commodity_id && weight && supplier) {
+                /*element = [{
+                    commodityBatch_id: commodityBatch_id,
+                    commodity_id: commodity_id,
+                    weight: weight,
+                    supplier: supplier
+                }];
+
+                $.ajax({
+                    url: 'REST/Resources/commodityBatch/',
+                    method: 'POST',
+                    contentType: "application/json",
+                    data: JSON.stringify(element),
+                    success: function (element) {
+                        // Display element
+                        showElementsAuto(element)
+                    },
+                    error: function (jqXHR, textStatus, error) {
+                        alert(jqXHR.responseText)
+                    }
+                });*/
+                elements.push ({
+                    commodityBatch_id: commodityBatch_id,
+                    commodity_id: commodity_id,
+                    weight: weight,
+                    supplier: supplier
+                });}
+
+
+
+            // Display element
+            showElementsAuto(elements)
+
+            // To hide the modal after creating an object
+            hideModal()
+        }
+
+        /** To hide modal and make fields empty */
+        function hideModal(updateButton) {
+            document.getElementById('modal-view').style.display = 'none'
+
+            if (updateButton)
+                document.getElementById('modal-update').style.display = 'none';
+
+            // Make the fields empty
+            document.getElementById('commodityBatch_id-input').value = ''
+            document.getElementById('commodity_id-input').value = ''
+            document.getElementById('weight-input').value = ''
+            document.getElementById('supplier-input').value = ''
+        }
+
+        /** To Show all elements */
+        function showElementsAuto(elements) {
+            const single_element = document.getElementById('commodityBatch-list');
+
+
+            let color = true; // todo
+
+
+            for (element of elements) {
+                if(color) {
+                    single_element.insertAdjacentHTML('beforebegin', `
+                                                <div class="bg-gray-400 flex">
+                                                <div onclick="showElementInfo('${element.commodityBatch_id}', false)" class=" ">${element.commodityBatch_id} </div>
+                                                <div class="ml-auto">
+                                                <button onclick="showElementInfo('${element.commodityBatch_id}', true)" class="text-green-600">U</button>
+                                                <button class="text-red-600">X</button>
+                                                </div>
+                                                </div>
+                                                `)
+                    color = false;
+                } else {
+                    single_element.insertAdjacentHTML('beforebegin', `
+                                                <div class="bg-gray-100 flex">
+                                                <div onclick="showElementInfo('${element.commodityBatch_id}')" class=" ">${element.commodityBatch_id} </div>
+                                                <div class="ml-auto">
+                                                <button class="text-green-600">U</button>
+                                                <button class="text-red-600">X</button>
+                                                </div>
+                                                </div>
+                                                `)
+                    color = true;
+                }
+            }
+        }
+
+
+        /** Show element information */
+        function showElementInfo(commodityBatch_id, showUpdateButton){
+            let element = elements[
+                elements.findIndex(element => element.commodityBatch_id === commodityBatch_id)]
+
+
+            document.getElementById('modal-add').style.display = 'none'
+            if (showUpdateButton) {
+                // To not allow user to write in id field
+                document.getElementById('commodityBatch_id-input').disabled = true
+                document.getElementById('modal-update').style.display = 'block'
+            }
+
+
+
+            document.getElementById('commodityBatch_id-input').value = element.commodityBatch_id;
+            document.getElementById('commodity_id-input').value = element.commodity_id;
+            document.getElementById('weight-input').value = element.weight;
+            document.getElementById('supplier-input').value = element.supplier;
+
+
+            showModal();
+
+        }
+
+
+
+        /** Show element information with ajax */
+       /* function showElementInfo(commodityBatch_id) {
+            console.log("showElementInfo");
+            $.ajax({
+                url  : 'REST/Resources/commodityBatch/' + commodityBatch_id,
+                contentType : "application/json",
+                type : "GET",
+                success : function (response) {
+                    document.getElementById('modal-add').style.display = 'none'
+                    $('#commodityBatch_id-input').val(response.commodityBatch_id)
+                    $('#commodity_id-input').val(response.commodity_id)
+                    $('#weight-input').val(response.weight)
+                    $('#supplier-input').val(response.supplier)
+                },
+                error: function (jqXHR, text, error) {
+                    /!** The user can search if we have a specific element or not *!/
+                }
+
+            });
+
+            // To show element information
+            showModal();
+        }*/
+
+
+
+        /** Update element */
+        function updateElement(commodityBatch_id) {
+             elements[
+                elements.findIndex(element => element.commodityBatch_id === commodityBatch_id)
+                ] = {
+                 commodityBatch_id: commodityBatch_id,
+                 commodity_id: document.getElementById('commodity_id-input').value,
+                 weight: document.getElementById('weight-input').value,
+                 supplier: document.getElementById('supplier-input').value,
+             }
+
+            // To hide the modal after creating an object
+            hideModal(true)
+
+        }
+
+        /** Search for element */
+        function searchForElement() {
+
+        }
+
+
+
+
+
+    </script>
+
+
+    </body>
+</html>
