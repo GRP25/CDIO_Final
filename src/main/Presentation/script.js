@@ -265,7 +265,7 @@ function inactiveUser(id, state) {
    else {
        // use the update function
         getUser(id, false);
-        $("#ShowUserStatus").prop('checked', true);
+        document.getElementById("ShowUserStatus").checked = true;
         updateUser();
    }
 }
