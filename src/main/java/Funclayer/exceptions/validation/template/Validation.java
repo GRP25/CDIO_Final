@@ -56,6 +56,12 @@ public abstract class Validation {
 	}
 
 
+	protected static boolean isDouble(Object number) {
+		if(number instanceof Double)
+			return true;
+
+		return false;
+	}
 
 
 

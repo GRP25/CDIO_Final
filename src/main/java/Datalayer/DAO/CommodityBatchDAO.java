@@ -26,9 +26,10 @@ public class CommodityBatchDAO implements ICommodityBatchDAO, IValidation {
 
         ResultSet resultSet = DBUtil.executeSelectQuery(query, parameters, connection);
         CommodityBatchDTO commodityBatchDTO = new CommodityBatchDTO();
-        resultSet.first();
 
-        commodityBatchDTO.interpretResultSet(resultSet);
+
+        if (resultSet.first())
+            commodityBatchDTO.interpretResultSet(resultSet);
 
         connection.close();
         return commodityBatchDTO;

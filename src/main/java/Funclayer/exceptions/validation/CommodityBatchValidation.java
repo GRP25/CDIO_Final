@@ -5,7 +5,6 @@ import Datalayer.DAO.CommodityDAO;
 import Datalayer.DTO.CommodityBatchDTO;
 import Datalayer.Interfaces.ICommodityBatchDAO;
 import Datalayer.Interfaces.ICommodityDAO;
-import Funclayer.exceptions.exceptions.DataLayerException;
 import Funclayer.exceptions.exceptions.IDException;
 import Funclayer.exceptions.exceptions.ObjectException;
 import Funclayer.exceptions.validation.template.Validation;
@@ -15,12 +14,6 @@ import java.sql.SQLException;
 public class CommodityBatchValidation extends Validation {
 
     static ICommodityBatchDAO commodityBatchDAO = new CommodityBatchDAO();
-
-    public static void validateCommodityBatchID(int ID) throws SQLException {
-        if(!commodityBatchDAO.exists(idValidator( ID ))){
-            throw new IDException("No CommodityBatch exists with this number as an identification!");
-        }
-    }
 
 
 
@@ -48,12 +41,7 @@ public class CommodityBatchValidation extends Validation {
 
     }
 
-    private static boolean isDouble(Object number) {
-        if(number instanceof Double)
-            return true;
 
-        return false;
-    }
 
     private static boolean weightValidation(String str) {
         return (str.matches( "[0-9]*.[0-9]" ) ||
