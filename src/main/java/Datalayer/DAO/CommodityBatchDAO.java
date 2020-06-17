@@ -10,24 +10,25 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import Datalayer.DBUtil;
+import Datalayer.DAO.Interfaces.IValidation;
 import Datalayer.DTO.CommodityBatchDTO;
 import Datalayer.Interfaces.ICommodityBatchDAO;
 
 @RequestScoped
-public class CommodityBatchDAO implements ICommodityBatchDAO {
+public class CommodityBatchDAO implements ICommodityBatchDAO, IValidation {
 
     @Override
     public CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws SQLException {
         Connection connection = DBUtil.getConnection();
 
         String query = "SELECT * FROM CommodityBatch WHERE commodityBatchId = ?";
-        Object[] parameters = {commodityBatch_id}; // Todo Think about this
+        Object[] parameters = { commodityBatch_id }; // Todo Think about this
 
-        ResultSet resultSet = DBUtil.executeSelectQuery( query, parameters, connection );
-        CommodityBatchDTO commodityBatchDTO = new CommodityBatchDTO( );
-        resultSet.first(); //todo Test if need if statement
+        ResultSet resultSet = DBUtil.executeSelectQuery(query, parameters, connection);
+        CommodityBatchDTO commodityBatchDTO = new CommodityBatchDTO();
+        resultSet.first(); // todo Test if need if statement
 
-        commodityBatchDTO.interpretResultSet( resultSet );
+        commodityBatchDTO.interpretResultSet(resultSet);
 
         connection.close();
         return commodityBatchDTO;
@@ -39,14 +40,14 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
 
         String query = "SELECT * FROM CommodityBatch";
 
-        ResultSet resultSet = DBUtil.executeSelectQuery( query, null, connection);
+        ResultSet resultSet = DBUtil.executeSelectQuery(query, null, connection);
         List<CommodityBatchDTO> listOfCommodityBatchDTO = new ArrayList<>();
 
         CommodityBatchDTO commodityBatchDTO;
 
         while (resultSet.next()) {
-            commodityBatchDTO = new CommodityBatchDTO( );
-            commodityBatchDTO.interpretResultSet( resultSet );
+            commodityBatchDTO = new CommodityBatchDTO();
+            commodityBatchDTO.interpretResultSet(resultSet);
             listOfCommodityBatchDTO.add(commodityBatchDTO);
         }
 
@@ -59,18 +60,18 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
         Connection connection = DBUtil.getConnection();
 
         String query = "SELECT * FROM CommodityBatch WHERE commodityId = ?";
-        Object[] parameters = {commodity_id};
+        Object[] parameters = { commodity_id };
 
-        ResultSet resultSet = DBUtil.executeSelectQuery( query, parameters, connection );
+        ResultSet resultSet = DBUtil.executeSelectQuery(query, parameters, connection);
         List<CommodityBatchDTO> listOfCommodityBatchDTO;
 
         CommodityBatchDTO commodityBatchDTO;
         listOfCommodityBatchDTO = new ArrayList<>();
 
         while (resultSet.next()) {
-            commodityBatchDTO = new CommodityBatchDTO(  );
-            commodityBatchDTO.interpretResultSet( resultSet );
-            listOfCommodityBatchDTO.add( commodityBatchDTO );
+            commodityBatchDTO = new CommodityBatchDTO();
+            commodityBatchDTO.interpretResultSet(resultSet);
+            listOfCommodityBatchDTO.add(commodityBatchDTO);
         }
 
         connection.close();
@@ -84,7 +85,7 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
         String query = "INSERT INTO CommodityBatch (commodityBatchId, commodityId, weight, supplier) VALUES (?, ?, ?, ?)";
         Object[] parameters = batch.convertToObject();
 
-        DBUtil.executeSelectQuery( query, parameters, connection );
+        DBUtil.executeSelectQuery(query, parameters, connection);
 
         connection.close();
     }
@@ -93,10 +94,11 @@ public class CommodityBatchDAO implements ICommodityBatchDAO {
     public void updateCommodityBatch(CommodityBatchDTO batch) throws SQLException {
         Connection connection = DBUtil.getConnection();
 
-        String query = "UPDATE CommodityBatch SET commodityBatchId=?, commodityId=?, weight=?, supplier=? WHERE commodityBatchId="+batch.getCommodityBatch_id();
+        String query = "UPDATE CommodityBatch SET commodityBatchId=?, commodityId=?, weight=?, supplier=? WHERE commodityBatchId="
+                + batch.getCommodityBatch_id();
         Object[] parameters = batch.convertToObject();
 
-        DBUtil.executeSelectQuery( query, parameters, connection );
+        DBUtil.executeSelectQuery(query, parameters, connection);
         connection.close();
     }
 

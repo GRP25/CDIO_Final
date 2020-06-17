@@ -9,6 +9,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import Datalayer.DBUtil;
+import Datalayer.DAO.Interfaces.IValidation;
 import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchDAO;
 
@@ -16,7 +17,7 @@ import Datalayer.Interfaces.IProductBatchDAO;
  * ProductBatchDAO
  */
 @RequestScoped
-public class ProductBatchDAO implements IProductBatchDAO {
+public class ProductBatchDAO implements IProductBatchDAO, IValidation {
 
     @Override
     public ProductBatchDTO getProductBatchDTO(int productBatch_id) throws SQLException {

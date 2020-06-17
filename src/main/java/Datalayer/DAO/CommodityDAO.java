@@ -9,11 +9,12 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import Datalayer.DBUtil;
+import Datalayer.DAO.Interfaces.IValidation;
 import Datalayer.DTO.commodityDTO;
 import Datalayer.Interfaces.ICommodityDAO;
 
 @RequestScoped
-public class CommodityDAO implements ICommodityDAO {
+public class CommodityDAO implements ICommodityDAO, IValidation {
 
 	@Override
 	public commodityDTO getCommodity(int commodity_id) throws SQLException {
@@ -21,7 +22,7 @@ public class CommodityDAO implements ICommodityDAO {
 		commodityDTO commoDTO = new commodityDTO();
 		String query = "SELECT * FROM Commodity WHERE commodityId = ?";
 		Connection connection = DBUtil.getConnection();
-		Object[] parameter = {commodity_id};
+		Object[] parameter = { commodity_id };
 
 		ResultSet resultSet = DBUtil.executeSelectQuery(query, parameter, connection);
 
