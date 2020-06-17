@@ -95,9 +95,11 @@
 
     <div id="EditProductBatchWindow" class="modal">
         <div id="EditProductBatchContent" class="modal-content">
-            <h2>Opret Product Batch</h2>
+            <h2>Opdater Product Batch eller Vis</h2>
             <label>Product Batch ID: </label><input id="EditProductBatchID"><br/>
             <label>Prescription ID: </label><input id="EditPrescriptionID"><br/>
+            <label>Start Date:</label><input id = "EditStartDate"><br/>
+            <label>End Date:</label><input id = "EditEndDate"><br/>
             <label>Status: </label><input type="radio" id="EditInputStatusBegan"> Began </input> <input type="radio" id="EditInputstatusProgress"> In Progress </input> <input type="radio" id="EditInputStatusDone"> Done </input> <br/>
             <button id="EditProductBatchButton" class="EditProductBatchButton"> Tilføj ProductBatch</button>
             <button id="EditCancelButton" class="CancelButton"> Cancel</button>
@@ -105,31 +107,41 @@
     </div>
 </div>
 <script>
-    var addModal = document.getElementById("CreateProductBatchWindow");
 
-    var addBtn = document.getElementById("CreateProductBatchBtn");
+    $(document).ready(function () {
+        console.log("ready!");
 
-    var addProductBatch = document.getElementById("createProductBatchButton");
+        var addModal = document.getElementById("CreateProductBatchWindow");
 
-    addBtn.onclick = function () {
-        addModal.style.display = "block";
-    };
+        var addBtn = document.getElementById("CreateProductBatchBtn");
 
-    addProductBatch.onclick = function () {
-        CreateProductBatch();
-        addModal.style.display = "none";
-    };
+        var addProductBatch = document.getElementById("createProductBatchButton");
 
-    window.onclick = function (event) {
-        if (event.target === addModal) {
+        addBtn.onclick = function () {
+            addModal.style.display = "block";
+        };
+
+        addProductBatch.onclick = function () {
+            CreateProductBatch();
             addModal.style.display = "none";
+        };
+
+        window.onclick = function (event) {
+            if (event.target === addModal) {
+                addModal.style.display = "none";
+            }
+        };
+
+        var editModal = document.getElementById("EditProductBatchWindow");
+
+        var editSpan = document.getElementById("EditProductBatchButton");
+
+        editSpan.onclick = function (event) {
+            if(event.target == editModal){
+                editModal.style.display = "none";
+            }
         }
-    };
-
-    var editModal = document.getElementById("EditProductBatchWindow");
-
-    var editBtn = document.getElementById("")
-
+    });
 
 </script>
 
