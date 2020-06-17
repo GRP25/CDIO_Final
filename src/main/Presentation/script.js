@@ -108,6 +108,12 @@ function updateUser() {
     if (document.getElementById("ShowUserRolesLab").checked == true)
         userRoles.push("Laborant");
 
+    // get status
+    var userStatus;
+    if ($("#ShowUserStatus").checked == true)
+      return "1";
+    else 
+      return "0";
 
   var user = {
         
@@ -119,12 +125,7 @@ function updateUser() {
     roles: userRoles,
 
     // Adding status
-    status: function () {
-        if ($("#ShowUserStatus").checked == true)
-            return 1;
-        else 
-            return 0;
-    },         
+    status: userStatus,
   };
 
   sendUpdateToServer(user);
@@ -160,7 +161,7 @@ function listUsers() {
           jQuery.each(response, (i, item) => {
           html += `<tr>`;
           html += `<td> ${item.userID}  ${item.firstName} ${item.surname}</td>`;
-          html += `<td><button class="w3-dark-grey list-item-btn" onclick="inactiveUser(${item.userID});"> ${getStatus(item.status)} <i class="fa fa-close"></i></button> <button onclick="getUser(${item.userID});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+          html += `<td><button class="w3-dark-grey list-item-btn" onclick="inactiveUser(${item.userID}, ${item.status});"> ${getStatus(item.status)} <i class="fa fa-close"></i></button> <button onclick="getUser(${item.userID});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
           html += `</tr>`;
         });
         console.log(html);
@@ -244,8 +245,8 @@ function getUser(id) {
       });
 }
 
-function inactiveUser(id) {
-  /*  if (state === "deaktiver") { */
+function inactiveUser(id, state) {
+    if (state == 1) {
         $.ajax({
             url: "https://api.mama.sh/userresource/" + id,
             contentType: "application/json",
@@ -258,10 +259,13 @@ function inactiveUser(id) {
               alert(jqXHR.status + text + error);
             },
           });
- /*   }
+    }
    else {
        // use the update function
-   }*/
+        getUser(id);
+        $("#ShowUserStatus").prop('checked', true);
+        updateUser();
+   }
 }
 
 function printUserToTable(id, name, status) {
