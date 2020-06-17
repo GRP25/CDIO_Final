@@ -1,6 +1,5 @@
 package Datalayer.Interfaces;
 
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,6 +18,5 @@ public interface ICommodityBatchDAO {
 	void updateCommodityBatch(CommodityBatchDTO batch) throws SQLException;
 
 	boolean exists(int id) throws SQLException;
-
 
 }

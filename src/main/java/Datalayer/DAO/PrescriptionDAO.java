@@ -9,6 +9,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import Datalayer.DBUtil;
+import Datalayer.DAO.Interfaces.IValidation;
 import Datalayer.DTO.PrescriptionDTO;
 import Datalayer.Interfaces.IPrescriptionDAO;
 
@@ -16,7 +17,7 @@ import Datalayer.Interfaces.IPrescriptionDAO;
  * PrescriptionDAO
  */
 @RequestScoped
-public class PrescriptionDAO implements IPrescriptionDAO {
+public class PrescriptionDAO implements IPrescriptionDAO, IValidation {
 
 	@Override
 	public PrescriptionDTO getPrescription(int prescription_id) throws SQLException {
