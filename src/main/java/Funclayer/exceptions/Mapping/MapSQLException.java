@@ -5,13 +5,13 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import Funclayer.exceptions.ErrorMessage;
-
-import java.sql.SQLException;
+import Funclayer.exceptions.exceptions.MapSQLExceptionTest;
 
 @Provider
-public class MapSQLException implements ExceptionMapper<SQLException> {
+public class MapSQLException implements ExceptionMapper<MapSQLExceptionTest> {
+
     @Override
-    public Response toResponse(SQLException e) {
+    public Response toResponse(MapSQLExceptionTest e) {
         ErrorMessage err = new ErrorMessage(e.getMessage(), 6, "https://mama.sh/");
         return Response.status(Response.Status.NOT_ACCEPTABLE).entity(err).build();
     }
