@@ -287,16 +287,16 @@ function getStatus(status) {
 function CreateProductBatch() {
 
     var productBatchStatus;
-        if(document.getElementById("InputStatusBegan").checked === "Began")
-            productBatchStatus = "1";
-        else if(document.getElementById("InputStatusBegan").checked === "In Progress")
-            productBatchStatus = "2";
-        else
-            productBatchStatus = "3";
+    if(document.getElementById("InputStatusBegin").checked === "Begin")
+        productBatchStatus = 1;
+    else if(document.getElementById("InputstatusProgress").checked === "In Progress")
+        productBatchStatus = 2;
+    else if (document.getElementById("InputStatusDone").checked === "Done")
+        productBatchStatus = 3;
 
     var productBatch = {
-        ProductBatchID: $("#ShowProductBatchID").val(),
-        PrescriptionID: $("#ShowPrescriptionID").val(),
+        productBatch_id: $("#CreateProductBatchID").val(),
+        prescription_id: $("#InputPrescriptionID").val(),
         status: productBatchStatus
 
     };
@@ -326,8 +326,8 @@ function getProductBatchList() {
             var html = "";
             jQuery.each(response, (i, item) => {
                 html += `<tr>`;
-                html += `<td> ${item.ProductBatchID}  ${item.PrescriptionID}</td>`;
-                html += `<td><button onclick="getProductBatch(${item.ProductBatchID});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+                html += `<td> ${item.productBatch_id}  ${item.prescription_id}</td>`;
+                html += `<td><button onclick="getProductBatch(${item.productBatch_id});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
                 html += `</tr>`;
             });
             console.log(html);
@@ -350,20 +350,20 @@ function getProductBatch(id) {
         method: "GET",
         success: function (response) {
             document.getElementById("EditProductBatchWindow").style.display = "block";
-            $("#ShowProductBatchID").val(response.ProductBatchID);
-            $("#ShowPrescriptionID").val(response.PrescriptionID);
-            $("#ShowStartDate").val(response.StartDate);
-            $("#ShowEndDate").val(response.EndDate);
+            $("#EditProductBatchID").val(response.ProductBatchID);
+            $("#EditPrescriptionID").val(response.PrescriptionID);
+            $("#StartDate").val(response.StartDate);
+            $("#EndDate").val(response.EndDate);
 
             switch(response.status){
                 case "1":
-                    $("#InputStatusBegin").prop('checked', true);
+                    $("#EditInputStatusBegan").prop('checked', true);
                     break;
                 case "2":
-                    $("#InputstatusProgress").prop('checked', true);
+                    $("#EditInputStatusBegan").prop('checked', true);
                     break;
                 case "3":
-                    $("#InputStatusDone").prop('checked', true);
+                    $("#EditInputStatusBegan").prop('checked', true);
                     break;
             }
         },
