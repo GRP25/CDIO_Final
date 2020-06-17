@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Produkt Batch Administration</title>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -46,15 +47,11 @@
         <h5>Dashboard</h5>
     </div>
     <div class="w3-bar-block">
-        <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
-           onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Bruger
-            Administration</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Bruger Administration</a>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Råvare Administration</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Råvarebatch
-            Administration</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Produktbatch
-            Administration</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Råvarebatch Administration</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Produktbatch Administration</a>
         <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Afvejning</a>
     </div>
 </nav>
@@ -69,9 +66,10 @@
 
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
-        <h5><b> Bruger Administration</b></h5>
+        <h5><b> Produktbatch Administration</b></h5>
         <button id="CreateProductBatchBtn" class="w3-button w3-dark-grey">Tilføj Product Batch <i class="fa fa-plus"></i></button>
-        <button id="Refresh" onclick="listUsers();" class="w3-button w3-dark-grey">Refresh List <i class="fa fa-plus"></i></button>
+        <button id="GetProductBatchList" onclick="getProductBatchList();" class="w3-button w3-dark-grey">Get Produkt Batch List </button>
+        <button id="GetProductBatchByInt" class="w3-button w3-dark-grey"> Få Produkt Batch med samme Receptnummer</button>
     </header>
 
 
@@ -84,28 +82,28 @@
         <br>
     </div>
 
-    <input id="CreateProductBatchWindow" class="modal">
-    <input id="CreateProductBatchContent" class="modal-content">
-    <h2>Opret Product Batch</h2>
-    <label>Product Batch ID: </label><input id="CreateProductBatchID"><br/>
-    <label>Prescription ID: </label><input id="InputPrescriptionID"><br/>
-    <label>Status: </label><input type="radio" id="InputStatusBegan"> Began </input> <input type="radio" id="InputstatusProgress"> In Progress </input> <input type="radio" id="InputStatusDone"> Done </input> <br/>
-    <button id="createProductBatchButton" class="createProductBatchButton"> Tilføj ProductBatch</button>
-    <button id="CreateCancelButton" class="CancelButton"> Cancel</button>
-</div>
-</div>
+    <div id="CreateProductBatchWindow" class="modal">
+        <div id="CreateProductBatchContent" class="modal-content">
+            <h2>Opret Product Batch</h2>
+            <label>Product Batch ID: </label><input id="CreateProductBatchID"><br/>
+            <label>Prescription ID: </label><input id="InputPrescriptionID"><br/>
+            <label>Status: </label><input type="radio" id="InputStatusBegin"> Begin </input> <input type="radio" id="InputstatusProgress"> In Progress </input> <input type="radio" id="InputStatusDone"> Done </input> <br/>
+            <button id="createProductBatchButton" class="createProductBatchButton"> Tilføj ProductBatch</button>
+            <button id="CreateCancelButton" class="CancelButton"> Cancel</button>
+        </div>
+    </div>
 
-<div id="EditProductBatchWindow" class="modal">
-    <div id="EditProductBatchContent" class="modal-content">
-        <h2>Opret Product Batch</h2>
-        <label>Product Batch ID: </label><input id="EditProductBatchID"><br/>
-        <label>Product Batch ID: </label><input id="EditPrescriptionID"><br/>
-        <label>Status: </label><input type="radio" id="InputStatusBegan"> Began </input> <input type="radio" id="InputstatusProgress"> In Progress </input> <input type="radio" id="InputStatusDone"> Done </input> <br/>
-        <button id="EditProductBatchButton" class="EditProductBatchButton"> Tilføj ProductBatch</button>
-        <button id="EditCancelButton" class="CancelButton"> Cancel</button>
+    <div id="EditProductBatchWindow" class="modal">
+        <div id="EditProductBatchContent" class="modal-content">
+            <h2>Opret Product Batch</h2>
+            <label>Product Batch ID: </label><input id="EditProductBatchID"><br/>
+            <label>Prescription ID: </label><input id="EditPrescriptionID"><br/>
+            <label>Status: </label><input type="radio" id="EditInputStatusBegan"> Began </input> <input type="radio" id="EditInputstatusProgress"> In Progress </input> <input type="radio" id="EditInputStatusDone"> Done </input> <br/>
+            <button id="EditProductBatchButton" class="EditProductBatchButton"> Tilføj ProductBatch</button>
+            <button id="EditCancelButton" class="CancelButton"> Cancel</button>
+        </div>
     </div>
 </div>
-
 <script>
     var addModal = document.getElementById("CreateProductBatchWindow");
 
@@ -113,9 +111,7 @@
 
     var addProductBatch = document.getElementById("createProductBatchButton");
 
-    var addCancelBtn = document.getElementById("CreateCancelButton");
-
-    addBtn.onClick = function () {
+    addBtn.onclick = function () {
         addModal.style.display = "block";
     };
 
@@ -124,18 +120,43 @@
         addModal.style.display = "none";
     };
 
-    addCancelBtn.onclick = function () {
-
-        addModal.style.display = "none";
-    };
-
     window.onclick = function (event) {
-        if (event.target == addModal) {
+        if (event.target === addModal) {
             addModal.style.display = "none";
         }
     };
 
+    var editModal = document.getElementById("EditProductBatchWindow");
 
+    var editBtn = document.getElementById("")
+
+
+</script>
+
+<script>
+
+    // Get the Sidebar
+    var mySidebar = document.getElementById("mySidebar");
+
+    // Get the DIV with overlay effect
+    var overlayBg = document.getElementById("myOverlay");
+
+    // Toggle between showing and hiding the sidebar, and add overlay effect
+    function w3_open() {
+        if (mySidebar.style.display === 'block') {
+            mySidebar.style.display = 'none';
+            overlayBg.style.display = "none";
+        } else {
+            mySidebar.style.display = 'block';
+            overlayBg.style.display = "block";
+        }
+    }
+
+    // Close the sidebar with the close button
+    function w3_close() {
+        mySidebar.style.display = "none";
+        overlayBg.style.display = "none";
+    }
 </script>
 </body>
 </html>
