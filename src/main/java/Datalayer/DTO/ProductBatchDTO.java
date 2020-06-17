@@ -1,6 +1,7 @@
 package Datalayer.DTO;
 
 import Datalayer.DTO.IDTO.IDTO;
+import org.apache.ibatis.jdbc.Null;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -9,8 +10,8 @@ import java.sql.SQLException;
 public class ProductBatchDTO implements IDTO {
 	private int productBatch_id;
 	private int prescription_id;
-	private Date startDate;
-	private Date endDate;
+	private Date startDate = null;
+	private Date endDate = null;
 	private int status;
 
 	public ProductBatchDTO(int productBatch_id, int prescription_id, int status) {
@@ -21,6 +22,14 @@ public class ProductBatchDTO implements IDTO {
 
 	public ProductBatchDTO() {
 
+	}
+
+	public ProductBatchDTO(int productBatch_id, int prescription_id, Date startDate, Date endDate, int status) {
+		this.productBatch_id = productBatch_id;
+		this.prescription_id = prescription_id;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.status = status;
 	}
 
 	public void setProductBatch_id(int productBatch_id) {

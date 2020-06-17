@@ -62,7 +62,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
         // INSERT INTO ProductBatch VALUES (?,?,?,?,?)
 
         Connection connection = DBUtil.getConnection();
-        String query = "INSERT INTO ProductBatch (productBatchId,prescriptionId,status) VALUES (?,?,?);";
+        String query = "INSERT INTO ProductBatch (productBatchId,prescriptionId,status) VALUES (?,?,?,?,?);";
         Object[] parameter = productBatch.convertToObject();
         DBUtil.executeSelectQuery(query, parameter, connection);
     }
