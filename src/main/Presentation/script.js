@@ -178,9 +178,9 @@ function listUsers() {
    // $("#list").show();  
 }
 
-function getUser(id, showBox=true) {
+async function getUser(id, showBox=true) {
     console.log("getuser Started");
-    $.ajax({
+    await $.ajax({
         url: "https://api.mama.sh/userresource/" + id,
         contentType: "application/json",
         method: "GET",
@@ -238,13 +238,15 @@ function getUser(id, showBox=true) {
                 $("#ShowUserRolesLab").prop('checked', true);
               }
           });
-          
+          return response;
         },
         error: function (jqXHR, text, error) {
           document.getElementById("loaderID").style.display = "none";
           alert(jqXHR.status + text + error);
         },
       });
+
+      console.log("getuser done");
 }
 
 function inactiveUser(id, state) {
