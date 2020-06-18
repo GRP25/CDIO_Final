@@ -88,10 +88,4 @@ public class ProductBatchDAO implements IProductBatchDAO {
         connection.close();
     }
 
-    public static void main(String[] args) throws SQLException {
-        ProductBatchDAO productBatchDAO = new ProductBatchDAO();
-
-        System.out.println(productBatchDAO.getProductBatchDTO(17).getEndDate());
-    }
-
 }

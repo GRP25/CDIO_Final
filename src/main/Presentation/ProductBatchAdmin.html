@@ -68,7 +68,7 @@
     <header class="w3-container" style="padding-top:22px">
         <h5><b> Produktbatch Administration</b></h5>
         <button id="CreateProductBatchBtn" class="w3-button w3-dark-grey">Tilføj Product Batch <i class="fa fa-plus"></i></button>
-        <button id="GetProductBatchList" onclick="getProductBatchList();" class="w3-button w3-dark-grey">Get Produkt Batch List </button>
+        <button id="GetProductBatchList" onclick="getProductBatchList();" class="w3-button w3-dark-grey">Få Produkt Batch List/Refresh </button>
         <button id="GetProductBatchByInt" class="w3-button w3-dark-grey"> Få Produkt Batch med samme Receptnummer</button>
     </header>
 
@@ -87,7 +87,7 @@
             <h2>Opret Product Batch</h2>
             <label>Product Batch ID: </label><input id="CreateProductBatchID"><br/>
             <label>Prescription ID: </label><input id="InputPrescriptionID"><br/>
-            <label>Status: </label><input type="radio" id="InputStatusBegin"> Begin </input> <input type="radio" id="InputstatusProgress"> In Progress </input> <input type="radio" id="InputStatusDone"> Done </input> <br/>
+            <label>Status: </label><input name="status" type="radio" id="InputStatusBegin"> Begin </input> <input name="status" type="radio" id="InputstatusProgress"> In Progress </input> <input name="status" type="radio" id="InputStatusDone"> Done </input> <br/>
             <button id="createProductBatchButton" class="createProductBatchButton"> Tilføj ProductBatch</button>
             <button id="CreateCancelButton" class="CancelButton"> Cancel</button>
         </div>
@@ -96,12 +96,12 @@
     <div id="EditProductBatchWindow" class="modal">
         <div id="EditProductBatchContent" class="modal-content">
             <h2>Opdater Product Batch eller Vis</h2>
-            <label>Product Batch ID: </label><input id="EditProductBatchID"><br/>
+            <label>Product Batch ID: </label><label id="EditProductBatchID"> </label><br/>
             <label>Prescription ID: </label><input id="EditPrescriptionID"><br/>
-            <label>Start Date:</label><input id = "EditStartDate"><br/>
-            <label>End Date:</label><input id = "EditEndDate"><br/>
-            <label>Status: </label><input type="radio" id="EditInputStatusBegan"> Began </input> <input type="radio" id="EditInputstatusProgress"> In Progress </input> <input type="radio" id="EditInputStatusDone"> Done </input> <br/>
-            <button id="EditProductBatchButton" class="EditProductBatchButton"> Tilføj ProductBatch</button>
+            <label>Start Date: </label><span id = "EditStartDate"></span><br/>
+            <label>End Date: </label><span id = "EditEndDate"></span><br/>
+            <label>Status: </label><input name="EditStatus" type="radio" id="EditInputStatusBegin"> Begin </input> <input name="EditStatus" type="radio" id="EditInputstatusProgress"> In Progress </input> <input name="EditStatus" type="radio" id="EditInputStatusDone"> Done </input> <br/>
+            <button id="EditProductBatchButton" class="EditProductBatchButton"> Opdater ProductBatch</button>
             <button id="EditCancelButton" class="CancelButton"> Cancel</button>
         </div>
     </div>
@@ -136,7 +136,12 @@
 
         var editSpan = document.getElementById("EditProductBatchButton");
 
-        editSpan.onclick = function (event) {
+        editSpan.onclick = function(){
+            updateProductBatch();
+            editModal.style.display = "none";
+        };
+
+        window.onclick = function (event) {
             if(event.target == editModal){
                 editModal.style.display = "none";
             }

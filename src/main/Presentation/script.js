@@ -286,15 +286,19 @@ function getStatus(status) {
     }
 }
 
+/**************** *
+ * ProductBatch   *
+ **************** */
+
 function CreateProductBatch() {
 
     let productBatchStatus;
-    if(document.getElementById("InputStatusBegin").checked === "Begin")
-        productBatchStatus = "1";
-    else if(document.getElementById("InputstatusProgress").checked === "In Progress")
-        productBatchStatus = "2";
-    else if (document.getElementById("InputStatusDone").checked === "Done")
-        productBatchStatus = "3";
+    if(document.getElementById("InputStatusBegin").checked == true)
+        productBatchStatus = 1;
+    else if(document.getElementById("InputstatusProgress").checked == true)
+        productBatchStatus = 2;
+    else if (document.getElementById("InputStatusDone").checked == true)
+        productBatchStatus = 3;
 
     var productBatch = {
         productBatch_id: $("#CreateProductBatchID").val(),
@@ -343,6 +347,41 @@ function getProductBatchList() {
     })
 }
 
+function updateProductBatch() {
+
+    let productBatchStatus;
+    if(document.getElementById("EditInputStatusBegin").checked == true)
+        productBatchStatus = 1;
+    else if(document.getElementById("EditInputstatusProgress").checked == true)
+        productBatchStatus = 2;
+    else if (document.getElementById("EditInputStatusDone").checked == true)
+        productBatchStatus = 3;
+
+    var productBatch = {
+        productBatch_id: $("#EditProductBatchID").text(),
+        prescription_id: $("#EditPrescriptionID").val(),
+        status: productBatchStatus
+    };
+
+    $.ajax ({
+        url: "https://api.mama.sh/ProductBatchs",
+        contentType: "application/json",
+        method: "PUT",
+        data: JSON.stringify(productBatch),
+        success: function (response) {
+            alert("Produkt Batch Opdateret");
+        },
+        error: function (data, text, error) {
+            alert("fejl: Produkt Batch ikke opdateres");
+        }
+
+    });
+}
+
+function getProductBatchListWithID(){
+
+}
+
 async function getProductBatch(id) {
     console.log("getuser Started");
     await $.ajax({
@@ -351,14 +390,19 @@ async function getProductBatch(id) {
         method: "GET",
         success: function (response) {
             document.getElementById("EditProductBatchWindow").style.display = "block";
-            $("#EditProductBatchID").val(response.productBatch_id);
+            $("#EditProductBatchID").text(response.productBatch_id);
             $("#EditPrescriptionID").val(response.prescription_id);
-            //$("#EditEndDate").val(response.startDate);
-            //$("#EndDate").val(response.endDate);
+            $("#EditStartDate").html(new Date(response.startDate).toDateString());
+            if(response.endDate <= 0){
+                $("#EditEndDate").html("")
+            } else {
+                $("#EditEndDate").html(new Date(response.endDate).toDateString());
+
+            }
 
             switch(response.status){
                 case 1:
-                    $("#EditInputStatusBegan").prop('checked', true);
+                    $("#EditInputStatusBegin").prop('checked', true);
                     break;
                 case 2:
                     $("#EditInputstatusProgress").prop('checked', true);
