@@ -40,6 +40,14 @@ function createUser() {
             userRoles.push("Laborant");
 
 
+        
+        // Getting user status
+        var userStatus;
+        if (document.getElementById("CreateUserStatus").checked == true)
+          userStatus = "1";
+        else
+          userStatus = "0";
+      
     //console.log(userRoles);
 /*//    console.log($("#CreateUserID").val());
   //  console.log($("#CreateUserFirstName").val());
@@ -48,7 +56,7 @@ function createUser() {
   //  console.log($("#CreateUserIniTxt").val());*/
     var user = {
         
-        userID: $("#CreateUserID").val(),
+      //  userID: $("#CreateUserID").val(),
         firstName: $("#CreateUserFirstName").val(),
         surname: $("#CreateUserLastName").val(),
         cpr: $("#CreateUserCPR").val(),
@@ -56,12 +64,7 @@ function createUser() {
         roles: userRoles,
 
         // Adding status
-        status: function () {
-            if ($("#CreateUserStatus").checked == true)
-                return 1;
-            else 
-                return 0;
-        },         
+        status: userStatus
       };
 /*
   // test values
@@ -88,10 +91,61 @@ function createUser() {
             alert("fejl: bruger ikke oprettet");
         }
         
-      })
+      });
 }
 
+function updateUser() {
+  let userRoles = [];//function () {
+    //if ($("#CreateUserRolesAdmin").checked == true) {
+    if(document.getElementById("ShowUserRolesAdmin").checked == true)
+        userRoles.push("Admin");
+    if (document.getElementById("ShowUserRolesFarma").checked == true)
+        userRoles.push("Pharmaceut");
 
+    if (document.getElementById("ShowUserRolesProductionleader").checked == true)
+        userRoles.push("Produktionsleder");
+
+    if (document.getElementById("ShowUserRolesLab").checked == true)
+        userRoles.push("Laborant");
+
+    // get status
+    var userStatus;
+    if (document.getElementById("ShowUserStatus").checked == true)
+      userStatus = "1";
+    else 
+      userStatus = "0";
+
+  var user = {
+        
+    userID: $("#ShowUserID").val(),
+    firstName: $("#ShowUserFirstName").val(),
+    surname: $("#ShowUserLastName").val(),
+    cpr: $("#ShowUserCPR").val(),
+    initials: $("#ShowUserIniTxt").val(),
+    roles: userRoles,
+
+    // Adding status
+    status: userStatus,
+  };
+
+  sendUpdateToServer(user);
+}
+
+function sendUpdateToServer(user) {
+  $.ajax ({
+    url: "https://api.mama.sh/userresource",
+    contentType: "application/json",
+    method: "PUT",
+    data: JSON.stringify(user),
+    success: function (response) {
+        alert("Bruger Opdateret");            
+    },
+    error: function (data, text, error) {
+        alert("fejl: bruger ikke opdateres");
+    }
+    
+  });
+}
 
 function listUsers() {
    // document.getElementById("loaderID").style.display = "block";
@@ -106,8 +160,8 @@ function listUsers() {
           //'<table class="tableOfUsers"> <tr><th>Name</th><th>Id</th></tr>';
           jQuery.each(response, (i, item) => {
           html += `<tr>`;
-          html += `<td> ${item.userID}  ${item.firstName} ${item.surname}</td>`;
-          html += `<td><button class="w3-dark-grey list-item-btn" onclick="inactiveUser(${item.userID});"> ${getStatus(item.status)} <i class="fa fa-close"></i></button> <button onclick="getUser(${item.userID});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+          html += `<td> ${item.userID} | ${item.firstName} ${item.surname} | ${item.roles}</td>`;
+          html += `<td><button class="w3-dark-grey list-item-btn" onclick="inactiveUser(${item.userID}, ${item.status});"> ${getStatus(item.status)} <i class="fa fa-close"></i></button> <button onclick="getUser(${item.userID});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
           html += `</tr>`;
         });
         console.log(html);
@@ -124,14 +178,16 @@ function listUsers() {
    // $("#list").show();  
 }
 
-function getUser(id) {
+async function getUser(id, showBox=true) {
     console.log("getuser Started");
-    $.ajax({
+    await $.ajax({
         url: "https://api.mama.sh/userresource/" + id,
         contentType: "application/json",
         method: "GET",
         success: function (response) {
-          document.getElementById("EditUserWindow").style.display = "block";
+          if (showBox == true) {
+            document.getElementById("EditUserWindow").style.display = "block";
+          }
           $("#ShowUserID").val(response.userID);
           $("#ShowUserFirstName").val(response.firstName);
           $("#ShowUserLastName").val(response.surname);
@@ -182,17 +238,19 @@ function getUser(id) {
                 $("#ShowUserRolesLab").prop('checked', true);
               }
           });
-          
+          return response;
         },
         error: function (jqXHR, text, error) {
           document.getElementById("loaderID").style.display = "none";
           alert(jqXHR.status + text + error);
         },
       });
+
+      console.log("getuser done");
 }
 
-function inactiveUser(id) {
-  /*  if (state === "deaktiver") { */
+function inactiveUser(id, state) {
+    if (state == 1) {
         $.ajax({
             url: "https://api.mama.sh/userresource/" + id,
             contentType: "application/json",
@@ -205,10 +263,13 @@ function inactiveUser(id) {
               alert(jqXHR.status + text + error);
             },
           });
- /*   }
+    }
    else {
        // use the update function
-   }*/
+        getUser(id, false);
+        document.getElementById("ShowUserStatus").checked = true;
+        updateUser();
+   }
 }
 
 function printUserToTable(id, name, status) {
@@ -225,3 +286,279 @@ function getStatus(status) {
     }
 }
 
+function CreateProductBatch() {
+
+    let productBatchStatus;
+    if(document.getElementById("InputStatusBegin").checked === "Begin")
+        productBatchStatus = "1";
+    else if(document.getElementById("InputstatusProgress").checked === "In Progress")
+        productBatchStatus = "2";
+    else if (document.getElementById("InputStatusDone").checked === "Done")
+        productBatchStatus = "3";
+
+    var productBatch = {
+        productBatch_id: $("#CreateProductBatchID").val(),
+        prescription_id: $("#InputPrescriptionID").val(),
+        status: productBatchStatus
+    };
+
+    $.ajax ({
+        url: "https://api.mama.sh/ProductBatchs",
+        contentType: "application/json",
+        method: "POST",
+        data: JSON.stringify(productBatch),
+        success: function (response) {
+            alert("Product Batch Oprettet");
+        },
+        error: function (data, text, error) {
+            alert("Error: Product Batch ikke oprettet");
+        }
+
+    });
+}
+
+function getProductBatchList() {
+    $.ajax({
+        url: "https://api.mama.sh/ProductBatchs",
+        contentType: "application/json",
+        method: "GET",
+        success: function (response) {
+            $("#ListOfProductBatchTable").html("");
+            var html = "";
+            jQuery.each(response, (i, item) => {
+                html += `<tr>`;
+                html += `<td><h5>Produkt Bacth ID</h5> ${item.productBatch_id} <h5>Prescription ID </h5> ${item.prescription_id}</td>`;
+                html += `<td><button onclick="getProductBatch(${item.productBatch_id});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+                html += `</tr>`;
+            });
+            console.log(html);
+            $("#ListOfProductBatchTable").append(html);
+
+            $("#ListOfProductBatchTable").show();
+        },
+        error: function (jqXHR, text, error) {
+            document.getElementById("loaderID").style.display = "none";
+            alert(jqXHR.status + text + error);
+        }
+    })
+}
+
+async function getProductBatch(id) {
+    console.log("getuser Started");
+    await $.ajax({
+        url: "https://api.mama.sh/ProductBatchs/ID/"+id,
+        contentType: "application/json",
+        method: "GET",
+        success: function (response) {
+            document.getElementById("EditProductBatchWindow").style.display = "block";
+            $("#EditProductBatchID").val(response.productBatch_id);
+            $("#EditPrescriptionID").val(response.prescription_id);
+            //$("#EditEndDate").val(response.startDate);
+            //$("#EndDate").val(response.endDate);
+
+            switch(response.status){
+                case 1:
+                    $("#EditInputStatusBegan").prop('checked', true);
+                    break;
+                case 2:
+                    $("#EditInputstatusProgress").prop('checked', true);
+                    break;
+                case 3:
+                    $("#EditInputStatusDone").prop('checked', true);
+                    break;
+            }
+            return response.productBatch_id;
+        },
+        error: function (jqXHR, text, error) {
+            document.getElementById("loaderID").style.display = "none";
+            alert(jqXHR.status + text + error);
+        },
+    });
+}
+
+/**************** *
+ * CommodityBatch *
+ **************** */
+function getCommodityBatch(id) {
+    console.log("getCommodityBatch method")
+    $.ajax({
+        url  : 'REST/Resources/commodityBatch/' + commodityBatch_id,
+        contentType : "application/json",
+        type : "GET",
+        success : function (response) {
+            document.getElementById('modal-add').style.display = 'none'
+            $('#commodityBatch_id-input').val(response.commodityBatch_id)
+            $('#commodity_id-input').val(response.commodity_id)
+            $('#weight-input').val(response.weight)
+            $('#supplier-input').val(response.supplier)
+        },
+        error: function (jqXHR, text, error) {  
+            alert(jqXHR.status + text + error);
+        }
+    });
+}
+
+
+function getCommodityBatchList() {
+    console.log("getCommodityBatchList method")
+    $.ajax({
+        url  : 'REST/Resources/commodityBatch',
+        contentType : "application/json",
+        type : "GET",
+        success : function (response) {
+
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+    });
+}
+
+function getCommodityBatchList(commodityBatch_id) {
+    console.log("getCommodityBatchList method")
+    $.ajax({
+        url  : 'REST/Resources/commodityBatch/list/' + commodityBatch_id,
+        contentType : "application/json",
+        type : "GET",
+        success : function (response) {
+
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+    });
+}
+
+function createCommodityBatch() {
+    let data = [
+        {
+            commodityBatch_id: $('#commodityBatch_id-input').val(),
+            commodity_id: $('#commodity_id-input').val(),
+            weight: $('#weight-input').val(),
+            supplier: $('#supplier-input')
+        }
+    ];
+
+    console.log("createCommodityBatch method")
+    $.ajax( {
+        url : 'REST/Resources/commodityBatch',
+        contentType : "application/json",
+        type : "POST",
+        data : JSON.stringify(data),
+        success : function (response) {
+            alert("CommodityBatch is being created")
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+
+    });
+}
+
+function updateCommodityBatch() {
+    let data = [
+        {
+            commodityBatch_id: $('#commodityBatch_id-input').val(),
+            commodity_id: $('#commodity_id-input').val(),
+            weight: $('#weight-input').val(),
+            supplier: $('#supplier-input')
+        }
+    ];
+
+    console.log("createCommodityBatch method")
+    $.ajax( {
+        url : 'REST/Resources/commodityBatch',
+        contentType : "application/json",
+        type : "PUT",
+        data : JSON.stringify(data),
+        success : function (response) {
+            alert("CommodityBatch is being created")
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+
+    });
+}
+
+
+
+async function getPrescription(id) {
+    await $.ajax ({
+        url: "https://api.mama.sh/Prescriptions/ID/" + id,
+        contentType: "application/json",
+        type: "GET",
+        success: function (response) {
+            // CAN be changed to another value when the admin portal has been added !!!
+            // Just can the openProductBatch() to match the new id;
+            $("#WeightPrescriptionName").text(response.prescription_name);
+            console.log(response.prescription_name);
+            
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+    });
+}
+
+async function openProductBatch() {
+    var productBatchID = document.getElementById("ProductBatchToWeight").value;
+    await getProductBatch(productBatchID);
+    document.getElementById("EditProductBatchWindow").style.display = "none";
+
+    var presID = document.getElementById("EditPrescriptionID").value;
+    await getPrescription(presID);
+    document.getElementById("WeightPrescriptionID").innerHTML = presID;
+    getPrescriptionCompList(presID);
+    //document.getElementById("WeightPrescriptionName").innerHTML = ;
+}
+
+function getPrescriptionCompList(prescriptionID) {
+    $.ajax ( {
+        url: "https://api.mama.sh/PrescriptionComp/" + prescriptionID,
+        contentType: "application/json",
+        type: "GET",
+        success: function (response) {
+            response.forEach(prescriptionComp => { 
+
+                ShowPrescriptionCompToLab(prescriptionComp);
+            })
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+    });
+}
+
+function ShowPrescriptionCompToLab(PrescriptionComp) {
+    var commoditybatchList = document.getElementById("WeightCommodityBatchList");
+
+    commoditybatchList.innerHTML += '<div class="w3-container"> ' 
+                                + ' <h5>Råvare nr: <label>'+ PrescriptionComp.commodity_id+'</label></h5> '
+                                + '<h5>Råvare Navn: <label>Vand</label></h5> '
+                                + ' <table id="ListOfProductBatchTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white"> '
+                                + ' <tr> '
+                                + '<td>Del</td> '
+                                + '<td>Mængde</td>'
+                                + '<td>Tolerance</td>'
+                                + '<td>Tara</td>'
+                                + '<td>Netto (kg)</td>'
+                                + '<td>Batch</td>'
+                                + '<td>Opr</td>'
+                                + '<td>Terminal</td>'
+                                + '</tr>'
+                                + '<tr>'
+                                + '<td>1</td>'
+                                + '<td>' + PrescriptionComp.nomNetto +'</td>'
+                                + '<td>' + PrescriptionComp.tolerance + '</td>'
+                                + '<td><input type="text"></input></td>'
+                                + '<td><input type="text"></input></td>'
+                                + '<td><input type="text"></input></td>'
+                                + '<td><input type="text"></input></td>'
+                                + '<td><input type="text"></input></td>'
+                                + '</tr>'
+                                + '</table>'
+                                + '<br>'
+                                + '</div>';
+
+}

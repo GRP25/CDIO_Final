@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <head>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +13,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 <!-- our custom style sheet-->
 <link rel="stylesheet" href="style.css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="script.js"></script>
+</head>
 
 <body class="w3-light-grey">
 
@@ -36,16 +39,18 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </div>
   </div>
   <hr> -->
+
   <div class="w3-container">
     <h5>Dashboard</h5>
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Bruger Administration</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Råvare Administration</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Råvarebatch Administration</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Produktbatch Administration</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Afvejning</a>
+    <a href="#" id="UserAdminPortal" style="display: none;" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Bruger Administration</a>
+    <a href="#" id="CommodityAdminPortal" style="display: none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Råvare Administration</a>
+    <a href="#" id="CommodityBatchPortal" style="display: none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Råvarebatch Administration</a>
+    <a href="#" id="ProductBatchPortal" style="display: none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Produktbatch Administration</a>
+    <a href="#" id="WeightPortal" style="display: none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Afvejning</a>
+    <button id="logoutBtn" style="display: none;" onclick="logout();" >Log ud</button>
   </div>
 </nav>
 
@@ -58,69 +63,116 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
-    <h5><b> Råvare Administration - Template</b></h5>
-    <button id="CreateBtn" class="w3-button w3-dark-grey">Tilføj   <i class="fa fa-plus"></i></button>
+    <h5><b> Log in</b></h5>
   </header>
 
 
   <div class="w3-container">
-    <h5>Råvare</h5>
-    
-    <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-      <tr>
-        <td>United States</td>
-        <td><button class="w3-dark-grey list-item-btn"><i class="	fa fa-wrench"></i></button> <button class="w3-dark-grey list-item-btn"><i class="fa fa-cog fa-fw"></i></button></td>
-      </tr>
-      <tr>
-        <td>UK</td>
-        <td><button class="w3-dark-grey list-item-btn"><i class="	fa fa-wrench"></i></button> <button class="w3-dark-grey list-item-btn"><i class="fa fa-cog fa-fw"></i></button></td>
-      </tr>
-    </table><br>
-    <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button>
+    <h5></h5>
+    <label>Indtast bruger ID: </label><input type="text" id="LoginUserID"></input> <br />
+    <button class="w3-button w3-dark-grey" onclick="login();">Log ind<i class="fa fa-arrow-right"></i></button>
+    <label id="userIDInsert"></label>
 </div>
 
 
-        <!-- Popup windows for addeding a new commodity one-->
-        <div id="CreateCommodityWindow" class="modal">
-          <div id="CreateCommodityWindow" class="modal-content">
-              <h2>Opret en råvare</h2>
-              <label>ID: </label><input id="CommodityIDTxtIn"> </input><br />
-              <label>Navn: </label> <input id="CommodityNameTxtIn"></input> <br />
-              <button class="close">Tilføj Råvare</button>
-          </div>
-      </div>
+<!-- from userAdim to manged user information-->
+              <div id="EditUserWindow" class="modal">
+                <div id="EditUserWindowContent" class="modal-content">
+                    <h2>Vis eller Opdater en bruger</h2>
+                    <label>Bruger ID: </label><input id="ShowUserID"> </input><br />
+                    <label>Fornavn: </label> <input id="ShowUserFirstName"></input> <br />
+                    <label>Efternavn: </label> <input id="ShowUserLastName"> </input> <br />
+                    <label>CPR nummer: </label> <input id="ShowUserCPR"> </input> <br />
+                    <label>Initialer: </label> <input id="ShowUserIniTxt"> </input> <br />
+                    <label>Roller: </label> <input type="checkbox" id="ShowUserRolesAdmin"> Administrator</input>, <input type="checkbox" id="ShowUserRolesFarma">Farmaceut</input>, <input type="checkbox" id="ShowUserRolesProductionleader">Produktionsleder</input>, <input type="checkbox" id="ShowUserRolesLab">Laborant</input> <br />
+                    <label>Status: </label> <input  type="checkbox" id="ShowUserStatus"> Aktiv </input> <br />
+                    <button onclick="" id="UpdateUserClose" class="UpdateUserClose">Opdater Bruger</button>
+                </div>
+            </div>
 
 
-<!--   Popup windows script  -->
-      <script>
-        // Get the modal
-        var modal = document.getElementById("CreateCommodityWindow");
-        
-        // Get the button that opens the modal
-        var btn = document.getElementById("CreateBtn");
-        
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-        
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-          modal.style.display = "block";
-        }
-        
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-    </script>
-
+</div>
 <script>
+
+  async function login() {
+
+    var id = document.getElementById("LoginUserID").value;
+
+    await getUser(id, false);
+
+    //document.getElementById("userIDInsert").content = document.getElementById("ShowUserID").value;
+    
+     // console.log("ready function");
+      if ( !(document.getElementById("ShowUserID").value == "") && document.getElementById("ShowUserStatus").checked == true ) {
+        console.log("du kan logge ind");
+        document.getElementById("logoutBtn").style.display = "block";
+        // admin portal 
+        if (document.getElementById("ShowUserRolesAdmin").checked == true) {
+          // user portal
+          AdminAccess();
+        } 
+
+        // Pharmaceut portal
+        if (document.getElementById("ShowUserRolesFarma").checked == true) {
+          //Commodity 
+          // Prescriptions and prescription components
+          // and produktionsleder access
+          PharmaceutAccess();
+        }
+
+        // Producktion leader
+        if (document.getElementById("ShowUserRolesProductionleader").checked == true) {
+          // commodity batches
+          // productbatches
+          // and has Lab guy access
+          ProductionleaderAccess();
+        }
+
+        // Lab guy
+        if (document.getElementById("ShowUserRolesLab").checked == true) {
+          // weight access
+          LabAccess();
+        }
+        
+      }
+      else {
+        console.log("Du kan ikke logge ind i systemet");
+      }
+   // setTimeout(valUser,1200);
+  }
+
+  function LabAccess() {
+    document.getElementById("WeightPortal").style.display = "block";
+  }
+
+  function ProductionleaderAccess() {
+    document.getElementById("ProductBatchPortal").style.display = "block";
+    document.getElementById("CommodityBatchPortal").style.display = "block";
+    LabAccess();
+  }
+
+  function PharmaceutAccess() {
+    // TODO: needs to be fixed
+              //Commodity 
+          // Prescriptions and prescription components
+          // and produktionsleder access
+    document.getElementById("ProductBatchPortal").style.display = "block";
+    document.getElementById("ProductBatchPortal").style.display = "block";
+    ProductionleaderAccess();
+  }
+
+  function AdminAccess() {
+    document.getElementById("UserAdminPortal").style.display = "block";
+  }
+
+  function logout() {
+    document.getElementById("WeightPortal").style.display = "none";
+    document.getElementById("ProductBatchPortal").style.display = "none";
+    document.getElementById("CommodityBatchPortal").style.display = "none";
+
+    document.getElementById("UserAdminPortal").style.display = "none";
+    document.getElementById("logoutBtn").style.display = "none";
+  }
 
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");

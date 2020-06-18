@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<head>
 <title>Bruger Administration</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,8 +15,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <link rel="stylesheet" href="style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="script.js"></script>
-
+</head>
 <body class="w3-light-grey">
+
+<script>
+
+</script>
 
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
@@ -67,11 +72,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <div class="w3-container">
     <h5>Brugere</h5>
-    
     <table id="ListOfUsersTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-     
+      <tr>
+        <td> loading </td>
+        <td><button class="w3-dark-grey list-item-btn"> loading <i class="fa fa-close"></i></button> <button id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>
+      </tr>
+      
     </table><br>
-</div>
+  </div>
 
 
         <!-- Popup windows for addeding a new commodity one-->
@@ -100,13 +108,20 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
                     <label>Initialer: </label> <input id="ShowUserIniTxt"> </input> <br />
                     <label>Roller: </label> <input type="checkbox" id="ShowUserRolesAdmin"> Administrator</input>, <input type="checkbox" id="ShowUserRolesFarma">Farmaceut</input>, <input type="checkbox" id="ShowUserRolesProductionleader">Produktionsleder</input>, <input type="checkbox" id="ShowUserRolesLab">Laborant</input> <br />
                     <label>Status: </label> <input  type="checkbox" id="ShowUserStatus"> Aktiv </input> <br />
-                    <button class="UpdateUserClose">Opdater Bruger</button>
+                    <button onclick="" id="UpdateUserClose" class="UpdateUserClose">Opdater Bruger</button>
                 </div>
             </div>
 
 
 <!--   Popup windows script  -->
       <script>
+        // startup stuff
+
+        listUsers();
+
+        $( document ).ready(function() {
+          console.log( "ready!" );
+       
         // Get the modal
         var addModal = document.getElementById("CreateUserWindow");
         
@@ -141,24 +156,27 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         var editBtn = document.getElementById("EditBtn");
         
         // Get the <span> element that closes the modal
-        var editSpan = document.getElementsByClassName("UpdateUserClose")[0];
+        var editSpan = document.getElementById("UpdateUserClose");
         
         // When the user clicks the button, open the modal 
-        editBtn.onclick = function() {
+       /* editBtn.onclick = function() {
             editModal.style.display = "block";
-        }
+        } */
         
         // When the user clicks on <span> (x), close the modal
         editSpan.onclick = function() {
+            updateUser();
             editModal.style.display = "none";
         }
         
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
           if (event.target == editModal) {
+            
             editModal.style.display = "none";
           }
         }
+      });
     </script>
 
 <script>
@@ -186,6 +204,6 @@ function w3_close() {
   overlayBg.style.display = "none";
 } 
 </script>
-
+</div>
 </body>
 </html>

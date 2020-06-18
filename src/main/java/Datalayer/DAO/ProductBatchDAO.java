@@ -1,6 +1,7 @@
 package Datalayer.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
         ResultSet result = DBUtil.executeSelectQuery(query, parameter, connection);
 
         result.first();
+        System.out.println(result.toString());
         productDTO.interpretResultSet(result);
         connection.close();
 
@@ -62,9 +64,12 @@ public class ProductBatchDAO implements IProductBatchDAO {
         // INSERT INTO ProductBatch VALUES (?,?,?,?,?)
 
         Connection connection = DBUtil.getConnection();
-        String query = "INSERT INTO ProductBatch (productBatchId,prescriptionId,status) VALUES (?,?,?);";
+        String query = "INSERT INTO ProductBatch (productBatchId,prescriptionId,startDate,endDate,status) VALUES (?,?,?,?,?);";
         Object[] parameter = productBatch.convertToObject();
+
         DBUtil.executeSelectQuery(query, parameter, connection);
+
+        connection.close();
     }
 
     @Override
@@ -80,6 +85,13 @@ public class ProductBatchDAO implements IProductBatchDAO {
 
         DBUtil.executeSelectQuery(query, parameter, connection);
 
+        connection.close();
+    }
+
+    public static void main(String[] args) throws SQLException {
+        ProductBatchDAO productBatchDAO = new ProductBatchDAO();
+
+        System.out.println(productBatchDAO.getProductBatchDTO(17).getEndDate());
     }
 
 }
