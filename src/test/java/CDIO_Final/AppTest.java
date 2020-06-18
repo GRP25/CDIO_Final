@@ -40,10 +40,6 @@ public class AppTest
             userFuncTest.createUser(testUser);
 
             // handle response
-            /*responseUser = userFuncTest.getUser(testUser.getUserID());
-            System.out.println("Response: " + responseUser.toString());
-
-            assertEquals(testUser, responseUser);*/
 
         } catch (final Exception e) {
             System.out.println("Connection failed");
