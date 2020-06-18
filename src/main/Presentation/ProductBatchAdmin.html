@@ -69,7 +69,7 @@
         <h5><b> Produktbatch Administration</b></h5>
         <button id="CreateProductBatchBtn" class="w3-button w3-dark-grey">Tilføj Product Batch <i class="fa fa-plus"></i></button>
         <button id="GetProductBatchList" onclick="getProductBatchList();" class="w3-button w3-dark-grey">Få Produkt Batch List/Refresh </button>
-        <button id="GetProductBatchByInt" class="w3-button w3-dark-grey"> Få Produkt Batch med samme Receptnummer</button>
+       <!-- <button id="GetProductBatchByInt" class="w3-button w3-dark-grey"> Få Produkt Batch med samme Receptnummer</button> -->
     </header>
 
 
@@ -87,7 +87,7 @@
             <h2>Opret Product Batch</h2>
             <label>Product Batch ID: </label><input id="CreateProductBatchID"><br/>
             <label>Prescription ID: </label><input id="InputPrescriptionID"><br/>
-            <label>Status: </label><input name="status" type="radio" id="InputStatusBegin"> Begin </input> <input name="status" type="radio" id="InputstatusProgress"> In Progress </input> <input name="status" type="radio" id="InputStatusDone"> Done </input> <br/>
+            <label>Status: </label><input name="status" type="radio" id="InputStatusBegin"> Oprettet  </input> <input name="status" type="radio" id="InputstatusProgress"> Under Produktion </input> <input name="status" type="radio" id="InputStatusDone"> Afsluttet </input> <br/>
             <button id="createProductBatchButton" class="createProductBatchButton"> Tilføj ProductBatch</button>
             <button id="CreateCancelButton" class="CancelButton"> Cancel</button>
         </div>
@@ -100,7 +100,7 @@
             <label>Prescription ID: </label><input id="EditPrescriptionID"><br/>
             <label>Start Date: </label><span id = "EditStartDate"></span><br/>
             <label>End Date: </label><span id = "EditEndDate"></span><br/>
-            <label>Status: </label><input name="EditStatus" type="radio" id="EditInputStatusBegin"> Begin </input> <input name="EditStatus" type="radio" id="EditInputstatusProgress"> In Progress </input> <input name="EditStatus" type="radio" id="EditInputStatusDone"> Done </input> <br/>
+            <label>Status: </label><input name="EditStatus" type="radio" id="EditInputStatusBegin"> Oprettet  </input> <input name="EditStatus" type="radio" id="EditInputstatusProgress"> Under Produktion </input> <input name="EditStatus" type="radio" id="EditInputStatusDone"> Afsluttet </input> <br/>
             <button id="EditProductBatchButton" class="EditProductBatchButton"> Opdater ProductBatch</button>
             <button id="EditCancelButton" class="CancelButton"> Cancel</button>
         </div>
@@ -127,7 +127,7 @@
         };
 
         window.onclick = function (event) {
-            if (event.target === addModal) {
+            if (event.target == addModal) {
                 addModal.style.display = "none";
             }
         };

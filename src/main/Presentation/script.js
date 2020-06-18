@@ -379,7 +379,19 @@ function updateProductBatch() {
 }
 
 function getProductBatchListWithID(){
+    $.ajax ({
+        url: "https://api.mama.sh/ProductBatchs",
+        contentType: "application/json",
+        method: "PUT",
+        data: JSON.stringify(productBatch),
+        success: function (response) {
+            alert("Produkt Batch Opdateret");
+        },
+        error: function (data, text, error) {
+            alert("fejl: Produkt Batch ikke opdateres");
+        }
 
+    });
 }
 
 async function getProductBatch(id) {
