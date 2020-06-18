@@ -507,15 +507,58 @@ async function openProductBatch() {
     document.getElementById("EditProductBatchWindow").style.display = "none";
 
     var presID = document.getElementById("EditPrescriptionID").value;
-    await getPrescription(presID)
+    await getPrescription(presID);
     document.getElementById("WeightPrescriptionID").innerHTML = presID;
+    getPrescriptionCompList(presID);
     //document.getElementById("WeightPrescriptionName").innerHTML = ;
 }
 
-function getPrescriptionComp(prescriptionID) {
-    
+function getPrescriptionCompList(prescriptionID) {
+    $.ajax ( {
+        url: "https://api.mama.sh/PrescriptionComp/" + prescriptionID,
+        contentType: "application/json",
+        type: "GET",
+        success: function (response) {
+            response.forEach(prescriptionComp => { 
+
+                ShowPrescriptionCompToLab(prescriptionComp);
+            })
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+    });
 }
 
-function ShowPrescriptionCompToLab(PrescriptionCompList) {
-    
+function ShowPrescriptionCompToLab(PrescriptionComp) {
+    var commoditybatchList = document.getElementById("WeightCommodityBatchList");
+
+    commoditybatchList.innerHTML += '<div class="w3-container"> ' 
+                                + ' <h5>Råvare nr: <label>'+ PrescriptionComp.commodity_id+'</label></h5> '
+                                + '<h5>Råvare Navn: <label>Vand</label></h5> '
+                                + ' <table id="ListOfProductBatchTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white"> '
+                                + ' <tr> '
+                                + '<td>Del</td> '
+                                + '<td>Mængde</td>'
+                                + '<td>Tolerance</td>'
+                                + '<td>Tara</td>'
+                                + '<td>Netto (kg)</td>'
+                                + '<td>Batch</td>'
+                                + '<td>Opr</td>'
+                                + '<td>Terminal</td>'
+                                + '</tr>'
+                                + '<tr>'
+                                + '<td>1</td>'
+                                + '<td>' + PrescriptionComp.nomNetto +'</td>'
+                                + '<td>' + PrescriptionComp.tolerance + '</td>'
+                                + '<td><input type="text"></input></td>'
+                                + '<td><input type="text"></input></td>'
+                                + '<td><input type="text"></input></td>'
+                                + '<td><input type="text"></input></td>'
+                                + '<td><input type="text"></input></td>'
+                                + '</tr>'
+                                + '</table>'
+                                + '<br>'
+                                + '</div>';
+
 }
