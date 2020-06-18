@@ -17,12 +17,14 @@ public class PrescriptionCompService implements IPrescriptionCompService {
 
 	@Override
 	public PrescriptionCompDTO getPrescriptionComp(int prescription_id, int commodity_id) throws SQLException {
+
 		PrescriptionCompDTO prescriptionCompDTO =  prescriptionCompDAO.getPrescriptionComp(prescription_id, commodity_id);
 
-		if (prescriptionCompDTO.getPrescription_id() == 0) // TODO how if commodity_batch doesn't exist
-			throw new ObjectException("No PrescriptionComp exists with this number as an identification!");
+		if (prescriptionCompDTO.getPrescription_id() == 0) // TODO how if commodity doesn't exist
+			throw new ObjectException("No PrescriptionComp or Commodity exists with this number as an identification!");
 
 		return prescriptionCompDTO;
+
 	}
 
 	@Override
@@ -32,12 +34,14 @@ public class PrescriptionCompService implements IPrescriptionCompService {
 
 	@Override
 	public List<PrescriptionCompDTO> getPrescriptionCompList(int prescription_id) throws SQLException {
+
 		List<PrescriptionCompDTO> prescriptionCompDTOList = prescriptionCompDAO.getPrescriptionCompList(prescription_id);
 
 		if (prescriptionCompDTOList.isEmpty())
 			throw new ObjectException("No PrescriptionComp exists with this number as an identification!");
 
 		return prescriptionCompDTOList;
+
 	}
 
 	@Override

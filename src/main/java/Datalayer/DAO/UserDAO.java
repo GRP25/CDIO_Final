@@ -92,42 +92,36 @@ public class UserDAO implements IUserDAO, IValidation {
 	}
 
 	@Override
-	public void deactivateUser(int id) throws SQLException {
+	public boolean deactivateUser(int id) throws SQLException {
 		String query = "UPDATE Users set status = ? WHERE userId = ?;";
 		Connection connection = DBUtil.getConnection();
 		Object[] parameter = { 0, id };
-		DBUtil.executeSelectQuery(query, parameter, connection);
+		ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
+
 		connection.close();
+		return rs.next();
 	}
 
 	@Override
 	public boolean exists(String cpr) throws SQLException {
-		boolean ret;
 		String query = "SELECT userId FROM Users WHERE cpr = ?";
 		Object[] parameter = { cpr };
 		Connection connection = DBUtil.getConnection();
 		ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
-		if (rs.next())
-			ret = true;
-		else
-			ret = false;
+
 		connection.close();
-		return ret;
+		return rs.next();
 	}
 
 	@Override
 	public boolean exists(int id) throws SQLException {
-		boolean ret;
 		String query = "SELECT userId FROM Users WHERE userId = ?";
 		Object[] parameter = { id };
 		Connection connection = DBUtil.getConnection();
 		ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
-		if (rs.next())
-			ret = true;
-		else
-			ret = false;
+
 		connection.close();
-		return ret;
+		return rs.next();
 	}
 
 	private ArrayList<String> get_user_roles(int id, Connection connection) throws SQLException {

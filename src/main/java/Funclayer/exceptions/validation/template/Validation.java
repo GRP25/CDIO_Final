@@ -1,6 +1,7 @@
 package Funclayer.exceptions.validation.template;
 
 import Funclayer.exceptions.exceptions.DataLayerException;
+import Funclayer.exceptions.exceptions.IDException;
 import Funclayer.exceptions.exceptions.NotANameException;
 import Funclayer.exceptions.exceptions.NotAStatusException;
 
@@ -49,12 +50,12 @@ public abstract class Validation {
 		}
 	}
 
-	protected static int idValidator(int id) throws DataLayerException {
+	protected static int idValidator(int id) throws  IDException {
 		if (!hasDigit( String.valueOf( id ) ))
-			throw new DataLayerException( "ID should be a number" );
+			throw new IDException( "ID should be a number" );
 
 		if (id < 1 || id > 99999999)
-			throw new DataLayerException( "ID should be between 1 - 99999999" );
+			throw new IDException( "ID should be between 1 - 99999999" );
 
 		return id;
 	}

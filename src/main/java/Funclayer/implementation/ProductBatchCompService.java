@@ -20,8 +20,8 @@ public class ProductBatchCompService implements IProductBatchCompService {
 
         ProductBatchCompDTO productBatchCompDTO = productBatchCompDAO.getProductBatchComp(productBatch_id,commodityBatch_id);
 
-        if (productBatchCompDTO.getProductBatch_id() == 0)
-            throw new ObjectException("No ProductBatchComp exists with this number as an identification!");
+        if (productBatchCompDTO.getProductBatch_id() == 0) // TODO how if commodity_batch doesn't exist
+            throw new ObjectException("No ProductBatchComp or CommodityBatch exists with this number as an identification!");
 
         return productBatchCompDTO;
 

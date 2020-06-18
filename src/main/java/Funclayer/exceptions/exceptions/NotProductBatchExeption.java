@@ -2,7 +2,9 @@ package Funclayer.exceptions.exceptions;
 
 import Datalayer.DTO.ProductBatchDTO;
 
-public class NotProductBatchExeption extends Exception {
+import java.sql.SQLException;
+
+public class NotProductBatchExeption extends SQLException {
     public NotProductBatchExeption(String message){
         super(message);
     }

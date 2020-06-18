@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class ProductBatchCompDTO implements IDTO {
 	private int productBatch_id;
-	private int commodity_id;
+	private int commodityBatch_id;
 	private int user_id;
 	private double tara;
 	private double netto;
@@ -16,9 +16,9 @@ public class ProductBatchCompDTO implements IDTO {
 
 	}
 
-	public ProductBatchCompDTO(int productBatch_id, int commodity_id, int user_id, double tara, double netto) {
+	public ProductBatchCompDTO(int productBatch_id, int commodityBatch_id, int user_id, double tara, double netto) {
 		this.productBatch_id = productBatch_id;
-		this.commodity_id = commodity_id;
+		this.commodityBatch_id = commodityBatch_id;
 		this.user_id = user_id;
 		this.tara = tara;
 		this.netto = netto;
@@ -32,12 +32,12 @@ public class ProductBatchCompDTO implements IDTO {
 		return productBatch_id;
 	}
 
-	public void setCommodity_id(int commodity_id) {
-		this.commodity_id = commodity_id;
+	public void setCommodityBatch_id(int commodityBatch_id) {
+		this.commodityBatch_id = commodityBatch_id;
 	}
 
-	public int getCommodity_id() {
-		return commodity_id;
+	public int getCommodityBatch_id() {
+		return commodityBatch_id;
 	}
 
 	public void setUser_id(int user_id) {
@@ -66,14 +66,14 @@ public class ProductBatchCompDTO implements IDTO {
 
 	@Override
 	public String toString() {
-		return "ProductBatchCompDTO{" + "productBatch_id=" + productBatch_id + ", commodity_id=" + commodity_id
+		return "ProductBatchCompDTO{" + "productBatch_id=" + productBatch_id + ", commodity_id=" + commodityBatch_id
 				+ ", user_id=" + user_id + ", tara=" + tara + ", netto=" + netto + '}';
 	}
 
 	@Override
 	public IDTO interpretResultSet(ResultSet resultSet) throws SQLException {
 		this.setProductBatch_id(resultSet.getInt("productBatchId"));
-		this.setCommodity_id(resultSet.getInt("commodityBatchId"));
+		this.setCommodityBatch_id(resultSet.getInt("commodityBatchId"));
 		this.setUser_id(resultSet.getInt("userId"));
 		this.setTara(resultSet.getDouble("tara"));
 		this.setNetto(resultSet.getDouble("netto"));
@@ -84,7 +84,7 @@ public class ProductBatchCompDTO implements IDTO {
 	public Object[] convertToObject() {
 		Object[] objects = new Object[5];
 		objects[0] = this.productBatch_id;
-		objects[1] = this.commodity_id;
+		objects[1] = this.commodityBatch_id;
 		objects[2] = this.user_id;
 		objects[3] = this.tara;
 		objects[4] = this.netto;

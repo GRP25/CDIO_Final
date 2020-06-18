@@ -18,12 +18,14 @@ public class CommodityService implements ICommodityService {
 
     @Override
     public CommodityDTO getCommodity(int commodity_id) throws SQLException {
+
         CommodityDTO commodityDTO = commodityDAO.getCommodity(commodity_id);
 
         if (commodityDTO.getCommodity_id() == 0)
             throw new ObjectException("No Commodity exists with this number as an identification!");
 
         return commodityDTO;
+
     }
 
     @Override

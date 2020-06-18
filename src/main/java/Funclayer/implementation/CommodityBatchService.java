@@ -18,8 +18,14 @@ public class CommodityBatchService implements ICommodityBatchService {
 
     @Override
     public CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws SQLException {
-        validateCommodityBatchID(commodityBatch_id);
+
+        CommodityBatchDTO commodityBatchDTO = commodityBatchDAO.getCommodityBatch( commodityBatch_id );
+
+        if (commodityBatchDTO.getCommodityBatch_id() == 0)
+            throw new ObjectException("No CommodityBatch exists with this number as an identification!");
+
         return commodityBatchDAO.getCommodityBatch( commodityBatch_id );
+
     }
 
 
@@ -29,14 +35,15 @@ public class CommodityBatchService implements ICommodityBatchService {
     }
 
     @Override
-    public List<CommodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws SQLException {
-        validateCommodityBatchID(commodityBatch_id);
-        List<CommodityBatchDTO> commodityBatchDTOList = commodityBatchDAO.getCommodityBatchList( commodityBatch_id );
+    public List<CommodityBatchDTO> getCommodityBatchList(int commodity_id) throws SQLException {
+
+        List<CommodityBatchDTO> commodityBatchDTOList = commodityBatchDAO.getCommodityBatchList( commodity_id );
 
         if (commodityBatchDTOList.isEmpty())
-            throw new ObjectException("No CommodityBatch exists with this number as an identification!");
+            throw new ObjectException("No Commodity exists with this number as an identification!");
 
         return commodityBatchDTOList;
+
     }
 
     @Override

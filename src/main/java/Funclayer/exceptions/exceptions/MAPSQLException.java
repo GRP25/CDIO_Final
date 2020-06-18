@@ -2,8 +2,8 @@ package Funclayer.exceptions.exceptions;
 
 import java.sql.SQLException;
 
-public class MapSQLExceptionTest extends SQLException {
-    public MapSQLExceptionTest(String reason) {
+public class MAPSQLException extends SQLException {
+    public MAPSQLException(String reason) {
         super( reason );
     }
 }

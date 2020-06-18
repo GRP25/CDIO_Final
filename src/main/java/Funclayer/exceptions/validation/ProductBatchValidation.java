@@ -1,7 +1,9 @@
 package Funclayer.exceptions.validation;
 
+import Datalayer.DAO.PrescriptionDAO;
 import Datalayer.DAO.ProductBatchDAO;
 import Datalayer.DTO.ProductBatchDTO;
+import Datalayer.Interfaces.IPrescriptionDAO;
 import Datalayer.Interfaces.IProductBatchDAO;
 import Funclayer.exceptions.exceptions.DataLayerException;
 import Funclayer.exceptions.exceptions.NotProductBatchExeption;
@@ -26,19 +28,22 @@ public class ProductBatchValidation extends Validation {
 
     public static void productBatchValidation(ProductBatchDTO productBatchDTO) throws NotProductBatchExeption, SQLException {
 
-        if (!isDateValidator( String.valueOf( productBatchDTO.getStartDate() ) ))
+
+        /*if (!isDateValidator( String.valueOf( productBatchDTO.getStartDate() ) ))
             throw new DateTimeException("Invalid start-date");
 
         if (!isDateValidator( String.valueOf( productBatchDTO.getEndDate() ) ))
-            throw new DateTimeException("Invalid end-date");
+            throw new DateTimeException("Invalid end-date");*/ // TODO Need explanation
 
         statusValidator(productBatchDTO.getStatus());
 
-        if (!productBatchDAO.exists( idValidator( productBatchDTO.getProductBatch_id())))
-            throw new ObjectException( "Invalid productbatch ID");
+        if (productBatchDAO.exists( idValidator( productBatchDTO.getProductBatch_id())))
+            throw new ObjectException( "ProductBatch id is already exist");
 
-        if (!productBatchDAO.exists( idValidator( productBatchDTO.getPrescription_id())))
-            throw new ObjectException( "Invalid prescription ID");
+
+        IPrescriptionDAO prescriptionDAO = new PrescriptionDAO();
+        if (!prescriptionDAO.exists( idValidator( productBatchDTO.getPrescription_id())))
+            throw new ObjectException( "Prescription id is not exist");
 
     }
 
