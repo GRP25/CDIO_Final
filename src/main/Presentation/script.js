@@ -535,7 +535,7 @@ function ShowPrescriptionCompToLab(PrescriptionComp, number) {
     var commoditybatchList = document.getElementById("WeightCommodityBatchList");
 
     commoditybatchList.innerHTML += '<div class="w3-container"> ' 
-                                + ' <h5>Råvare nr: <label>'+ PrescriptionComp.commodity_id+'</label></h5> '
+                                + ' <h5>Råvare nr: <label id="WeightCommodityID">'+ PrescriptionComp.commodity_id+'</label></h5> '
                                 + '<h5>Råvare Navn: <label>Vand</label></h5> '
                                 + ' <table id="ListOfProductBatchTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white"> '
                                 + ' <tr> '
@@ -552,27 +552,37 @@ function ShowPrescriptionCompToLab(PrescriptionComp, number) {
                                 + '<td>1</td>'
                                 + '<td>' + PrescriptionComp.nomNetto +'</td>'
                                 + '<td>' + PrescriptionComp.tolerance + '</td>'
-                                + '<td><input type="text"></input></td>'
-                                + '<td><input type="text"></input></td>'
-                                + '<td><input type="text"></input></td>'
+                                + '<td><input type="text" id="WeightTara' + PrescriptionComp.commodity_id +'"></input></td>'
+                                + '<td><input type="text" id="WeightNetto' + PrescriptionComp.commodity_id + '"></input></td>'
+                                + '<td><input type="text"></input></td>' 
                                 + '<td><input type="text"></input></td>'
                                 + '<td><input type="text"></input></td>'
                                 + '</tr>'
                                 + '</table>'
                                 + '<br>'
-                                + '<button onclick="CreateProductBatchComp();"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
+                                + '<button onclick="CreateProductBatchComp('+ PrescriptionComp.commodity_id+');"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
                                 + '</div>';
 
 }
 
-function CreateProductBatchComp() {
+function CreateProductBatchComp(commodityID) {
+    // work in progress
+    var productbatchcomp = {
+        productBatch_id: $('#ProductBatchToWeight').val(),
+        commodity_id: commodityID, //$('#WeightCommodityID').val(),
+        user_id: 1,
+        tara: $('#WeightTara' + commodityID).val(),
+        netto: $('#WeightNetto' + commodityID).val()
+      };
+
+
     $.ajax ({
         url: "https://api.mama.sh/productbatchcomp",
         contentType: "application/json",
         type: "POST",
-        data : JSON.stringify(data),
+        data : JSON.stringify(productbatchcomp),
         success : function (response) {
-            
+            alert("ProductBatch Comp has been added");
         }
         
     });
