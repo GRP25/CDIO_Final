@@ -299,7 +299,6 @@ function CreateProductBatch() {
     var productBatch = {
         productBatch_id: $("#CreateProductBatchID").val(),
         prescription_id: $("#InputPrescriptionID").val(),
-        startDate: date().now,
         status: productBatchStatus
     };
 

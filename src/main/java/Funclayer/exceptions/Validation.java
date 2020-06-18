@@ -55,9 +55,9 @@ public class Validation {
     public static String nameValidator(String name) throws NotANameException {
         if (hasDigit(name))
             throw new NotANameException("Names can not have numbers. Please put in a real name!");
-        if (hasSpecial(name))
+        else if (hasSpecial(name))
             throw new NotANameException("Names can not have special characters. Please put in a real name!");
-        if (lengthValidator(1, 25, name))
+        else if (lengthValidator(1, 25, name))
             throw new NotANameException("The name can only be between 2 and 25 characters");
         else
             return name;
@@ -66,7 +66,11 @@ public class Validation {
     public static void validateUser(UserDTO user) throws UserException, SQLException{
         nameValidator(nameConversion(user.getFirstName()));
         nameValidator(nameConversion(user.getSurname()));
-        cprValidator(user.getCpr());
+        try {
+            user.getUserID();
+        } catch (Exception e) {
+            cprValidator(user.getCpr());
+        }
     }
 
     public static void validateUserId(int id) throws SQLException {

@@ -1,7 +1,6 @@
 package REST.Resources;
 
 import Datalayer.DTO.UserDTO;
-import Funclayer.exceptions.ErrorMessage;
 import Funclayer.implementation.UserService;
 import Funclayer.interfaces.IUserService;
 import Funclayer.exceptions.UserException;
