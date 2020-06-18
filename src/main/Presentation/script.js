@@ -367,7 +367,6 @@ async function getProductBatch(id) {
                     $("#EditInputStatusDone").prop('checked', true);
                     break;
             }
-            return response.productBatch_id;
         },
         error: function (jqXHR, text, error) {
             document.getElementById("loaderID").style.display = "none";
@@ -506,6 +505,20 @@ async function openProductBatch() {
     await getProductBatch(productBatchID);
     document.getElementById("EditProductBatchWindow").style.display = "none";
 
+    // Get status for productbatch
+    var productBatchStatus;
+    if (document.getElementById("EditInputStatusBegan").checked == true)
+        productBatchStatus = "Startet";
+    else if (document.getElementById("EditInputstatusProgress").checked == true)
+        productBatchStatus = "Underproduktion";
+    else
+        productBatchStatus = "Afsluttet";
+
+    // show productBatch information
+    document.getElementById("WeightProductBatchStatus").innerHTML = productBatchStatus;
+    document.getElementById("WeightProductBatchStartDate").innerHTML = "work in progress";
+    document.getElementById("WeightProductBatchEndDate").innerHTML = "work in progress";
+
     var presID = document.getElementById("EditPrescriptionID").value;
     await getPrescription(presID);
     document.getElementById("WeightPrescriptionID").innerHTML = presID;
@@ -520,6 +533,7 @@ function getPrescriptionCompList(prescriptionID) {
         type: "GET",
         success: function (response) {
             var number = 0;
+            document.getElementById("WeightCommodityBatchList").innerHTML = "";
             response.forEach(prescriptionComp => { 
                 number++;
                 ShowPrescriptionCompToLab(prescriptionComp, number);
@@ -533,6 +547,13 @@ function getPrescriptionCompList(prescriptionID) {
 
 function ShowPrescriptionCompToLab(PrescriptionComp, number) {
     var commoditybatchList = document.getElementById("WeightCommodityBatchList");
+    var isShown = "none";
+
+    if (number == 1) {
+        isShown = "block";
+    }
+
+
 
     commoditybatchList.innerHTML += '<div class="w3-container"> ' 
                                 + ' <h5>Råvare nr: <label id="WeightCommodityID">'+ PrescriptionComp.commodity_id+'</label></h5> '
@@ -548,47 +569,86 @@ function ShowPrescriptionCompToLab(PrescriptionComp, number) {
                                 + '<td>Opr</td>'
                                 + '<td>Terminal</td>'
                                 + '</tr>'
-                                + '<tr>'
+                                + '<tr >'
                                 + '<td>1</td>'
                                 + '<td>' + PrescriptionComp.nomNetto +'</td>'
                                 + '<td>' + PrescriptionComp.tolerance + '</td>'
-                                + '<td><input type="text" id="WeightTara' + PrescriptionComp.commodity_id +'"></input></td>'
-                                + '<td><input type="text" id="WeightNetto' + PrescriptionComp.commodity_id + '"></input></td>'
-                                + '<td><input type="text"></input></td>' 
-                                + '<td><input type="text"></input></td>'
-                                + '<td><input type="text"></input></td>'
+                                + '<td id="WeightLineTara' + number + '"><input type="text" id="WeightTara' + PrescriptionComp.commodity_id +'"></input></td>'
+                                + '<td id="WeightLineNetto' + number + '"><input type="text" id="WeightNetto' + PrescriptionComp.commodity_id + '"></input></td>'
+                                + '<td id="WeightLineBatch' + number + '"><input type="text"></input></td>' 
+                                + '<td id="WeightLineOpr' + number + '"><input type="text"></input></td>'
+                                + '<td id="WeightLineTerminal' + number + '"><input type="text"></input></td>'
                                 + '</tr>'
                                 + '</table>'
                                 + '<br>'
-                                + '<button onclick="CreateProductBatchComp('+ PrescriptionComp.commodity_id+');"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
+                                + '<button style="display: ' + isShown +';" id="WeightSubmitBtn' + number +'" onclick="CreateProductBatchComp('+ PrescriptionComp.commodity_id+',' + number + ');"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
                                 + '</div>';
 
 }
 
-function CreateProductBatchComp(commodityID) {
+async function CreateProductBatchComp(commodityID, number) {
     // work in progress
+    var productBatchID = $('#ProductBatchToWeight').val();
+
     var productbatchcomp = {
-        productBatch_id: $('#ProductBatchToWeight').val(),
+        productBatch_id: productBatchID,
         commodity_id: commodityID, //$('#WeightCommodityID').val(),
-        user_id: 1,
-        tara: $('#WeightTara' + commodityID).val(),
-        netto: $('#WeightNetto' + commodityID).val()
+        user_id: 1, // add current user
+        tara: $("#WeightTara" + commodityID).val(),
+        netto: $("#WeightNetto" + commodityID).val(),
       };
 
 
-    $.ajax ({
+    await $.ajax ({
         url: "https://api.mama.sh/productbatchcomp",
         contentType: "application/json",
         type: "POST",
         data : JSON.stringify(productbatchcomp),
         success : function (response) {
             alert("ProductBatch Comp has been added");
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+            console.log(productbatchcomp);
+            
         }
         
     });
+    
+    console.log("Not skipped!");
+    
+    document.getElementById("WeightSubmitBtn" + number).style.display = "none";
+    try {
+        document.getElementById("WeightSubmitBtn" + (number + 1)).style.display = "block";
+    }
+    catch {
+        console.log ("done!");
+    }
+
+    await UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
 }
 
-// show status to weight
-function showStatusAndDates() {
+async function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
     
+    console.log("starting update");
+    
+    await $.ajax ({
+        url: "https://api.mama.sh/productbatchcomp/component?productBatchId=" + productBatchID + "&commodityBatchId=" + commodityID,
+        contentType: "application/json",
+        type: "GET",
+        success : function (response) {
+            document.getElementById("WeightLineTara" + number).innerHTML = response.tara;
+            document.getElementById("WeightLineNetto" + number).innerHTML = response.netto;
+            document.getElementById("WeightLineBatch" + number).innerHTML = response.commodity_id;
+            document.getElementById("WeightLineOpr" + number).innerHTML = response.userID;
+            document.getElementById("WeightLineTerminal" + number).innerHTML = 1;
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+            console.log("Get updated error");
+            
+        }
+    });
+
+
 }
