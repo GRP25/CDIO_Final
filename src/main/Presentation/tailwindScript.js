@@ -1,6 +1,44 @@
 $(document).ready(() => {
+	var openmodal = document.querySelectorAll('.modal-open')
+	for (var i = 0; i < openmodal.length; i++) {
+		openmodal[i].addEventListener('click', function (event) {
+			event.preventDefault()
+			toggleModal()
+		})
+	}
 
+	const overlay = document.querySelector('.modal-overlay')
+	overlay.addEventListener('click', toggleModal)
+
+	var closemodal = document.querySelectorAll('.modal-close')
+	for (var i = 0; i < closemodal.length; i++) {
+		closemodal[i].addEventListener('click', toggleModal)
+	}
+
+	document.onkeydown = function (evt) {
+		evt = evt || window.event
+		var isEscape = false
+		if ("key" in evt) {
+			isEscape = (evt.key === "Escape" || evt.key === "Esc")
+		} else {
+			isEscape = (evt.keyCode === 27)
+		}
+		if (isEscape && document.body.classList.contains('modal-active')) {
+			toggleModal()
+		}
+	};
 });
+
+
+
+
+function toggleModal() {
+	const body = document.querySelector('body')
+	const modal = document.querySelector('.modal')
+	modal.classList.toggle('opacity-0')
+	modal.classList.toggle('pointer-events-none')
+	body.classList.toggle('modal-active')
+}
 
 function listCommodities() {
 	console.log("test");
@@ -11,7 +49,7 @@ function listCommodities() {
 		method: "GET",
 		success: function (response) {
 			//document.getElementById("loaderID").style.display = "none";
-			$("#ListOfUsersTable").html("");
+			$("#listOfCommoditiestable").html("");
 			var html = "";
 			//'<table class="tableOfUsers"> <tr><th>Name</th><th>Id</th></tr>';
 			jQuery.each(response, (i, item) => {
@@ -21,9 +59,9 @@ function listCommodities() {
 				html += `</tr>`;
 			});
 			console.log(html);
-			$("#ListOfUsersTable").append(html);
+			$("#listOfCommoditiestable").append(html);
 
-			$("#ListOfUsersTable").show();
+			$("#listOfCommoditiestable").show();
 		},
 		error: function (jqXHR, text, error) {
 			document.getElementById("loaderID").style.display = "none";
