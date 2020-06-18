@@ -344,9 +344,9 @@ function getProductBatchList() {
     })
 }
 
-function getProductBatch(id) {
+async function getProductBatch(id) {
     console.log("getuser Started");
-    $.ajax({
+    await $.ajax({
         url: "https://api.mama.sh/ProductBatchs/ID/"+id,
         contentType: "application/json",
         method: "GET",
@@ -368,6 +368,7 @@ function getProductBatch(id) {
                     $("#EditInputStatusDone").prop('checked', true);
                     break;
             }
+            return response.productBatch_id;
         },
         error: function (jqXHR, text, error) {
             document.getElementById("loaderID").style.display = "none";
@@ -482,3 +483,40 @@ function updateCommodityBatch() {
 }
 
 
+
+async function getPrescription(id) {
+    await $.ajax ({
+        url: "https://api.mama.sh/Prescriptions/ID/" + id,
+        contentType: "application/json",
+        type: "GET",
+        success: function (response) {
+            // CAN be changed to another value when the admin portal has been added !!!
+            // Just can the openProductBatch() to match the new id;
+            $("#WeightPrescriptionName").text(response.prescription_name);
+            console.log(response.prescription_name);
+            
+        },
+        error: function (jqXHR, text, error) {
+            alert(jqXHR.status + text + error);
+        }
+    });
+}
+
+async function openProductBatch() {
+    var productBatchID = document.getElementById("ProductBatchToWeight").value;
+    await getProductBatch(productBatchID);
+    document.getElementById("EditProductBatchWindow").style.display = "none";
+
+    var presID = document.getElementById("EditPrescriptionID").value;
+    await getPrescription(presID)
+    document.getElementById("WeightPrescriptionID").innerHTML = presID;
+    //document.getElementById("WeightPrescriptionName").innerHTML = ;
+}
+
+function getPrescriptionComp(prescriptionID) {
+    
+}
+
+function ShowPrescriptionCompToLab(PrescriptionCompList) {
+    
+}
