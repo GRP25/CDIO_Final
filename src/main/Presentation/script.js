@@ -520,9 +520,10 @@ function getPrescriptionCompList(prescriptionID) {
         contentType: "application/json",
         type: "GET",
         success: function (response) {
+            var number = 0;
             response.forEach(prescriptionComp => { 
-
-                ShowPrescriptionCompToLab(prescriptionComp);
+                number++;
+                ShowPrescriptionCompToLab(prescriptionComp, number);
             })
         },
         error: function (jqXHR, text, error) {
@@ -531,7 +532,7 @@ function getPrescriptionCompList(prescriptionID) {
     });
 }
 
-function ShowPrescriptionCompToLab(PrescriptionComp) {
+function ShowPrescriptionCompToLab(PrescriptionComp, number) {
     var commoditybatchList = document.getElementById("WeightCommodityBatchList");
 
     commoditybatchList.innerHTML += '<div class="w3-container"> ' 
@@ -560,6 +561,25 @@ function ShowPrescriptionCompToLab(PrescriptionComp) {
                                 + '</tr>'
                                 + '</table>'
                                 + '<br>'
+                                + '<button onclick="CreateProductBatchComp();"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
                                 + '</div>';
 
+}
+
+function CreateProductBatchComp() {
+    $.ajax ({
+        url: "https://api.mama.sh/productbatchcomp",
+        contentType: "application/json",
+        type: "POST",
+        data : JSON.stringify(data),
+        success : function (response) {
+            
+        }
+        
+    });
+}
+
+// show status to weight
+function showStatusAndDates() {
+    
 }
