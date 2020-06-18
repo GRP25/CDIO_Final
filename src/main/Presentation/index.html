@@ -50,6 +50,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <a href="#" id="CommodityBatchPortal" style="display: none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Råvarebatch Administration</a>
     <a href="#" id="ProductBatchPortal" style="display: none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Produktbatch Administration</a>
     <a href="#" id="WeightPortal" style="display: none;" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Afvejning</a>
+    <button id="logoutBtn" style="display: none;" onclick="logout();" >Log ud</button>
   </div>
 </nav>
 
@@ -74,7 +75,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </div>
 
 
-              <!-- Popup windows for edditing  a commodity one-->
+<!-- from userAdim to manged user information-->
               <div id="EditUserWindow" class="modal">
                 <div id="EditUserWindowContent" class="modal-content">
                     <h2>Vis eller Opdater en bruger</h2>
@@ -104,7 +105,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
      // console.log("ready function");
       if ( !(document.getElementById("ShowUserID").value == "") && document.getElementById("ShowUserStatus").checked == true ) {
         console.log("du kan logge ind");
-
+        document.getElementById("logoutBtn").style.display = "block";
         // admin portal 
         if (document.getElementById("ShowUserRolesAdmin").checked == true) {
           // user portal
@@ -151,6 +152,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   }
 
   function PharmaceutAccess() {
+    // TODO: needs to be fixed
+              //Commodity 
+          // Prescriptions and prescription components
+          // and produktionsleder access
     document.getElementById("ProductBatchPortal").style.display = "block";
     document.getElementById("ProductBatchPortal").style.display = "block";
     ProductionleaderAccess();
@@ -160,7 +165,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     document.getElementById("UserAdminPortal").style.display = "block";
   }
 
+  function logout() {
+    document.getElementById("WeightPortal").style.display = "none";
+    document.getElementById("ProductBatchPortal").style.display = "none";
+    document.getElementById("CommodityBatchPortal").style.display = "none";
 
+    document.getElementById("UserAdminPortal").style.display = "none";
+  }
 
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
