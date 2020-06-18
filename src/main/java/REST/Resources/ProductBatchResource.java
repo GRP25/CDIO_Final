@@ -56,13 +56,8 @@ public class ProductBatchResource {
 
         ProductBatchDTO productBatchDTO = productBatchService.getProductBatchDTO(productBatchId);
 
-        if (productBatchDTO != null) {
-            response = Response.status(Response.Status.OK).entity(productBatchDTO).build();
+        response = Response.status(Response.Status.OK).entity(productBatchDTO).build();
 
-        } else {
-            response = Response.status(Response.Status.BAD_REQUEST).entity("Error").build();
-
-        }
         return response;
     }
 

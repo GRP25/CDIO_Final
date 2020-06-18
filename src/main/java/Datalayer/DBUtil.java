@@ -54,6 +54,8 @@ public class DBUtil {
                     pstmt.setDouble(index++, Double.parseDouble(object.toString()));
                 } else if (object instanceof String) {
                     pstmt.setString(index++, object.toString());
+                } else if(object instanceof Date) {
+                    pstmt.setDate(index++ , Date.valueOf(((Date) object).toLocalDate()));
                 }
             }
         }
