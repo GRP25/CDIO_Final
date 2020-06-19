@@ -502,10 +502,10 @@ function updateProductBatchComp(){
         method: "PUT",
         data: JSON.stringify(productBachComp),
         success: function (response) {
-            alert("Produkt Batch Opdateret");
+            alert("Produkt Batch Comp Opdateret");
         },
         error: function (data, text, error) {
-            alert("fejl: Produkt Batch ikke opdateres");
+            alert("fejl: Produkt Batch Comp ikke opdateret");
         }
 
     });
