@@ -28,14 +28,15 @@
             </div>
 
             <!--Container-->
-            <div class="w-2/3 ml-auto h-screen">
+            <div class="w-2/3 ml-auto h-screen p-6">
 
-                 <div class="h-auto w-full bg-gray-800 my-10 ">
+                 <div class="h-auto w-full bg-gray-800 my-10 rounded-lg">
                      <!--Search Bar-->
                      <div class="p-2 flex justify-end" >
-                         <input type="text" class="rounded-full">
-                         <button class="cursor-pointer m-4 bg-blue-300 rounded-full">SØG</button>
-                         <button onclick="showModal(true)" class="cursor-pointer m-4 bg-blue-300 rounded-full">OPRET</button>
+                         <input type="text" class="rounded-full ">
+                         <button onclick="" class="cursor-pointer m-4 bg-blue-300 hover:bg-blue-400 rounded-full ">SØG</button>
+                         <button onclick="showModal(true)" class="cursor-pointer m-4 bg-blue-300 hover:bg-blue-400 rounded-full">OPRET</button>
+                         <button onclick="getCommodityBatchList()" class="cursor-pointer m-4 bg-blue-300 hover:bg-blue-400 rounded-full">Show All Elements</button>
                      </div>
                         <!--Body showElementsAuto()-->
                      <div class="text-black">
@@ -72,8 +73,7 @@
                     <div class="flex flex-row justify-end">
                         <button onclick="hideModal()" class="cursor-pointer bg-red-200">Cancel</button>
                         <button id="modal-add" onclick="addElement()" class="cursor-pointer bg-blue-200">Add Element</button>
-                        <button id="modal-update" onclick="updateElement(document.getElementById('commodityBatch_id-input').value)"  class="cursor-pointer bg-blue-200">Update Element</button>
-
+                        <button id="modal-update" onclick="updateElement(document.getElementById('commodityBatch_id-input').value)"  class="cursor-pointer bg-blue-200 hidden">Update Element</button>
                     </div>
                 </div>
 
@@ -104,9 +104,6 @@
         function showModal(showAddButton) {
             document.getElementById('modal-view').style.display = 'flex';
 
-
-
-
             if (showAddButton) {
                 document.getElementById('modal-add').style.display = 'block';
                 document.getElementById('modal-update').style.display = 'none';
@@ -129,38 +126,28 @@
 
             // To add attributes to data base if all attributes are not empty
             if (commodityBatch_id && commodity_id && weight && supplier) {
-                elements = [{
-                    commodityBatch_id: commodityBatch_id,
-                    commodity_id: commodity_id,
-                    weight: weight,
-                    supplier: supplier
-                }];
-
                 $.ajax({
-                    url: 'https://api.mama.sh/cdio/api/commodityBatch',
+                    url: 'https://api.mama.sh/commodityBatch',
                     method: 'POST',
                     contentType: "application/json",
-                    data: JSON.stringify(elements),
+                    data: JSON.stringify(element),
                     success: function (elements) {
-                        // Display element
-                        showElementsAuto(elements)
+                        // Display elements
+                        getCommodityBatchList()
                     },
                     error: function (jqXHR, textStatus, error) {
                         alert(jqXHR.responseText + textStatus + error)
                     }
                 });
+            }else {
+                alert("")
             }
-                /*elements.push ({
-                    commodityBatch_id: commodityBatch_id,
-                    commodity_id: commodity_id,
-                    weight: weight,
-                    supplier: supplier
-                });}*/
 
 
 
-            // Display element
-            showElementsAuto(elements)
+
+            // Display elements
+
 
             // To hide the modal after creating an object
             hideModal()
@@ -183,13 +170,11 @@
         /** To Show all elements */
         function showElementsAuto(elements) {
             const single_element = document.getElementById('commodityBatch-list');
+            // single_element.innerText = '' todo just uncomment
 
-            while (single_element.firstChild) single_element.removeChild(single_element.lastChild)
-
-
-
+            let element;
             for (element of elements) {
-                    single_element.insertAdjacentHTML('beforebegin', `
+                    single_element.insertAdjacentHTML('beforeend', `
                                                 <div class="bg-gray-400 flex p-2">
                                                 <div class="cursor-pointer text-green-600">ID: ${element.commodityBatch_id} </div>
                                                 <div class="ml-auto">
@@ -200,16 +185,60 @@
                                                 </div>
                                                 `)
             }
+
+            console.log(elements + "From showElementsAuto")
         }
+
+
+        function getCommodityBatchList() {
+            elements = [];
+            let element;
+            console.log("getCommodityBatchList method")
+            $.ajax({
+                url  : 'https://api.mama.sh/commodityBatch',
+                contentType : "application/json",
+                type : "GET",
+                success : function (response) {
+                    for (element of response) {
+                        elements.push(element)
+                    }
+                    showElementsAuto(elements)
+                },
+                error: function (jqXHR, text, error) {
+                    alert(jqXHR.status + text + error);
+                }
+            });
+
+        }
+
+
+        /*success: function (response) {
+            //document.getElementById("loaderID").style.display = "none";
+            $("#ListOfUsersTable").html("");
+            var html = "";
+            //'<table class="tableOfUsers"> <tr><th>Name</th><th>Id</th></tr>';
+            jQuery.each(response, (i, item) => {
+                html += `<tr>`;
+                html += `<td> ${item.userID} | ${item.firstName} ${item.surname} | ${item.roles}</td>`;
+                html += `<td><button class="w3-dark-grey list-item-btn" onclick="inactiveUser(${item.userID}, ${item.status});"> ${getStatus(item.status)} <i class="fa fa-close"></i></button> <button onclick="getUser(${item.userID});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+                html += `</tr>`;
+            });
+            console.log(html);
+            $("#ListOfUsersTable").append(html);
+
+            $("#ListOfUsersTable").show();
+        }*/
 
 
         /** Show element information */
         function showElementInfo(commodityBatch_id, showUpdateButton){
             let element = elements[
-                elements.findIndex(element => element.commodityBatch_id === commodityBatch_id)]
+                elements.findIndex(element => element.commodityBatch_id == commodityBatch_id)]
 
 
             document.getElementById('modal-add').style.display = 'none'
+            document.getElementById('modal-update').style.display = 'none'
+
             if (showUpdateButton) {
                 // To not allow user to write in id field
                 document.getElementById('commodityBatch_id-input').disabled = true
@@ -224,7 +253,7 @@
             document.getElementById('supplier-input').value = element.supplier;
 
 
-            showModal();
+            showModal(false);
 
         }
 
@@ -276,9 +305,6 @@
         function searchForElement() {
 
         }
-
-
-
 
 
     </script>
