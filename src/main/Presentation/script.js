@@ -571,8 +571,8 @@ function ShowPrescriptionCompToLab(PrescriptionComp, number) {
                                 + '</tr>'
                                 + '<tr >'
                                 + '<td>1</td>'
-                                + '<td>' + PrescriptionComp.nomNetto +'</td>'
-                                + '<td>' + PrescriptionComp.tolerance + '</td>'
+                                + '<td id="WeightLineNonNetto' + number + '">' + PrescriptionComp.nomNetto +'</td>'
+                                + '<td id="WeightLineTolerance' + number + '">' + PrescriptionComp.tolerance + '</td>'
                                 + '<td id="WeightLineTara' + number + '"><input type="text" id="WeightTara' + PrescriptionComp.commodity_id +'"></input></td>'
                                 + '<td id="WeightLineNetto' + number + '"><input type="text" id="WeightNetto' + PrescriptionComp.commodity_id + '"></input></td>'
                                 + '<td id="WeightLineBatch' + number + '"><input type="text"></input></td>' 
@@ -598,6 +598,27 @@ async function CreateProductBatchComp(commodityID, number) {
         netto: $("#WeightNetto" + commodityID).val(),
       };
 
+      // setup for weight tolerance
+    var weightLineNonNetto = $('#WeightLineNonNetto' + number).html();
+    var WeightLineTolerance = $('#WeightLineTolerance' + number).html();
+    console.log(weightLineNonNetto + ', ' + WeightLineTolerance);
+    
+    // get the rollance weight
+    let minWeightTolerance = weightLineNonNetto * (1- (WeightLineTolerance/100));
+    let maxWeightTolerance = weightLineNonNetto * (1+ (WeightLineTolerance/100));
+    
+    // test for variable
+    console.log(minWeightTolerance + ' , ' + maxWeightTolerance);
+    
+    // test if weight is acceptable
+    if (minWeightTolerance < productbatchcomp.netto && maxWeightTolerance > productbatchcomp.netto) {
+        console.log("good to go");
+    }
+    else {
+        console.log("not accepted");
+    }
+    
+
 
     await $.ajax ({
         url: "https://api.mama.sh/productbatchcomp",
@@ -617,16 +638,32 @@ async function CreateProductBatchComp(commodityID, number) {
     
     console.log("Not skipped!");
     
+
+    await UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
+
+    
     document.getElementById("WeightSubmitBtn" + number).style.display = "none";
     try {
         document.getElementById("WeightSubmitBtn" + (number + 1)).style.display = "block";
     }
-    catch {
+    catch { // end of commodity to productbatch
         console.log ("done!");
+
+        // get all netto and tara weight
+        var weightNettoTotal = 0;
+        var weightTaraTotal = 0;
+    
+        for (let index = 1; index <= number; index++) {
+            weightTaraTotal += $('#WeightLineTara' + index).html();
+            weightNettoTotal += $('#WeightLineNetto' + index).html();
+        }
+
+        // print to screen
+        $('#WeightSumTara' + index).html(weightTaraTotal);
+        $('#WeightSumNetto' + index).html(weightNettoTotal);
+
         // update status to "Afsluttet" and update end date
     }
-
-    await UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
 }
 
 async function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
