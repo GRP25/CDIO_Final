@@ -11,6 +11,8 @@ import Datalayer.Interfaces.IProductBatchDAO;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class makePdf {
@@ -36,6 +38,8 @@ public class makePdf {
     }
 
     public static void main(String[] args) {
-        System.out.println(productionToReceipt(1));
+        LocalDate dat = LocalDate.now();
+        Date now = Date.valueOf(dat);
+        System.out.println(now);
     }
 }

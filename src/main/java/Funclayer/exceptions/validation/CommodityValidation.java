@@ -23,7 +23,7 @@ public class CommodityValidation extends Validation {
     public static void commodityValidationForCreate(CommodityDTO commodityDTO) throws SQLException {
 
         if (commodityDAO.exists( idValidator( commodityDTO.getCommodity_id(  ) )) )
-            throw new ObjectException( "Commodity id is already exist");
+            throw new ObjectException( "Commodity id already exists");
 
         nameValidator( commodityDTO.getCommodity_Name());
 

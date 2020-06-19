@@ -30,9 +30,9 @@ public class ProductBatchCompValidation extends Validation {
         if (!commodityBatchDAO.exists( idValidator( productBatchCompDTO.getCommodityBatch_id() ) ))
             throw new ObjectException( "CommodityBatch id is not exist" );
 
-        if (productBatchCompDAO.exists( idValidator( productBatchCompDTO.getProductBatch_id())))
-            throw new ObjectException( "ProductBatchComp id is already exist");
-
+//        if (productBatchCompDAO.exists( idValidator( productBatchCompDTO.getProductBatch_id())))
+//            throw new ObjectException( "ProductBatchComp id is already exist");
+//
         if (!isDouble( productBatchCompDTO.getNetto()))
             throw new ObjectException( "Invalid netto format: Use a double");
 
