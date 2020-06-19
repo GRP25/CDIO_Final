@@ -426,8 +426,8 @@ function getProductBatchCompList() {
             var html = "";
             jQuery.each(response, (i, item) => {
                 html += `<tr>`;
-                html += `<td><h5>Produkt Bacth ID</h5> ${item.productBatch_id} <h5>Råvare ID </h5> ${item.commodity_id}</td>`;
-                html += `<td><button onclick="getOneProductBatchComp(${item.commodity_id},${item.productBatch_id});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+                html += `<td><h5>Produkt Bacth ID</h5> ${item.productBatch_id} <h5>Råvare ID </h5> ${item.commodityBatch_id}</td>`;
+                html += `<td><button onclick="getOneProductBatchComp(${item.commodityBatch_id},${item.productBatch_id});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
                 html += `</tr>`;
             });
             console.log(html);
@@ -450,7 +450,7 @@ function getOneProductBatchComp(CommodityID, ProductBatchID) {
         success: function (response) {
             document.getElementById("ViewProductBatchCompWindow").style.display= "block";
             $("#ViewProductBatchID").text(response.productBatch_id);
-            $("#ViewCommodityID").val(response.commodity_id);
+            $("#ViewCommodityID").val(response.commodityBatch_id);
             $("#ViewUserID").val(response.user_id);
             $("#ViewTara").val(response.tara);
             $("#ViewNetto").val(response.netto);
@@ -490,7 +490,7 @@ function getProductBatchCompListOneBatch(id) {
 function updateProductBatchComp(){
     var productBachComp = {
         productBatch_id: $("#ViewProductBatchID").text(),
-        commodity_id: $("#ViewCommodityID").val(),
+        commodityBatch_id: $("#ViewCommodityID").val(),
         user_id: $("#ViewUserID").val(),
         tara: $("#ViewTara").val(),
         netto: $("#ViewNetto").val()
