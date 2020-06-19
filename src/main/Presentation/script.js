@@ -369,6 +369,9 @@ function updateProductBatch() {
         method: "PUT",
         data: JSON.stringify(productBatch),
         success: function (response) {
+            if(document.getElementById("EditInputStatusDone").checked == true){
+                response.endDate = new Date.getTime();
+            }
             alert("Produkt Batch Opdateret");
         },
         error: function (data, text, error) {
