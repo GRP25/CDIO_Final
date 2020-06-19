@@ -45,8 +45,8 @@ public abstract class Validation {
 	}
 
 	public static void statusValidator(int status) throws NotAStatusException {
-		if (status != 0 && status != 1) {
-			throw new NotAStatusException("Not a Valid status");
+		if (status < 1 || status > 3) {
+			throw new NotAStatusException("Not a Valid status, please input status between 1 - 3");
 		}
 	}
 

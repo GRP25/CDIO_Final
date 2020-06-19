@@ -56,5 +56,11 @@ public class UserValidation extends Validation {
             throw new DataLayerException("No user exists with this number as an identification!");
     }
 
+    public static void statusValidator(int status) throws NotAStatusException {
+        if (status != 1) {
+            throw new NotAStatusException("Not a Valid status, please make sure status's box is checked or input status = 1  ");
+        }
+    }
+
 
 }
