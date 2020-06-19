@@ -617,7 +617,6 @@ async function CreateProductBatchComp(commodityID, number) {
     if (minWeightTolerance < productbatchcomp.netto && maxWeightTolerance > productbatchcomp.netto) {
         console.log("Netto weight: good to go");
         
-
         await $.ajax ({
             url: "https://api.mama.sh/productbatchcomp",
             contentType: "application/json",
@@ -635,9 +634,9 @@ async function CreateProductBatchComp(commodityID, number) {
         });
     
         console.log("Not skipped!");
-    
+        
         await UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
-
+        
     }
     else {
         alert("Netto vægt ikke inden for tolerancen");
@@ -661,6 +660,7 @@ async function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,numbe
             document.getElementById("WeightLineBatch" + number).innerHTML = response.commodityBatch_id;
             document.getElementById("WeightLineOpr" + number).innerHTML = response.user_id;
             document.getElementById("WeightLineTerminal" + number).innerHTML = 1;
+            
         },
         error: function (jqXHR, text, error) {
           //  alert(jqXHR.status + text + error);
@@ -668,12 +668,16 @@ async function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,numbe
         }
     });
 
-    
-    $( document ).ready(function() {
-    document.getElementById("WeightSubmitBtn" + number).style.display = "none";
-
-    try {
         
+    $( document ).ready(function() {
+        console.log("started to show BTN");
+        document.getElementById("WeightSubmitBtn" + number).style.display = "none";
+        console.log("End og BTN")
+            // end of document ready
+    });
+
+    $( document ).ready(function() {
+     try {
         document.getElementById("WeightSubmitBtn" + (number + 1)).style.display = "block";
     }
     catch { // end of commodity to productbatch
@@ -686,7 +690,9 @@ async function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,numbe
         for (let index = 1; index <= number; index++) {
             // test stuff
             console.log(Number($('#WeightLineTara' + index).html()));
+            console.log($('#WeightLineTara' + index).html());
             console.log(Number($('#WeightLineNetto' + index).html()));
+            console.log($('#WeightLineNetto' + index).html());
 
             weightTaraTotal += Number($('#WeightLineTara' + index).html());
 
@@ -700,8 +706,22 @@ async function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,numbe
 
         // update status to "Afsluttet" and update end date
     }
+         // end of document ready
+        });
+}
 
-    // end of document ready
-    });
+function WeightPrint() {
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
+    document.getElementById("PrintDate").innerHTML = "Udskrevet: " + date;
+    document.getElementById("PrintDate").style.display = "block";
+    document.getElementById("OpenProductBtn").style.display = "none";
+    document.getElementById("PrintBtn").style.display = "none";
+
+    window.print();
+
+    document.getElementById("PrintDate").style.display = "none";
+    document.getElementById("OpenProductBtn").style.display = "inline";
+    document.getElementById("PrintBtn").style.display = "inline";
 }
