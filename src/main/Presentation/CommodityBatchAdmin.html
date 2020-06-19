@@ -1,135 +1,4 @@
 <!DOCTYPE html>
-
-<html lang="en">
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>CDIO</title>
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--<link rel="stylesheet" href="tailwindStyle.css">-->
-<link href="https://unpkg.com/tailwindcss@%5E1.0/dist/tailwind.min.css" rel="stylesheet">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="script.js"></script>
-
-<body class="bg-gray-700">
-<!--Header containing logo and title-->
-<header class="flex items-end justify-between bg-black px-4 pt-3">
-    <div>
-        <span class="font-bold text-4xl text-white">CDIO</span>
-    </div>
-
-
-    <div>
-        <img class="h-8 fill-white " src="health.svg" alt="">
-
-    </div>
-</header>
-<!--Overhead fan containing links to the different administrations-->
-<div :class="administrationer" class="flex items-end text-white justify-start bg-gray-900">
-    <button type="button" class="inline-block px-3 hover:text-blue-500 "> this is a button</button>
-    <button type="button" class="inline-block px-3 hover:text-blue-500 "> this is a button</button>
-    <button type="button" class="inline-block px-3 hover:text-blue-500 "> this is a button</button>
-    <button type="button" class="inline-block px-3 hover:text-blue-500 "> this is a button</button>
-    <button type="button" class="inline-block px-3 hover:text-blue-500 "> this is a button</button>
-</div>
-<!--Sideboard with the different functions the administration can perform-->
-<div class="relative h-screen w-1/3 bg-gray-800 float-left">
-    <div :class="sidebar" class="container absolute inset-y-0 left-0 px-4 py3">
-        <h5 class="font-semibold text-3xl text-white text-center">Valgmuligheder</h5>
-
-        <!-- Circle bar -->
-        <div class="block w-1/4">
-            <a href="#"
-               class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center">Råvare</a>
-            <a href=" #" class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
-               onclick="listPrecriptions()">Recepter</a>
-            <a href=" #" class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
-               onclick="listPrecriptions()">Råvarebatch-administration</a>
-        </div>
-
-        <!-- Filter bar -->
-        <div id="filter-list" class="w-3/4 ">
-
-        </div>
-    </div>
-</div>
-<!--main container will contain results and lists-->
-<div :class="mainScreen" class="relative h-screen w-2/3 bg-gray-700 float-right">
-
-    <!--Create and show list components-->
-    <div class="flex justify-start inline-block h-24 px-full mb-0">
-        <a href="#"
-           class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center">Tilføj
-            +</a>
-        <a href="#"
-           class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-           onclick="listCommodities();">VisListe</a>
-    </div>
-
-    <!--Table for showing results-->
-    <div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
-        <table class="table-fixed w-full mx-auto">
-            <thead>
-            <tr>
-                <th class="w-1/2 px-4 py-2">Råvare id</th>
-                <th class="w-1/2 px-4 py-2">Recept id</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td class="border px-4 py-2">
-                    <span class="float-left">Test</span>
-                    <div class="flex inline-block justify-end ">
-                        <button class="button float-right px-2">this is a button</button>
-                        <button class="button float-right px-2">this is a button</button>
-                    </div>
-                </td>
-                <td class="border px-4 py-2">Adam</td>
-            </tr>
-            <tr class="bg-gray-100">
-                <td class="border px-4 py-2">A Long and Winding Tour of the History of UI Frameworks and Tools
-                    and the Impact on Design</td>
-                <td class="border px-4 py-2">Adam</td>
-            </tr>
-            <tr>
-                <td class="border px-4 py-2">Intro to JavaScript</td>
-                <td class="border px-4 py-2">Chris</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-
-
-</body>
-
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -140,57 +9,76 @@
 
 </head>
     <body>
+        <div>
+            <!--Sidebar-->
+            <div class="fixed top-0 bottom0 w-1/3 flex flex-row">
+                <!--Circle bar-->
+                <div class="w-1/4 h-screen bg-gray-800 flex flex-col p-2">
+                    <div onclick="" class="cursor-pointer w-20 h-20 rounded-full bg-blue-400 hover:bg-blue-500 text-center p-2">
+                        Productions lederen
+                    </div>
+                </div>
 
-        <div class="container">
-             <div class="h-auto w-full bg-gray-800 my-10 ">
-                 &lt;!&ndash;Search Bar&ndash;&gt;
-                 <div class="p-2 flex justify-end" >
-                     <input type="text" class="rounded-full">
-                     <button class="m-4 bg-blue-300 rounded-full">SØG</button>
-                     <button onclick="showModal(true)" class="m-4 bg-blue-300 rounded-full">OPRET</button>
-                 </div>
-                    &lt;!&ndash;Body showElementsAuto()&ndash;&gt;
-                 <div class="text-black">
-                     <div id="commodityBatch-list">
+                <!--Filter bar-->
+                <div class="w-3/4 bg-gray-900 pt-10 p-2">
+                    <div onclick="" class="cursor-pointer w-30 h-30 rounded-full bg-gray-400 hover:bg-gray-500 text-center p-5">
+                        CommodityBatch
+                    </div>
+                </div>
+            </div>
 
+            <!--Container-->
+            <div class="w-2/3 ml-auto h-screen p-6">
+
+                 <div class="h-auto w-full bg-gray-800 my-10 rounded-lg">
+                     <!--Search Bar-->
+                     <div class="p-2 flex justify-end" >
+                         <input type="text" class="rounded-full ">
+                         <button onclick="" class="cursor-pointer m-4 bg-blue-300 hover:bg-blue-400 rounded-full ">SØG</button>
+                         <button onclick="showModal(true)" class="cursor-pointer m-4 bg-blue-300 hover:bg-blue-400 rounded-full">OPRET</button>
+                         <button onclick="getCommodityBatchList()" class="cursor-pointer m-4 bg-blue-300 hover:bg-blue-400 rounded-full">Show All Elements</button>
+                     </div>
+                        <!--Body showElementsAuto()-->
+                     <div class="text-black">
+                         <div id="commodityBatch-list">
+
+                         </div>
                      </div>
                  </div>
-             </div>
-        </div>
 
-        &lt;!&ndash;Add information by user to commodityBatch&ndash;&gt;
-        <div id="modal-view" class="hidden">
-            &lt;!&ndash;Information field&ndash;&gt;
-            <div class="bg-gray-300 w-1/3 p-3">
-                <label>
-                    Commodity Batch Id
-                    <input class="w-full" type="text"  id="commodityBatch_id-input">
-                </label>
-                <label>
-                    Commodity Id
-                    <input class="w-full" type="text"  id="commodity_id-input">
-                </label>
-                <label>
-                    Weight
-                    <input class="w-full" type="text"  id="weight-input">
-                </label>
-                <label>
-                    Supplier
-                    <input class="w-full" type="text"  id="supplier-input">
-                </label>
+
+                <!--Add information by user to commodityBatch-->
+                <div id="modal-view" class="hidden flex-col  items-center  h-screen">
+                    <!--Information field-->
+                    <div class="bg-gray-300 w-1/3 p-3">
+                        <label>
+                            Commodity Batch Id
+                            <input class="w-full" type="text"  id="commodityBatch_id-input">
+                        </label>
+                        <label>
+                            Commodity Id
+                            <input class="w-full" type="text"  id="commodity_id-input">
+                        </label>
+                        <label>
+                            Weight
+                            <input class="w-full" type="text"  id="weight-input">
+                        </label>
+                        <label>
+                            Supplier
+                            <input class="w-full" type="text"  id="supplier-input">
+                        </label>
+                    </div>
+
+                    <!--Create and Cancel buttons-->
+                    <div class="flex flex-row justify-end">
+                        <button onclick="hideModal()" class="cursor-pointer bg-red-200">Cancel</button>
+                        <button id="modal-add" onclick="addElement()" class="cursor-pointer bg-blue-200">Add Element</button>
+                        <button id="modal-update" onclick="updateElement(document.getElementById('commodityBatch_id-input').value)"  class="cursor-pointer bg-blue-200 hidden">Update Element</button>
+                    </div>
+                </div>
+
             </div>
-
-            &lt;!&ndash;Create and Cancel buttons&ndash;&gt;
-            <div class="flex flex-row justify-end">
-                <button onclick="hideModal()" class="bg-red-200">Cancel</button>
-                <button id="modal-add" onclick="addElement()" class="bg-blue-200">Add Element</button>
-                <button id="modal-update" onclick="updateElement(document.getElementById('commodityBatch_id-input').value)"  class="bg-blue-200">Update Element</button>
-
-            </div>
-
-
         </div>
-
 
     <script>
 
@@ -216,9 +104,6 @@
         function showModal(showAddButton) {
             document.getElementById('modal-view').style.display = 'flex';
 
-
-
-
             if (showAddButton) {
                 document.getElementById('modal-add').style.display = 'block';
                 document.getElementById('modal-update').style.display = 'none';
@@ -241,37 +126,28 @@
 
             // To add attributes to data base if all attributes are not empty
             if (commodityBatch_id && commodity_id && weight && supplier) {
-                /*element = [{
-                    commodityBatch_id: commodityBatch_id,
-                    commodity_id: commodity_id,
-                    weight: weight,
-                    supplier: supplier
-                }];
-
                 $.ajax({
-                    url: 'REST/Resources/commodityBatch/',
+                    url: 'https://api.mama.sh/commodityBatch',
                     method: 'POST',
                     contentType: "application/json",
                     data: JSON.stringify(element),
-                    success: function (element) {
-                        // Display element
-                        showElementsAuto(element)
+                    success: function (elements) {
+                        // Display elements
+                        getCommodityBatchList()
                     },
                     error: function (jqXHR, textStatus, error) {
-                        alert(jqXHR.responseText)
+                        alert(jqXHR.responseText + textStatus + error)
                     }
-                });*/
-                elements.push ({
-                    commodityBatch_id: commodityBatch_id,
-                    commodity_id: commodity_id,
-                    weight: weight,
-                    supplier: supplier
-                });}
+                });
+            }else {
+                alert("")
+            }
 
 
 
-            // Display element
-            showElementsAuto(elements)
+
+            // Display elements
+
 
             // To hide the modal after creating an object
             hideModal()
@@ -294,46 +170,75 @@
         /** To Show all elements */
         function showElementsAuto(elements) {
             const single_element = document.getElementById('commodityBatch-list');
+            // single_element.innerText = '' todo just uncomment
 
-
-            let color = true; // todo
-
-
+            let element;
             for (element of elements) {
-                if(color) {
-                    single_element.insertAdjacentHTML('beforebegin', `
-                                                <div class="bg-gray-400 flex">
-                                                <div onclick="showElementInfo('${element.commodityBatch_id}', false)" class=" ">${element.commodityBatch_id} </div>
+                    single_element.insertAdjacentHTML('beforeend', `
+                                                <div class="bg-gray-400 flex p-2">
+                                                <div class="cursor-pointer text-green-600">ID: ${element.commodityBatch_id} </div>
                                                 <div class="ml-auto">
-                                                <button onclick="showElementInfo('${element.commodityBatch_id}', true)" class="text-green-600">U</button>
+                                                <button onclick="showElementInfo('${element.commodityBatch_id}', false)" class="cursor-pointer text-green-600">Element Information</button>
+                                                <button onclick="showElementInfo('${element.commodityBatch_id}', true)" class="cursor-pointer text-green-600">U</button>
                                                 <button class="text-red-600">X</button>
                                                 </div>
                                                 </div>
                                                 `)
-                    color = false;
-                } else {
-                    single_element.insertAdjacentHTML('beforebegin', `
-                                                <div class="bg-gray-100 flex">
-                                                <div onclick="showElementInfo('${element.commodityBatch_id}')" class=" ">${element.commodityBatch_id} </div>
-                                                <div class="ml-auto">
-                                                <button class="text-green-600">U</button>
-                                                <button class="text-red-600">X</button>
-                                                </div>
-                                                </div>
-                                                `)
-                    color = true;
-                }
             }
+
+            console.log(elements + "From showElementsAuto")
         }
+
+
+        function getCommodityBatchList() {
+            elements = [];
+            let element;
+            console.log("getCommodityBatchList method")
+            $.ajax({
+                url  : 'https://api.mama.sh/commodityBatch',
+                contentType : "application/json",
+                type : "GET",
+                success : function (response) {
+                    for (element of response) {
+                        elements.push(element)
+                    }
+                    showElementsAuto(elements)
+                },
+                error: function (jqXHR, text, error) {
+                    alert(jqXHR.status + text + error);
+                }
+            });
+
+        }
+
+
+        /*success: function (response) {
+            //document.getElementById("loaderID").style.display = "none";
+            $("#ListOfUsersTable").html("");
+            var html = "";
+            //'<table class="tableOfUsers"> <tr><th>Name</th><th>Id</th></tr>';
+            jQuery.each(response, (i, item) => {
+                html += `<tr>`;
+                html += `<td> ${item.userID} | ${item.firstName} ${item.surname} | ${item.roles}</td>`;
+                html += `<td><button class="w3-dark-grey list-item-btn" onclick="inactiveUser(${item.userID}, ${item.status});"> ${getStatus(item.status)} <i class="fa fa-close"></i></button> <button onclick="getUser(${item.userID});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+                html += `</tr>`;
+            });
+            console.log(html);
+            $("#ListOfUsersTable").append(html);
+
+            $("#ListOfUsersTable").show();
+        }*/
 
 
         /** Show element information */
         function showElementInfo(commodityBatch_id, showUpdateButton){
             let element = elements[
-                elements.findIndex(element => element.commodityBatch_id === commodityBatch_id)]
+                elements.findIndex(element => element.commodityBatch_id == commodityBatch_id)]
 
 
             document.getElementById('modal-add').style.display = 'none'
+            document.getElementById('modal-update').style.display = 'none'
+
             if (showUpdateButton) {
                 // To not allow user to write in id field
                 document.getElementById('commodityBatch_id-input').disabled = true
@@ -348,7 +253,7 @@
             document.getElementById('supplier-input').value = element.supplier;
 
 
-            showModal();
+            showModal(false);
 
         }
 
@@ -402,11 +307,8 @@
         }
 
 
-
-
-
     </script>
 
 
     </body>
-</html>-->
+</html>
