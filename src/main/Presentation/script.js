@@ -359,7 +359,7 @@ function updateProductBatch() {
 
     var productBatch = {
         productBatch_id: $("#EditProductBatchID").text(),
-        prescription_id: $("#EditPrescriptionID").val(),
+        prescription_id: $("#EditPrescriptionID").text(),
         status: productBatchStatus
     };
 
@@ -390,7 +390,7 @@ async function getProductBatch(id) {
         success: function (response) {
             document.getElementById("EditProductBatchWindow").style.display = "block";
             $("#EditProductBatchID").text(response.productBatch_id);
-            $("#EditPrescriptionID").val(response.prescription_id);
+            $("#EditPrescriptionID").text(response.prescription_id);
             $("#EditStartDate").html(new Date(response.startDate).toDateString());
             if(response.endDate <= 0){
                 $("#EditEndDate").html("")
@@ -401,13 +401,13 @@ async function getProductBatch(id) {
 
             switch(response.status){
                 case 1:
-                    $("#EditInputStatusBegin").prop('checked', true);
+                    $("#EditInputStatusBegin").text("Oprettet");
                     break;
                 case 2:
-                    $("#EditInputstatusProgress").prop('checked', true);
+                    $("#EditInputstatusProgress").text("Under Produktion");
                     break;
                 case 3:
-                    $("#EditInputStatusDone").prop('checked', true);
+                    $("#EditInputStatusDone").text("Afsluttet");
                     break;
             }
             return response.productBatch_id;
