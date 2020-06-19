@@ -623,6 +623,7 @@ async function CreateProductBatchComp(commodityID, number) {
     }
     catch {
         console.log ("done!");
+        // update status to "Afsluttet" and update end date
     }
 
     await UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
