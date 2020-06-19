@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static Funclayer.exceptions.validation.CommodityValidation.commodityValidation;
+import static Funclayer.exceptions.validation.CommodityValidation.validateCommodityID;
 
 public class CommodityService implements ICommodityService {
 
@@ -42,7 +43,7 @@ public class CommodityService implements ICommodityService {
 
     @Override
     public String updateCommodity(CommodityDTO commodity) throws SQLException {
-        commodityValidation(commodity);
+        validateCommodityID(commodity.getCommodity_id());
         commodityDAO.updateCommodity(commodity);
         return "Update query executed successfully";
     }
