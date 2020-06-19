@@ -767,6 +767,7 @@ async function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,numbe
 }
 
 function WeightPrint() {
+    // 2 linjer taget fra nettet "https://tecadmin.net/get-current-date-time-javascript/"
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
