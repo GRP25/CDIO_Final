@@ -17,14 +17,10 @@ public class ProductBatchCompService implements IProductBatchCompService {
 
     @Override
     public ProductBatchCompDTO getProductBatchComp(int productBatch_id, int commodityBatch_id) throws SQLException {
-
         ProductBatchCompDTO productBatchCompDTO = productBatchCompDAO.getProductBatchComp(productBatch_id,commodityBatch_id);
-
         if (productBatchCompDTO.getProductBatch_id() == 0) // TODO how if commodity_batch doesn't exist
             throw new ObjectException("No ProductBatchComp or CommodityBatch exists with this number as an identification!");
-
         return productBatchCompDTO;
-
     }
 
 
@@ -36,14 +32,10 @@ public class ProductBatchCompService implements IProductBatchCompService {
 
     @Override
     public List<ProductBatchCompDTO> getProductBatchCompList(int productBatch_id) throws SQLException {
-
         List<ProductBatchCompDTO> productBatchCompDTOList = productBatchCompDAO.getProductBatchCompList(productBatch_id);
-
         if (productBatchCompDTOList.isEmpty())
             throw new ObjectException("No ProductBatchComp exists with this ProductBatch ID");
-
         return productBatchCompDTOList;
-
     }
 
 
@@ -56,7 +48,7 @@ public class ProductBatchCompService implements IProductBatchCompService {
 
 
     @Override
-    public String updateProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException {
+    public String updateProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException, ObjectException {
         productBatchCompValidation(productBatchComp);
         productBatchCompDAO.updateProductBatchComp(productBatchComp);
         return "Update query executed successfully";

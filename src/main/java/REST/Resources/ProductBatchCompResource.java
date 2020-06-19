@@ -71,8 +71,8 @@ public class ProductBatchCompResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException {
         Response response;
-        SuccessMessage msg = new SuccessMessage("ProductBatchComp succesfully updated", 11, "https://mama.sh/");
         productBatchCompService.updateProductBatchComp(productBatchComp);
+        SuccessMessage msg = new SuccessMessage("ProductBatchComp succesfully updated", 11, "https://mama.sh/");
         response = Response.status(Response.Status.OK).entity(msg).build();
         return response;
     }

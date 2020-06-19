@@ -40,7 +40,7 @@ public class UserValidation extends Validation {
         return cpr;
     }
 
-    public static void validateUser(UserDTO user) throws SQLException {
+    public static void validateUser(UserDTO user) throws SQLException, IDException {
         nameValidator(nameConversion(user.getFirstName()));
         nameValidator(nameConversion(user.getSurname()));
         cprValidator(user.getCpr());
