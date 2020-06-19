@@ -31,12 +31,8 @@ public class ProductBatchResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllProducts() throws SQLException {
         Response response;
-
         List<ProductBatchDTO> productBatchList = productBatchService.getProductBatchDTOList();
-
         response = Response.status(Response.Status.OK).entity(productBatchList).build();
-
-
         return response;
     }
 
@@ -46,12 +42,9 @@ public class ProductBatchResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProductBatchByID(@PathParam("ProductID") int productBatchId) throws SQLException {
         validateProductBatchID(productBatchId);
-
         Response response;
         ProductBatchDTO productBatchDTO = productBatchService.getProductBatchDTO(productBatchId);
-
         response = Response.status(Response.Status.OK).entity(productBatchDTO).build();
-
         return response;
     }
 

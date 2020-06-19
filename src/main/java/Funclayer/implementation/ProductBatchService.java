@@ -43,6 +43,11 @@ public class ProductBatchService implements IProductBatchService {
     @Override
     public String updateProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
         productBatchValidationForUpdate(productBatch);
+        if (productBatch.getStatus() == 1 || productBatch.getStatus() == 2){
+            productBatch.setEndDate(0);
+        } else if (productBatch.getStatus() == 3) {
+            productBatch.setEndDate(System.currentTimeMillis());
+        }
         productBatchDAO.updateProductBatch(productBatch);
         return "Update query executed successfully";
     }

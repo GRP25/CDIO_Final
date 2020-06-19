@@ -1,6 +1,7 @@
 package Funclayer.implementation;
 
 import Datalayer.DAO.ProductBatchCompDAO;
+import Datalayer.DAO.ProductBatchDAO;
 import Datalayer.DTO.ProductBatchCompDTO;
 import Datalayer.Interfaces.IProductBatchCompDAO;
 import Funclayer.exceptions.exceptions.ObjectException;
