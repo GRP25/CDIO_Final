@@ -651,7 +651,7 @@ async function CreateProductBatchComp(commodityID, number) {
 
     var productbatchcomp = {
         productBatch_id: productBatchID,
-        commodity_id: commodityID, //$('#WeightCommodityID').val(),
+        commodityBatch_id: commodityID, //$('#WeightCommodityID').val(),
         user_id: 1, // add current user
         tara: $("#WeightTara" + commodityID).val(),
         netto: $("#WeightNetto" + commodityID).val(),
