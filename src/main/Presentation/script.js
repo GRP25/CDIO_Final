@@ -574,8 +574,8 @@ async function openProductBatch() {
     document.getElementById("WeightSumTara").innerHTML = "";
     document.getElementById("WeightSumNetto").innerHTML = "";
     document.getElementById("WeightProductBatchStatus").innerHTML = productBatchStatus;
-    document.getElementById("WeightProductBatchStartDate").innerHTML = "work in progress";
-    document.getElementById("WeightProductBatchEndDate").innerHTML = "work in progress";
+    document.getElementById("WeightProductBatchStartDate").innerHTML = document.getElementById("EditStartDate").innerHTML;
+    document.getElementById("WeightProductBatchEndDate").innerHTML = document.getElementById("EditEndDate").innerHTML;
 
     var presID = document.getElementById("EditPrescriptionID").value;
     await getPrescription(presID);
