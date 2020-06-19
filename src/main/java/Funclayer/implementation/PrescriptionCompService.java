@@ -9,7 +9,8 @@ import Datalayer.Interfaces.IPrescriptionCompDAO;
 import Funclayer.exceptions.exceptions.ObjectException;
 import Funclayer.interfaces.IPrescriptionCompService;
 
-import static Funclayer.exceptions.validation.PrescriptionComp.prescriptionCompValidation;
+import static Funclayer.exceptions.validation.PrescriptionComp.prescriptionCompValidationForCreate;
+import static Funclayer.exceptions.validation.PrescriptionComp.prescriptionCompValidationForUpdate;
 
 public class PrescriptionCompService implements IPrescriptionCompService {
 
@@ -46,14 +47,14 @@ public class PrescriptionCompService implements IPrescriptionCompService {
 
 	@Override
 	public String createPrescriptionComp(PrescriptionCompDTO prescription) throws SQLException {
-		prescriptionCompValidation(prescription);
+		prescriptionCompValidationForCreate(prescription);
 		prescriptionCompDAO.createPrescriptionComp(prescription);
 		return "Insert query executed successfully";
 	}
 
 	@Override
 	public String updatePrescriptionComp(PrescriptionCompDTO prescription) throws SQLException {
-		prescriptionCompValidation(prescription);
+		prescriptionCompValidationForUpdate(prescription);
 		prescriptionCompDAO.updatePrescriptionComp(prescription);
 		return "Update query executed successfully";
 	}

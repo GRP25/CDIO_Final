@@ -3,7 +3,6 @@ package Funclayer.implementation;
 import Datalayer.DAO.CommodityBatchDAO;
 import Datalayer.DTO.CommodityBatchDTO;
 import Datalayer.Interfaces.ICommodityBatchDAO;
-import Funclayer.exceptions.exceptions.IDException;
 import Funclayer.exceptions.exceptions.ObjectException;
 import Funclayer.interfaces.ICommodityBatchService;
 
@@ -48,14 +47,14 @@ public class CommodityBatchService implements ICommodityBatchService {
 
     @Override
     public String createCommodityBatch(CommodityBatchDTO batch) throws SQLException {
-        commodityBatchValidation(batch);
+        commodityBatchValidationForCreate(batch);
         commodityBatchDAO.createCommodityBatch( batch );
         return "Insert query executed successfully";
     }
 
     @Override
     public String updateCommodityBatch(CommodityBatchDTO batch) throws SQLException {
-        commodityBatchValidation(batch);
+        commodityBatchValidationForUpdate(batch);
         commodityBatchDAO.updateCommodityBatch( batch );
         return "Update query executed successfully";
     }

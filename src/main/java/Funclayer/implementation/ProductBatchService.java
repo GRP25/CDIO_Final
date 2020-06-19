@@ -34,7 +34,7 @@ public class ProductBatchService implements IProductBatchService {
 
     @Override
     public String createProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
-        productBatchValidation(productBatch);
+        productBatchValidationForCreate(productBatch);
         productBatchDAO.createProductBatch(productBatch);
         return "Insert query executed successfully";
     }
@@ -42,7 +42,7 @@ public class ProductBatchService implements IProductBatchService {
 
     @Override
     public String updateProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
-        productBatchValidation(productBatch);
+        productBatchValidationForUpdate(productBatch);
         productBatchDAO.updateProductBatch(productBatch);
         return "Update query executed successfully";
     }

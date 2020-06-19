@@ -26,7 +26,7 @@ public class ProductBatchValidation extends Validation {
     }
 
 
-    public static void productBatchValidation(ProductBatchDTO productBatchDTO) throws NotProductBatchExeption, SQLException {
+    public static void productBatchValidationForCreate(ProductBatchDTO productBatchDTO) throws NotProductBatchExeption, SQLException {
 
 
         /*if (!isDateValidator( String.valueOf( productBatchDTO.getStartDate() ) ))
@@ -46,5 +46,25 @@ public class ProductBatchValidation extends Validation {
             throw new ObjectException( "Prescription id is not exist");
 
     }
+
+
+    public static void productBatchValidationForUpdate(ProductBatchDTO productBatchDTO) throws NotProductBatchExeption, SQLException {
+
+
+        /*if (!isDateValidator( String.valueOf( productBatchDTO.getStartDate() ) ))
+            throw new DateTimeException("Invalid start-date");
+
+        if (!isDateValidator( String.valueOf( productBatchDTO.getEndDate() ) ))
+            throw new DateTimeException("Invalid end-date");*/ // TODO Need explanation
+
+        statusValidator(productBatchDTO.getStatus());
+
+        IPrescriptionDAO prescriptionDAO = new PrescriptionDAO();
+        if (!prescriptionDAO.exists( idValidator( productBatchDTO.getPrescription_id())))
+            throw new ObjectException( "Prescription id is not exist");
+
+    }
+
+
 
 }

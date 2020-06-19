@@ -40,7 +40,7 @@ public class UserValidation extends Validation {
         return cpr;
     }
 
-    public static void validateUser(UserDTO user) throws SQLException {
+    public static void validateUserForCreate(UserDTO user) throws SQLException {
         nameValidator(nameConversion(user.getFirstName()));
         nameValidator(nameConversion(user.getSurname()));
         cprValidator(user.getCpr());
@@ -49,6 +49,13 @@ public class UserValidation extends Validation {
         if (db.exists( user.getUserID() ))
             throw new IDException( "User Id is already exist" );
 
+    }
+
+    public static void validateUserForUpdate(UserDTO user) throws SQLException {
+        nameValidator(nameConversion(user.getFirstName()));
+        nameValidator(nameConversion(user.getSurname()));
+        initialsValidator(user.getInitials());
+        statusValidator(user.getStatus());
     }
 
     public static void validateUserId(int id) throws SQLException {

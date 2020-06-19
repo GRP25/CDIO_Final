@@ -12,8 +12,7 @@ import Funclayer.exceptions.exceptions.NotProductBatchExeption;
 import Funclayer.implementation.ProductBatchService;
 import Funclayer.interfaces.IProductBatchService;
 
-import static Funclayer.exceptions.validation.ProductBatchValidation.productBatchValidation;
-import static Funclayer.exceptions.validation.ProductBatchValidation.validateProductBatchID;
+import static Funclayer.exceptions.validation.ProductBatchValidation.*;
 
 /*
 * Get productbatch
@@ -63,7 +62,7 @@ public class ProductBatchResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
-        productBatchValidation(productBatch);
+        productBatchValidationForCreate(productBatch);
 
         Response response;
         String createResult = productBatchService.createProductBatch(productBatch);
@@ -80,7 +79,7 @@ public class ProductBatchResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
-        productBatchValidation(productBatch);
+        productBatchValidationForUpdate(productBatch);
 
         Response response;
         String updateResult = productBatchService.updateProductBatch(productBatch);

@@ -20,7 +20,7 @@ public class ProductBatchCompValidation extends Validation {
 
     static IProductBatchCompDAO productBatchCompDAO = new ProductBatchCompDAO();
 
-    public static void productBatchCompValidation(ProductBatchCompDTO productBatchCompDTO) throws SQLException {
+    public static void productBatchCompValidationForCreate(ProductBatchCompDTO productBatchCompDTO) throws SQLException {
 
         IUserDAO userDAO = new UserDAO();
         if (!userDAO.exists( idValidator( productBatchCompDTO.getUser_id())))
@@ -40,6 +40,26 @@ public class ProductBatchCompValidation extends Validation {
             throw new ObjectException( "Invalid tara format: Use a double");
 
     }
+
+
+    public static void productBatchCompValidationForUpdate(ProductBatchCompDTO productBatchCompDTO) throws SQLException {
+
+        IUserDAO userDAO = new UserDAO();
+        if (!userDAO.exists( idValidator( productBatchCompDTO.getUser_id())))
+            throw new ObjectException(  "User ID is not exist");
+
+
+        if (!isDouble( productBatchCompDTO.getNetto()))
+            throw new ObjectException( "Invalid netto format: Use a double");
+
+        if (!isDouble( productBatchCompDTO.getTara()))
+            throw new ObjectException( "Invalid tara format: Use a double");
+
+    }
+
+
+
+
 
 
 }

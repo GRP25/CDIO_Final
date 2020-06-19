@@ -21,7 +21,7 @@ public class CommodityBatchValidation extends Validation {
         }
     }
 
-    public static void commodityBatchValidation(CommodityBatchDTO commodityBatchDTO) throws SQLException {
+    public static void commodityBatchValidationForCreate(CommodityBatchDTO commodityBatchDTO) throws SQLException {
 
 
         if (commodityBatchDAO.exists( idValidator( commodityBatchDTO.getCommodityBatch_id() )) )
@@ -41,6 +41,24 @@ public class CommodityBatchValidation extends Validation {
         if (hasSpecial( commodityBatchDTO.getSupplier()))
             throw new ObjectException( "Invalid Supplier (Out special character)" );
 
+
+    }
+
+    public static void commodityBatchValidationForUpdate(CommodityBatchDTO commodityBatchDTO) throws SQLException {
+
+        ICommodityDAO commodityDAO = new CommodityDAO();
+        if (!commodityDAO.exists( idValidator( commodityBatchDTO.getCommodity_id() ) ))
+            throw new ObjectException( "Commodity id is not exist" );
+
+
+
+        if (!isDouble( commodityBatchDTO.getWeight( )))
+            throw new ObjectException( "Invalid weight Please use just number" );
+
+
+
+        if (hasSpecial( commodityBatchDTO.getSupplier()))
+            throw new ObjectException( "Invalid Supplier (Out special character)" );
 
     }
 

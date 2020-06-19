@@ -9,7 +9,8 @@ import Datalayer.Interfaces.IPrescriptionDAO;
 import Funclayer.exceptions.exceptions.ObjectException;
 import Funclayer.interfaces.IPrescriptionService;
 
-import static Funclayer.exceptions.validation.PrescriptionValidation.prescriptionValidation;
+import static Funclayer.exceptions.validation.PrescriptionValidation.prescriptionValidationForCreate;
+import static Funclayer.exceptions.validation.PrescriptionValidation.prescriptionValidationForUpdate;
 
 public class PrescriptionService implements IPrescriptionService {
 
@@ -32,14 +33,14 @@ public class PrescriptionService implements IPrescriptionService {
 
 	@Override
 	public String createPrescription(PrescriptionDTO prescription) throws SQLException {
-		prescriptionValidation(prescription);
+		prescriptionValidationForCreate(prescription);
 		prescriptionDAO.createPrescription(prescription);
 		return "Insert query executed successfully";
 	}
 
 	@Override
 	public String updatePrescription(PrescriptionDTO prescription) throws SQLException {
-		prescriptionValidation(prescription);
+		prescriptionValidationForUpdate(prescription);
 		prescriptionDAO.updatePrescription(prescription);
 		return "Update query executed successfully";
 	}

@@ -49,7 +49,7 @@ public class ProductBatchCompService implements IProductBatchCompService {
 
     @Override
     public String createProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException {
-        productBatchCompValidation(productBatchComp);
+        productBatchCompValidationForCreate(productBatchComp);
         productBatchCompDAO.createProductBatchComp(productBatchComp);
         return "Insert query executed successfully";
     }
@@ -57,7 +57,7 @@ public class ProductBatchCompService implements IProductBatchCompService {
 
     @Override
     public String updateProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException {
-        productBatchCompValidation(productBatchComp);
+        productBatchCompValidationForUpdate(productBatchComp);
         productBatchCompDAO.updateProductBatchComp(productBatchComp);
         return "Update query executed successfully";
     }

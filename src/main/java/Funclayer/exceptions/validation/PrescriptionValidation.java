@@ -20,7 +20,7 @@ public class PrescriptionValidation extends Validation {
 	}
 
 
-	public static void prescriptionValidation(PrescriptionDTO prescriptionDTO) throws SQLException {
+	public static void prescriptionValidationForCreate(PrescriptionDTO prescriptionDTO) throws SQLException {
 
 		if (prescriptionDAO.exists( idValidator( prescriptionDTO.getPrescription_id())))
 			throw new ObjectException( "Prescription id is already exist");
@@ -29,4 +29,14 @@ public class PrescriptionValidation extends Validation {
 
 
 	}
+
+
+	public static void prescriptionValidationForUpdate(PrescriptionDTO prescriptionDTO) throws SQLException {
+
+		nameValidator( prescriptionDTO.getPrescription_name() );
+
+	}
+
+
+
 }

@@ -21,7 +21,7 @@ public class PrescriptionComp extends Validation {
         }
     }
 
-    public static void prescriptionCompValidation(PrescriptionCompDTO prescriptionCompDTO) throws SQLException {
+    public static void prescriptionCompValidationForCreate(PrescriptionCompDTO prescriptionCompDTO) throws SQLException {
 
         if (prescriptionCompDAO.exists( idValidator( prescriptionCompDTO.getPrescription_id())))
             throw new ObjectException( "PrescriptionComp id is already exist");
@@ -30,6 +30,22 @@ public class PrescriptionComp extends Validation {
         if (!commodityDAO.exists( idValidator( prescriptionCompDTO.getCommodity_id() ) ))
             throw new ObjectException( "Commodity id is not exist" );
 
+
+
+        double nomNetto = prescriptionCompDTO.getNomNetto( );
+        if (!isDouble( nomNetto ) || !isNomNettoValid( nomNetto ) )
+            throw new ObjectException( "Invalid nomNetto Please input number between (0.05 - 20.0)" );
+
+
+
+        double tolerance = prescriptionCompDTO.getTolerance();
+        if (!isDouble( tolerance ) || !isTolerance( tolerance ))
+            throw new ObjectException( "Invalid tolerance please input number between (0.1 - 10.0)" );
+
+
+    }
+
+    public static void prescriptionCompValidationForUpdate(PrescriptionCompDTO prescriptionCompDTO) throws SQLException {
 
 
         double nomNetto = prescriptionCompDTO.getNomNetto( );

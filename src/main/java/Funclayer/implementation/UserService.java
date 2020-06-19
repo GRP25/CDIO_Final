@@ -10,7 +10,8 @@ import javax.enterprise.context.RequestScoped;
 import java.sql.SQLException;
 import java.util.List;
 
-import static Funclayer.exceptions.validation.UserValidation.validateUser;
+import static Funclayer.exceptions.validation.UserValidation.validateUserForCreate;
+import static Funclayer.exceptions.validation.UserValidation.validateUserForUpdate;
 
 @RequestScoped
 public class UserService implements IUserService {
@@ -31,13 +32,13 @@ public class UserService implements IUserService {
 
     @Override
     public void updateUser(UserDTO user) throws SQLException {
-        validateUser(user);
+        validateUserForUpdate(user);
         userDao.updateUser( user );
     }
 
     @Override
     public void createUser(UserDTO user) throws SQLException {
-        validateUser(user);
+        validateUserForCreate(user);
         userDao.createUser( user );
     }
 
