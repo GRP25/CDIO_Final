@@ -18,4 +18,7 @@ public interface IPrescriptionDAO {
 	void createPrescription(PrescriptionDTO prescription) throws SQLException;
 
 	void updatePrescription(PrescriptionDTO prescription) throws SQLException;
+
+	boolean exists(int id) throws SQLException;
+
 }
