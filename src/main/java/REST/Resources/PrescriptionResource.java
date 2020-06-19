@@ -10,6 +10,8 @@ import javax.ws.rs.core.Response;
 import Datalayer.DTO.*;
 import Funclayer.implementation.PrescriptionService;
 import Funclayer.interfaces.IPrescriptionService;
+import REST.SuccessMessage;
+
 
 @Path("Prescriptions")
 public class PrescriptionResource {
@@ -21,34 +23,18 @@ public class PrescriptionResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createPrescription(PrescriptionDTO prescriptionDTO) throws SQLException {
-		Response response;
-
-		String createResult = prescriptionService.createPrescription(prescriptionDTO);
-
-		if (createResult.equalsIgnoreCase("Insert query executed succesfully")) {
-			response = Response.status(Response.Status.OK).entity(prescriptionDTO).build();
-		} else {
-			response = Response.status(Response.Status.BAD_REQUEST).entity("Error").build();
-		}
-
-		return response;
+		prescriptionService.createPrescription(prescriptionDTO);
+		SuccessMessage msg = new SuccessMessage("Created new Prescription", 0, "");
+		return Response.status(Response.Status.OK).entity(msg).build();
 	}
 
 	// Update prescription
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updatePrescription(PrescriptionDTO prescriptionDTO) throws SQLException {
-		Response response;
-
-		String updateResult = prescriptionService.updatePrescription(prescriptionDTO);
-
-		if (updateResult.equalsIgnoreCase("Update query executed succesfully")) {
-			response = Response.status(Response.Status.OK).entity(prescriptionDTO).build();
-		} else {
-			response = Response.status(Response.Status.BAD_REQUEST).entity(prescriptionDTO).build();
-		}
-
-		return response;
+		prescriptionService.updatePrescription(prescriptionDTO);
+		SuccessMessage msg = new SuccessMessage("Updated Prescription", 1, "");
+		return Response.status(Response.Status.OK).entity(msg).build();
 	}
 
 	// Get all Prescription function
@@ -56,7 +42,6 @@ public class PrescriptionResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPrescriptionList() throws SQLException {
 		Response response;
-
 		List<PrescriptionDTO> prescriptionDTOList = prescriptionService.getPrescriptionList();
 
 		if (prescriptionDTOList != null) {
@@ -73,7 +58,6 @@ public class PrescriptionResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPrescription(@PathParam("PrescriptionID") int presID) throws SQLException {
 		Response response;
-
 		PrescriptionDTO prescriptionDTO = prescriptionService.getPrescription(presID);
 
 		if (prescriptionDTO != null) {

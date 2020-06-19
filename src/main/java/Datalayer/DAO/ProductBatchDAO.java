@@ -9,6 +9,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 import Datalayer.DBUtil;
+import Datalayer.DAO.Interfaces.IValidation;
 import Datalayer.DTO.ProductBatchDTO;
 import Datalayer.Interfaces.IProductBatchDAO;
 
@@ -16,7 +17,7 @@ import Datalayer.Interfaces.IProductBatchDAO;
  * ProductBatchDAO
  */
 @RequestScoped
-public class ProductBatchDAO implements IProductBatchDAO {
+public class ProductBatchDAO implements IProductBatchDAO, IValidation {
 
     @Override
     public ProductBatchDTO getProductBatchDTO(int productBatch_id) throws SQLException {
@@ -80,6 +81,17 @@ public class ProductBatchDAO implements IProductBatchDAO {
 
         DBUtil.executeSelectQuery(query, parameter, connection);
 
+    }
+
+    @Override
+    public boolean exists(int id) throws SQLException {
+        String query = "SELECT productBatchId FROM ProductBatch WHERE productBatchId = ?";
+        Object[] parameter = { id };
+        Connection connection = DBUtil.getConnection();
+        ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
+
+        connection.close();
+        return rs.next();
     }
 
 }

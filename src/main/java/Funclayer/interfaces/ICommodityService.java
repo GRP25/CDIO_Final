@@ -1,6 +1,6 @@
 package Funclayer.interfaces;
 
-import Datalayer.DTO.commodityDTO;
+import Datalayer.DTO.CommodityDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,13 +8,13 @@ import java.util.List;
 public interface ICommodityService {
 
 
-    commodityDTO getCommodity(int commodity_id) throws SQLException;
+    CommodityDTO getCommodity(int commodity_id) throws SQLException;
 
-    List<commodityDTO> getCommodityList() throws SQLException;
+    List<CommodityDTO> getCommodityList() throws SQLException;
 
-    String createCommodity(commodityDTO commodity) throws SQLException;
+    String createCommodity(CommodityDTO commodity) throws SQLException;
 
-    String updateCommodity(commodityDTO commodity) throws SQLException;
+    String updateCommodity(CommodityDTO commodity) throws SQLException;
 
 
 }

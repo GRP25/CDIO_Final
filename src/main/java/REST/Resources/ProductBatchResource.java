@@ -1,22 +1,19 @@
 package REST.Resources;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.inject.ResolutionException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import Datalayer.DAO.ProductBatchCompDAO;
-import Datalayer.DAO.ProductBatchDAO;
-import Datalayer.DTO.ProductBatchCompDTO;
 import Datalayer.DTO.ProductBatchDTO;
-import Datalayer.Interfaces.IProductBatchCompDAO;
-import Datalayer.Interfaces.IProductBatchDAO;
+import Funclayer.exceptions.exceptions.NotProductBatchExeption;
 import Funclayer.implementation.ProductBatchService;
 import Funclayer.interfaces.IProductBatchService;
+
+import static Funclayer.exceptions.validation.ProductBatchValidation.productBatchValidation;
+import static Funclayer.exceptions.validation.ProductBatchValidation.validateProductBatchID;
 
 /*
 * Get productbatch
@@ -52,8 +49,9 @@ public class ProductBatchResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProductBatchByID(@PathParam("ProductID") int productBatchId) throws SQLException {
-        Response response;
+        validateProductBatchID(productBatchId);
 
+        Response response;
         ProductBatchDTO productBatchDTO = productBatchService.getProductBatchDTO(productBatchId);
 
         if (productBatchDTO != null) {
@@ -69,9 +67,10 @@ public class ProductBatchResource {
     // create produkt batch
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createProductBatch(ProductBatchDTO productBatch) throws SQLException {
-        Response response;
+    public Response createProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
+        productBatchValidation(productBatch);
 
+        Response response;
         String createResult = productBatchService.createProductBatch(productBatch);
 
         if (createResult.equalsIgnoreCase("Insert query executed successfully")) {
@@ -85,9 +84,10 @@ public class ProductBatchResource {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateProductBatch(ProductBatchDTO productBatch) throws SQLException {
-        Response response;
+    public Response updateProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
+        productBatchValidation(productBatch);
 
+        Response response;
         String updateResult = productBatchService.updateProductBatch(productBatch);
 
         if (updateResult.equalsIgnoreCase("Update query executed successfully")) {
