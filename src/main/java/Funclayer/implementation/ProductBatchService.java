@@ -7,7 +7,8 @@ import Funclayer.exceptions.exceptions.ObjectException;
 import Funclayer.interfaces.IProductBatchService;
 import java.sql.SQLException;
 import java.util.List;
-import Funclayer.exceptions.validation.ProductBatchValidation;
+
+import static Funclayer.exceptions.validation.ProductBatchValidation.*;
 
 public class ProductBatchService implements IProductBatchService {
 
@@ -34,7 +35,7 @@ public class ProductBatchService implements IProductBatchService {
 
     @Override
     public String createProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
-        productBatchValidatoinForCreate(productBatch);
+        productBatchValidationForCreate(productBatch);
         productBatchDAO.createProductBatch(productBatch);
         return "Insert query executed successfully";
     }
