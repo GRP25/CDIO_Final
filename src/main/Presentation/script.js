@@ -615,7 +615,7 @@ async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchI
 
     commoditybatchList.innerHTML += '<div class="w3-container"> ' 
                                 + ' <h5>Råvare nr: <label id="WeightCommodityID">'+ PrescriptionComp.commodity_id+'</label></h5> '
-                                + '<h5>Råvare Navn: <label>Vand</label></h5> '
+                                + '<h5>Råvare Navn: <label>Implement commodity name</label></h5> '
                                 + ' <table id="ListOfProductBatchTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white"> '
                                 + ' <tr> '
                                 + '<td>Del</td> '
