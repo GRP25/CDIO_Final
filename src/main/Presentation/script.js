@@ -378,22 +378,6 @@ function updateProductBatch() {
     });
 }
 
-function getProductBatchListWithID(){
-    $.ajax ({
-        url: "https://api.mama.sh/ProductBatchs",
-        contentType: "application/json",
-        method: "PUT",
-        data: JSON.stringify(productBatch),
-        success: function (response) {
-            alert("Produkt Batch Opdateret");
-        },
-        error: function (data, text, error) {
-            alert("fejl: Produkt Batch ikke opdateres");
-        }
-
-    });
-}
-
 async function getProductBatch(id) {
     console.log("getuser Started");
     await $.ajax({
@@ -465,13 +449,13 @@ function getOneProductBatchComp(CommodityID, ProductBatchID) {
         success: function (response) {
             document.getElementById("ViewProductBatchCompWindow").style.display= "block";
             $("#ViewProductBatchID").text(response.productBatch_id);
-            $("#ViewCommodityID").text(response.commodity_id);
-            $("#ViewUserID").text(response.user_id);
-            $("#ViewTara").text(response.tara);
-            $("#ViewNetto").text(response.netto);
+            $("#ViewCommodityID").val(response.commodity_id);
+            $("#ViewUserID").val(response.user_id);
+            $("#ViewTara").val(response.tara);
+            $("#ViewNetto").val(response.netto);
         },
         error: function (jqXHR, text, error) {
-            document.getElementById("loaderID").style.display = "none";
+            //document.getElementById("loaderID").style.display = "none";
             alert(jqXHR.status + text + error);
         },
     });
@@ -502,6 +486,30 @@ function getProductBatchCompListOneBatch(id) {
     });
 }
 
+function updateProductBatchComp(){
+    var productBachComp = {
+        productBatch_id: $("#ViewProductBatchID").text(),
+        commodity_id: $("#ViewCommodityID").val(),
+        user_id: $("#ViewUserID").val(),
+        tara: $("#ViewTara").val(),
+        netto: $("#ViewNetto").val()
+    };
+
+    $.ajax ({
+        url: "https://api.mama.sh/productbatchcomp",
+        contentType: "application/json",
+        method: "PUT",
+        data: JSON.stringify(productBachComp),
+        success: function (response) {
+            alert("Produkt Batch Opdateret");
+        },
+        error: function (data, text, error) {
+            alert("fejl: Produkt Batch ikke opdateres");
+        }
+
+    });
+}
+
 /**************** *
  * CommodityBatch *
  **************** */
@@ -523,7 +531,6 @@ function getCommodityBatch(id) {
         }
     });
 }
-
 
 function getCommodityBatchList() {
     console.log("getCommodityBatchList method")

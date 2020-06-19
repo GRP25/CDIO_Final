@@ -129,10 +129,11 @@
         <div id="ViewProductBatchCompContent" class="modal-content">
             <h2>Vis Produkt Batch Comp</h2>
             <label>Produkt Batch ID: </label><label id="ViewProductBatchID"></label><br/>
-            <label>Råvare ID: </label><label id="ViewCommodityID"></label><br/>
-            <label>Bruger ID: </label><label id="ViewUserID"></label><br/>
-            <label>Tara: </label><label id="ViewTara"></label><br/>
-            <label>Netto: </label><label id="ViewNetto"></label><br/>
+            <label>Råvare ID: </label><input id="ViewCommodityID"><br/>
+            <label>Bruger ID: </label><input id="ViewUserID"><br/>
+            <label>Tara: </label><input id="ViewTara"><br/>
+            <label>Netto: </label><input id="ViewNetto"><br/>
+            <button id="EditProductBatchCompButton" class="EditProductBatchCompButton">Opdater Produkt Batch Comp</button>
             <button id="closeButtonProductBacthComp" class="closeButtonProductBacthComp">Close </button>
         </div>
     </div>
@@ -197,11 +198,13 @@
         cancelBtnEdit.onclick = function () {
             editModal.style.display = "none";
         }
-    });
+
 
     var viewModal = document.getElementById("ViewProductBatchCompWindow");
 
     var closeBtnView = document.getElementById("closeButtonProductBacthComp");
+
+    var viewSpan = document.getElementById("EditProductBatchCompButton");
 
     window.onclick = function (event) {
         if(event.target == viewModal){
@@ -211,7 +214,12 @@
 
     closeBtnView.onclick = function () {
         viewModal.style.display = "none";
-    }
+    };
+
+    viewSpan.onclick = function () {
+        updateProductBatchComp();
+        viewModal.style.display = "none";
+    };
 
     var inputModal = document.getElementById("InputForIDForProductBatchWindow");
 
@@ -239,6 +247,8 @@
     inputBtnClose.onclick = function () {
         inputModal.style.display = "none";
     }
+
+    });
 
 </script>
 
