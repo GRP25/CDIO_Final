@@ -441,6 +441,7 @@ function getProductBatchCompList() {
         }
     })
 }
+
 function getOneProductBatchComp(CommodityID, ProductBatchID) {
     $.ajax({
         url: "https://api.mama.sh/productbatchcomp/component?productBatchId="+ProductBatchID+"&commodityBatchId="+CommodityID,
@@ -455,7 +456,7 @@ function getOneProductBatchComp(CommodityID, ProductBatchID) {
             $("#ViewNetto").val(response.netto);
         },
         error: function (jqXHR, text, error) {
-            //document.getElementById("loaderID").style.display = "none";
+            document.getElementById("loaderID").style.display = "none";
             alert(jqXHR.status + text + error);
         },
     });
