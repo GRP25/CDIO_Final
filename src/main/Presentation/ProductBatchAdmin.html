@@ -75,7 +75,7 @@
 
 
     <div class="w3-container">
-        <h5>Produkt Batch</h5>
+        <h5>Alle Produkt Batchs</h5>
 
         <table id="ListOfProductBatchTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
 
@@ -84,7 +84,7 @@
     </div>
 
     <div class="w3-container">
-        <h5>Produkt Batch Comp</h5>
+        <h5>Alle Produkt Batch Comps</h5>
 
         <table id="ListOfProductBatchCompTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
 
@@ -93,7 +93,7 @@
     </div>
 
     <div class="w3-container">
-        <h5>One Produkt Batch</h5>
+        <h5>En Produkt Batch</h5>
 
         <table id="ListOfOneProductBatchTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
 
@@ -114,13 +114,13 @@
 
     <div id="EditProductBatchWindow" class="modal">
         <div id="EditProductBatchContent" class="modal-content">
-            <h2>Opdater Product Batch eller Vis</h2>
-            <label>Product Batch ID: </label><span id="EditProductBatchID"> </span><br/>
-            <label>Prescription ID: </label><span id="EditPrescriptionID"> </span><br/>
+            <h2>Vis Produkt Batch</h2>
+            <label>Product Batch ID: </label><span id="EditProductBatchID"></span><br/>
+            <label>Prescription ID: </label><span id="EditPrescriptionID"></span><br/>
             <label>Start Date: </label><span id = "EditStartDate"></span><br/>
             <label>End Date: </label><span id = "EditEndDate"></span><br/>
-            <label>Status: </label><span id="EditInputStatusBegin">  </span> <br/>            <button id="EditProductBatchButton" class="EditProductBatchButton"> Opdater ProductBatch</button>
-            <button id="EditCancelButton" class="CancelButton"> Cancel</button>
+            <label>Status: </label><span id="EditInputStatusBegin"></span><br/>
+            <button id="EditCancelButton" class="CancelButton"> Close </button>
         </div>
     </div>
 
@@ -179,12 +179,10 @@
 
         var editModal = document.getElementById("EditProductBatchWindow");
 
-        var editSpan = document.getElementById("EditProductBatchButton");
-
-        var cancelBtnEdit = document.getElementById("EditCancelButton");
+        var editSpan = document.getElementById("EditCancelButton");
 
         editSpan.onclick = function(){
-            updateProductBatch();
+            //updateProductBatch();
             editModal.style.display = "none";
         };
 
@@ -192,11 +190,9 @@
             if(event.target == editModal){
                 editModal.style.display = "none";
             }
-        }
+        };
 
-        cancelBtnEdit.onclick = function () {
-            editModal.style.display = "none";
-        }
+
 
 
     var viewModal = document.getElementById("ViewProductBatchCompWindow");

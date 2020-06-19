@@ -475,8 +475,8 @@ function getProductBatchCompListOneBatch(id) {
             var html = "";
             jQuery.each(response, (i, item) => {
                 html += `<tr>`;
-                html += `<td><h5>Produkt Bacth ID</h5> ${id}</td>`;
-                html += `<td><button onclick="getOneProductBatchComp(${item.commodity_id},${id});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+                html += `<td><h5>Produkt Bacth ID</h5> ${id}<h5>Råvare ID</h5>${item.commodityBatch_id}</td>`;
+                html += `<td><button onclick="getOneProductBatchComp(${item.commodityBatch_id},${id});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
                 html += `</tr>`;
             });
             $("#ListOfOneProductBatchTable").append(html);
