@@ -23,7 +23,7 @@ public class UserValidation extends Validation {
 
     private static void initialsValidator(String ini) throws SQLException {
         if(ini.length() < 2 || ini.length() > 4)
-            throw new ObjectException("Invalid input, please input between 2 - 4 characters");
+            throw new ObjectException("Invalid initials input, please input between 2 - 4 characters");
     }
 
     public static String cprValidator(String cpr) throws  SQLException {
@@ -45,12 +45,16 @@ public class UserValidation extends Validation {
         nameValidator(nameConversion(user.getSurname()));
         cprValidator(user.getCpr());
         initialsValidator(user.getInitials());
+        statusValidator(user.getStatus());
         if (db.exists( user.getUserID() ))
             throw new IDException( "User Id is already exist" );
+
     }
 
     public static void validateUserId(int id) throws SQLException {
         if (!db.exists(id))
             throw new DataLayerException("No user exists with this number as an identification!");
     }
+
+
 }
