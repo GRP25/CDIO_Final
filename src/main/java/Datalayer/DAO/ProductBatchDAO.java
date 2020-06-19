@@ -79,10 +79,9 @@ public class ProductBatchDAO implements IProductBatchDAO, IValidation {
         // UPDATE ProductBatch SET prescriptionId = ?, startDate = ?, endDate = ?,
         // status = ? WHERE productBatchId = ?
 
-        String query = "UPDATE ProductBatch SET prescriptionId = ?, endDate = ?, status = ?  WHERE productBatchId = ?";
+        String query = "UPDATE ProductBatch SET productBatchId = ?, prescriptionId = ?, endDate = ?, status = ?  WHERE productBatchId = "+productBatch.getProductBatch_id();
         Connection connection = DBUtil.getConnection();
-        Object[] parameter = { productBatch.getPrescription_id(), productBatch.getEndDate(), productBatch.getStatus(),
-                productBatch.getProductBatch_id() };
+        Object[] parameter = {productBatch.getProductBatch_id(), productBatch.getPrescription_id(), productBatch.getEndDate(), productBatch.getStatus()};
 
         DBUtil.executeSelectQuery(query, parameter, connection);
 

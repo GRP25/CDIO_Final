@@ -7,7 +7,7 @@ import Funclayer.exceptions.exceptions.ObjectException;
 import Funclayer.interfaces.IProductBatchService;
 import java.sql.SQLException;
 import java.util.List;
-import static Funclayer.exceptions.validation.ProductBatchValidation.*;
+import Funclayer.exceptions.validation.ProductBatchValidation;
 
 public class ProductBatchService implements IProductBatchService {
 
