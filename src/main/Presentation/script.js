@@ -432,6 +432,76 @@ async function getProductBatch(id) {
     });
 }
 
+function getProductBatchCompList() {
+    $.ajax({
+        url: "https://api.mama.sh/productbatchcomp",
+        contentType: "application/json",
+        method: "GET",
+        success: function (response) {
+            $("#ListOfProductBatchCompTable").html("");
+            var html = "";
+            jQuery.each(response, (i, item) => {
+                html += `<tr>`;
+                html += `<td><h5>Produkt Bacth ID</h5> ${item.productBatch_id} <h5>Råvare ID </h5> ${item.commodity_id}</td>`;
+                html += `<td><button onclick="getOneProductBatchComp(${item.commodity_id},${item.productBatch_id});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+                html += `</tr>`;
+            });
+            console.log(html);
+            $("#ListOfProductBatchCompTable").append(html);
+
+            $("#ListOfProductBatchCompTable").show();
+        },
+        error: function (jqXHR, text, error) {
+            document.getElementById("loaderID").style.display = "none";
+            alert(jqXHR.status + text + error);
+        }
+    })
+}
+function getOneProductBatchComp(CommodityID, ProductBatchID) {
+    $.ajax({
+        url: "https://api.mama.sh/productbatchcomp/component?productBatchId="+ProductBatchID+"&commodityBatchId="+CommodityID,
+        contentType: "application/json",
+        method: "GET",
+        success: function (response) {
+            document.getElementById("ViewProductBatchCompWindow").style.display= "block";
+            $("#ViewProductBatchID").text(response.productBatch_id);
+            $("#ViewCommodityID").text(response.commodity_id);
+            $("#ViewUserID").text(response.user_id);
+            $("#ViewTara").text(response.tara);
+            $("#ViewNetto").text(response.netto);
+        },
+        error: function (jqXHR, text, error) {
+            document.getElementById("loaderID").style.display = "none";
+            alert(jqXHR.status + text + error);
+        },
+    });
+}
+
+function getProductBatchCompListOneBatch(id) {
+    $.ajax({
+        url: "https://api.mama.sh/productbatchcomp/ID/"+id,
+        contentType: "application/json",
+        method: "GET",
+        success: function (response) {
+            $("#ListOfOneProductBatchTable").html("");
+            var html = "";
+            jQuery.each(response, (i, item) => {
+                html += `<tr>`;
+                html += `<td><h5>Produkt Bacth ID</h5> ${id}</td>`;
+                html += `<td><button onclick="getOneProductBatchComp(${item.commodity_id},${id});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+                html += `</tr>`;
+            });
+            $("#ListOfOneProductBatchTable").append(html);
+
+            $("#ListOfOneProductBatchTable").show();
+        },
+        error: function (jqXHR, text, error) {
+            document.getElementById("loaderID").style.display = "none";
+            alert(jqXHR.status + text + error);
+        }
+    });
+}
+
 /**************** *
  * CommodityBatch *
  **************** */
