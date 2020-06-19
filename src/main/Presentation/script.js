@@ -634,7 +634,7 @@ async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchI
                                 + '<td id="WeightLineTara' + number + '"><input type="text" id="WeightTara' + PrescriptionComp.commodity_id +'"></input></td>'
                                 + '<td id="WeightLineNetto' + number + '"><input type="text" id="WeightNetto' + PrescriptionComp.commodity_id + '"></input></td>'
                                 + '<td id="WeightLineBatch' + number + '"><input type="text"></input></td>' 
-                                + '<td id="WeightLineOpr' + number + '"><input type="text"></input></td>'
+                                + '<td id="WeightLineOpr' + number + '"><input type="text" value="Need info about log in user"></input></td>'
                                 + '<td id="WeightLineTerminal' + number + '"><input type="text"></input></td>'
                                 + '</tr>'
                                 + '</table>'
