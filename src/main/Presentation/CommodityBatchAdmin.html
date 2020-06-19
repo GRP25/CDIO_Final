@@ -47,7 +47,7 @@
                      </div>
                  </div>
 
-                <!--Add information by user to commodityBatch-->
+                <!--Input commodity id to show a list of elements -->
                 <div id="commodity_modal-view" class="hidden flex-col  items-center  h-screen w-1/3">
                     <!--Information field-->
                     <div class="bg-gray-300 p-3">
@@ -214,50 +214,6 @@
             }
 
 
-            /** Add element to dataBase */
-            function addElement() {
-
-                let element = [];
-
-                // Store user input in variables
-                let commodityBatch_id = document.getElementById('commodityBatch_id-input').value;
-                let commodity_id = document.getElementById('commodity_id-input').value;
-                let weight = document.getElementById('weight-input').value;
-                let supplier = document.getElementById('supplier-input').value;
-
-                // To add attributes to data base if all attributes are not empty
-                if (commodityBatch_id && commodity_id && weight && supplier) {
-                    element = [{
-                        commodityBatch_id: commodityBatch_id,
-                        commodity_id: commodity_id,
-                        weight: weight,
-                        supplier: supplier
-                    }];
-
-                    // http://localhost:8080/cdio/api/commodityBatch
-
-                    $.ajax({
-                        url: 'https://cors-anywhere.herokuapp.com/http://localhost:8080/cdio/api/commodityBatch',
-                        method: 'POST',
-                        contentType: "application/json",
-                        data: JSON.stringify(element),
-                        success: function (element) {
-                            alert(JSON.stringify(element))
-                            // Display elements
-                            getCommodityBatchList()
-                        },
-                        error: function (jqXHR, textStatus, error) {
-                            alert(jqXHR.responseText + textStatus + error)
-                        }
-                    });
-                }else {
-                    alert("Please input values for all fields:) ")
-                }
-
-                // To hide the modal after creating an object
-                hideModal()
-            }
-
 
             function getCommodityBatchList() {
                 elements = [];
@@ -329,17 +285,88 @@
                 showElementInfo(0, false)
             }
 
+            /** Add element to dataBase */
+            function addElement() {
+                let element = [];
+
+                // Store user input in variables
+                let commodityBatch_id = document.getElementById('commodityBatch_id-input').value;
+                let commodity_id = document.getElementById('commodity_id-input').value;
+                let weight = document.getElementById('weight-input').value;
+                let supplier = document.getElementById('supplier-input').value;
+
+                // To add attributes to data base if all attributes are not empty
+                if (commodityBatch_id && commodity_id && weight && supplier) {
+                    element = [{
+                        commodityBatch_id: commodityBatch_id,
+                        commodity_id: commodity_id,
+                        weight: weight,
+                        supplier: supplier
+                    }];
+
+                    // https://cors-anywhere.herokuapp.com/http://localhost:8080/cdio/api/commodityBatch
+
+                    $.ajax({
+                        url: 'https://api.mama.sh/commodityBatch',
+                        method: 'POST',
+                        contentType: "application/json",
+                        data: JSON.stringify(element),
+                        success: function (element) {
+                            alert(JSON.stringify(element))
+                            // Display elements
+                            getCommodityBatchList()
+                        },
+                        error: function (jqXHR, textStatus, error) {
+                            alert(jqXHR.responseText + textStatus + error)
+                        }
+                    });
+                }else {
+                    alert("Please input values for all fields:) ")
+
+                }
+
+                // To hide the modal after creating an object
+                hideModal()
+            }
+
 
             /** Update element */
             function updateElement(commodityBatch_id) {
-                 elements[
-                    elements.findIndex(element => element.commodityBatch_id === commodityBatch_id)
-                    ] = {
-                     commodityBatch_id: commodityBatch_id,
-                     commodity_id: document.getElementById('commodity_id-input').value,
-                     weight: document.getElementById('weight-input').value,
-                     supplier: document.getElementById('supplier-input').value,
-                 }
+                let element = [];
+
+                // Store user input in variables
+                let commodity_id = document.getElementById('commodity_id-input').value;
+                let weight = document.getElementById('weight-input').value;
+                let supplier = document.getElementById('supplier-input').value;
+
+                // To add attributes to data base if all attributes are not empty
+                if (commodityBatch_id && commodity_id && weight && supplier) {
+                    element = [{
+                        commodityBatch_id: commodityBatch_id,
+                        commodity_id: commodity_id,
+                        weight: weight,
+                        supplier: supplier
+                    }];
+
+                    // http://localhost:8080/cdio/api/commodityBatch
+
+                    $.ajax({
+                        url: 'https://api.mama.sh/commodityBatch',
+                        method: 'PUT',
+                        contentType: "application/json",
+                        data: JSON.stringify(element),
+                        success: function (element) {
+                            alert(JSON.stringify(element))
+                            // Display elements
+                            getCommodityBatchList()
+                        },
+                        error: function (jqXHR, textStatus, error) {
+                            alert(jqXHR.responseText + textStatus + error)
+                        }
+                    });
+                }else {
+                    alert("Please input values for all fields:) ")
+                }
 
                 // To hide the modal after creating an object
                 hideModal(true)
