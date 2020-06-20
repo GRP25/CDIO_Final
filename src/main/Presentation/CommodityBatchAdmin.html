@@ -327,8 +327,10 @@
                         method: 'POST',
                         contentType: "application/json",
                         data: JSON.stringify(element),
-                        success: function () {
-
+                        success: function (response) { // todo it's working, but got an error (Update query executed successfullyparsererrorSyntaxError: Unexpected token U in JSON at position 0)
+                            alert(JSON.stringify(response))
+                            // Display elements
+                            getCommodityBatchList()
                         },
                         error: function (jqXHR, textStatus, error) {
                             alert(jqXHR.responseText + textStatus + error.toString())
@@ -339,8 +341,7 @@
 
                 }
 
-                // Display elements
-                getCommodityBatchList()
+
 
                 // To hide the modal after creating an object
                 hideModal()
