@@ -123,6 +123,7 @@
                 if (showAddButton) {
                     document.getElementById('modal-add').style.display = 'block';
                     document.getElementById('modal-update').style.display = 'none';
+                    document.getElementById('commodity_modal-view').style.display = 'none'
                     // To allow user to write in id field
                     document.getElementById('commodityBatch_id-input').disabled = false
                 }
@@ -149,6 +150,10 @@
 
             /** To Show all elements */
             function showElementsAuto(elements) {
+                showElementInfo(0, false);
+                // To hide all modal
+                hideAllModel();
+
                 const single_element = document.getElementById('commodityBatch-list');
                 single_element.innerText = ''
 
@@ -165,7 +170,6 @@
                                                     `)
                 }
 
-                console.log(elements + "From showElementsAuto")
             }
 
             /** Show element information */
@@ -178,9 +182,11 @@
                         elements.findIndex(element => element.commodityBatch_id == commodityBatch_id)]
                 }
 
-                // To make its invisible
+                // To hide modals
                 document.getElementById('modal-add').style.display = 'none'
                 document.getElementById('modal-update').style.display = 'none'
+                document.getElementById('commodity_modal-view').style.display = 'none'
+                // To make field empty
                 document.getElementById('commodityBatch_id-input').value = '';
 
 
@@ -198,10 +204,19 @@
 
             }
 
+            /** To hide all modals */
+            function hideAllModel() {
+                document.getElementById('modal-add').style.display = 'none'
+                document.getElementById('modal-update').style.display = 'none'
+                document.getElementById('commodity_modal-view').style.display = 'none'
+                document.getElementById('modal-view').style.display = 'none';
+            }
+
 
 
             function showCommodityField() {
                 document.getElementById('modal-view').style.display = 'none'
+                document.getElementById('modal-update').style.display = 'none'
                 document.getElementById('commodity_modal-view').style.display = 'block'
             }
 
@@ -239,6 +254,9 @@
 
 
             function getCommodityBatchListByCommodityId(commodity_id) {
+                // Input's user Validation
+                idValidation(commodity_id);
+
                 elements = [];
                 let element;
                 console.log("getCommodityBatchList method")
@@ -287,7 +305,7 @@
 
             /** Add element to dataBase */
             function addElement() {
-                let element = [];
+                let element;
 
                 // Store user input in variables
                 let commodityBatch_id = document.getElementById('commodityBatch_id-input').value;
@@ -297,33 +315,32 @@
 
                 // To add attributes to data base if all attributes are not empty
                 if (commodityBatch_id && commodity_id && weight && supplier) {
-                    element = [{
+                    element = {
                         commodityBatch_id: commodityBatch_id,
                         commodity_id: commodity_id,
                         weight: weight,
                         supplier: supplier
-                    }];
-
-                    // https://cors-anywhere.herokuapp.com/http://localhost:8080/cdio/api/commodityBatch
+                    };
 
                     $.ajax({
                         url: 'https://api.mama.sh/commodityBatch',
                         method: 'POST',
                         contentType: "application/json",
                         data: JSON.stringify(element),
-                        success: function (element) {
-                            alert(JSON.stringify(element))
-                            // Display elements
-                            getCommodityBatchList()
+                        success: function () {
+
                         },
                         error: function (jqXHR, textStatus, error) {
-                            alert(jqXHR.responseText + textStatus + error)
+                            alert(jqXHR.responseText + textStatus + error.toString())
                         }
                     });
                 }else {
                     alert("Please input values for all fields:) ")
 
                 }
+
+                // Display elements
+                getCommodityBatchList()
 
                 // To hide the modal after creating an object
                 hideModal()
@@ -332,7 +349,7 @@
 
             /** Update element */
             function updateElement(commodityBatch_id) {
-                let element = [];
+                let element;
 
                 // Store user input in variables
                 let commodity_id = document.getElementById('commodity_id-input').value;
@@ -341,27 +358,34 @@
 
                 // To add attributes to data base if all attributes are not empty
                 if (commodityBatch_id && commodity_id && weight && supplier) {
-                    element = [{
+
+                    // Input's user Validation
+                    idValidation(commodity_id);
+                    numberValidation(weight);
+                    stringValidation(supplier);
+
+
+
+                    // Store variables in element object
+                    element = {
                         commodityBatch_id: commodityBatch_id,
                         commodity_id: commodity_id,
                         weight: weight,
                         supplier: supplier
-                    }];
+                    };
 
                     // http://localhost:8080/cdio/api/commodityBatch
 
                     $.ajax({
                         url: 'https://api.mama.sh/commodityBatch',
-                        method: 'PUT',
                         contentType: "application/json",
+                        method: 'PUT',
                         data: JSON.stringify(element),
-                        success: function (element) {
-                            alert(JSON.stringify(element))
-                            // Display elements
-                            getCommodityBatchList()
+                        success: function (response) {
+                            alert(JSON.stringify(response))
                         },
                         error: function (jqXHR, textStatus, error) {
-                            alert(jqXHR.responseText + textStatus + error)
+                            alert(jqXHR.responseText + textStatus + error.toString())
                         }
                     });
                 }else {
@@ -374,11 +398,33 @@
             }
 
             /** Search for element */
-            function searchForElement() {
+            function searchForElement(id) {
 
             }
 
+            function idValidation(id) {
+                numberValidation(id)
+                if (id < 1 || id > 99999999) {
+                    alert("The input must be between  1 - 99999999 in id's field");
+                    return false;
+                }
+            }
 
+            function stringValidation(string) {
+                var str = /^[a-zA-Z0-9]+$/;
+                if (!string.match(str)) {
+                    alert("Special character is not allow in supplier's field")
+                    return false;
+                }
+            }
+
+            function numberValidation(number) {
+                var num =/^([0-9]+.{0,1}[0-9]*,{0,1})*[0-9]+$/;
+                if (!number.match(num)) {
+                    alert("The input must be a number in id's or weight's field");
+                    return false;
+                }
+            }
         </script>
     </body>
 </html>
