@@ -11,7 +11,7 @@ import Funclayer.exceptions.exceptions.NotACPRException;
 public class MapCPR implements ExceptionMapper<NotACPRException> {
   @Override
   public Response toResponse(NotACPRException e) {
-    ErrorMessage err = new ErrorMessage(e.getMessage(), 2, "https://mama.sh/");
+    ErrorMessage err = new ErrorMessage(e.getMessage(), 3101, "https://mama.sh/");
     return Response.status(Response.Status.NOT_ACCEPTABLE).entity(err).build();
   }
 }

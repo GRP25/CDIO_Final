@@ -23,7 +23,7 @@ public class PrescriptionCompResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createPrescriptionComp(PrescriptionCompDTO presCompDTO) throws SQLException {
 		prescriptionCompService.createPrescriptionComp(presCompDTO);
-		SuccessMessage msg = new SuccessMessage("Prescriptioncomp Successfully created", 41, "https://mama.sh/");
+		SuccessMessage msg = new SuccessMessage("Prescriptioncomp Successfully created", 5010, "https://mama.sh/");
 		return Response.status(Response.Status.OK).entity(msg).build();
 	}
 
@@ -32,7 +32,7 @@ public class PrescriptionCompResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePrescriptionComp(PrescriptionCompDTO presCompDTO) throws SQLException {
 		prescriptionCompService.updatePrescriptionComp(presCompDTO);
-		SuccessMessage msg = new SuccessMessage("Prescriptioncomp Successfully updated", 42, "https://mama.sh/");
+		SuccessMessage msg = new SuccessMessage("Prescriptioncomp Successfully updated", 5011, "https://mama.sh/");
 		return Response.status(Response.Status.OK).entity(msg).build();
 	}
 
