@@ -22,37 +22,28 @@ public class CommodityResource {
     @Path("/{commodity_id}")
     @GET
     public Response getCommodity(@PathParam("commodity_id") int comID) throws SQLException {
-        Response response;
         CommodityDTO commodityItem = commodityService.getCommodity(comID);
-        response = Response.status( Response.Status.OK ).entity( commodityItem ).build();
-        return response;
+        return Response.status( Response.Status.OK ).entity( commodityItem ).build();
     }
 
     @GET
     public Response getCommodityList() throws SQLException {
-        Response response;
         List<CommodityDTO> commodityList = commodityService.getCommodityList();
-        response = Response.status( Response.Status.OK ).entity( commodityList ).build();
-        return response;
+        return Response.status( Response.Status.OK ).entity( commodityList ).build();
     }
 
     @POST
     public Response createCommodity(CommodityDTO comDTO) throws SQLException {
-
-        Response response;
         commodityService.createCommodity( comDTO );
-        SuccessMessage msg = new SuccessMessage("Created successfully", 20, "https://mama.sh/");
-        response = Response.status( Response.Status.OK ).entity( msg ).build();
-        return response;
+        SuccessMessage msg = new SuccessMessage("Created successfully", 51, "https://mama.sh/");
+        return Response.status( Response.Status.OK ).entity( msg ).build();
     }
 
     @PUT
     public Response updateCommodity(CommodityDTO comDTO) throws SQLException {
-        Response response;
         commodityService.updateCommodity( comDTO );
-        SuccessMessage msg = new SuccessMessage("Updated successfully", 20, "https://mama.sh/");
-        response = Response.status( Response.Status.OK ).entity( msg ).build();
-        return response;
+        SuccessMessage msg = new SuccessMessage("Updated successfully", 52, "https://mama.sh/");
+        return Response.status( Response.Status.OK ).entity( msg ).build();
     }
 
 }
