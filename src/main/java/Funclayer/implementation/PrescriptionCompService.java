@@ -17,7 +17,7 @@ public class PrescriptionCompService implements IPrescriptionCompService {
 
     @Override
     public PrescriptionCompDTO getPrescriptionComp(int prescription_id, int commodity_id) throws SQLException {
-        validatePrescriptionDAOId(prescription_id);
+        validatePrescriptionDAOId(prescription_id, commodity_id);
         validateCommodityID(commodity_id);
         return prescriptionCompDAO.getPrescriptionComp(prescription_id, commodity_id);
     }
