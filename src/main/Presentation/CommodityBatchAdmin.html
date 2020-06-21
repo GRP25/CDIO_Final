@@ -44,7 +44,7 @@
             <div class="p-2" >
               <button onclick="getCommodityBatchList()" class="cursor-pointer m-4 bg-blue-300 hover:bg-blue-400 rounded-full">Show All Elements</button>
               <button onclick="showCommodityField()" class=" cursor-pointer m-4 bg-blue-300 hover:bg-blue-400 rounded-full">Show Elements by Commidty's id</button>
-              <button onclick="showModal(true)" class="cursor-pointer m-4 bg-blue-300 hover:bg-blue-400 rounded-full">OPRET</button>
+              <button onclick="showAddModal(true)" class="cursor-pointer m-4 bg-blue-300 hover:bg-blue-400 rounded-full">OPRET</button>
 
             </div>
             <div class="justify-end p-6 ml-20">
@@ -123,7 +123,8 @@
       let elements =  [];
 
       /** Show modal to add an object */
-      function showModal(showAddButton) {
+      function showAddModal(showAddButton) {
+        hideModal(false);
         document.getElementById('modal-view').style.display = 'flex';
 
         if (showAddButton) {
@@ -166,6 +167,7 @@
         }
 
         // To hide modals
+        showAddModal(false);
         document.getElementById('modal-add').style.display = 'none'
         document.getElementById('modal-update').style.display = 'none'
         document.getElementById('commodity_modal-view').style.display = 'none'
@@ -178,12 +180,12 @@
           document.getElementById('commodityBatch_id-input').disabled = true
           document.getElementById('modal-update').style.display = 'block'
           document.getElementById('commodityBatch_id-input').value = element.commodityBatch_id;
-          document.getElementById('commodity_id-input').value = '';
-          document.getElementById('weight-input').value = '';
-          document.getElementById('supplier-input').value = '';
+          document.getElementById('commodity_id-input').value = element.commodity_id;
+          document.getElementById('weight-input').value = element.weight;
+          document.getElementById('supplier-input').value = element.supplier;
         }
 
-        showModal(false);
+
 
       }
 
@@ -313,7 +315,7 @@
 
 
 
-      /** Show element information with ajax */
+      /** Show element information */
       function getElement(commodityBatch_id) {
         console.log("getElement method");
 
@@ -322,10 +324,10 @@
           contentType : "application/json",
           type : "GET",
           success : function (response) {
-            document.getElementById('modal-add').style.display = 'none'
-            $('#commodityBatch_id-input').val(response.commodityBatch_id)
-            $('#commodity_id-input').val(response.commodity_id)
-            $('#weight-input').val(response.weight)
+            document.getElementById('modal-add').style.display = 'none';
+            $('#commodityBatch_id-input').val(response.commodityBatch_id);
+            $('#commodity_id-input').val(response.commodity_id);
+            $('#weight-input').val(response.weight);
             $('#supplier-input').val(response.supplier)
           },
           error: function (jqXHR, text, error) {
@@ -333,8 +335,8 @@
           }
         });
 
-        // To show element information
-        showElementInfo(0, false)
+        // To hide other windows og show element information
+        showElementInfo(0, false);
       }
 
       /** Add element to dataBase */
@@ -349,27 +351,30 @@
 
         // To add attributes to data base if all attributes are not empty
         if (commodityBatch_id && commodity_id && weight && supplier) {
-          element = {
-            commodityBatch_id: commodityBatch_id,
-            commodity_id: commodity_id,
-            weight: weight,
-            supplier: supplier
-          };
+          // Input's user Validation
+          if (idValidation(commodityBatch_id) && idValidation(commodity_id) && doubleValidation(weight) && stringValidation(supplier)) {
+            element = {
+              commodityBatch_id: commodityBatch_id,
+              commodity_id: commodity_id,
+              weight: weight,
+              supplier: supplier
+            };
 
-          $.ajax({
-            url: 'https://api.mama.sh/commodityBatch',
-            method: 'POST',
-            contentType: "application/json",
-            data: JSON.stringify(element),
-            success: function (response) { // todo it's working, but got an error (Update query executed successfullyparsererrorSyntaxError: Unexpected token U in JSON at position 0)
-              alert(JSON.stringify(response))
-              // Display elements
-              getCommodityBatchList()
-            },
-            error: function (jqXHR, textStatus, error) {
-              alert(jqXHR.responseText + textStatus + error.toString())
-            }
-          });
+            $.ajax({
+              url: 'https://api.mama.sh/commodityBatch',
+              method: 'POST',
+              contentType: "application/json",
+              data: JSON.stringify(element),
+              success: function (response) {
+                alert(JSON.stringify(response))
+                // Display elements
+                getCommodityBatchList()
+              },
+              error: function (jqXHR, textStatus, error) {
+                alert(jqXHR.responseText + textStatus + error.toString())
+              }
+            });
+          }
         }else {
           alert("Please input values for all fields:) ")
 
@@ -393,36 +398,31 @@
 
         // To add attributes to data base if all attributes are not empty
         if (commodityBatch_id && commodity_id && weight && supplier) {
-
           // Input's user Validation
-          idValidation(commodity_id);
-          numberValidation(weight);
-          stringValidation(supplier);
+            if (idValidation(commodity_id) && doubleValidation(weight) && stringValidation(supplier)) {
+              // Store variables in element object
+              element = {
+                commodityBatch_id: commodityBatch_id,
+                commodity_id: commodity_id,
+                weight: weight,
+                supplier: supplier
+              };
 
 
 
-          // Store variables in element object
-          element = {
-            commodityBatch_id: commodityBatch_id,
-            commodity_id: commodity_id,
-            weight: weight,
-            supplier: supplier
-          };
-
-          // http://localhost:8080/cdio/api/commodityBatch
-
-          $.ajax({
-            url: 'https://api.mama.sh/commodityBatch',
-            contentType: "application/json",
-            method: 'PUT',
-            data: JSON.stringify(element),
-            success: function (response) {
-              alert(JSON.stringify(response))
-            },
-            error: function (jqXHR, textStatus, error) {
-              alert(jqXHR.responseText + textStatus + error.toString())
+              $.ajax({
+                url: 'https://api.mama.sh/commodityBatch',
+                contentType: "application/json",
+                method: 'PUT',
+                data: JSON.stringify(element),
+                success: function (response) {
+                  alert(JSON.stringify(response))
+                },
+                error: function (jqXHR, textStatus, error) {
+                  alert(jqXHR.responseText + textStatus + error.toString())
+                }
+              });
             }
-          });
         }else {
           alert("Please input values for all fields:) ")
         }
@@ -438,28 +438,35 @@
        *****************************************************/
 
       function idValidation(id) {
-        numberValidation(id)
-        if (id < 1 || id > 99999999) {
-          alert("The input must be between  1 - 99999999 in id's field");
+        var num = /^[0-9]+$/;
+        if (!id.match(num) || id < 1 || id > 99999999) {
+          alert("The input must be an integer number and " +
+                            "between  1 - 99999999 in id's field");
           return false;
         }
+        return true;
       }
 
       function stringValidation(string) {
-        var str = /^[a-zA-Z0-9]+$/;
+        var str = /^[a-zA-Z0-9åÅæÆøØ]+$/;
         if (!string.match(str)) {
-          alert("Special character is not allow in supplier's field")
+          alert("Special character is not allow in supplier's field");
           return false;
         }
+        return true;
       }
 
-      function numberValidation(number) {
+      function doubleValidation(number) {
         var num =/^([0-9]+.{0,1}[0-9]*,{0,1})*[0-9]+$/;
         if (!number.match(num)) {
-          alert("The input must be a number in id's or weight's field");
+          alert("The input must be a number in weight's field");
           return false;
         }
+        return true;
       }
+
+
+
     </script>
   </body>
 </html>
