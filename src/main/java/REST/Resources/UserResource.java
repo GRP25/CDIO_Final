@@ -29,6 +29,7 @@ public class UserResource {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateUser(UserDTO user) throws UserException, SQLException {
         userService.updateUser(user);
         SuccessMessage msg = new SuccessMessage("Updated", 1, "https://mama.sh/doc");
@@ -37,15 +38,16 @@ public class UserResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(UserDTO user) throws UserException, SQLException{
-        System.out.println(user); // Prints the user on the server side!
         userService.createUser(user);
         SuccessMessage msg = new SuccessMessage("Created", 2, "https://mama.sh/doc");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 
-    @Path("/{userID}")
     @DELETE
+    @Path("/{userID}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response deleteUser(@PathParam("userID") int userID) throws SQLException {
         userService.deleteUser(userID);
         SuccessMessage msg = new SuccessMessage("Deleted", 3, "https://mama.sh/doc");
