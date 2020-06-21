@@ -81,7 +81,7 @@ public class ProductBatchCompDAO implements IProductBatchCompDAO {
         String     query;
 
         //Update Batch Status
-        query = "UPDATE ProductBactch SET (status) VALUES (2) WHERE ProductBatchId = ?;";
+        query = "UPDATE ProductBactch SET status = 2 WHERE ProductBatchId = ?;";
         Object[] parameter = {productBatchComp.getProductBatch_id()};
         DBUtil.executeSelectQuery(query, parameter, connection);
 
