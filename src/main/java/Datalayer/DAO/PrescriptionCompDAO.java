@@ -93,9 +93,9 @@ public class PrescriptionCompDAO implements IPrescriptionCompDAO {
 
 
 	@Override
-	public boolean exists(int id) throws SQLException {
-		String query = "SELECT prescriptionId FROM PrescriptionComp WHERE prescriptionId = ?";
-		Object[] parameter = { id };
+	public boolean exists(int pre_id, int com_id) throws SQLException {
+		String query = "SELECT prescriptionId FROM PrescriptionComp WHERE prescriptionId = ? AND commodityId = ?";
+		Object[] parameter = { pre_id, com_id};
 		Connection connection = DBUtil.getConnection();
 		ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
 

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IUserService {
-    UserDTO getUser(int userID) throws SQLException, SQLException;
+    UserDTO getUser(int userID) throws SQLException;
 
     void updateUser(UserDTO user) throws SQLException;
 
