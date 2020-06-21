@@ -1,7 +1,6 @@
 package Funclayer.exceptions.Mapping;
 
 import Funclayer.exceptions.ErrorMessage;
-import Funclayer.exceptions.exceptions.MAPSQLException;
 import Funclayer.exceptions.exceptions.NotProductBatchExeption;
 
 import javax.ws.rs.core.Response;
