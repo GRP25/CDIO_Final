@@ -15,7 +15,7 @@ public class UserDTO implements IDTO {
     private String cpr;
     private String initials;
     private List<String> roles;
-    private int status;
+    private int status = 1;
 
     public UserDTO(int userID, String firstName, String surname, String cpr, String initials, List<String> roles,
             int status) {

@@ -67,9 +67,10 @@
     <!-- Header -->
     <header class="w3-container" style="padding-top:22px">
         <h5><b> Afvejning</b></h5>
-        <label>Indtast Produktbatch nummer: </label><input id="ProductBatchToWeight" type="text"> </input> <br />
-        <button onclick="openProductBatch();" class="w3-button w3-dark-grey">Åben Produktbatch<i class="fa fa-plus"></i></button>
-        
+        <label id="PrintDate" style="display: none;">Udskrevet: </label>
+        <label>Indtast Produktbatch nummer: </label><input id="ProductBatchToWeight" type="text"> </input>
+        <button id="OpenProductBtn" onclick="openProductBatch();" class="w3-button w3-dark-grey">Åben Produktbatch<i class="fa fa-plus"></i></button>
+        <button id="PrintBtn" onclick="WeightPrint();" class="w3-button w3-dark-grey">Print<i class="fa fa-plus"></i></button>
     </header>
 
     <div class="w3-container">
@@ -138,6 +139,15 @@
     </div>
     -->
 </div>
+    <div class="w3-container">
+        <label>Sum Tara: </label> <label id="WeightSumTara"> 3</label> <br />
+        <label>Sum Netto: </label> <label id="WeightSumNetto"> 3</label> <br />
+    </div> <br />
+    <div class="w3-container">
+        <label>Produktion Status: </label> <label id="WeightProductBatchStatus"> 3</label> <br />
+        <label>Produktion Startet: </label> <label id="WeightProductBatchStartDate"> dato1</label> <br />
+        <label>Produktion Slut: </label> <label id="WeightProductBatchEndDate"> dato2</label> <br />
+    </div>
 
 
     <div id="CreateProductBatchWindow" class="modal">
@@ -156,8 +166,8 @@
             <h2>Opdater Product Batch eller Vis</h2>
             <label>Product Batch ID: </label><input id="EditProductBatchID"><br/>
             <label>Prescription ID: </label><input id="EditPrescriptionID"><br/>
-            <label>Start Date:</label><input id = "EditStartDate"><br/>
-            <label>End Date:</label><input id = "EditEndDate"><br/>
+            <label>Start Date: </label><span id = "EditStartDate"></span><br/>
+            <label>End Date: </label><span id = "EditEndDate"></span><br/>
             <label>Status: </label><input type="radio" id="EditInputStatusBegan"> Began </input> <input type="radio" id="EditInputstatusProgress"> In Progress </input> <input type="radio" id="EditInputStatusDone"> Done </input> <br/>
             <button id="EditProductBatchButton" class="EditProductBatchButton"> Tilføj ProductBatch</button>
             <button id="EditCancelButton" class="CancelButton"> Cancel</button>

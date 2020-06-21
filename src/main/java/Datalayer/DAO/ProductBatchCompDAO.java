@@ -78,11 +78,19 @@ public class ProductBatchCompDAO implements IProductBatchCompDAO {
 
     @Override
     public void createProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException {
-        String query = "INSERT INTO  ProductBatchComp (productBatchId, commodityBatchId, userId, tara, netto) values (?, ?, ?, ?, ?);";
-        Object[] parameter = productBatchComp.convertToObject();
         Connection connection = DBUtil.getConnection();
+        String query;
 
+        //Update Batch Status
+        query = "UPDATE ProductBactch SET (status) VALUES (2) WHERE ProductBatchId = ?;";
+        Object[] parameter = {productBatchComp.getProductBatch_id()};
         DBUtil.executeSelectQuery(query, parameter, connection);
+
+        //Insert Component
+        query = "INSERT INTO  ProductBatchComp (productBatchId, commodityBatchId, userId, tara, netto) values (?, ?, ?, ?, ?);";
+        parameter = productBatchComp.convertToObject();
+        DBUtil.executeSelectQuery(query, parameter, connection);
+
         connection.close();
     }
 
@@ -98,5 +106,17 @@ public class ProductBatchCompDAO implements IProductBatchCompDAO {
         connection.close();
 
     }
+
+    @Override
+    public boolean exists(int id) throws SQLException {
+        String query = "SELECT productBatchId FROM ProductBatchComp WHERE productBatchId = ?";
+        Object[] parameter = { id };
+        Connection connection = DBUtil.getConnection();
+        ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
+
+        connection.close();
+        return rs.next();
+    }
+
 
 }

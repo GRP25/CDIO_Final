@@ -1,7 +1,7 @@
-package Funclayer.exceptions;
+package Funclayer.exceptions.exceptions;
 
 public class NotANameException extends UserException {
-    NotANameException(String message) {
+    public NotANameException(String message) {
         super(message);
     }
 }
