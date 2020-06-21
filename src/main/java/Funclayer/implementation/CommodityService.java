@@ -9,8 +9,7 @@ import Funclayer.interfaces.ICommodityService;
 import java.sql.SQLException;
 import java.util.List;
 
-import static Funclayer.exceptions.validation.CommodityValidation.commodityValidationForCreate;
-import static Funclayer.exceptions.validation.CommodityValidation.commodityValidationForUpdate;
+import static Funclayer.exceptions.validation.CommodityValidation.*;
 
 public class CommodityService implements ICommodityService {
 
@@ -18,14 +17,8 @@ public class CommodityService implements ICommodityService {
 
     @Override
     public CommodityDTO getCommodity(int commodity_id) throws SQLException {
-
-        CommodityDTO commodityDTO = commodityDAO.getCommodity(commodity_id);
-
-        if (commodityDTO.getCommodity_id() == 0)
-            throw new ObjectException("No Commodity exists with this number as an identification!");
-
-        return commodityDTO;
-
+        validateCommodityID(commodity_id);
+        return commodityDAO.getCommodity(commodity_id);
     }
 
     @Override
