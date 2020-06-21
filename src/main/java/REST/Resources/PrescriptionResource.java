@@ -23,15 +23,16 @@ public class PrescriptionResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createPrescription(PrescriptionDTO prescriptionDTO) throws SQLException {
 		prescriptionService.createPrescription(prescriptionDTO);
-		SuccessMessage msg = new SuccessMessage("Created new Prescription", 31, "");
+		SuccessMessage msg = new SuccessMessage("Created new Prescription", 31, "https://mama.sh/");
 		return Response.status(Response.Status.OK).entity(msg).build();
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePrescription(PrescriptionDTO prescriptionDTO) throws SQLException {
 		prescriptionService.updatePrescription(prescriptionDTO);
-		SuccessMessage msg = new SuccessMessage("Updated Prescription", 32, "");
+		SuccessMessage msg = new SuccessMessage("Updated Prescription", 32, "https://mama.sh");
 		return Response.status(Response.Status.OK).entity(msg).build();
 	}
 

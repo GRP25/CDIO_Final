@@ -95,8 +95,4 @@ public class ProductBatchDTO implements IDTO {
 		object[4] = this.status;
 		return object;
 	}
-
-	public static void main(String[] args) {
-
-	}
 }
