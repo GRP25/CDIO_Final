@@ -359,7 +359,7 @@ function updateProductBatch() {
 
     var productBatch = {
         productBatch_id: $("#EditProductBatchID").text(),
-        prescription_id: $("#EditPrescriptionID").val(),
+        prescription_id: $("#EditPrescriptionID").text(),
         status: productBatchStatus
     };
 
@@ -369,22 +369,9 @@ function updateProductBatch() {
         method: "PUT",
         data: JSON.stringify(productBatch),
         success: function (response) {
-            alert("Produkt Batch Opdateret");
-        },
-        error: function (data, text, error) {
-            alert("fejl: Produkt Batch ikke opdateres");
-        }
-
-    });
-}
-
-function getProductBatchListWithID(){
-    $.ajax ({
-        url: "https://api.mama.sh/ProductBatchs",
-        contentType: "application/json",
-        method: "PUT",
-        data: JSON.stringify(productBatch),
-        success: function (response) {
+            if(document.getElementById("EditInputStatusDone").checked == true){
+                response.endDate = new Date.getTime();
+            }
             alert("Produkt Batch Opdateret");
         },
         error: function (data, text, error) {
@@ -403,7 +390,7 @@ async function getProductBatch(id) {
         success: function (response) {
             document.getElementById("EditProductBatchWindow").style.display = "block";
             $("#EditProductBatchID").text(response.productBatch_id);
-            $("#EditPrescriptionID").val(response.prescription_id);
+            $("#EditPrescriptionID").text(response.prescription_id);
             $("#EditStartDate").html(new Date(response.startDate).toDateString());
             if(response.endDate <= 0){
                 $("#EditEndDate").html("")
@@ -414,13 +401,13 @@ async function getProductBatch(id) {
 
             switch(response.status){
                 case 1:
-                    $("#EditInputStatusBegin").prop('checked', true);
+                    $("#EditInputStatusBegin").text("Oprettet");
                     break;
                 case 2:
-                    $("#EditInputstatusProgress").prop('checked', true);
+                    $("#EditInputstatusProgress").text("Under Produktion");
                     break;
                 case 3:
-                    $("#EditInputStatusDone").prop('checked', true);
+                    $("#EditInputStatusDone").text("Afsluttet");
                     break;
             }
         },
@@ -428,6 +415,101 @@ async function getProductBatch(id) {
             document.getElementById("loaderID").style.display = "none";
             alert(jqXHR.status + text + error);
         },
+    });
+}
+
+function getProductBatchCompList() {
+    $.ajax({
+        url: "https://api.mama.sh/productbatchcomp",
+        contentType: "application/json",
+        method: "GET",
+        success: function (response) {
+            $("#ListOfProductBatchCompTable").html("");
+            var html = "";
+            jQuery.each(response, (i, item) => {
+                html += `<tr>`;
+                html += `<td><h5>Produkt Bacth ID</h5> ${item.productBatch_id} <h5>Råvare ID </h5> ${item.commodityBatch_id}</td>`;
+                html += `<td><button onclick="getOneProductBatchComp(${item.commodityBatch_id},${item.productBatch_id});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+                html += `</tr>`;
+            });
+            console.log(html);
+            $("#ListOfProductBatchCompTable").append(html);
+
+            $("#ListOfProductBatchCompTable").show();
+        },
+        error: function (jqXHR, text, error) {
+            document.getElementById("loaderID").style.display = "none";
+            alert(jqXHR.status + text + error);
+        }
+    })
+}
+
+function getOneProductBatchComp(CommodityID, ProductBatchID) {
+    $.ajax({
+        url: "https://api.mama.sh/productbatchcomp/component?productBatchId="+ProductBatchID+"&commodityBatchId="+CommodityID,
+        contentType: "application/json",
+        method: "GET",
+        success: function (response) {
+            document.getElementById("ViewProductBatchCompWindow").style.display= "block";
+            $("#ViewProductBatchID").text(response.productBatch_id);
+            $("#ViewCommodityID").val(response.commodityBatch_id);
+            $("#ViewUserID").val(response.user_id);
+            $("#ViewTara").val(response.tara);
+            $("#ViewNetto").val(response.netto);
+        },
+        error: function (jqXHR, text, error) {
+            document.getElementById("loaderID").style.display = "none";
+            alert(jqXHR.status + text + error);
+        },
+    });
+}
+
+function getProductBatchCompListOneBatch(id) {
+    $.ajax({
+        url: "https://api.mama.sh/productbatchcomp/ID/"+id,
+        contentType: "application/json",
+        method: "GET",
+        success: function (response) {
+            $("#ListOfOneProductBatchTable").html("");
+            var html = "";
+            jQuery.each(response, (i, item) => {
+                html += `<tr>`;
+                html += `<td><h5>Produkt Bacth ID</h5> ${id}<h5>Råvare ID</h5>${item.commodityBatch_id}</td>`;
+                html += `<td><button onclick="getOneProductBatchComp(${item.commodityBatch_id},${id});" id="EditBtn" class="w3-dark-grey list-item-btn">Vis <i class="fa fa-cog fa-fw"></i></button></td>`;
+                html += `</tr>`;
+            });
+            $("#ListOfOneProductBatchTable").append(html);
+
+            $("#ListOfOneProductBatchTable").show();
+        },
+        error: function (jqXHR, text, error) {
+            document.getElementById("loaderID").style.display = "none";
+            alert(jqXHR.status + text + error);
+        }
+    });
+}
+
+function updateProductBatchComp(){
+    var productBachComp = {
+        productBatch_id: $("#ViewProductBatchID").text(),
+        commodityBatch_id: $("#ViewCommodityID").val(),
+        user_id: $("#ViewUserID").val(),
+        tara: $("#ViewTara").val(),
+        netto: $("#ViewNetto").val()
+    };
+
+    $.ajax ({
+        url: "https://api.mama.sh/productbatchcomp",
+        contentType: "application/json",
+        method: "PUT",
+        data: JSON.stringify(productBachComp),
+        success: function (response) {
+            alert("Produkt Batch Comp Opdateret");
+        },
+        error: function (data, text, error) {
+            alert("fejl: Produkt Batch Comp ikke opdateret");
+        }
+
     });
 }
 
@@ -452,7 +534,6 @@ function getCommodityBatch(id) {
         }
     });
 }
-
 
 function getCommodityBatchList() {
     console.log("getCommodityBatchList method")
@@ -778,7 +859,9 @@ function WeightPrint() {
 
     window.print();
 
+
     document.getElementById("PrintDate").style.display = "none";
     document.getElementById("OpenProductBtn").style.display = "inline";
     document.getElementById("PrintBtn").style.display = "inline";
 }
+
