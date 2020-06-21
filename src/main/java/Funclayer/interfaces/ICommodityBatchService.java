@@ -7,14 +7,13 @@ import java.util.List;
 
 public interface ICommodityBatchService {
 
-        CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws SQLException;
+    CommodityBatchDTO getCommodityBatch(int commodityBatch_id) throws SQLException;
 
-        List<CommodityBatchDTO> getCommodityBatchList() throws SQLException;
+    List<CommodityBatchDTO> getCommodityBatchList() throws SQLException;
 
-        List<CommodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws SQLException;
+    List<CommodityBatchDTO> getCommodityBatchList(int commodityBatch_id) throws SQLException;
 
-        String createCommodityBatch(CommodityBatchDTO batch) throws SQLException;
+    void createCommodityBatch(CommodityBatchDTO batch) throws SQLException;
 
-        String updateCommodityBatch(CommodityBatchDTO batch) throws SQLException;
-
+    void updateCommodityBatch(CommodityBatchDTO batch) throws SQLException;
 }

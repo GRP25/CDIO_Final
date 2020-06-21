@@ -34,15 +34,14 @@ public class ProductBatchService implements IProductBatchService {
 
 
     @Override
-    public String createProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
+    public void createProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
         productBatchValidationForCreate(productBatch);
         productBatchDAO.createProductBatch(productBatch);
-        return "Insert query executed successfully";
     }
 
 
     @Override
-    public String updateProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
+    public void updateProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
         productBatchValidationForUpdate(productBatch);
         if (productBatch.getStatus() == 1 || productBatch.getStatus() == 2){
             productBatch.setEndDate(0);
@@ -50,6 +49,5 @@ public class ProductBatchService implements IProductBatchService {
             productBatch.setEndDate(System.currentTimeMillis());
         }
         productBatchDAO.updateProductBatch(productBatch);
-        return "Update query executed successfully";
     }
 }

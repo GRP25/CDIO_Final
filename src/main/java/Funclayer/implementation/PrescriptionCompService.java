@@ -46,16 +46,14 @@ public class PrescriptionCompService implements IPrescriptionCompService {
 	}
 
 	@Override
-	public String createPrescriptionComp(PrescriptionCompDTO prescription) throws SQLException {
+	public void createPrescriptionComp(PrescriptionCompDTO prescription) throws SQLException {
 		prescriptionCompValidationForCreate(prescription);
 		prescriptionCompDAO.createPrescriptionComp(prescription);
-		return "Insert query executed successfully";
 	}
 
 	@Override
-	public String updatePrescriptionComp(PrescriptionCompDTO prescription) throws SQLException {
+	public void updatePrescriptionComp(PrescriptionCompDTO prescription) throws SQLException {
 		prescriptionCompValidationForUpdate(prescription);
 		prescriptionCompDAO.updatePrescriptionComp(prescription);
-		return "Update query executed successfully";
 	}
 }

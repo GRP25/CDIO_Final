@@ -1,4 +1,3 @@
-
 package Funclayer.implementation;
 
 import Datalayer.DAO.CommodityDAO;
@@ -35,17 +34,14 @@ public class CommodityService implements ICommodityService {
     }
 
     @Override
-    public String createCommodity(CommodityDTO commodity) throws SQLException {
+    public void createCommodity(CommodityDTO commodity) throws SQLException {
         commodityValidationForCreate(commodity);
         commodityDAO.createCommodity(commodity);
-        return "Insert query executed successfully";
     }
 
     @Override
-    public String updateCommodity(CommodityDTO commodity) throws SQLException {
+    public void updateCommodity(CommodityDTO commodity) throws SQLException {
         commodityValidationForUpdate(commodity);
         commodityDAO.updateCommodity(commodity);
-        return "Update query executed successfully";
     }
-
 }

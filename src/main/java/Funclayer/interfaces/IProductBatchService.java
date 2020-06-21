@@ -11,7 +11,7 @@ public interface IProductBatchService {
 
     List<ProductBatchDTO> getProductBatchDTOList() throws SQLException;
 
-    String createProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption;
+    void createProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption;
 
-    String updateProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption;
+    void updateProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption;
 }
