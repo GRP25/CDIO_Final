@@ -27,6 +27,8 @@ public class PrescriptionComp extends Validation {
     }
 
     public static void prescriptionCompValidationForCreate(PrescriptionCompDTO prescriptionCompDTO) throws SQLException {
+        idValidator(prescriptionCompDTO.getPrescription_id());
+        idValidator(prescriptionCompDTO.getCommodity_id());
         //Checking if the prescription component already exists in the database.
         if (prescriptionCompDAO.exists(prescriptionCompDTO.getPrescription_id(), prescriptionCompDTO.getCommodity_id()))
             throw new ObjectException("PrescriptionComp already exist");
