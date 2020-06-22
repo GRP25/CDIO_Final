@@ -1,4 +1,4 @@
-package Funclayer.exceptions;
+package Funclayer.exceptions.exceptions;
 
 import java.sql.SQLException;
 

@@ -12,7 +12,7 @@ public interface IProductBatchCompService {
 
     List<ProductBatchCompDTO> getProductBatchCompList(int productBatch_id) throws SQLException;
 
-    String createProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException;
+    void createProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException;
 
-    String updateProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException;
+    void updateProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException;
 }

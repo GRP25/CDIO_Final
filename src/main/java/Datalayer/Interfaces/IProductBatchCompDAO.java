@@ -21,4 +21,5 @@ public interface IProductBatchCompDAO {
 
 	void updateProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException;
 
+	boolean exists(int pro_id, int combat_id) throws SQLException;
 }

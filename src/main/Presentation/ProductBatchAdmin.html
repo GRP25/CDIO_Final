@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Produkt Batch Administration</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    html, body, h1, h2, h3, h4, h5 {
+        font-family: "Raleway", sans-serif
+    }
+</style>
+
+<!-- our custom style sheet-->
+<link rel="stylesheet" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="script.js"></script>
+
+<body class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i
+            class="fa fa-bars"></i>  Menu
+    </button>
+    <span class="w3-bar-item w3-right">Logo</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left myNav" style="z-index:3;" id="mySidebar"><br>
+    <!-- <div class="w3-container w3-row">
+       <div class="w3-col s4">
+         <img src="/w3images/avatar2.png" class="w3-circle w3-margin-right" style="width:46px">
+       </div>
+       <div class="w3-col s8 w3-bar">
+         <span>Welcome, <strong>Mike</strong></span><br>
+         <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+         <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+         <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+       </div>rtrtrtrtrtrtrttrtt
+     </div>
+     <hr> -->
+    <div class="w3-container">
+        <h5>Dashboard</h5>
+    </div>
+    <div class="w3-bar-block">
+        <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Bruger Administration</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>  Råvare Administration</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Råvarebatch Administration</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-bullseye fa-fw"></i>  Produktbatch Administration</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Afvejning</a>
+    </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+     title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main myBody" style="margin-top:43px;">
+
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:22px">
+        <h5><b> Produktbatch Administration</b></h5>
+        <button id="CreateProductBatchBtn" class="w3-button w3-dark-grey">Tilføj Product Batch <i class="fa fa-plus"></i></button>
+        <button id="GetProductBatchList" onclick="getProductBatchList();" class="w3-button w3-dark-grey">Få Produkt Batch List/Refresh </button>
+        <button id="GetProductBatchCompList" onclick="getProductBatchCompList();" class="w3-button w3-dark-grey"> Få Produkt Batch Comp Liste/Refresh</button>
+        <button id="GetOneProductBatchList" class="w3-button w3-dark-grey"> Få En Produkt Batch Liste/Refresh</button>
+    </header>
+
+
+    <div class="w3-container">
+        <h5>Alle Produkt Batchs</h5>
+
+        <table id="ListOfProductBatchTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+
+        </table>
+        <br>
+    </div>
+
+    <div class="w3-container">
+        <h5>Alle Produkt Batch Comps</h5>
+
+        <table id="ListOfProductBatchCompTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+
+        </table>
+        <br>
+    </div>
+
+    <div class="w3-container">
+        <h5>En Produkt Batch</h5>
+
+        <table id="ListOfOneProductBatchTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+
+        </table>
+        <br>
+    </div>
+
+    <div id="CreateProductBatchWindow" class="modal">
+        <div id="CreateProductBatchContent" class="modal-content">
+            <h2>Opret Product Batch</h2>
+            <label>Produkt Batch ID: </label><input id="CreateProductBatchID"><br/>
+            <label>Prescription ID: </label><input id="InputPrescriptionID"><br/>
+            <label>Status: </label><input name="status" type="radio" id="InputStatusBegin"> Oprettet  </input> <input name="status" type="radio" id="InputstatusProgress"> Under Produktion </input> <input name="status" type="radio" id="InputStatusDone"> Afsluttet </input> <br/>
+            <button id="createProductBatchButton" class="createProductBatchButton"> Tilføj ProductBatch</button>
+            <button id="CreateCancelButton" class="CancelButton"> Cancel</button>
+        </div>
+    </div>
+
+    <div id="EditProductBatchWindow" class="modal">
+        <div id="EditProductBatchContent" class="modal-content">
+            <h2>Vis Produkt Batch</h2>
+            <label>Product Batch ID: </label><span id="EditProductBatchID"></span><br/>
+            <label>Prescription ID: </label><span id="EditPrescriptionID"></span><br/>
+            <label>Start Date: </label><span id = "EditStartDate"></span><br/>
+            <label>End Date: </label><span id = "EditEndDate"></span><br/>
+            <label>Status: </label><span id="EditInputStatusBegin"></span><br/>
+            <button id="EditCancelButton" class="CancelButton"> Close </button>
+        </div>
+    </div>
+
+    <div id="ViewProductBatchCompWindow" class="modal">
+        <div id="ViewProductBatchCompContent" class="modal-content">
+            <h2>Vis Produkt Batch Comp</h2>
+            <label>Produkt Batch ID: </label><span id="ViewProductBatchID"></span><br/>
+            <label>Råvare ID: </label><input id="ViewCommodityID"><br/>
+            <label>Bruger ID: </label><input id="ViewUserID"><br/>
+            <label>Tara: </label><input id="ViewTara"><br/>
+            <label>Netto: </label><input id="ViewNetto"><br/>
+            <button id="EditProductBatchCompButton" class="EditProductBatchCompButton">Opdater Produkt Batch Comp</button>
+            <button id="closeButtonProductBacthComp" class="closeButtonProductBacthComp">Close </button>
+        </div>
+    </div>
+
+    <div id="InputForIDForProductBatchWindow" class="modal">
+        <div id="InputForIDForProductBatchContent" class="modal-content">
+            <h2>Input ID for Produkt Batch</h2>
+            <label>Product Batch ID</label><input id="InputProductBatchID"><br/>
+            <button id="InputProductIDButton" class="InputProductIDButton">Ok</button>
+            <button id="InputProductIDButtonClose" class="InputProductIDButtonClose">Close </button>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+
+        var addModal = document.getElementById("CreateProductBatchWindow");
+
+        var addBtn = document.getElementById("CreateProductBatchBtn");
+
+        var addProductBatch = document.getElementById("createProductBatchButton");
+
+        var cancelBtn = document.getElementById("CreateCancelButton");
+
+        addBtn.onclick = function () {
+            addModal.style.display = "block";
+        };
+
+        addProductBatch.onclick = function () {
+            CreateProductBatch();
+            addModal.style.display = "none";
+        };
+
+        window.onclick = function (event) {
+            if (event.target == addModal) {
+                addModal.style.display = "none";
+            }
+        };
+
+        cancelBtn.onclick = function () {
+            addModal.style.display = "none";
+        };
+
+        var editModal = document.getElementById("EditProductBatchWindow");
+
+        var editSpan = document.getElementById("EditCancelButton");
+
+        editSpan.onclick = function(){
+            //updateProductBatch();
+            editModal.style.display = "none";
+        };
+
+        window.onclick = function (event) {
+            if(event.target == editModal){
+                editModal.style.display = "none";
+            }
+        };
+
+
+
+
+    var viewModal = document.getElementById("ViewProductBatchCompWindow");
+
+    var closeBtnView = document.getElementById("closeButtonProductBacthComp");
+
+    var viewSpan = document.getElementById("EditProductBatchCompButton");
+
+    window.onclick = function (event) {
+        if(event.target == viewModal){
+            viewModal.style.display = "none";
+        }
+    };
+
+    closeBtnView.onclick = function () {
+        viewModal.style.display = "none";
+    };
+
+    viewSpan.onclick = function () {
+        updateProductBatchComp();
+        viewModal.style.display = "none";
+    };
+
+    var inputModal = document.getElementById("InputForIDForProductBatchWindow");
+
+    var inputSpan = document.getElementById("InputProductIDButton");
+
+    var inputBtn = document.getElementById("GetOneProductBatchList");
+
+    var inputBtnClose = document.getElementById("InputProductIDButtonClose");
+
+    inputSpan.onclick = function () {
+        getProductBatchCompListOneBatch(document.getElementById("InputProductBatchID").value);
+        inputModal.style.display = "none"
+    };
+
+    window.onclick = function (event) {
+        if(event.target == inputModal){
+            inputModal.style.display = "none";
+        }
+    };
+
+    inputBtn.onclick = function () {
+        inputModal.style.display = "block";
+    };
+
+    inputBtnClose.onclick = function () {
+        inputModal.style.display = "none";
+    }
+
+    });
+
+</script>
+
+<script>
+
+    // Get the Sidebar
+    var mySidebar = document.getElementById("mySidebar");
+
+    // Get the DIV with overlay effect
+    var overlayBg = document.getElementById("myOverlay");
+
+    // Toggle between showing and hiding the sidebar, and add overlay effect
+    function w3_open() {
+        if (mySidebar.style.display === 'block') {
+            mySidebar.style.display = 'none';
+            overlayBg.style.display = "none";
+        } else {
+            mySidebar.style.display = 'block';
+            overlayBg.style.display = "block";
+        }
+    }
+
+    // Close the sidebar with the close button
+    function w3_close() {
+        mySidebar.style.display = "none";
+        overlayBg.style.display = "none";
+    }
+</script>
+</body>
+</html>

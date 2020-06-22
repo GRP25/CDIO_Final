@@ -73,7 +73,7 @@ public class PrescriptionCompDAO implements IPrescriptionCompDAO {
 
 	@Override
 	public void createPrescriptionComp(PrescriptionCompDTO prescription) throws SQLException {
-		String query = "INSERT INTO PrescriptionComp (prescriptionId, commodityId, nomNetto, tollerance) VALUES (?,?,?,?)";
+		String query = "INSERT INTO PrescriptionComp (prescriptionId, commodityId, nomNetto, tolerance) VALUES (?,?,?,?)";
 		Connection connection = DBUtil.getConnection();
 		Object[] parameter = prescription.convertToObject();
 		DBUtil.executeSelectQuery(query, parameter, connection);
@@ -90,4 +90,17 @@ public class PrescriptionCompDAO implements IPrescriptionCompDAO {
 		connection.close();
 
 	}
+
+
+	@Override
+	public boolean exists(int pre_id, int com_id) throws SQLException {
+		String query = "SELECT prescriptionId FROM PrescriptionComp WHERE prescriptionId = ? AND commodityId = ?";
+		Object[] parameter = { pre_id, com_id};
+		Connection connection = DBUtil.getConnection();
+		ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
+
+		connection.close();
+		return rs.next();
+	}
+
 }

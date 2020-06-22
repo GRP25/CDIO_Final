@@ -6,13 +6,8 @@ package Datalayer;
  * connection: Connection                                                          *
  *---------------------------------------------------------------------------------*
  * getConnection():                                              Connection        *
- * getPrepareStatement(query: String):                           PreparedStatement *
  * executeSelectQuery(query: String, objects: Object[]):         ResultSet         *
- * executeCreateAndUpdate(query: String, objects: Object[])                        *
  * fillOutStatement(pstmt: PreparedStatement, objects: Object[])                   *
- * convertTOObject(parameter: Object...):                        Object[]          *
- * resultSetToObject(ResultSet resultSet, Class classObject)     Object            *
- * remainingParameter(objects: Object[], objectIndex: int, parameter: Object...)   *
  ***********************************************************************************/
 
 import Datalayer.DTO.CommodityBatchDTO;
@@ -37,7 +32,7 @@ public class DBUtil {
     public static ResultSet executeSelectQuery(String query, Object[] parameter, Connection connection) throws SQLException {
         PreparedStatement pstmt = connection.prepareStatement(query);
         fillOutStatement(pstmt, parameter);
-        return pstmt.executeQuery(); // todo
+        return pstmt.executeQuery();
     }
 
 
@@ -54,6 +49,8 @@ public class DBUtil {
                     pstmt.setDouble(index++, Double.parseDouble(object.toString()));
                 } else if (object instanceof String) {
                     pstmt.setString(index++, object.toString());
+                } else if(object instanceof Date) {
+                    pstmt.setDate(index++ , Date.valueOf(((Date) object).toLocalDate()));
                 }
             }
         }

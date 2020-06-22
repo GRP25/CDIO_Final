@@ -4,32 +4,33 @@ import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class ErrorMessage {
-    private String errorMessage;
-    private int errorCode;
+    private String message;
+    private int    code;
     private String errorDocUrl;
 
-    public ErrorMessage(){};
+    public ErrorMessage() {
+    }
 
-    public ErrorMessage(String errorMessage, int errorCode, String errorDocUrl) {
-        this.errorMessage = errorMessage;
-        this.errorCode = errorCode;
+    public ErrorMessage(String message, int code, String errorDocUrl) {
+        this.message = message;
+        this.code = code;
         this.errorDocUrl = errorDocUrl;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public int getErrorCode() {
-        return errorCode;
+    public int getCode() {
+        return code;
     }
 
-    public void setErrorCode(int errorCode) {
-        this.errorCode = errorCode;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getErrorDocUrl() {

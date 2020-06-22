@@ -3,6 +3,7 @@ package REST.Resources;
 import Datalayer.DTO.ProductBatchCompDTO;
 import Funclayer.implementation.ProductBatchCompService;
 import Funclayer.interfaces.IProductBatchCompService;
+import REST.SuccessMessage;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,100 +16,47 @@ import java.util.List;
 public class ProductBatchCompResource {
     IProductBatchCompService productBatchCompService = new ProductBatchCompService();
 
-    // get product (int product id, int commodity id)
     @Path("/component")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProductBatchComp(@QueryParam("productBatchId") int productBatch_id,
             @QueryParam("commodityBatchId") int commodityBatch_id) throws SQLException {
-        Response response;
-
-        ProductBatchCompDTO productBatchComp = productBatchCompService.getProductBatchComp(productBatch_id,
-                commodityBatch_id);
-
-        if (productBatchComp != null) {
-            response = Response.status(Response.Status.OK).entity(productBatchComp).build();
-        } else {
-            response = Response.status(Response.Status.BAD_REQUEST).entity("Error").build();
-        }
-
-        return response;
+        ProductBatchCompDTO productBatchComp;
+        productBatchComp = productBatchCompService.getProductBatchComp(productBatch_id,commodityBatch_id);
+        return Response.status(Response.Status.OK).entity(productBatchComp).build();
     }
 
-    // get productbatchcomp list
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllProductBatchCompList() throws SQLException {
-        Response response;
-
         List<ProductBatchCompDTO> productBatchCompList = productBatchCompService.getProductBatchCompList();
-
-        if (productBatchCompList != null) {
-            response = Response.status(Response.Status.OK).entity(productBatchCompList).build();
-        } else {
-            response = Response.status(Response.Status.OK).entity("Error").build();
-
-        }
-
-        return response;
-
+        return Response.status(Response.Status.OK).entity(productBatchCompList).build();
     }
 
-    // get productBatch comp list with id
     @Path("/ID/{ProductID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProductBatchCompListByID(@PathParam("ProductID") int productBatch_id) throws SQLException {
-
-        Response response;
-        List<ProductBatchCompDTO> productBatchCompList = productBatchCompService
-                .getProductBatchCompList(productBatch_id);
-
-        if (productBatchCompList != null) {
-            response = Response.status(Response.Status.OK).entity(productBatchCompList).build();
-        } else {
-            response = Response.status(Response.Status.OK).entity("Error").build();
-
-        }
-        return response;
+        List<ProductBatchCompDTO> productBatchCompList;
+        productBatchCompList = productBatchCompService.getProductBatchCompList(productBatch_id);
+        return Response.status(Response.Status.OK).entity(productBatchCompList).build();
     }
 
-    // create productbatchcomp
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createProductBatchComp(ProductBatchCompDTO productBatchCompDTO) throws SQLException {
-        Response response;
-
-        String createResult = productBatchCompService.createProductBatchComp(productBatchCompDTO);
-
-        if (createResult.equalsIgnoreCase("Insert query executed succesfully")) {
-            response = Response.status(Response.Status.OK).entity(createResult).build();
-        } else {
-            response = Response.status(Response.Status.BAD_REQUEST).entity(createResult).build();
-        }
-
-        return response;
-
+        productBatchCompService.createProductBatchComp(productBatchCompDTO);
+        SuccessMessage msg = new SuccessMessage("ProductBatchComp succesfully created", 6010, "https://mama.sh/");
+        return Response.status(Response.Status.OK).entity(msg).build();
     }
-
-    // update productbatchcomp
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException {
-        Response response;
-
-        String updateResult = productBatchCompService.updateProductBatchComp(productBatchComp);
-
-        if (updateResult.equalsIgnoreCase("Update query executed succesfully")) {
-            response = Response.status(Response.Status.OK).entity(updateResult).build();
-        } else {
-            response = Response.status(Response.Status.BAD_REQUEST).entity(updateResult).build();
-        }
-
-        return response;
+        productBatchCompService.updateProductBatchComp(productBatchComp);
+        SuccessMessage msg = new SuccessMessage("ProductBatchComp succesfully updated", 6011, "https://mama.sh/");
+        return Response.status(Response.Status.OK).entity(msg).build();
     }
-
 }

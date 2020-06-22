@@ -32,8 +32,6 @@ rectangle "Softwaresystem" {
             nameConversion(String)\t:String
         }
         rectangle "Exceptions" as exe {
-            class "NotAValidNameException" as exenam
-            class "NotAValidCPRException" as execpr
         }
     }
 }

@@ -1,0 +1,48 @@
+OTHER MESSAGES:
+    Error:
+        1100: Unknown Exception
+        1101: ObjectException
+        1102: IDException
+        1103: NotAValidNameException
+        1104: NotAStatusException
+SQL MESSAGES:
+    Error:
+        2100: SQL Exception
+        2101: DataLayerException
+USER MESSAGES:
+    Success:
+        3000: Created
+        3001: Updated
+        3002: Deactivated
+    Error:
+        3100: UserException
+        3101: CPRException
+COMMODITY MESSAGES:
+    Success:
+        4000: Created
+        4001: Updated
+COMMODITYBATCH MESSAGES:
+    Success:
+        4010: Created
+        4011: Updated
+PRESCRIPTION MESSAGES:
+    Success:
+        5000: Created
+        5001: Updated
+PRESCRIPTIONCOMP MESSAGES:
+    Success:
+        5010: Created
+        5011: Updated
+PRODUCTBATCH MESSAGES:
+    Success:
+        6001: Created
+        6001: Updated
+    Error:
+        6100: NotAProductBatchException
+        6101: ProductFinishedException
+PRODUCTBATCHCOMP MESSAGES:
+    Success:
+        6011: Created
+        6011: Updated
+    Error:
+        6110: NotAProductBatchCompException
