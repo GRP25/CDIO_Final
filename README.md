@@ -7,6 +7,7 @@
 * Generelt ploish af tabeller
 * Bedre flow
 * Style Login container
+* Få lavet slutdate med at afslutte produkt batch
 ## Raport Struktur
 * Der skal laves noget struktur over vores rapport
     * Implementations laget skal måske deles op i 3-lagsmodellen
