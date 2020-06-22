@@ -55,247 +55,267 @@
 		<!--main containers will contain results and lists-->
 		<div class=" mainScreen user-window relative h-screen w-5/6 bg-gray-700 float-right hidden">
 
-						<!--Create and show list components-->
-						<div class="flex justify-start inline-block h-24 px-full mb-0">
-							<a href="#"
-								class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-								onclick=UserModal("createUser()")>Tilføj
-								+</a>
-							<a href="#"
-								class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-								onclick="listUsers()">Vis Liste</a>
-						</div>
+			<!--Create and show list components-->
+			<div class="flex justify-start inline-block h-24 px-full mb-0">
+				<a href="#"
+					class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick=UserModal("createUser()")>Tilføj
+					+</a>
+				<a href="#"
+					class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick="listUsers()">Vis Liste</a>
+			</div>
 
-						<!--Table for showing results-->
-						<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
-							<table id="listOfUsersTable" class="table-fixed w-full mx-auto">
+			<!--Table for showing results-->
+			<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
+				<table id="listOfUsersTable" class="table-fixed w-full mx-auto">
 
-							</table>
-						</div>
+				</table>
+			</div>
+		</div>
+
+
+
+	</div>
+	<!--COMMODITY WINDOW-->
+	<div class="mainWindow commodityAdmin">
+		<!--Sideboard with the different functions the administration can perform-->
+		<div class="relative h-screen w-1/6 bg-gray-800 float-left">
+			<div :class="sidebar" class="container absolute inset-y-0 left-0 px-4 py3">
+				<h5 class="font-semibold text-3xl text-white text-center">Valgmuligheder</h5>
+
+				<div class="block">
+					<a href="#" data-target=".commodity-window"
+						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center">Råvare</a>
+					<a href=" #"
+						class="valgmulighed-2 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
+						data-target=".prescription-window">Recepter</a>
+					<a href=" #"
+						class="valgmulighed-3 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
+						data-target=".prescriptionComp-window">Recept komponenter</a>
 				</div>
+			</div>
+		</div>
+		<!--main containers will contain results and lists-->
+		<div class=" mainScreen commodity-window relative h-screen w-5/6 bg-gray-700 float-right hidden">
 
+			<!--Create and show list components-->
+			<div class="flex justify-start inline-block h-24 px-full mb-0">
+				<a href="#"
+					class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick=createCommodityModal("createCommodity()");>Tilføj
+					+</a>
+				<a href="#"
+					class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick="listCommodities()">Vis Liste</a>
+			</div>
 
+			<!--Table for showing results-->
+			<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
+				<table id="listOfCommoditiestable" class="table-fixed w-full mx-auto">
+
+				</table>
+			</div>
+		</div>
+
+		<div class="mainScreen prescription-window relative h-screen w-5/6 bg-gray-700 float-right hidden">
+
+			<!--Create and show list components-->
+			<div class="flex justify-start inline-block h-24 px-full mb-0">
+				<a href="#"
+					class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick=createPrescriptionModal("createPrescription()")>Tilføj
+					+</a>
+				<a href="#"
+					class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick="listPrescriptions()">Vis Liste</a>
+			</div>
+
+			<!--Table for showing results-->
+			<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
+				<table id="listOfPrescriptionsTable" class="table-fixed w-full mx-auto"></table>
 
 			</div>
-			<!--COMMODITY WINDOW-->
-			<div class="mainWindow commodityAdmin">
-				<!--Sideboard with the different functions the administration can perform-->
-				<div class="relative h-screen w-1/6 bg-gray-800 float-left">
-					<div :class="sidebar" class="container absolute inset-y-0 left-0 px-4 py3">
-						<h5 class="font-semibold text-3xl text-white text-center">Valgmuligheder</h5>
+		</div>
 
-						<div class="block">
-							<a href="#" data-target=".commodity-window"
-								class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center" >Råvare</a>
-			<a href=" #" class="valgmulighed-2 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
-								data-target=".prescription-window">Recepter</a>
-						</div>
-					</div>
-				</div>
-				<!--main containers will contain results and lists-->
-				<div class=" mainScreen commodity-window relative h-screen w-5/6 bg-gray-700 float-right hidden">
+		<div class="mainScreen prescriptionComp-window relative h-screen w-5/6 bg-gray-700 float-right hidden">
 
-					<!--Create and show list components-->
-					<div class="flex justify-start inline-block h-24 px-full mb-0">
-						<a href="#"
-							class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-							onclick=createCommodityModal("createCommodity()");>Tilføj
-							+</a>
-						<a href="#"
-							class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-							onclick="listCommodities()">Vis Liste</a>
-					</div>
+			<!--Create and show list components-->
+			<div class="flex justify-start inline-block h-24 px-full mb-0">
+				<a href="#"
+					class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick=prescriptionCompModal("createPrescriptionComp()")>Tilføj
+					+</a>
+				<a href="#"
+					class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick="listPrescriptionComp()">Vis Liste</a>
+			</div>
 
-					<!--Table for showing results-->
-					<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
-						<table id="listOfCommoditiestable" class="table-fixed w-full mx-auto">
-
-						</table>
-					</div>
-				</div>
-
-				<div class="mainScreen prescription-window relative h-screen w-5/6 bg-gray-700 float-right hidden">
-
-					<!--Create and show list components-->
-					<div class="flex justify-start inline-block h-24 px-full mb-0">
-						<a href="#"
-							class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-							onclick=createPrescriptionModal()>Tilføj
-							+</a>
-						<a href="#"
-							class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-							onclick="listPrescriptions()">Vis Liste</a>
-						<a href="#"
-							class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-							onclick="">Tilføj Recept Komponent</a>
-					</div>
-
-					<!--Table for showing results-->
-					<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
-						<table id="listOfPrescriptionsTable" class="table-fixed w-full mx-auto"></table>
-
-					</div>
-				</div>
-
-
+			<!--Table for showing results-->
+			<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
+				<table id="listOfPrescriptionCompTable" class="table-fixed w-full mx-auto"></table>
 
 			</div>
-			<!--COMMODITYBATCH WINDOW-->
-			<div class="mainWindow commodityBatchAdmin">
-				<!--Sideboard with the different functions the administration can perform-->
-				<div class="relative h-screen w-1/6 bg-gray-800 float-left">
-					<div :class="sidebar" class="container absolute inset-y-0 left-0 px-4 py3">
-						<h5 class="font-semibold text-3xl text-white text-center">Råvare Batch</h5>
+		</div>
 
-						<div class="block">
-							<a href="#" data-target=".råvareBatch-window"
-								class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center">Råvare
-								Batch</a>
-						</div>
-					</div>
+
+
+	</div>
+	<!--COMMODITYBATCH WINDOW-->
+	<div class="mainWindow commodityBatchAdmin">
+		<!--Sideboard with the different functions the administration can perform-->
+		<div class="relative h-screen w-1/6 bg-gray-800 float-left">
+			<div :class="sidebar" class="container absolute inset-y-0 left-0 px-4 py3">
+				<h5 class="font-semibold text-3xl text-white text-center">Råvare Batch</h5>
+
+				<div class="block">
+					<a href="#" data-target=".råvareBatch-window"
+						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center">Råvare
+						Batch</a>
 				</div>
-				<!--main containers will contain results and lists-->
-				<div class=" mainScreen råvareBatch-window relative h-screen w-5/6 bg-gray-700 float-right hidden">
-
-					<!--Create and show list components-->
-					<div class="flex justify-start inline-block h-24 px-full mb-0">
-						<a href="#"
-							class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-							onclick=commodityBatchModal("createCommodityBatch()")>Tilfø +</a>
-						<a href="#"
-							class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-							onclick="getCommodityBatchList()">Vis Liste</a>
-						<a href="#"
-							class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-							onclick=getOneCompModal("getCommodityBatchListByCommodityId()")>Vis Lister per id</a>
-					</div>
-
-					<!--Table for showing results-->
-					<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
-						<table id="listOfCommodityBatchTable" class="table-fixed w-full mx-auto">
-
-						</table>
-					</div>
-
-					<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
-						<table id="listOfCommodityBatchListTable" class="table-fixed w-full mx-auto">
-
-						</table>
-					</div>
-				</div>
-
 			</div>
-			<!--PRODUCTBTACHWINDOW-->
-			<div class="mainWindow productBatchAdmin">
-				<!--Sideboard with the different functions the administration can perform-->
-				<div class="relative h-screen w-1/6 bg-gray-800 float-left">
-					<div :class="sidebar" class="container absolute inset-y-0 left-0 px-4 py3">
-						<h5 class="font-semibold text-3xl text-white text-center">Produkter</h5>
+		</div>
+		<!--main containers will contain results and lists-->
+		<div class=" mainScreen råvareBatch-window relative h-screen w-5/6 bg-gray-700 float-right hidden">
 
-						<div class="block">
-							<a href="#" data-target=".product-window"
-								class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center" >Produkt Batch</a>
-								<a href=" #" data-target=".product-comp-window"
-								class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center" >Produkt Batch Komp</a>
+			<!--Create and show list components-->
+			<div class="flex justify-start inline-block h-24 px-full mb-0">
+				<a href="#"
+					class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick=commodityBatchModal("createCommodityBatch()")>Tilfø +</a>
+				<a href="#"
+					class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick="getCommodityBatchList()">Vis Liste</a>
+				<a href="#"
+					class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick=getOneCompModal("getCommodityBatchListByCommodityId()")>Vis Lister per id</a>
+			</div>
+
+			<!--Table for showing results-->
+			<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
+				<table id="listOfCommodityBatchTable" class="table-fixed w-full mx-auto">
+
+				</table>
+			</div>
+
+			<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
+				<table id="listOfCommodityBatchListTable" class="table-fixed w-full mx-auto">
+
+				</table>
+			</div>
+		</div>
+
+	</div>
+	<!--PRODUCTBTACHWINDOW-->
+	<div class="mainWindow productBatchAdmin">
+		<!--Sideboard with the different functions the administration can perform-->
+		<div class="relative h-screen w-1/6 bg-gray-800 float-left">
+			<div :class="sidebar" class="container absolute inset-y-0 left-0 px-4 py3">
+				<h5 class="font-semibold text-3xl text-white text-center">Produkter</h5>
+
+				<div class="block">
+					<a href="#" data-target=".product-window"
+						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center">Produkt
+						Batch</a>
+					<a href=" #" data-target=".product-comp-window"
+						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center">Produkt
+						Batch Komp</a>
 				</div>
 			</div>
 		</div>
 		<!--main containers will contain results and lists-->
 		<div class=" mainScreen product-window relative h-screen w-5/6 bg-gray-700 float-right hidden">
 
-								<!--Create and show list components-->
-								<div class="flex justify-start inline-block h-24 px-full mb-0">
-									<a href="#"
-										class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-										onclick=productModal("CreateProductBatch()")>Tilføj
-										+</a>
-									<a href="#"
-										class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-										onclick="getProductBatchList()">Vis Liste</a>
-								</div>
+			<!--Create and show list components-->
+			<div class="flex justify-start inline-block h-24 px-full mb-0">
+				<a href="#"
+					class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick=productModal("CreateProductBatch()")>Tilføj
+					+</a>
+				<a href="#"
+					class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick="getProductBatchList()">Vis Liste</a>
+			</div>
 
-								<!--Table for showing results-->
-								<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
-									<table id="ListOfProductBatchTable" class="table-fixed w-full mx-auto">
+			<!--Table for showing results-->
+			<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
+				<table id="ListOfProductBatchTable" class="table-fixed w-full mx-auto">
 
-									</table>
-								</div>
-						</div>
-						<div
-							class="mainScreen product-comp-window relative h-screen w-5/6 bg-gray-700 float-right hidden">
+				</table>
+			</div>
+		</div>
+		<div class="mainScreen product-comp-window relative h-screen w-5/6 bg-gray-700 float-right hidden">
 
-							<!--Create and show list components-->
-							<div class="flex justify-start inline-block h-24 px-full mb-0">
+			<!--Create and show list components-->
+			<div class="flex justify-start inline-block h-24 px-full mb-0">
 
-								<a href="#"
-									class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-									onclick="getProductBatchCompList()">Vis Liste</a>
-								<a href="#"
-									class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
-									onclick=getOneCompModal("getProductBatchCompListOneBatch()")>Vis
-									enkelt</a>
-							</div>
+				<a href="#"
+					class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick="getProductBatchCompList()">Vis Liste</a>
+				<a href="#"
+					class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick=getOneCompModal("getProductBatchCompListOneBatch()")>Vis
+					enkelt</a>
+			</div>
 
-							<!--Table for showing results-->
-							<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
-								<table id="listOfProductsCompTable" class="table-fixed w-full mx-auto">
+			<!--Table for showing results-->
+			<div class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
+				<table id="listOfProductsCompTable" class="table-fixed w-full mx-auto">
 
-								</table>
-							</div>
-						</div>
+				</table>
+			</div>
+		</div>
 
+	</div>
+	<!--AFVEJNING WINDOW-->
+	<div class="mainWindow afvejning"></div>
+
+	<!--Modal reuse modal for each page-->
+	<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+		<div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+		<div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+
+			<div
+				class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+				<svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+					viewBox="0 0 18 18">
+					<path
+						d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+					</path>
+				</svg>
+				<span class="text-sm">(Esc)</span>
+			</div>
+
+			<!-- Add margin if you want to see some of the overlay behind the modal-->
+			<div class="modal-content py-4 text-left px-6">
+				<!--Title-->
+				<div class="flex justify-between items-center pb-3">
+					<span class="modal-title text-2xl font-bold" id="modal-title"></span>
+					<div class="modal-close cursor-pointer z-50">
+						<svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+							viewBox="0 0 18 18">
+							<path
+								d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+							</path>
+						</svg>
 					</div>
-					<!--AFVEJNING WINDOW-->
-					<div class="mainWindow afvejning"></div>
+				</div>
 
-					<!--Modal reuse modal for each page-->
-					<div
-						class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
-						<div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-
-						<div
-							class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-
-							<div
-								class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
-								<svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18"
-									height="18" viewBox="0 0 18 18">
-									<path
-										d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-									</path>
-								</svg>
-								<span class="text-sm">(Esc)</span>
-							</div>
-
-							<!-- Add margin if you want to see some of the overlay behind the modal-->
-							<div class="modal-content py-4 text-left px-6">
-								<!--Title-->
-								<div class="flex justify-between items-center pb-3">
-									<span class="modal-title text-2xl font-bold" id="modal-title"></span>
-									<div class="modal-close cursor-pointer z-50">
-										<svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg"
-											width="18" height="18" viewBox="0 0 18 18">
-											<path
-												d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-											</path>
-										</svg>
-									</div>
-								</div>
-
-								<!--Body-->
-								<div id="modal-body" class="modal-content">
+				<!--Body-->
+				<div id="modal-body" class="modal-content">
 
 
-								</div>
+				</div>
 
-								<!--Footer-->
-								<div id="modal-footer" class="modal-footer flex justify-end pt-2">
+				<!--Footer-->
+				<div id="modal-footer" class="modal-footer flex justify-end pt-2">
 
-								</div>
+				</div>
 
-							</div>
-						</div>
-					</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

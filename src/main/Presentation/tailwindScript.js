@@ -92,15 +92,130 @@ function toggleModal() {
 	body.classList.toggle('modal-active')
 }
 
+function listPrescriptions() {
+	event.preventDefault();
+	console.log("test");
+	// document.getElementById("loaderID").style.display = "block";
+	$.ajax({
+		url: "https://api.mama.sh/Prescriptions",
+		contentType: "application/json",
+		method: "GET",
+		success: function (response) {
+			console.log("test");
+			//document.getElementById("loaderID").style.display = "none";
+			$("#listOfPrescriptionsTable").html("");
+			let html = `<thead><tr><th class="w-1/2 px-4 py-2">Råvare navn</th><th class="w-1/2 px-4 py-2">Råvare id</th></tr></thead><tbody>`
+			//'<table class="tableOfUsers"> <tr><th>Name</th><th>Id</th></tr>';
+			jQuery.each(response, (i, item) => {
+				html += `<tr>`;
+				html += `<td class="border px-4 py-2"> <span class="float-left"> ${item.prescription_name}</td>`;
+				html += `<td class="border px-4 py-2">
+					<span class="commodity-id float-left"> ${item.prescription_id}</span>
+					<div class="flex inline-block justify-end px-2 ">
+								<button
+									class="modal-open bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 mx-2 rounded float-right" onClick="getPrescription(${item.prescription_id})">vis</button>
+							</div>
+				</td>`;
+				html += `</tr>`;
+			});
+			html += `</tbody>`
+			console.log(html);
+			$("#listOfPrescriptionsTable").append(html);
+			applyModal();
+
+			$("#listOfPrescriptionsTable").show();
+		},
+		error: function (jqXHR, text, error) {
+			alert(jqXHR.status + text + error);
+		},
+	})
+}
+
+function listPrescriptionComp() {
+	event.preventDefault();
+	// document.getElementById("loaderID").style.display = "block";
+	$.ajax({
+		url: "https://api.mama.sh/PrescriptionComp",
+		contentType: "application/json",
+		method: "GET",
+		success: function (response) {
+			//document.getElementById("loaderID").style.display = "none";
+			$("#listOfPrescriptionCompTable").html("");
+			let html = `<thead><tr><th class="w-1/2 px-4 py-2">Recept id</th><th class="w-1/2 px-4 py-2">Råvare id</th></tr></thead><tbody>`
+			jQuery.each(response, (i, item) => {
+				html += `<tr>`;
+				html += `<td class="border px-4 py-2"> <span class="float-left"> ${item.prescription_id}</td>`;
+				html += `<td class="border px-4 py-2">
+					<span class="commodity-id float-left"> ${item.commodity_id}</span>
+					<div class="flex inline-block justify-end px-2 ">
+								<button
+									class="modal-open bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 mx-2 rounded float-right" onClick="getPrescriptionComp(${item.prescription_id}, ${item.commodity_id})">vis</button>
+							</div>
+				</td>`;
+				html += `</tr>`;
+			});
+			html += `</tbody>`
+			console.log(html);
+			$("#listOfPrescriptionCompTable").append(html);
+			applyModal();
+
+			$("#listOfPrescriptionCompTable").show();
+		},
+		error: function (jqXHR, text, error) {
+			alert(jqXHR.status + text + error);
+		},
+	})
+}
+
+function getPrescription(id) {
+	createPrescriptionModal("updatePrescription()");
+
+	$.ajax({
+		url: `https://api.mama.sh/Prescriptions/ID/${id}`,
+		contentType: "application/json",
+		method: "GET",
+		success: function (response) {
+			$("#showPrescriptionName").val(response.prescription_name);
+			$("#showPrescriptionId").val(response.prescription_id);
+			applyModal();
+		},
+		error: function (response) {
+			alert("AAARGH ALT BRÆNDER")
+		}
+	})
+}
+
+function updatePrescription() {
+	toggleModal();
+	let prescription = {
+		prescription_name: $("#showPrescriptionName").val(),
+		prescription_id: $("#showPrescriptionId").val(),
+	}
+
+	$.ajax({
+		url: `https://api.mama.sh/Prescriptions`,
+		contentType: "application/json",
+		method: "PUT",
+		data: JSON.stringify(prescription),
+		success: function (response) {
+			alert("Det virker");
+		},
+		error: function (response) {
+			alert("AAARGH ALT BRÆNDER")
+		}
+	})
+}
+
 function createPrescriptionModal(funktion) {
+	$("#modal-title").text("Recept");
 	toggleModal()
 	$("#modal-body").html("");
 	$("#modal-body").append(`<form>
-			<label>Råvare Navn:</label>
+			<label>Recept Navn:</label>
 			<input class="shadow appearance-none border rounded text-gray-700 py-2 px-3" type="text"
 				placeholder="" id="showPrescriptionName"></input> <br />
 
-			<label>Råvare id:</label>
+			<label>Recept id:</label>
 			<input class="shadow appearance-none border rounded text-gray-700 py-2 px-3" type="text"
 				placeholder="" id="showPrescriptionId"></input> <br />
 
@@ -116,8 +231,135 @@ function createPrescriptionModal(funktion) {
 				</div>`
 	);
 
+	applyModal();
+
 
 }
+
+function prescriptionCompModal(funktion) {
+	$("#modal-title").text("Recept komponent");
+	toggleModal();
+	$("#modal-body").html("");
+	$("#modal-body").append(`<form>
+<label>Recept id:</label>
+<input class="shadow appearance-none border rounded text-gray-700 py-2 px-3" type="text"
+	placeholder="" id="showReceptCompID"></input> <br />
+
+<label>Råvare id:</label>
+<input class="shadow appearance-none border rounded text-gray-700 py-2 px-3" type="text"
+	placeholder="" id="showRåvarePrescriptionId"></input> <br />
+
+<label>nom netto:</label>
+	<input class="shadow appearance-none border rounded text-gray-700 py-2 px-3" type="text"
+		placeholder="" id="showReceptCompNomNetto"></input> <br />
+
+<label>Tolerance:</label>
+	<input class="shadow appearance-none border rounded text-gray-700 py-2 px-3" type="text"
+	placeholder="" id="showReceptCompTolerance"></input> <br />
+</form>`);
+	$("#modal-footer").html("");
+	$("#modal-footer").append(
+		`<div>
+					<button
+						class="modal-update px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2"
+						onclick=${funktion}>Opret </button>
+					<button
+						class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
+				</div>`
+	);
+	applyModal();
+}
+
+function getPrescriptionComp(prescription_id, commodity_id) {
+	event.preventDefault();
+	prescriptionCompModal("updatePrescriptionComp()");
+	$.ajax({
+		url: `https://api.mama.sh/PrescriptionComp/component?presID=${prescription_id}&comID=${commodity_id}`,
+		contentType: "application/json",
+		method: "GET",
+		success: function (response) {
+			$("#showReceptCompID").val(response.prescription_id);
+			$("#showRåvarePrescriptionId").val(response.commodity_id);
+			$("#showReceptCompNomNetto").val(response.nomNetto);
+			$("#showReceptCompTolerance").val(response.tolerance);
+			applyModal();
+		},
+		error: function (response) {
+			alert("AAARGH ALT BRÆNDER")
+		}
+	})
+}
+
+function createPrescription() {
+	toggleModal();
+	let prescription = {
+		prescription_name: $("#showPrescriptionName").val(),
+		prescription_id: $("#showPrescriptionId").val(),
+	}
+
+	$.ajax({
+		url: `https://api.mama.sh/Prescriptions`,
+		contentType: "application/json",
+		method: "POST",
+		data: JSON.stringify(prescription),
+		success: function (response) {
+			alert("Det virker");
+		},
+		error: function (response) {
+			alert("AAARGH ALT BRÆNDER")
+		}
+	})
+}
+
+function updatePrescriptionComp() {
+	let prescriptionComp = {
+		prescription_id: $("#showReceptCompID").val(),
+		commodity_id: $("#showRåvarePrescriptionId").val(),
+		nomNetto: $("#showReceptCompNomNetto").val(),
+		tolerance: $("#showReceptCompTolerance").val(),
+
+	}
+
+	$.ajax({
+		url: `https://api.mama.sh/PrescriptionComp`,
+		contentType: "application/json",
+		method: "PUT",
+		data: JSON.stringify(prescriptionComp),
+		success: function (response) {
+			toggleModal();
+			alert("Update successfull");
+		},
+		error: function (response) {
+			alert("KLokken er kvart i daller");
+		}
+	});
+}
+
+function createPrescriptionComp() {
+	let prescriptionComp = {
+		prescription_id: $("#showReceptCompID").val(),
+		commodity_id: $("#showRåvarePrescriptionId").val(),
+		nomNetto: $("#showReceptCompNomNetto").val(),
+		tolerance: $("#showReceptCompTolerance").val(),
+
+	}
+
+	$.ajax({
+		url: `https://api.mama.sh/PrescriptionComp`,
+		contentType: "application/json",
+		method: "POST",
+		data: JSON.stringify(prescriptionComp),
+		success: function (response) {
+			toggleModal();
+			alert("Create successfull");
+		},
+		error: function (response) {
+			alert("KLokken er kvart i daller");
+		}
+	});
+}
+
+
 
 function createCommodity() {
 	console.log("create commodity started");
@@ -139,7 +381,7 @@ function createCommodity() {
 		error: function (jqXHR, text, error) {
 			alert(jqXHR.status + text + error);
 		},
-	})
+	});
 }
 
 function updateCommodity() {
