@@ -532,11 +532,11 @@ function createCommodityModal(funktion) {
 
 }
 
-function getUser(id, showBox = true) {
+async function getUser(id, showBox = true) {
 
 	UserModal("updateUser()")
 	console.log("getuser Started");
-	$.ajax({
+	await $.ajax({
 		url: "https://api.mama.sh/userresource/" + id,
 		contentType: "application/json",
 		method: "GET",
@@ -1564,7 +1564,7 @@ function getPrescriptionCompList(prescriptionID, productBatchID) {
 
 async function login() {
 
-	var id = $("#LoginUserID").value;
+	var id = $("#LoginUserID").val();
 
 	await getUser(id, false);
 
@@ -1573,7 +1573,7 @@ async function login() {
 	// console.log("ready function");
 	if (!($("#ShowUserID").val() === "") && $("#ShowUserStatus").is(':checked')) {
 		console.log("du kan logge ind");
-		$("#logoutBtn").style.display = "block";
+		//$("#logoutBtn").style.display = "block";
 		// admin portal
 		if ($("#ShowUserRolesAdmin").is(':checked')) {
 			// user portal
@@ -1622,21 +1622,23 @@ function PharmaceutAccess() {
 	//Commodity
 	// Prescriptions and prescription components
 	// and produktionsleder access
-	$("#ProductBatchPortal").show();
-	$("#ProductBatchPortal").show();
+	$("#CommodityBatchPortal").show();
+	$("#CommodityPortal").show();
 	ProductionleaderAccess();
 }
 
 function AdminAccess() {
-	$("#UserAdminPortal").show();
+	$("#AdminPortal").show();
 }
 
 function logout() {
-	$("#WeightPortal").show();
-	$("#ProductBatchPortal").show();
+	$("#AdminPortal").show();
+	$("#CommodityPortal").show();
 	$("#CommodityBatchPortal").show();
 
-	$("#UserAdminPortal").show();
-	$("#logoutBtn").show();
+	$("#ProductBatchPortal").show();
+	$("#WeightPortal").show();
+
+//	$("#logoutBtn").show();
 }
 // setTimeout(
