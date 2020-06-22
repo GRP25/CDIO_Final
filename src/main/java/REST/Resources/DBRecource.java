@@ -2,6 +2,7 @@ package REST.Resources;
 
 import Funclayer.implementation.DatabaseService;
 import REST.SuccessMessage;
+import org.mariadb.jdbc.internal.com.read.resultset.SelectResultSet;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,9 +21,20 @@ public class DBRecource {
     @Path("backup")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response activateUser(@PathParam("userID") int userID) throws SQLException {
+    public Response activateUser() {
         SuccessMessage msg = new SuccessMessage("Database succesfully changed", 1001, "https://mama.sh/");
         db.change();
+        return Response.status(Response.Status.OK).entity(msg).build();
+    }
+    @Path("check")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response check() {
+        SuccessMessage msg;
+        if (db.checkIfDBisMain())
+            msg = new SuccessMessage("Database is main", 1002, "https://mama.sh/");
+        else
+            msg = new SuccessMessage("Database is backup", 1003, "https://mama.sh/");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 }

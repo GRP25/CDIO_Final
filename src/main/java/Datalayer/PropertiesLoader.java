@@ -14,4 +14,11 @@ public class PropertiesLoader {
             return false;
         }
     }
+    public static boolean isMain(){
+        if (jdbcUrl.equals("jdbc:mariadb://mama.sh:4123/pharmacy")) {
+            return true;
+        }
+        else
+            return false;
+    }
 }
