@@ -6,6 +6,7 @@
 * Terminal skal være mellem 1-3
 * Generelt ploish af tabeller
 * Bedre flow
+* Style Login container
 ## Raport Struktur
 * Der skal laves noget struktur over vores rapport
     * Implementations laget skal måske deles op i 3-lagsmodellen
