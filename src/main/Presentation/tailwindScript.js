@@ -13,6 +13,10 @@ $(document).ready(() => {
 
 });
 
+var userobject = {
+
+};
+
 function listCommodities() {
 	event.preventDefault();
 	console.log("test");
@@ -1556,3 +1560,83 @@ function getPrescriptionCompList(prescriptionID, productBatchID) {
 		}
 	});
 }
+
+
+async function login() {
+
+	var id = document.getElementById("LoginUserID").value;
+
+	await getUser(id, false);
+
+	//document.getElementById("userIDInsert").content = document.getElementById("ShowUserID").value;
+
+	// console.log("ready function");
+	if (!(document.getElementById("ShowUserID").value == "") && document.getElementById("ShowUserStatus").checked == true) {
+		console.log("du kan logge ind");
+		document.getElementById("logoutBtn").style.display = "block";
+		// admin portal
+		if (document.getElementById("ShowUserRolesAdmin").checked == true) {
+			// user portal
+			AdminAccess();
+		}
+
+		// Pharmaceut portal
+		if (document.getElementById("ShowUserRolesFarma").checked == true) {
+			//Commodity
+			// Prescriptions and prescription components
+			// and produktionsleder access
+			PharmaceutAccess();
+		}
+
+		// Producktion leader
+		if (document.getElementById("ShowUserRolesProductionleader").checked == true) {
+			// commodity batches
+			// productbatches
+			// and has Lab guy access
+			ProductionleaderAccess();
+		}
+
+		// Lab guy
+		if (document.getElementById("ShowUserRolesLab").checked == true) {
+			// weight access
+			LabAccess();
+		}
+
+	} else {
+		console.log("Du kan ikke logge ind i systemet");
+	}
+}
+
+function LabAccess() {
+	document.getElementById("WeightPortal").style.display = "block";
+}
+
+function ProductionleaderAccess() {
+	document.getElementById("ProductBatchPortal").style.display = "block";
+	document.getElementById("CommodityBatchPortal").style.display = "block";
+	LabAccess();
+}
+
+function PharmaceutAccess() {
+	// TODO: needs to be fixed
+	//Commodity
+	// Prescriptions and prescription components
+	// and produktionsleder access
+	document.getElementById("ProductBatchPortal").style.display = "block";
+	document.getElementById("ProductBatchPortal").style.display = "block";
+	ProductionleaderAccess();
+}
+
+function AdminAccess() {
+	document.getElementById("UserAdminPortal").style.display = "block";
+}
+
+function logout() {
+	document.getElementById("WeightPortal").style.display = "none";
+	document.getElementById("ProductBatchPortal").style.display = "none";
+	document.getElementById("CommodityBatchPortal").style.display = "none";
+
+	document.getElementById("UserAdminPortal").style.display = "none";
+	document.getElementById("logoutBtn").style.display = "none";
+}
+// setTimeout(

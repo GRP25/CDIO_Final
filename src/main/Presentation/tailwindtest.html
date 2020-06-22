@@ -28,19 +28,27 @@
 	</header>
 	<!--Overhead fan containing links to the different administrations-->
 	<div class="flex items-end text-white justify-start bg-gray-900">
-		<a href="#" class="administration-1 administration inline-block px-3 hover:text-blue-500 "
+		<a href="#" class="administration-1 administration inline-block px-3 hover:text-blue-500 hidden"
 			data-target=".userAdmin">Bruger administration </a>
-		<a href="#" class="administration-1 administration inline-block px-3 hover:text-blue-500 "
+		<a href="#" class="administration-1 administration inline-block px-3 hover:text-blue-500 hidden"
 			data-target=".commodityAdmin">Råvare administration</a>
-		<a href="#" class="administration-1 administration inline-block px-3 hover:text-blue-500 "
+		<a href="#" class="administration-1 administration inline-block px-3 hover:text-blue-500 hidden"
 			data-target=".commodityBatchAdmin">Råvarebatch administration</a>
-		<a href="#" class="administration-1 administration inline-block px-3 hover:text-blue-500 "
+		<a href="#" class="administration-1 administration inline-block px-3 hover:text-blue-500 hidden"
 			data-target=".productBatchAdmin">Produktbatch administration</a>
-		<a href="#" class="administration-1 administration inline-block px-3 hover:text-blue-500 "
+		<a href="#" class="administration-1 administration inline-block px-3 hover:text-blue-500 hidden"
 			data-target=".afvejning">Afvejning </a>
 	</div>
+
+    <div class="w3-container">
+        <h5></h5>
+        <label>Indtast bruger ID: </label><input type="text" id="LoginUserID"></input> <br />
+        <button class="w3-button w3-dark-grey" onclick="login()">Log ind<i class="fa fa-arrow-right"></i></button>
+        <label id="userIDInsert"></label>
+    </div>
+
 	<!--USER WINDOW-->
-	<div class="mainWindow userAdmin">
+	<div class="mainWindow userAdmin hidden">
 
 		<!--Sideboard with the different functions the administration can perform-->
 		<div class="relative h-screen w-1/6 bg-gray-800 float-left">
@@ -79,7 +87,7 @@
 
 	</div>
 	<!--COMMODITY WINDOW-->
-	<div class="mainWindow commodityAdmin">
+	<div class="mainWindow commodityAdmin hidden">
 		<!--Sideboard with the different functions the administration can perform-->
 		<div class="relative h-screen w-1/6 bg-gray-800 float-left">
 			<div :class="sidebar" class="container absolute inset-y-0 left-0 px-4 py3">
@@ -163,7 +171,7 @@
 
 	</div>
 	<!--COMMODITYBATCH WINDOW-->
-	<div class="mainWindow commodityBatchAdmin">
+	<div class="mainWindow commodityBatchAdmin hidden">
 		<!--Sideboard with the different functions the administration can perform-->
 		<div class="relative h-screen w-1/6 bg-gray-800 float-left">
 			<div :class="sidebar" class="container absolute inset-y-0 left-0 px-4 py3">
@@ -208,7 +216,7 @@
 
 	</div>
 	<!--PRODUCTBTACHWINDOW-->
-	<div class="mainWindow productBatchAdmin">
+	<div class="mainWindow productBatchAdmin hidden">
 		<!--Sideboard with the different functions the administration can perform-->
 		<div class="relative h-screen w-1/6 bg-gray-800 float-left">
 			<div :class="sidebar" class="container absolute inset-y-0 left-0 px-4 py3">
@@ -269,7 +277,7 @@
 
 	</div>
 	<!--AFVEJNING WINDOW-->
-	<div class="mainWindow afvejning">
+	<div class="mainWindow afvejning hidden">
         <div class=" mainScreen afvejning relative h-screen w-5/6 bg-gray-700 float-right hidden">
 
             <!--Create and show list components-->
