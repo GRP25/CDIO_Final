@@ -51,8 +51,12 @@ public class ProductBatchCompValidation extends Validation {
         }
     }
 
-    public static void productBatchCompValidationForID(int id) throws ObjectException {
-        if (id == 0) // TODO how if commodity_batch doesn't exist
-            throw new ObjectException("No ProductBatchComp or CommodityBatch exists with this number as an identification!");
+    public static void productBatchCompValidationForID(int pro_id, int combat_id) throws SQLException {
+        if (pro_id == 0)
+            throw new ObjectException("No ProductBatchComp exists with this number as an identification!");
+        if (combat_id == 0)
+            throw new ObjectException("No CommodityBatch exists with this number as an identification!");
+        if (!productBatchCompDAO.exists(pro_id, combat_id))
+            throw new ObjectException(("No ProductBatchComponent in this ProductBatch with this Commodity"));
     }
 }

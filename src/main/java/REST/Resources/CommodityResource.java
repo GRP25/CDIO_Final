@@ -35,14 +35,14 @@ public class CommodityResource {
     @POST
     public Response createCommodity(CommodityDTO comDTO) throws SQLException {
         commodityService.createCommodity( comDTO );
-        SuccessMessage msg = new SuccessMessage("Created successfully", 51, "https://mama.sh/");
+        SuccessMessage msg = new SuccessMessage("Created successfully", 4000, "https://mama.sh/");
         return Response.status( Response.Status.OK ).entity( msg ).build();
     }
 
     @PUT
     public Response updateCommodity(CommodityDTO comDTO) throws SQLException {
         commodityService.updateCommodity( comDTO );
-        SuccessMessage msg = new SuccessMessage("Updated successfully", 52, "https://mama.sh/");
+        SuccessMessage msg = new SuccessMessage("Updated successfully", 4001, "https://mama.sh/");
         return Response.status( Response.Status.OK ).entity( msg ).build();
     }
 

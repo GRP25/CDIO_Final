@@ -17,7 +17,7 @@ public class ProductBatchCompService implements IProductBatchCompService {
 
     @Override
     public ProductBatchCompDTO getProductBatchComp(int productBatch_id, int commodityBatch_id) throws SQLException {
-        productBatchCompValidationForID(productBatch_id);
+        productBatchCompValidationForID(productBatch_id, commodityBatch_id);
         validateCommodityBatchID(commodityBatch_id);
         return productBatchCompDAO.getProductBatchComp(productBatch_id, commodityBatch_id);
     }

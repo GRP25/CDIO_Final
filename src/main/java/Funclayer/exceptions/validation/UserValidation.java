@@ -64,7 +64,7 @@ public class UserValidation extends Validation {
     }
 
     public static void statusValidator(int status) throws NotAStatusException {
-        if (status != 1) {
+        if (status > 1 && status < 0) {
             throw new NotAStatusException("Not a Valid status, please make sure status's box is checked or input status = 1  ");
         }
     }
