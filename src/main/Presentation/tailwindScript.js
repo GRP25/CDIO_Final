@@ -13,8 +13,6 @@ $(document).ready(() => {
 
 });
 
-
-
 function listCommodities() {
 	event.preventDefault();
 	console.log("test");
@@ -56,7 +54,6 @@ function listCommodities() {
 	})
 };
 
-
 function applyModal() {
 	var openmodal = document.querySelectorAll('.modal-open')
 	for (var i = 0; i < openmodal.length; i++) {
@@ -94,8 +91,6 @@ function toggleModal() {
 	modal.classList.toggle('pointer-events-none')
 	body.classList.toggle('modal-active')
 }
-
-
 
 function createPrescriptionModal(funktion) {
 	toggleModal()
@@ -147,10 +142,6 @@ function createCommodity() {
 	})
 }
 
-
-
-
-
 function updateCommodity() {
 	toggleModal();
 	console.log("update started");
@@ -175,8 +166,6 @@ function updateCommodity() {
 		},
 	});
 }
-
-
 
 function listUsers() {
 	// document.getElementById("loaderID").style.display = "block";
@@ -522,6 +511,7 @@ function createUser() {
 
 	});
 }
+
 function sendUpdateToServer(user) {
 	$.ajax({
 		url: "https://api.mama.sh/userresource",
@@ -583,6 +573,7 @@ function showProductModal() {
 	);
 	applyModal();
 }
+
 function productModal(funktion) {
 	$("#modal-title").text("Produkt Batch");
 	toggleModal();
@@ -611,6 +602,7 @@ function productModal(funktion) {
 	);
 	applyModal();
 }
+
 function CreateProductBatch() {
 	let productBatchStatus;
 	if (document.getElementById("InputStatusBegin").checked == true)
@@ -677,6 +669,7 @@ function getProductBatchList() {
 		}
 	})
 }
+
 function getProductBatch(id) {
 
 	showProductModal();
@@ -716,7 +709,6 @@ function getProductBatch(id) {
 	});
 }
 
-
 function productBatchCompModal(funktion) {
 	$("#modal-title").text("Produkt Batch Komponent");
 	toggleModal();
@@ -755,6 +747,7 @@ function productBatchCompModal(funktion) {
 	);
 	applyModal();
 }
+
 function getProductBatchCompList() {
 	$.ajax({
 		url: "https://api.mama.sh/productbatchcomp",
@@ -789,7 +782,6 @@ function getProductBatchCompList() {
 		}
 	})
 }
-
 
 function getOneProductBatchComp(CommodityID, ProductBatchID) {
 	productBatchCompModal("updateProductBatchComp()")
@@ -1022,7 +1014,6 @@ function updateCommodityBatch(commodityBatch_id) {
 	});
 }
 
-
 function createCommodityBatch() {
 	toggleModal();
 	let element;
@@ -1057,21 +1048,34 @@ function createCommodityBatch() {
 }
 
 function getCommodityBatchListByCommodityId() {
-	// Input's user Validation
-
+	toggleModal();
 	let commodity_id = $('#inputCompId').val();
-	elements = [];
-	let element;
 	console.log("getCommodityBatchList method")
 	$.ajax({
 		url: 'https://api.mama.sh/commodityBatch/list/' + commodity_id,
 		contentType: "application/json",
 		type: "GET",
 		success: function (response) {
-			for (element of response) {
-				elements.push(element)
-			}
-			showElementsAuto(elements)
+			$("#listOfCommodityBatchListTable").html("");
+			let html = `<thead>
+					<tr>
+					<th class="w-1/2 px-4 py-2">Råvare id</th>
+					<th class="w-1/2 px-4 py-2">Råvare Batch id</th>
+					</tr>
+					</thead>
+					<tbody>`;
+			jQuery.each(response, (i, item) => {
+				html += `<tr>`;
+				html += `<td class="border px-4 py-2">  <span class="float-left">${item.commodity_id}</span></td>`
+				html += `<td class="border px-4 py-2">  <span class="float-left">${item.commodityBatch_id}</span>
+                <div class="flex inline-block justify-end px-2">
+				<button class="modal-open bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 mx-2 rounded float-right" onClick="getCommodityBatch(${item.commodityBatch_id})">vis</button>
+				</div></td>`
+				html += `</tr>`;
+			});
+			$("#listOfCommodityBatchListTable").append(html);
+
+			$("#listOfCommodityBatchListTable").show();
 		},
 		error: function (jqXHR, text, error) {
 			alert(jqXHR.status + text + error);
@@ -1079,3 +1083,22 @@ function getCommodityBatchListByCommodityId() {
 	});
 
 }
+
+/*
+$("#listOfProductsCompTable").html("");
+			let html = `<thead>
+					<tr>
+					<th class="w-1/2 px-4 py-2">Produkt Batch id</th>
+					<th class="w-1/2 px-4 py-2">Råvare id</th>
+					</tr>
+					</thead>
+					<tbody>`;
+			jQuery.each(response, (i, item) => {
+				html += `<tr>`;
+				html += `<td class="border px-4 py-2">  <span class="float-left">${item.productBatch_id}</span></td>`
+				html += `<td class="border px-4 py-2">  <span class="float-left">${item.commodityBatch_id}</span>
+                <div class="flex inline-block justify-end px-2">
+				<button class="modal-open bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 mx-2 rounded float-right" onClick="getOneProductBatchComp(${item.commodityBatch_id}, ${item.productBatch_id})">vis</button>
+				</div></td>`
+				html += `</tr>`;
+ */
