@@ -665,9 +665,9 @@ async function openProductBatch() {
     //document.getElementById("WeightPrescriptionName").innerHTML = ;
 }
 
-async function getPrescriptionCompList(prescriptionID, productBatchID) {
+function getPrescriptionCompList(prescriptionID, productBatchID) {
 
-    await $.ajax ( {
+    $.ajax ( {
         url: "https://api.mama.sh/PrescriptionComp/" + prescriptionID,
         contentType: "application/json",
         type: "GET",
@@ -686,7 +686,7 @@ async function getPrescriptionCompList(prescriptionID, productBatchID) {
     });
 }
 
-async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchID) {
+function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchID) {
     var commoditybatchList = document.getElementById("WeightCommodityBatchList");
     var isShown = "none";
 
@@ -723,10 +723,10 @@ async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchI
                                 + '<button style="display: ' + isShown +';" id="WeightSubmitBtn' + number +'" onclick="CreateProductBatchComp('+ PrescriptionComp.commodity_id+',' + number + ');"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
                                 + '</div>';
     
-    await UpdateToSubmitedProductBatchComp(productBatchID, PrescriptionComp.commodity_id, number);
+    UpdateToSubmitedProductBatchComp(productBatchID, PrescriptionComp.commodity_id, number);
 }
 
-async function CreateProductBatchComp(commodityID, number) {
+function CreateProductBatchComp(commodityID, number) {
     // work in progress
     var productBatchID = $('#ProductBatchToWeight').val();
 
@@ -754,7 +754,7 @@ async function CreateProductBatchComp(commodityID, number) {
     if (minWeightTolerance < productbatchcomp.netto && maxWeightTolerance > productbatchcomp.netto) {
         console.log("Netto weight: good to go");
         
-        await $.ajax ({
+        $.ajax ({
             url: "https://api.mama.sh/productbatchcomp",
             contentType: "application/json",
             type: "POST",
@@ -772,7 +772,7 @@ async function CreateProductBatchComp(commodityID, number) {
     
         console.log("Not skipped!");
         
-        await UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
+        UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
         
     }
     else {
@@ -783,11 +783,11 @@ async function CreateProductBatchComp(commodityID, number) {
 
 }
 
-async function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
+function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
     
     console.log("starting update");
     
-    await $.ajax ({
+    $.ajax ({
         url: "https://api.mama.sh/productbatchcomp/component?productBatchId=" + productBatchID + "&commodityBatchId=" + commodityID,
         contentType: "application/json",
         type: "GET",
