@@ -1564,24 +1564,24 @@ function getPrescriptionCompList(prescriptionID, productBatchID) {
 
 async function login() {
 
-	var id = document.getElementById("LoginUserID").value;
+	var id = $("#LoginUserID").value;
 
 	await getUser(id, false);
 
-	//document.getElementById("userIDInsert").content = document.getElementById("ShowUserID").value;
+	//$("#userIDInsert").content = $("#ShowUserID").value;
 
 	// console.log("ready function");
-	if (!(document.getElementById("ShowUserID").value == "") && document.getElementById("ShowUserStatus").checked == true) {
+	if (!($("#ShowUserID").val() === "") && $("#ShowUserStatus").is(':checked')) {
 		console.log("du kan logge ind");
-		document.getElementById("logoutBtn").style.display = "block";
+		$("#logoutBtn").style.display = "block";
 		// admin portal
-		if (document.getElementById("ShowUserRolesAdmin").checked == true) {
+		if ($("#ShowUserRolesAdmin").is(':checked')) {
 			// user portal
 			AdminAccess();
 		}
 
 		// Pharmaceut portal
-		if (document.getElementById("ShowUserRolesFarma").checked == true) {
+		if ($("#ShowUserRolesFarma").is(':checked')) {
 			//Commodity
 			// Prescriptions and prescription components
 			// and produktionsleder access
@@ -1589,7 +1589,7 @@ async function login() {
 		}
 
 		// Producktion leader
-		if (document.getElementById("ShowUserRolesProductionleader").checked == true) {
+		if ($("#ShowUserRolesProductionleader").is(':checked')) {
 			// commodity batches
 			// productbatches
 			// and has Lab guy access
@@ -1597,7 +1597,7 @@ async function login() {
 		}
 
 		// Lab guy
-		if (document.getElementById("ShowUserRolesLab").checked == true) {
+		if ($("#ShowUserRolesLab").is(':checked')) {
 			// weight access
 			LabAccess();
 		}
@@ -1608,12 +1608,12 @@ async function login() {
 }
 
 function LabAccess() {
-	document.getElementById("WeightPortal").style.display = "block";
+	$("#WeightPortal").show();
 }
 
 function ProductionleaderAccess() {
-	document.getElementById("ProductBatchPortal").style.display = "block";
-	document.getElementById("CommodityBatchPortal").style.display = "block";
+	$("#ProductBatchPortal").show();
+	$("#CommodityBatchPortal").show();
 	LabAccess();
 }
 
@@ -1622,21 +1622,21 @@ function PharmaceutAccess() {
 	//Commodity
 	// Prescriptions and prescription components
 	// and produktionsleder access
-	document.getElementById("ProductBatchPortal").style.display = "block";
-	document.getElementById("ProductBatchPortal").style.display = "block";
+	$("#ProductBatchPortal").show();
+	$("#ProductBatchPortal").show();
 	ProductionleaderAccess();
 }
 
 function AdminAccess() {
-	document.getElementById("UserAdminPortal").style.display = "block";
+	$("#UserAdminPortal").show();
 }
 
 function logout() {
-	document.getElementById("WeightPortal").style.display = "none";
-	document.getElementById("ProductBatchPortal").style.display = "none";
-	document.getElementById("CommodityBatchPortal").style.display = "none";
+	$("#WeightPortal").show();
+	$("#ProductBatchPortal").show();
+	$("#CommodityBatchPortal").show();
 
-	document.getElementById("UserAdminPortal").style.display = "none";
-	document.getElementById("logoutBtn").style.display = "none";
+	$("#UserAdminPortal").show();
+	$("#logoutBtn").show();
 }
 // setTimeout(
