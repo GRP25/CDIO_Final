@@ -658,7 +658,7 @@ async function openProductBatch() {
     document.getElementById("WeightProductBatchStartDate").innerHTML = document.getElementById("EditStartDate").innerHTML;
     document.getElementById("WeightProductBatchEndDate").innerHTML = document.getElementById("EditEndDate").innerHTML;
 
-    var presID = document.getElementById("EditPrescriptionID").value;
+    var presID = document.getElementById("EditPrescriptionID").textContent;
     await getPrescription(presID);
     document.getElementById("WeightPrescriptionID").innerHTML = presID;
     getPrescriptionCompList(presID, productBatchID);
