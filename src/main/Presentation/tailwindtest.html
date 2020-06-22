@@ -40,7 +40,7 @@
 			data-target=".afvejning">Afvejning </a>
 	</div>
 
-    <div class="w3-container">
+    <div id="loginContainer" class="w3-container">
         <h5></h5>
         <label>Indtast bruger ID: </label><input type="text" id="LoginUserID"></input> <br />
         <button class="w3-button w3-dark-grey" onclick="login()">Log ind<i class="fa fa-arrow-right"></i></button>
@@ -291,7 +291,7 @@
                    onclick="WeightPrint();">Print</a>
             </div>
 
-            <label id="PrintDate" class="hidden">Udskrevet: </label>
+            <label id="PrintDate" class="hidden">Udskrevet: </label> <br />
 
             <label>Indtast Produktbatch nummer: </label><input id="ProductBatchToWeight" type="text"> </input>
 
@@ -301,7 +301,7 @@
             </div>
 
             <!--Table for showing results-->
-            <div id="WeightCommodityBatchList" class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
+            <div id="WeightCommodityBatchList" class="max-w-full mx-2 rounded overflow-hidden bg-white content-center">
                <!--Insert of table -->
             </div>
 

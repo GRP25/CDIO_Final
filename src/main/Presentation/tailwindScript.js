@@ -13,9 +13,7 @@ $(document).ready(() => {
 
 });
 
-var userobject = {
-
-};
+var userobject;
 
 function listCommodities() {
 	event.preventDefault();
@@ -1365,17 +1363,17 @@ function WeightPrint() {
 	var today = new Date();
 	var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
-	document.getElementById("PrintDate").innerHTML = "Udskrevet: " + date;
-	document.getElementById("PrintDate").style.display = "block";
-	document.getElementById("OpenProductBtn").style.display = "none";
-	document.getElementById("PrintBtn").style.display = "none";
+	$("#PrintDate").html("Udskrevet: " + date);
+	$("#PrintDate").show();
+	$("#OpenProductBtn").hide();
+	$("#PrintBtn").hide();
 
 	window.print();
 
 
-	document.getElementById("PrintDate").style.display = "none";
-	document.getElementById("OpenProductBtn").style.display = "inline";
-	document.getElementById("PrintBtn").style.display = "inline";
+	$("#PrintDate").hide();
+	$("#OpenProductBtn").show();
+	$("#PrintBtn").show();
 }
 
 async function CreateProductBatchComp(commodityID, number) {
@@ -1385,7 +1383,7 @@ async function CreateProductBatchComp(commodityID, number) {
 	var productbatchcomp = {
 		productBatch_id: productBatchID,
 		commodityBatch_id: commodityID, //$('#WeightCommodityID').val(),
-		user_id: 1, // add current user
+		user_id: userobject.userID, // add current user
 		tara: $("#WeightTara" + commodityID).val(),
 		netto: $("#WeightNetto" + commodityID).val(),
 	};
@@ -1464,8 +1462,8 @@ function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchID) {
 		+ '<td id="WeightLineTara' + number + '"><input type="text" id="WeightTara' + PrescriptionComp.commodity_id +'"></input></td>'
 		+ '<td id="WeightLineNetto' + number + '"><input type="text" id="WeightNetto' + PrescriptionComp.commodity_id + '"></input></td>'
 		+ '<td id="WeightLineBatch' + number + '"><input type="text"></input></td>'
-		+ '<td id="WeightLineOpr' + number + '"><input type="text" value="Need info about log in user"></input></td>'
-		+ '<td id="WeightLineTerminal' + number + '"><input type="text"></input></td>'
+		+ '<td id="WeightLineOpr' + number + '">' + userobject.userID + '</input></td>'
+		+ '<td id="WeightLineTerminal' + number + '">1</td>'
 		+ '</tr>'
 		+ '</table>'
 		+ '<br>'
@@ -1568,11 +1566,47 @@ async function login() {
 
 	await getUser(id, false);
 
-	//$("#userIDInsert").content = $("#ShowUserID").value;
+	var statusTemp = 0;
+	if ($("#ShowUserStatus").is(':checked')) {
+		statusTemp = 1;
+	}
 
+	let userRoles = [];
+
+	if ($("#ShowUserRolesAdmin").is(':checked')) {
+		userRoles.push("Admin");
+	}
+	if ($("#ShowUserRolesFarma").is(':checked')) {
+		userRoles.push("Pharmaceut");
+	}
+	if ($("#ShowUserRolesProductionleader").is(':checked')) {
+		userRoles.push("Produktionsleder");
+	}
+	if ($("#ShowUserRolesLab").is(':checked')) {
+		userRoles.push("Laborant");
+	}
+
+
+	userobject = {
+		// set user status
+
+		userID: $("#ShowUserID").val(),
+		firstName: 	$("#ShowUserFirstName").val(),
+		surname: $("#ShowUserLastName").val(),
+		cpr: $("#ShowUserCPR").val(),
+		initials: $("#ShowUserIniTxt").val(),
+		roles: userRoles,
+
+		// Adding status
+		status: statusTemp
+	};
+	//$("#userIDInsert").content = $("#ShowUserID").value;
+	console.log(userobject);
+	
 	// console.log("ready function");
 	if (!($("#ShowUserID").val() === "") && $("#ShowUserStatus").is(':checked')) {
 		console.log("du kan logge ind");
+		$("#loginContainer").hide();
 		//$("#logoutBtn").style.display = "block";
 		// admin portal
 		if ($("#ShowUserRolesAdmin").is(':checked')) {
