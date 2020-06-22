@@ -8,6 +8,7 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="tailwindStyle.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="tailwindScript.js"></script>
@@ -268,7 +269,47 @@
 
 	</div>
 	<!--AFVEJNING WINDOW-->
-	<div class="mainWindow afvejning"></div>
+	<div class="mainWindow afvejning">
+        <div class=" mainScreen afvejning relative h-screen w-5/6 bg-gray-700 float-right hidden">
+
+            <!--Create and show list components-->
+            <div class="flex justify-start inline-block h-24 px-full mb-0">
+                <a href="#"
+                   id="OpenProductBtn" class="modal-create block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+                   onclick=openProductBatch();> Åben Produktbatch
+                    +</a>
+                <a href="#"
+                   id="PrintBtn" class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+                   onclick="WeightPrint();">Print</a>
+            </div>
+
+            <label id="PrintDate" class="hidden">Udskrevet: </label>
+
+            <label>Indtast Produktbatch nummer: </label><input id="ProductBatchToWeight" type="text"> </input>
+
+            <div class="w3-container">
+                <label>Recept id: </label> <label id="WeightPrescriptionID">00001</label> <br/>
+                <label>Recept navn: </label> <label id="WeightPrescriptionName"> Saltvand m. citron</label>
+            </div>
+
+            <!--Table for showing results-->
+            <div id="WeightCommodityBatchList" class="flex max-w-full mx-2 rounded overflow-hidden bg-white content-center">
+               <!--Insert of table -->
+            </div>
+
+            <div class="w3-container">
+                <label>Sum Tara: </label> <label id="WeightSumTara"> 3</label> <br />
+                <label>Sum Netto: </label> <label id="WeightSumNetto"> 3</label> <br />
+            </div> <br />
+
+            <div class="w3-container">
+                <label>Produktion Status: </label> <label id="WeightProductBatchStatus"> 3</label> <br />
+                <label>Produktion Startet: </label> <label id="WeightProductBatchStartDate"> dato1</label> <br />
+                <label>Produktion Slut: </label> <label id="WeightProductBatchEndDate"> dato2</label> <br />
+            </div>
+
+        </div>
+    </div>
 
 	<!--Modal reuse modal for each page-->
 	<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
