@@ -1,0 +1,24 @@
+{
+  "name": "CDIO_Final",
+  "version": "1.0.0",
+  "description": "* GET     https://api.mama.sh/PrescriptionComp\r * POST    https://api.mama.sh/PrescriptionComp\r * PUT     https://api.mama.sh/PrescriptionComp\r * GET     https://api.mama.sh/PrescriptionComp/component\r * GET     https://api.mama.sh/PrescriptionComp/{presID}\r ### Prescriptions\r * GET     https://api.mama.sh/Prescriptions\r * POST    https://api.mama.sh/Prescriptions\r * PUT     https://api.mama.sh/Prescriptions\r * GET     https://api.mama.sh/Prescriptions/ID/{PrescriptionID}\r ### Productbatch\r * GET     https://api.mama.sh/ProductBatchs\r * POST    https://api.mama.sh/ProductBatchs\r ### Productbatch Comp\r * POST    https://api.mama.sh/ProductBatchs/Comp\r * GET     https://api.mama.sh/ProductBatchs/Comp/{ProductID}\r * GET     https://api.mama.sh/ProductBatchs/ID/{ProductID}\r ### Aner ikke hvad det her er??\r * GET     https://api.mama.sh/application.wadl\r ### Commodity\r * GET     https://api.mama.sh/commodity\r * POST    https://api.mama.sh/commodity\r * PUT     https://api.mama.sh/commodity\r * GET     https://api.mama.sh/commodity/{commodity_id}\r ### Commodity Batch\r * GET     https://api.mama.sh/commodityBatch\r * POST    https://api.mama.sh/commodityBatch\r * PUT     https://api.mama.sh/commodityBatch\r * GET     https://api.mama.sh/commodityBatch/list/{commodity_id}\r * GET     https://api.mama.sh/commodityBatch/{commodityBatch_id}\r ### ProductBatch Comp igen??\r * GET     https://api.mama.sh/productbatchcomp\r * POST    https://api.mama.sh/productbatchcomp\r * GET     https://api.mama.sh/productbatchcomp/ID/{ProductID}\r ### User Resource\r * GET     https://api.mama.sh/userresource - Show\r * POST    https://api.mama.sh/userresource - Create\r * PUT     https://api.mama.sh/userresource - Update\r * DELETE  https://api.mama.sh/userresource/{userID} - Inactivate\r * GET     https://api.mama.sh/userresource/{userID} - Show",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwind build src/main/Presentation/tStyle.css -o src/main/Presentation/tailwindStyle.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GRP25/CDIO_Final.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GRP25/CDIO_Final/issues"
+  },
+  "homepage": "https://github.com/GRP25/CDIO_Final#readme",
+  "dependencies": {
+    "tailwindcss": "^1.4.6"
+  }
+}
