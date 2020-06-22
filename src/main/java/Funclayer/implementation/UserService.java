@@ -37,9 +37,15 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public void activateUser(int userID) throws SQLException {
+        validateUserId(userID);
+        userDao.changeUserStatus(1, userID);
+    }
+
+    @Override
     public void deleteUser(int userID) throws SQLException {
         validateUserId(userID);
-        userDao.deactivateUser(userID);
+        userDao.changeUserStatus(0, userID);
     }
 
     @Override

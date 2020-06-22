@@ -92,10 +92,10 @@ public class UserDAO implements IUserDAO, IValidation {
 	}
 
 	@Override
-	public boolean deactivateUser(int id) throws SQLException {
+	public boolean changeUserStatus(int status, int id) throws SQLException {
 		String query = "UPDATE Users set status = ? WHERE userId = ?;";
 		Connection connection = DBUtil.getConnection();
-		Object[] parameter = { 0, id };
+		Object[] parameter = { status, id };
 		ResultSet rs = DBUtil.executeSelectQuery(query, parameter, connection);
 
 		connection.close();

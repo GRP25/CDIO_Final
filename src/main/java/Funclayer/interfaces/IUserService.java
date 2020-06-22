@@ -13,6 +13,7 @@ public interface IUserService {
     void createUser(UserDTO user) throws SQLException;
 
     void deleteUser(int userID) throws SQLException;
+    void activateUser(int userID) throws SQLException;
 
     List<UserDTO> getUserList() throws SQLException;
 }
