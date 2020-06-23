@@ -410,7 +410,7 @@ function createCommodity() {
 		contentType: "application/json",
 		method: "POST",
 		data: JSON.stringify(commodity),
-		succes: function (response) {
+		success: function (response) {
 			toggleModal();
 			$("#loaderID").hide();
 			listCommodities()
@@ -439,7 +439,7 @@ function updateCommodity() {
 		contentType: "application/json",
 		method: "PUT",
 		data: JSON.stringify(commodity),
-		succes: function (response) {
+		success: function (response) {
 			$("#loaderID").hide();
 			listCommodities();
 			alert("Råvare opdateret")
