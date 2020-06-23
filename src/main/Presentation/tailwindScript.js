@@ -1533,7 +1533,8 @@ async function openProductBatch() {
 	weightPriscriptiuonID = presID;
 	await getPrescription(presID);
 	$("#WeightPrescriptionID").html(presID);
-	getPrescriptionCompList(presID, productBatchID);
+	let number = await getPrescriptionCompList(presID, productBatchID);
+	sumTotal(number);
 	//document.getElementById("WeightPrescriptionName").innerHTML = ;
 }
 
@@ -1602,26 +1603,51 @@ async function getPrescription(id) {
 
 async function getPrescriptionCompList(prescriptionID, productBatchID) {
 	$("#loaderID").show();
+	var number = 0;
+
 	await $.ajax({
 		url: "https://api.mama.sh/PrescriptionComp/" + prescriptionID,
 		contentType: "application/json",
-		async: false,
 		type: "GET",
 		success: function (response) {
 			$("#loaderID").hide();
-			var number = 0;
 			$("#WeightCommodityBatchList").html("");
-			response.forEach(prescriptionComp => {
+
+			for (const prescriptionComp of response) {
 				number++;
 				ShowPrescriptionCompToLab(prescriptionComp, number, productBatchID);
 
-			})
+			}
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
 			console.log(jqXHR.status + text + error);
 		}
 	});
+	return number;
+}
+
+function sumTotal(number) {
+	console.log("Hello world");
+	var weightNettoTotal = 0;
+	var weightTaraTotal = 0;
+
+	for (let index = 1; index <= number; index++) {
+
+		console.log(index + "Dtara: " + Number($('#WeightLineTara' + index).html()));
+		console.log(index + "tara: " + $('#WeightLineTara' + index).html());
+		console.log(index + "DNetto: " + Number($('#WeightLineNetto' + index).html()));
+		console.log(index + "Netto: " + $('#WeightLineNetto' + index).html());
+
+		weightTaraTotal += Number($('#WeightLineTara' + index).html());
+
+		weightNettoTotal += Number($('#WeightLineNetto' + index).html());
+	}
+	console.log('Tara Total: ' + weightTaraTotal + ', Netto Total: ' + weightNettoTotal);
+
+	// print to screen
+	$('#WeightSumTara').text(weightTaraTotal);
+	$('#WeightSumNetto').text(weightNettoTotal);
 }
 
 async function CreateProductBatchComp(commodityID, number) {
@@ -1688,6 +1714,7 @@ async function CreateProductBatchComp(commodityID, number) {
 
 
 function updateProductBatchToFinish() {
+	console.log("Jeg er i gang med at slukke for lortet");
 	$("#loaderID").show();
 
 	var today = new Date();
@@ -1719,11 +1746,11 @@ function updateProductBatchToFinish() {
 	});
 }
 
-function UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number) {
+async function UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number) {
 	$("#loaderID").show();
 	console.log("starting update");
 
-	$.ajax({
+	await $.ajax({
 		url: "https://api.mama.sh/productbatchcomp/component?productBatchId=" + productBatchID + "&commodityBatchId=" + commodityID,
 		contentType: "application/json",
 		type: "GET",
@@ -1738,58 +1765,39 @@ function UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number) {
 			$("#WeightLineTerminal" + number).html(1);
 			// });
 
-			/*
+
 			//	promise1.then((value) => {
-			$(document).ready(function () {
 
 
-				// show and hide button stuff
-				console.log("started to show BTN");
-				$('#WeightSubmitBtn' + number).hide();
-				console.log("End og BTN")
-				// end of document ready
+			// show and hide button stuff
+			console.log("started to show BTN");
+			$('#WeightSubmitBtn' + number).hide();
+			console.log("End og BTN")
+			// end of document ready
 
-				// test for last button
-				try {
-					document.getElementById("WeightSubmitBtn" + (number + 1)).style.display = "block";
+			// test for last button
+			try {
+				document.getElementById("WeightSubmitBtn" + (number + 1)).style.display = "block";
+			}
+			catch { // end of commodity to productbatch
+				console.log("done!");
+
+				while ($('#WeightLineTara' + number).html() != Number(response.tara)) {
+					// test stuff
+					// end of while loop
+					console.log("while loop");
 				}
-				catch { // end of commodity to productbatch
-					console.log("done!");
+			}
 
-					while ($('#WeightLineTara' + number).html() != Number(response.tara)) {
-						// test stuff
-						// end of while loop
-						console.log("while loop");
-					}
+			// get all netto and tara weight
+			sumTotal(number);
 
-					// get all netto and tara weight
-					var weightNettoTotal = 0;
-					var weightTaraTotal = 0;
+			// update status to "Afsluttet" and update end date
+			updateProductBatchToFinish();
+			$("#loaderID").hide();
+			//}
 
-					for (let index = 1; index <= number; index++) {
-
-						//sleep(500);
-						console.log(Number($('#WeightLineTara' + index).html()));
-						console.log($('#WeightLineTara' + index).html());
-						console.log(Number($('#WeightLineNetto' + index).html()));
-						console.log($('#WeightLineNetto' + index).html());
-
-						weightTaraTotal += Number($('#WeightLineTara' + index).html());
-
-						weightNettoTotal += Number($('#WeightLineNetto' + index).html());
-					}
-					console.log('Tara Total: ' + weightTaraTotal + ', Netto Total: ' + weightNettoTotal);
-
-					// print to screen
-					$('#WeightSumTara').text(weightTaraTotal);
-					$('#WeightSumNetto').text(weightNettoTotal);
-
-					// update status to "Afsluttet" and update end date
-					updateProductBatchToFinish();
-					$("#loaderID").hide();
-				}
-			});
-			//	}); */
+			//	}); 
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
@@ -1808,7 +1816,7 @@ async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchI
 	var commoditybatchList = document.getElementById("WeightCommodityBatchList");
 
 
-	await getCommodity(PrescriptionComp.commodity_id);
+	getCommodity(PrescriptionComp.commodity_id);
 
 
 	console.log("Dette er det nummer råvare vi laver" + number);
@@ -1846,7 +1854,6 @@ async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchI
 
 	//$(document).ready( function () {toggleModal();});
 	UpdateToSubmitedProductBatchComp(productBatchID, PrescriptionComp.commodity_id, number);
-
 }
 
 function WeightPrint() {
