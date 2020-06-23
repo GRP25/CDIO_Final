@@ -228,7 +228,7 @@ function updatePrescription() {
 
 function createPrescriptionModal(funktion) {
 	$("#modal-title").text("Recept");
-	toggleModal()
+	//toggleModal()
 	$("#modal-body").html("");
 	$("#modal-body").append(`<form>
 			<label>Recept Navn:</label>
@@ -258,7 +258,7 @@ function createPrescriptionModal(funktion) {
 
 function prescriptionCompModal(funktion) {
 	$("#modal-title").text("Recept komponent");
-	toggleModal();
+	//toggleModal();
 	$("#modal-body").html("");
 	$("#modal-body").append(`<form>
 <label>Recept id:</label>
