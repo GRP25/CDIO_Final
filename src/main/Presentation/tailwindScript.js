@@ -112,7 +112,7 @@ function listPrescriptions() {
 			console.log("test");
 			//document.getElementById("loaderID").style.display = "none";
 			$("#listOfPrescriptionsTable").html("");
-			let html = `<thead><tr><th class="w-1/2 px-4 py-2">Råvare navn</th><th class="w-1/2 px-4 py-2">Råvare id</th></tr></thead><tbody>`
+			let html = `<thead><tr><th class="w-1/2 px-4 py-2">Recept navn</th><th class="w-1/2 px-4 py-2">Råvare id</th></tr></thead><tbody>`
 			//'<table class="tableOfUsers"> <tr><th>Name</th><th>Id</th></tr>';
 			jQuery.each(response, (i, item) => {
 				html += `<tr>`;
