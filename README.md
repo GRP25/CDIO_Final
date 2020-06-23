@@ -4,6 +4,7 @@
 * Mere validering
 * Generelt ploish af tabeller
 * Nogle steder står der Opret i stedet for opdater
+* Råvare navn ved afvejning
 ## Raport Struktur
 * Der skal laves noget struktur over vores rapport
     * Implementations laget skal måske deles op i 3-lagsmodellen
