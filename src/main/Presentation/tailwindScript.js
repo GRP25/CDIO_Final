@@ -1333,7 +1333,7 @@ function getCommodityBatchListByCommodityId() {
 
 
 async function openProductBatch() {
-	var productBatchID = document.getElementById("ProductBatchToWeight").value;
+	var productBatchID = $("#ProductBatchToWeight").val();
 	await getProductBatch(productBatchID);
 	//$("#EditProductBatchWindow").hide();
 
@@ -1469,7 +1469,7 @@ function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchID) {
 		+ '</tr>'
 		+ '</table>'
 		+ '<br>'
-		+ '<button style="display: ' + isShown +';" id="WeightSubmitBtn' + number +'" onclick="CreateProductBatchComp('+ PrescriptionComp.commodity_id+',' + number + ');"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
+		+ '<button style="display: ' + isShown +';" id="WeightSubmitBtn' + number +'" class="button" onclick="CreateProductBatchComp('+ PrescriptionComp.commodity_id+',' + number + ');"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
 		+ '</div> <br/>';
 
 	UpdateToSubmitedProductBatchComp(productBatchID, PrescriptionComp.commodity_id, number);
@@ -1484,11 +1484,11 @@ function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
 		contentType: "application/json",
 		type: "GET",
 		success : function (response) {
-			document.getElementById("WeightLineTara" + number).innerHTML = response.tara;
-			document.getElementById("WeightLineNetto" + number).innerHTML = response.netto;
-			document.getElementById("WeightLineBatch" + number).innerHTML = response.commodityBatch_id;
-			document.getElementById("WeightLineOpr" + number).innerHTML = response.user_id;
-			document.getElementById("WeightLineTerminal" + number).innerHTML = 1;
+			$("#WeightLineTara" + number).html(response.tara);
+			$("#WeightLineNetto" + number).html(response.netto);
+			$("#WeightLineBatch" + number).html(response.commodityBatch_id);
+			$("#WeightLineOpr" + number).html(response.user_id);
+			$("#WeightLineTerminal" + number).html(1);
 
 
 			// show and hide button stuff
@@ -1526,6 +1526,8 @@ function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
 				$('#WeightSumNetto').html(weightNettoTotal);
 
 				// update status to "Afsluttet" and update end date
+				updateProductBatchToFinish();
+
 			}
 		},
 		error: function (jqXHR, text, error) {
@@ -1678,3 +1680,32 @@ function logout() {
 //	$("#logoutBtn").show();
 }
 // setTimeout(
+
+function updateProductBatchToFinish() {
+
+		productBatchStatus = 3;
+
+		var today = new Date();
+	
+		var productBatch = { 
+			prescription_id: $("#showPrescriptionId").val(),
+			productBatch_id: $("#ProductBatchToWeight").val(),
+			status: productBatchStatus,
+			startDate: "",
+			endDate: ""
+		};
+	
+		$.ajax ({
+			url: "https://api.mama.sh/ProductBatchs",
+			contentType: "application/json",
+			method: "PUT",
+			data: JSON.stringify(productBatch),
+			success: function (response) {
+				getProductBatch(productBatch.productBatch_id);
+			},
+			error: function (data, text, error) {
+				alert("fejl: Produkt Batch ikke opdateres");
+			}
+	
+		});
+}
