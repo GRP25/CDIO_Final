@@ -15,7 +15,7 @@ public interface IUserDAO {
 
 	void updateUser(UserDTO user) throws SQLException;
 
-	boolean deactivateUser(int userID) throws SQLException;
+	boolean changeUserStatus(int status, int userID) throws SQLException;
 
 	boolean exists(String cpr) throws SQLException;
 

@@ -18,6 +18,15 @@ import static Funclayer.exceptions.validation.UserValidation.validateUserId;
 public class UserResource {
     IUserService userService = new UserService();
 
+    @Path("activate/{userID}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response activateUser(@PathParam("userID") int userID) throws SQLException{
+        validateUserId(userID);
+        SuccessMessage msg = new SuccessMessage("User succesfully activated", 3003, "https://mama.sh/");
+        userService.activateUser(userID);
+        return Response.status(Response.Status.OK).entity(msg).build();
+    }
     @Path("/{userID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

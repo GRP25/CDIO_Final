@@ -1,4 +1,5 @@
 # CDIO_Final
+
 ## Styling den 23-06-2020
 * Alert og succes functioner
 * Generelt ploish af tabeller
@@ -7,6 +8,7 @@
 ## Raport Struktur
 * Der skal laves noget struktur over vores rapport
     * Implementations laget skal måske deles op i 3-lagsmodellen
+* Kode eksempler skal ændres fra billed til "lstlisting"
 ## Endpoints
 ### Prescription Comp
 * GET     https://api.mama.sh/PrescriptionComp
