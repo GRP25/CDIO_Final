@@ -51,10 +51,11 @@ function listCommodities() {
 			applyModal();
 
 			$("#listOfCommoditiestable").show();
+
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error + "Liste ikke indlæst rigtigt");
 		},
 	})
 };
@@ -134,7 +135,7 @@ function listPrescriptions() {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error +"Liste ikke indlæst rigtigt");
 		},
 	})
 }
@@ -173,7 +174,7 @@ function listPrescriptionComp() {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error +"Liste ikke indlæst rigtigt");
 		},
 	})
 }
@@ -197,7 +198,7 @@ async function getPrescription(id) {
 		},
 		error: function (response) {
 			$("#loaderID").hide();
-			alert("AAARGH ALT BRÆNDER")
+			alert("Recept ikke hentet prøv et andet ID")
 		}
 	})
 }
@@ -217,12 +218,12 @@ function updatePrescription() {
 		data: JSON.stringify(prescription),
 		success: function (response) {
 			$("#loaderID").hide();
-			alert("Det virker");
+			alert("Recept opdateret");
 			listPrescriptions();
 		},
 		error: function (response) {
 			$("#loaderID").hide();
-			alert("AAARGH ALT BRÆNDER")
+			alert("Recept ikke opdateret")
 		}
 	})
 }
@@ -309,7 +310,7 @@ function getPrescriptionComp(prescription_id, commodity_id) {
 		},
 		error: function (response) {
 			$("#loaderID").hide();
-			alert("AAARGH ALT BRÆNDER")
+			alert("Recept ikke hentet prøv et andet ID")
 		}
 	})
 }
@@ -329,12 +330,12 @@ function createPrescription() {
 		data: JSON.stringify(prescription),
 		success: function (response) {
 			$("#loaderID").hide();
-			alert("Det virker");
+			alert("Recept lavet");
 			listPrescriptions();
 		},
 		error: function (response) {
 			$("#loaderID").hide();
-			alert("AAARGH ALT BRÆNDER")
+			alert("Recept ikke lavet")
 		}
 	})
 }
@@ -357,11 +358,11 @@ function updatePrescriptionComp() {
 		success: function (response) {
 			$("#loaderID").hide();
 			toggleModal();
-			alert("Update successfull");
+			alert("Recept komponent opdateret");
 		},
 		error: function (response) {
 			$("#loaderID").hide();
-			alert("KLokken er kvart i daller");
+			alert("Recept komponent ikke opdateret");
 		}
 	});
 }
@@ -384,11 +385,11 @@ function createPrescriptionComp() {
 		success: function (response) {
 			$("#loaderID").hide();
 			toggleModal();
-			alert("Create successfull");
+			alert("Recept komponent lavet");
 		},
 		error: function (response) {
 			$("#loaderID").hide();
-			alert("KLokken er kvart i daller");
+			alert("Recept komponent ikke lavet");
 		}
 	});
 }
@@ -411,10 +412,11 @@ function createCommodity() {
 			toggleModal();
 			$("#loaderID").hide();
 			listCommodities()
+			alert("Råvare lavet")
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error + "Råvare ikke lavet");
 		},
 	});
 }
@@ -438,11 +440,12 @@ function updateCommodity() {
 		succes: function (response) {
 			$("#loaderID").hide();
 			listCommodities();
+			alert("Råvare opdateret")
 		},
 		error: function (jqXHR, text, error) {
 			toggleModal();
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error +" Råvare ikke opdateret");
 		},
 	});
 }
@@ -489,7 +492,7 @@ function listUsers() {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error+"Brugere ikke hentet");
 		},
 	});
 
@@ -621,7 +624,7 @@ async function getUser(id, showBox = true) {
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
 			document.getElementById("loaderID").style.display = "none";
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error+"Bruger ikke hentet prøv et andet ID");
 		},
 	});
 
@@ -643,7 +646,7 @@ function inactiveUser(id, state) {
 			error: function (jqXHR, text, error) {
 				$("#loaderID").hide();
 				document.getElementById("loaderID").style.display = "none";
-				alert(jqXHR.status + text + error);
+				alert(jqXHR.status + text + error+" Bruger er ikke blevet inaktiv");
 			},
 		});
 	}
@@ -664,12 +667,14 @@ function inactiveUser(id, state) {
 					initials: response.initials,
 					roles: response.roles,
 					status: 1
+
 				}
+				alert("Bruger er inaktiv");
 			},
 			error: function (jqXHR, text, error) {
 				$("#loaderID").hide();
 				document.getElementById("loaderID").style.display = "none";
-				alert(jqXHR.status + text + error);
+				alert(jqXHR.status + text + error +"Bruger ikke opdateret");
 			},
 		});
 		//let user = JSON.parse(bruger);
@@ -711,7 +716,7 @@ function getCommodity(id) {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error +" Råvare ikke hentet prøv et andet ID");
 		},
 	});
 }
@@ -803,11 +808,12 @@ function createUser() {
 			console.log("Bruger oprettet");
 			listUsers();
 			toggleModal();
+			alert("Bruger oprettet")
 			
 		},
 		error: function (data, text, error) {
 			$("#loaderID").hide();
-			alert("fejl: bruger ikke oprettet");
+			alert("Bruger ikke oprettet");
 		}
 
 	});
@@ -828,7 +834,7 @@ function sendUpdateToServer(user) {
 		},
 		error: function (data, text, error) {
 			$("#loaderID").hide();
-			alert("fejl: bruger ikke opdateres");
+			alert("Bruger ikke opdateret");
 		}
 
 	});
@@ -937,7 +943,7 @@ function CreateProductBatch() {
 		},
 		error: function (data, text, error) {
 			$("#loaderID").hide();
-			alert("Error: Product Batch ikke oprettet");
+			alert("Product Batch ikke oprettet");
 		}
 
 	});
@@ -976,7 +982,7 @@ function getProductBatchList() {
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
 			document.getElementById("loaderID").style.display = "none";
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error+"Produkt Batch liste ikke hentet");
 		}
 	})
 }
@@ -1016,7 +1022,7 @@ async function getProductBatch(id) {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error+" Produkt Batch ikke hentet");
 		},
 	});
 }
@@ -1092,7 +1098,7 @@ function getProductBatchCompList() {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error+" Produkt Batch komponenter ikke hentet");
 		}
 	})
 }
@@ -1114,7 +1120,7 @@ function getOneProductBatchComp(CommodityID, ProductBatchID) {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error+"Produkt Batch komponent ikke hentet");
 		},
 	});
 }
@@ -1141,7 +1147,7 @@ function updateProductBatchComp() {
 		},
 		error: function (data, text, error) {
 			$("#loaderID").hide();
-			alert("fejl: Produkt Batch Comp ikke opdateret");
+			alert("Produkt Batch Comp ikke opdateret");
 		}
 
 	});
@@ -1205,7 +1211,7 @@ function getProductBatchCompListOneBatch() {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error+"Produkt Batch komponenter ikke hentet");
 		}
 	});
 }
@@ -1245,7 +1251,7 @@ function getCommodityBatchList() {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error+" Råvare Batch liste ikke hentet");
 		}
 	});
 
@@ -1304,7 +1310,7 @@ function getCommodityBatch(commodityBatch_id) {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error)
+			alert(jqXHR.status + text + error +" Råvare Batch ikke hentet")
 		}
 	});
 
@@ -1336,11 +1342,11 @@ function updateCommodityBatch(commodityBatch_id) {
 		data: JSON.stringify(element),
 		success: function (response) {
 			$("#loaderID").hide();
-			alert(JSON.stringify(response))
+			alert("Råvare Batch opdateret");
 		},
 		error: function (jqXHR, textStatus, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.responseText + textStatus + error.toString())
+			alert(jqXHR.responseText + textStatus + " Råvare Batch ikke opdateret ")
 		}
 	});
 }
@@ -1370,13 +1376,13 @@ function createCommodityBatch() {
 		data: JSON.stringify(element),
 		success: function (response) {
 			$("#loaderID").hide();
-			alert(JSON.stringify(response))
+			alert("Råvare Batch lavet");
 			// Display elements
 			getCommodityBatchList()
 		},
 		error: function (jqXHR, textStatus, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.responseText + textStatus + error.toString())
+			alert(jqXHR.responseText + textStatus + "Råvare Batch ikke lavet")
 		}
 	});
 }
@@ -1412,10 +1418,11 @@ function getCommodityBatchListByCommodityId() {
 			$("#listOfCommodityBatchListTable").append(html);
 
 			$("#listOfCommodityBatchListTable").show();
+
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			alert(jqXHR.status + text + error + " Råvare Batch liste ikke hentet");
 		}
 	});
 
