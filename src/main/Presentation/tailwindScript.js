@@ -63,38 +63,38 @@ function applyModal() {
 	var openmodal = document.querySelectorAll('.modal-open')
 	for (var i = 0; i < openmodal.length; i++) {
 		openmodal[i].addEventListener('click', function (event, id) {
-			event.preventDefault()
-			toggleModal()
+			event.preventDefault();
+			toggleModal();
 		})
 	}
-	const overlay = document.querySelector('.modal-overlay')
-	overlay.addEventListener('click', toggleModal)
+	const overlay = document.querySelector('.modal-overlay');
+	overlay.addEventListener('click', toggleModal);
 
-	var closemodal = document.querySelectorAll('.modal-close')
+	var closemodal = document.querySelectorAll('.modal-close');
 	for (var i = 0; i < closemodal.length; i++) {
-		closemodal[i].addEventListener('click', toggleModal)
+		closemodal[i].addEventListener('click', toggleModal);
 	}
 
 	document.onkeydown = function (evt) {
-		evt = evt || window.event
-		var isEscape = false
+		evt = evt || window.event;
+		var isEscape = false;
 		if ("key" in evt) {
-			isEscape = (evt.key === "Escape" || evt.key === "Esc")
+			isEscape = (evt.key === "Escape" || evt.key === "Esc");
 		} else {
-			isEscape = (evt.keyCode === 27)
+			isEscape = (evt.keyCode === 27);
 		}
 		if (isEscape && document.body.classList.contains('modal-active')) {
-			toggleModal()
+			toggleModal();
 		}
 	};
 }
 
 function toggleModal() {
-	const body = document.querySelector('body')
-	const modal = document.querySelector('.modal')
-	modal.classList.toggle('opacity-0')
-	modal.classList.toggle('pointer-events-none')
-	body.classList.toggle('modal-active')
+	const body = document.querySelector('body');
+	const modal = document.querySelector('.modal');
+	modal.classList.toggle('opacity-0');
+	modal.classList.toggle('pointer-events-none');
+	body.classList.toggle('modal-active');
 }
 
 function listPrescriptions() {
@@ -218,6 +218,7 @@ function updatePrescription() {
 		success: function (response) {
 			$("#loaderID").hide();
 			alert("Det virker");
+			listPrescriptions();
 		},
 		error: function (response) {
 			$("#loaderID").hide();
@@ -329,6 +330,7 @@ function createPrescription() {
 		success: function (response) {
 			$("#loaderID").hide();
 			alert("Det virker");
+			listPrescriptions();
 		},
 		error: function (response) {
 			$("#loaderID").hide();
@@ -495,7 +497,7 @@ function listUsers() {
 
 function UserModal(funktion) {
 	$("#modal-title").text("Brugere");
-	toggleModal();
+//	toggleModal();
 	$("#modal-body").html("");
 	$("#modal-body").append(`<form>
 <label>Bruger ID:</label>
@@ -576,9 +578,9 @@ async function getUser(id, showBox = true) {
 		method: "GET",
 		success: function (response) {
 			$("#loaderID").hide();
-			if (showBox === true) {
-				toggleModal();
-			}
+	//		if (showBox === true) {
+	//			toggleModal();
+	//		}
 			$("#ShowUserID").val(response.userID);
 			$("#ShowUserFirstName").val(response.firstName);
 			$("#ShowUserLastName").val(response.surname);
@@ -797,7 +799,11 @@ function createUser() {
 		data: JSON.stringify(user),
 		success: function (response) {
 			$("#loaderID").hide();
-			alert("Bruger Oprettet");
+		//	alert("Bruger Oprettet");
+			console.log("Bruger oprettet");
+			listUsers();
+			toggleModal();
+			
 		},
 		error: function (data, text, error) {
 			$("#loaderID").hide();
@@ -805,6 +811,8 @@ function createUser() {
 		}
 
 	});
+
+
 }
 
 function sendUpdateToServer(user) {
@@ -1660,7 +1668,7 @@ async function login() {
 
 	var id = $("#LoginUserID").val();
 
-	await getUser(id, false);
+	await getUser(id, true);
 
 	var statusTemp = 0;
 	if ($("#ShowUserStatus").is(':checked')) {
