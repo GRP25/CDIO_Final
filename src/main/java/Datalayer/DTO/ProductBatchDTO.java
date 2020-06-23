@@ -90,8 +90,8 @@ public class ProductBatchDTO implements IDTO {
 		Object[] object = new Object[5];
 		object[0] = this.productBatch_id;
 		object[1] = this.prescription_id;
-		object[2] = new Date(this.startDate);
-		object[3] = new Date(this.endDate);
+		object[2] = this.startDate;
+		object[3] = this.endDate;
 		object[4] = this.status;
 		return object;
 	}
