@@ -1685,14 +1685,10 @@ function updateProductBatchToFinish() {
 
 		productBatchStatus = 3;
 
-		var today = new Date();
-	
-		var productBatch = { 
-			prescription_id: $("#showPrescriptionId").val(),
+		var productBatch = {
 			productBatch_id: $("#ProductBatchToWeight").val(),
+			prescription_id: $("#showPrescriptionId").val(),
 			status: productBatchStatus,
-			startDate: "",
-			endDate: ""
 		};
 	
 		$.ajax ({

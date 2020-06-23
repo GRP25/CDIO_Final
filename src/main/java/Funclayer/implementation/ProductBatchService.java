@@ -6,6 +6,7 @@ import Datalayer.Interfaces.IProductBatchDAO;
 import Funclayer.exceptions.exceptions.NotProductBatchExeption;
 import Funclayer.interfaces.IProductBatchService;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 

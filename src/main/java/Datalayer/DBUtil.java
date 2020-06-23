@@ -42,7 +42,7 @@ public class DBUtil {
         if (objects != null) {
 
             for (Object object : objects) {
-
+                System.out.println(object);
                 if (object instanceof Integer) {
                     pstmt.setInt(index++, Integer.parseInt(object.toString()));
                 } else if (object instanceof Double) {
