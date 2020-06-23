@@ -413,6 +413,7 @@ function updateCommodity() {
 }
 
 function listUsers() {
+	$("#loaderID").show();
 	// document.getElementById("loaderID").style.display = "block";
 	console.log("Test");
 	$.ajax({
@@ -420,6 +421,7 @@ function listUsers() {
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
+			$("#loaderID").hide();
 			//document.getElementById("loaderID").style.display = "none";
 			$("#listOfUsersTable").html("");
 			let html = `<thead>
@@ -451,7 +453,7 @@ function listUsers() {
 			$("#listOfUsersTable").show();
 		},
 		error: function (jqXHR, text, error) {
-			document.getElementById("loaderID").style.display = "none";
+			$("#loaderID").hide();
 			alert(jqXHR.status + text + error);
 		},
 	});
