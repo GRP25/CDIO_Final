@@ -845,9 +845,9 @@ function getStatus(status) {
 	}
 }
 
-function showProductModal() {
+function showProductModal(hasToggleModal) {
 	$("#modal-title").text("Produkt Batch");
-	toggleModal();
+	if (hasToggleModal) toggleModal();
 	$("#modal-body").html("");
 	$("#modal-body").append(`
 <label>Produkt Batch ID:</label>
@@ -984,9 +984,9 @@ function getProductBatchList() {
 	})
 }
 
-async function getProductBatch(id) {
+async function getProductBatch(id, hasToggleModal = true) {
 	$("#loaderID").show();
-	showProductModal();
+	showProductModal(hasToggleModal);
 	console.log("getuser Started");
 	await $.ajax({
 		url: "https://api.mama.sh/ProductBatchs/ID/" + id,
@@ -1429,7 +1429,7 @@ function getCommodityBatchListByCommodityId() {
 
 async function openProductBatch() {
 	var productBatchID = $("#ProductBatchToWeight").val();
-	await getProductBatch(productBatchID);
+	await getProductBatch(productBatchID, false);
 	//$("#EditProductBatchWindow").hide();
 
 	// Get status for productbatch
@@ -1579,7 +1579,7 @@ async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchI
 		+ '</tr>'
 		+ '</table>'
 		+ '<br>'
-		+ '<button style="display: ' + isShown +';" id="WeightSubmitBtn' + number +'" class="button" onclick="CreateProductBatchComp('+ PrescriptionComp.commodity_id+',' + number + ');"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
+		+ '<button style="display: ' + isShown +';" id="WeightSubmitBtn' + number +'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onclick="CreateProductBatchComp('+ PrescriptionComp.commodity_id+',' + number + ');"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
 		+ '</div> <br/>';
 
 		
@@ -1817,7 +1817,7 @@ function updateProductBatchToFinish() {
 			data: JSON.stringify(productBatch),
 			success: function (response) {
 				$("#loaderID").hide();
-				getProductBatch(productBatch.productBatch_id);
+				getProductBatch(productBatch.productBatch_id, true);
 			},
 			error: function (data, text, error) {
 				$("#loaderID").hide();
