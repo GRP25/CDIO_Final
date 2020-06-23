@@ -9,6 +9,7 @@
 * Der skal laves noget struktur over vores rapport
     * Implementations laget skal måske deles op i 3-lagsmodellen
 * Kode eksempler skal ændres fra billed til "lstlisting"
+* Hvorfor er der 2 Exceptions
 ## Endpoints
 ### Prescription Comp
 * GET     https://api.mama.sh/PrescriptionComp
