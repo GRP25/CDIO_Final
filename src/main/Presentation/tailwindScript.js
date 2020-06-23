@@ -15,6 +15,8 @@ $(document).ready(() => {
 
 var userobject;
 
+var weightPriscriptiuonID;
+
 function listCommodities() {
 	event.preventDefault();
 	$("#loaderID").show();
@@ -1459,6 +1461,7 @@ async function openProductBatch() {
 	document.getElementById("WeightProductBatchEndDate").innerHTML = document.getElementById("showEndDate").innerHTML;
 
 	var presID = $("#showPrescriptionID").html();
+	weightPriscriptiuonID = presID;
 	await getPrescription(presID);
 	$("#WeightPrescriptionID").html(presID);
 	getPrescriptionCompList(presID, productBatchID);
@@ -1551,9 +1554,6 @@ async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchI
 	
 	await getCommodity(PrescriptionComp.commodity_id);
 	
-	
-	
-
 	if (number == 1) {
 		isShown = "block";
 	}
@@ -1604,16 +1604,23 @@ function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
 		contentType: "application/json",
 		type: "GET",
 		success : function (response) {
-			$("#WeightLineTara" + number).html(response.tara);
+			
+			//const promise1 = new Promise((resolve, reject) => {
+				$("#WeightLineTara" + number).html(response.tara);
 			$("#WeightLineNetto" + number).html(response.netto);
 			$("#WeightLineBatch" + number).html(response.commodityBatch_id);
 			$("#WeightLineOpr" + number).html(response.user_id);
 			$("#WeightLineTerminal" + number).html(1);
+			 // });
+			
 
-
+		//	promise1.then((value) => {
+			$(document).ready( function () {
+				
+			
 			// show and hide button stuff
 			console.log("started to show BTN");
-			$("#WeightSubmitBtn" + number).hide();
+			$('#WeightSubmitBtn' + number).hide();
 			console.log("End og BTN")
 			// end of document ready
 
@@ -1623,13 +1630,20 @@ function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
 			}
 			catch { // end of commodity to productbatch
 				console.log ("done!");
-
+				
+				while ($('#WeightLineTara' + number).html() != Number(response.tara)) {
+					// test stuff
+					// end of while loop
+					console.log("while loop");
+				}
+			
 				// get all netto and tara weight
 				var weightNettoTotal = 0;
 				var weightTaraTotal = 0;
-
+				
 				for (let index = 1; index <= number; index++) {
-					// test stuff
+					
+					//sleep(500);
 					console.log(Number($('#WeightLineTara' + index).html()));
 					console.log($('#WeightLineTara' + index).html());
 					console.log(Number($('#WeightLineNetto' + index).html()));
@@ -1644,11 +1658,13 @@ function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
 				// print to screen
 				$('#WeightSumTara').html(weightTaraTotal);
 				$('#WeightSumNetto').html(weightNettoTotal);
-
+				
 				// update status to "Afsluttet" and update end date
 				updateProductBatchToFinish();
 				$("#loaderID").hide();
 			}
+		});
+	//	});
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
@@ -1663,9 +1679,9 @@ function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
 	});
 }
 
-function getPrescriptionCompList(prescriptionID, productBatchID) {
+async function getPrescriptionCompList(prescriptionID, productBatchID) {
 	$("#loaderID").show();
-	$.ajax ( {
+	await $.ajax ( {
 		url: "https://api.mama.sh/PrescriptionComp/" + prescriptionID,
 		contentType: "application/json",
 		type: "GET",
@@ -1810,7 +1826,7 @@ function updateProductBatchToFinish() {
 		var today = new Date();
 	
 		var productBatch = { 
-			prescription_id: $("#showPrescriptionId").val(),
+			prescription_id: weightPriscriptiuonID, // $("#showPrescriptionID").val(),
 			productBatch_id: $("#ProductBatchToWeight").val(),
 			status: 3,
 	//		startDate: 1,
@@ -1824,7 +1840,9 @@ function updateProductBatchToFinish() {
 			data: JSON.stringify(productBatch),
 			success: function (response) {
 				$("#loaderID").hide();
-				getProductBatch(productBatch.productBatch_id, true);
+				// getProductBatch(productBatch.productBatch_id, false);
+				//$("#WeightProductBatchStartDate").html($("#showStartDate").html());
+				//$("#WeightProductBatchEndDate").html( $("#showEndDate").html());
 			},
 			error: function (data, text, error) {
 				$("#loaderID").hide();
@@ -1833,3 +1851,7 @@ function updateProductBatchToFinish() {
 	
 		});
 }
+
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+  }
