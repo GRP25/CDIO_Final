@@ -58,7 +58,7 @@ CREATE TABLE Users
     CREATE TABLE Prescription
     (
         prescriptionId int NOT NULL,
-        prescriptionName varchar(20),
+        prescriptionName varchar(50),
         PRIMARY KEY (prescriptionId)
     );
 

@@ -1,5 +1,11 @@
 # CDIO_Final
-## Raport Struktur / TODO
+
+## Styling den 23-06-2020
+* Alert og succes functioner
+* Generelt ploish af tabeller
+* Nogle steder står der Opret i stedet for opdater
+* Råvare navn ved afvejning
+## Raport Struktur
 * Der skal laves noget struktur over vores rapport
     * Implementations laget skal måske deles op i 3-lagsmodellen
 * Kode eksempler skal ændres fra billed til "lstlisting"

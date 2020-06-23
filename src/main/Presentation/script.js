@@ -658,16 +658,16 @@ async function openProductBatch() {
     document.getElementById("WeightProductBatchStartDate").innerHTML = document.getElementById("EditStartDate").innerHTML;
     document.getElementById("WeightProductBatchEndDate").innerHTML = document.getElementById("EditEndDate").innerHTML;
 
-    var presID = document.getElementById("EditPrescriptionID").value;
+    var presID = document.getElementById("EditPrescriptionID").textContent;
     await getPrescription(presID);
     document.getElementById("WeightPrescriptionID").innerHTML = presID;
     getPrescriptionCompList(presID, productBatchID);
     //document.getElementById("WeightPrescriptionName").innerHTML = ;
 }
 
-async function getPrescriptionCompList(prescriptionID, productBatchID) {
+function getPrescriptionCompList(prescriptionID, productBatchID) {
 
-    await $.ajax ( {
+    $.ajax ( {
         url: "https://api.mama.sh/PrescriptionComp/" + prescriptionID,
         contentType: "application/json",
         type: "GET",
@@ -686,7 +686,7 @@ async function getPrescriptionCompList(prescriptionID, productBatchID) {
     });
 }
 
-async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchID) {
+function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchID) {
     var commoditybatchList = document.getElementById("WeightCommodityBatchList");
     var isShown = "none";
 
@@ -723,7 +723,7 @@ async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchI
                                 + '<button style="display: ' + isShown +';" id="WeightSubmitBtn' + number +'" onclick="CreateProductBatchComp('+ PrescriptionComp.commodity_id+',' + number + ');"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
                                 + '</div>';
     
-    await UpdateToSubmitedProductBatchComp(productBatchID, PrescriptionComp.commodity_id, number);
+    UpdateToSubmitedProductBatchComp(productBatchID, PrescriptionComp.commodity_id, number);
 }
 
 async function CreateProductBatchComp(commodityID, number) {
@@ -754,7 +754,7 @@ async function CreateProductBatchComp(commodityID, number) {
     if (minWeightTolerance < productbatchcomp.netto && maxWeightTolerance > productbatchcomp.netto) {
         console.log("Netto weight: good to go");
         
-        await $.ajax ({
+       await $.ajax ({
             url: "https://api.mama.sh/productbatchcomp",
             contentType: "application/json",
             type: "POST",
@@ -772,7 +772,7 @@ async function CreateProductBatchComp(commodityID, number) {
     
         console.log("Not skipped!");
         
-        await UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
+        UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
         
     }
     else {
@@ -783,11 +783,11 @@ async function CreateProductBatchComp(commodityID, number) {
 
 }
 
-async function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
+function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
     
     console.log("starting update");
     
-    await $.ajax ({
+    $.ajax ({
         url: "https://api.mama.sh/productbatchcomp/component?productBatchId=" + productBatchID + "&commodityBatchId=" + commodityID,
         contentType: "application/json",
         type: "GET",
@@ -797,52 +797,53 @@ async function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,numbe
             document.getElementById("WeightLineBatch" + number).innerHTML = response.commodityBatch_id;
             document.getElementById("WeightLineOpr" + number).innerHTML = response.user_id;
             document.getElementById("WeightLineTerminal" + number).innerHTML = 1;
+
+
+            // show and hide button stuff 
+                console.log("started to show BTN");
+                document.getElementById("WeightSubmitBtn" + number).style.display = "none";
+                console.log("End og BTN")
+                    // end of document ready
+        
+            // test for last button
+             try {
+                document.getElementById("WeightSubmitBtn" + (number + 1)).style.display = "block";
+            }
+            catch { // end of commodity to productbatch
+                console.log ("done!");
+        
+                // get all netto and tara weight
+                var weightNettoTotal = 0;
+                var weightTaraTotal = 0;
             
+                for (let index = 1; index <= number; index++) {
+                    // test stuff
+                    console.log(Number($('#WeightLineTara' + index).html()));
+                    console.log($('#WeightLineTara' + index).html());
+                    console.log(Number($('#WeightLineNetto' + index).html()));
+                    console.log($('#WeightLineNetto' + index).html());
+        
+                    weightTaraTotal += Number($('#WeightLineTara' + index).html());
+        
+                    weightNettoTotal += Number($('#WeightLineNetto' + index).html());
+                }
+                console.log('Tara Total: ' + weightTaraTotal + ', Netto Total: ' + weightNettoTotal);
+                
+                // print to screen
+                $('#WeightSumTara').html(weightTaraTotal);
+                $('#WeightSumNetto').html(weightNettoTotal);
+        
+                // update status to "Afsluttet" and update end date
+            }
         },
         error: function (jqXHR, text, error) {
           //  alert(jqXHR.status + text + error);
             console.log("Doenst exit in database");
         }
-    });
+ 
 
         
-    $( document ).ready(function() {
-        console.log("started to show BTN");
-        document.getElementById("WeightSubmitBtn" + number).style.display = "none";
-        console.log("End og BTN")
-            // end of document ready
-    });
 
-    $( document ).ready(function() {
-     try {
-        document.getElementById("WeightSubmitBtn" + (number + 1)).style.display = "block";
-    }
-    catch { // end of commodity to productbatch
-        console.log ("done!");
-
-        // get all netto and tara weight
-        var weightNettoTotal = 0;
-        var weightTaraTotal = 0;
-    
-        for (let index = 1; index <= number; index++) {
-            // test stuff
-            console.log(Number($('#WeightLineTara' + index).html()));
-            console.log($('#WeightLineTara' + index).html());
-            console.log(Number($('#WeightLineNetto' + index).html()));
-            console.log($('#WeightLineNetto' + index).html());
-
-            weightTaraTotal += Number($('#WeightLineTara' + index).html());
-
-            weightNettoTotal += Number($('#WeightLineNetto' + index).html());
-        }
-        console.log('Tara Total: ' + weightTaraTotal + ', Netto Total: ' + weightNettoTotal);
-        
-        // print to screen
-        $('#WeightSumTara').html(weightTaraTotal);
-        $('#WeightSumNetto').html(weightNettoTotal);
-
-        // update status to "Afsluttet" and update end date
-    }
          // end of document ready
         });
 }
