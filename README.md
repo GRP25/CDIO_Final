@@ -2,7 +2,6 @@
 ## Styling den 23-06-2020
 * Alert og succes functioner
 * Mere validering
-* Lav en loader/Copy pase fra CDIO 2
 * Terminal skal være mellem 1-3
 * Generelt ploish af tabeller
 * Bedre flow
