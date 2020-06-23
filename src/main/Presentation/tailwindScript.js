@@ -38,7 +38,7 @@ function listCommodities() {
 					<span class="commodity-id float-left"> ${item.commodity_id}</span>
 					<div class="flex inline-block justify-end px-2 ">
 								<button
-									class="modal-open bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 mx-2 rounded float-right" onClick="getCommodity(${item.commodity_id})">vis</button>
+									class="modal-open bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 mx-2 rounded float-right" onClick="getCommodity(${item.commodity_id});toggleModal();">vis</button>
 								<button
 									class="bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 mx-2 rounded float-right">slet</button>
 							</div>
@@ -357,6 +357,7 @@ function updatePrescriptionComp() {
 		success: function (response) {
 			$("#loaderID").hide();
 			toggleModal();
+			listPrescriptionComp();
 			alert("Update successfull");
 		},
 		error: function (response) {
@@ -384,6 +385,7 @@ function createPrescriptionComp() {
 		success: function (response) {
 			$("#loaderID").hide();
 			toggleModal();
+			listPrescriptionComp();
 			alert("Create successfull");
 		},
 		error: function (response) {
@@ -690,11 +692,11 @@ function inactiveUser(id, state) {
 	}
 }
 
-function getCommodity(id) {
+async function getCommodity(id) {
 	$("#loaderID").show();
 	console.log("getuser Started");
 	createCommodityModal("updateCommodity()");
-	$.ajax({
+	await $.ajax({
 		url: `https://api.mama.sh/commodity/${id}`,
 		contentType: "application/json",
 		method: "GET",
@@ -702,7 +704,7 @@ function getCommodity(id) {
 			$("#loaderID").hide();
 			console.log("Hej");
 			console.log(response.commodity_Name);
-			toggleModal();
+			//toggleModal();
 			$("#showRåvareNavn").val(response.commodity_Name);
 			$("#showRåvareId").val(response.commodity_id);
 
@@ -933,6 +935,7 @@ function CreateProductBatch() {
 		data: JSON.stringify(productBatch),
 		success: function (response) {
 			$("#loaderID").hide();
+			getProductBatchList();
 			alert("Product Batch Oprettet");
 		},
 		error: function (data, text, error) {
@@ -1099,7 +1102,7 @@ function getProductBatchCompList() {
 
 function getOneProductBatchComp(CommodityID, ProductBatchID) {
 	$("#loaderID").show();
-	productBatchCompModal("updateProductBatchComp()")
+	productBatchCompModal("updateProductBatchComp()");
 	$.ajax({
 		url: "https://api.mama.sh/productbatchcomp/component?productBatchId=" + ProductBatchID + "&commodityBatchId=" + CommodityID,
 		contentType: "application/json",
@@ -1301,6 +1304,7 @@ function getCommodityBatch(commodityBatch_id) {
 			$('#commodity_id-input').val(response.commodity_id);
 			$('#weight-input').val(response.weight);
 			$('#supplier-input').val(response.supplier)
+			
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
@@ -1336,6 +1340,7 @@ function updateCommodityBatch(commodityBatch_id) {
 		data: JSON.stringify(element),
 		success: function (response) {
 			$("#loaderID").hide();
+			getCommodityBatchList();
 			alert(JSON.stringify(response))
 		},
 		error: function (jqXHR, textStatus, error) {
@@ -1532,17 +1537,25 @@ async function CreateProductBatchComp(commodityID, number) {
 
 }
 
-function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchID) {
+async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchID) {
 	var commoditybatchList = document.getElementById("WeightCommodityBatchList");
 	var isShown = "none";
+	
+	
+	await getCommodity(PrescriptionComp.commodity_id);
+	
+	
+	
 
 	if (number == 1) {
 		isShown = "block";
 	}
 
+	var commodityName = $("#showRåvareNavn").val();
+
 	commoditybatchList.innerHTML += '<div > '
 		+ ' <h5>Råvare nr: <label id="WeightCommodityID">'+ PrescriptionComp.commodity_id+'</label></h5> '
-		+ '<h5>Råvare Navn: <label>Implement commodity name</label></h5> '
+		+ '<h5>Råvare Navn: ' + commodityName + '</h5> '
 		+ ' <table id="ListOfProductBatchTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white"> '
 		+ ' <tr> '
 		+ '<td>Del</td> '
@@ -1569,7 +1582,10 @@ function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchID) {
 		+ '<button style="display: ' + isShown +';" id="WeightSubmitBtn' + number +'" class="button" onclick="CreateProductBatchComp('+ PrescriptionComp.commodity_id+',' + number + ');"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
 		+ '</div> <br/>';
 
+		
+		//$(document).ready( function () {toggleModal();});
 	UpdateToSubmitedProductBatchComp(productBatchID, PrescriptionComp.commodity_id, number);
+
 }
 
 function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
@@ -1590,7 +1606,7 @@ function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
 
 			// show and hide button stuff
 			console.log("started to show BTN");
-			document.getElementById("WeightSubmitBtn" + number).style.display = "none";
+			$("#WeightSubmitBtn" + number).hide();
 			console.log("End og BTN")
 			// end of document ready
 
@@ -1658,7 +1674,7 @@ function getPrescriptionCompList(prescriptionID, productBatchID) {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error);
+			console.log(jqXHR.status + text + error);
 		}
 	});
 }
@@ -1805,7 +1821,7 @@ function updateProductBatchToFinish() {
 			},
 			error: function (data, text, error) {
 				$("#loaderID").hide();
-				alert("fejl: Produkt Batch ikke opdateres");
+				console.log("fejl: Produkt Batch ikke opdateres");
 			}
 	
 		});
