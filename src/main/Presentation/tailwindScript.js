@@ -1338,13 +1338,16 @@ async function openProductBatch() {
 	//$("#EditProductBatchWindow").hide();
 
 	// Get status for productbatch
+	
 	var productBatchStatus;
-	if ($("#InputStatusBegin").is(`:checked`))
+	/*if ($("#InputStatusBegin").is(`:checked`))
 		productBatchStatus = "Startet";
 	else if ($("#InputstatusProgress").is(`:checked`))
 		productBatchStatus = "Underproduktion";
 	else
-		productBatchStatus = "Afsluttet";
+		productBatchStatus = "Afsluttet";*/
+	productBatchStatus = $("#showInputStatus").text();
+	
 
 	// show productBatch information
 	document.getElementById("WeightSumTara").innerHTML = "";
@@ -1683,16 +1686,14 @@ function logout() {
 
 function updateProductBatchToFinish() {
 
-		productBatchStatus = 3;
-
 		var today = new Date();
 	
 		var productBatch = { 
 			prescription_id: $("#showPrescriptionId").val(),
 			productBatch_id: $("#ProductBatchToWeight").val(),
-			status: productBatchStatus,
-			startDate: "",
-			endDate: ""
+			status: 3,
+	//		startDate: 1,
+	//		endDate: 1
 		};
 	
 		$.ajax ({
