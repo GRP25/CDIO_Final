@@ -1,0 +1,758 @@
+{
+	"info": {
+		"_postman_id": "27e86ea5-f14e-411c-a7f5-eb743d7698c8",
+		"name": "CDIO_Final",
+		"description": "CDIO_FINAL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PrescriptionComp",
+			"item": [
+				{
+					"name": "Get component",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/PrescriptionComp/component?presID=1&comID=1",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"PrescriptionComp",
+								"component"
+							],
+							"query": [
+								{
+									"key": "presID",
+									"value": "1"
+								},
+								{
+									"key": "comID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get prescription component list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/PrescriptionComp",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"PrescriptionComp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Occurences of commodity in prescriptions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/PrescriptionComp/1",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"PrescriptionComp",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create prescription comp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prescription_id\": 2,\r\n    \"commodity_id\": 3,\r\n    \"nomNetto\": 1.0,\r\n    \"tolerance\": 5.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/PrescriptionComp",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"PrescriptionComp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prescription_id\": 2,\r\n    \"commodity_id\": 3,\r\n    \"nomNetto\": 10.0,\r\n    \"tolerance\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/PrescriptionComp",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"PrescriptionComp"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Prescriptions",
+			"item": [
+				{
+					"name": "Prescription",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/Prescriptions",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"Prescriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one prescription",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/Prescriptions/ID/1",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"Prescriptions",
+								"ID",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prescription_id\": 5,\r\n    \"prescription_name\": \"Kartoffler\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/Prescriptions",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"Prescriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"prescription_id\": 5,\r\n        \"prescription_name\": \"Syre\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/Prescriptions",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"Prescriptions"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ProductBatchs",
+			"item": [
+				{
+					"name": "product batch list (mangler date)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/ProductBatchs",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"ProductBatchs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one productBatch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/ProductBatchs/ID/1",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"ProductBatchs",
+								"ID",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create (mangler date)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"productBatch_id\": 4,\r\n        \"prescription_id\": 4,\r\n        \"status\": 3\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/ProductBatchs",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"ProductBatchs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"prescription_id\": 4,\r\n        \"status\": 2,\r\n        \"productBatch_id\": 4\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/ProductBatchs",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"ProductBatchs"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "productbatchcomp",
+			"item": [
+				{
+					"name": "productBatchComp list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/productbatchcomp",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"productbatchcomp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one productBatch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/productbatchcomp/ID/1",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"productbatchcomp",
+								"ID",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "productbatch component batch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/productbatchcomp/component?productBatchId=1&commodityBatchId=2",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"productbatchcomp",
+								"component"
+							],
+							"query": [
+								{
+									"key": "productBatchId",
+									"value": "1"
+								},
+								{
+									"key": "commodityBatchId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"productBatch_id\": 1,\r\n        \"commodity_id\": 2,\r\n        \"user_id\": 1,\r\n        \"tara\": 4.0,\r\n        \"netto\": 7.7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/productbatchcomp",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"productbatchcomp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"productBatch_id\": 4,\r\n        \"commodity_id\": 1,\r\n        \"user_id\": 1,\r\n        \"tara\": 4.0,\r\n        \"netto\": 8.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/productbatchcomp",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"productbatchcomp"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "commodity",
+			"item": [
+				{
+					"name": "commodity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/commodity",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"commodity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create commodity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commodity_id\": 3,\r\n    \"commodity_Name\": \"C\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/commodity",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"commodity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update commodity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commodity_id\": 3,\r\n    \"commodity_Name\": \"D\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/commodity",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"commodity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one commodity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/commodity/1",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"commodity",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "commodityBatch",
+			"item": [
+				{
+					"name": "commoditybatch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/commodityBatch",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"commodityBatch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one commoditybatch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/commodityBatch/1",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"commodityBatch",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commodityBatch_id\": 4,\r\n    \"commodity_id\": 1,\r\n    \"supplier\": \"Hej\",\r\n    \"weight\": 2.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/commodityBatch",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"commodityBatch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commodityBatch_id\": 5,\r\n    \"commodity_id\": 2,\r\n    \"supplier\": \"Styrbæk\",\r\n    \"weight\": 54.1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/commodityBatch",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"commodityBatch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "commodity list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/commodityBatch/list/2",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"commodityBatch",
+								"list",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "userresource",
+			"item": [
+				{
+					"name": "user list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/userresource",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"userresource"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/userresource/1",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"userresource",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deactivate user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{mama.sh}}/userresource/3",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"userresource",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"firstName\": \"Thomas\",\r\n        \"surname\": \"Hohnen\",\r\n        \"cpr\": \"0611930771\",\r\n        \"initials\": \"TH\",\r\n        \"roles\": [\r\n            \"Laborant\",\r\n            \"Produktionsleder\"\r\n        ],\r\n        \"status\": 1\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/userresource",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"userresource"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"userID\": 3,\r\n        \"firstName\": \"Daniel\",\r\n        \"surname\": \"Styrbæk\",\r\n        \"cpr\": \"0611930771\",\r\n        \"initials\": \"TH\",\r\n        \"roles\": [\r\n            \"Laborant\",\r\n            \"Admin\",\r\n            \"Produktionsleder\"\r\n        ],\r\n        \"status\": 1\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mama.sh}}/userresource",
+							"host": [
+								"{{mama.sh}}"
+							],
+							"path": [
+								"userresource"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
