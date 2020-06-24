@@ -57,7 +57,7 @@ function listCommodities() {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error + "Liste ikke indlæst rigtigt");
+			alert(error.responseJSON.message);
 		},
 	})
 };
@@ -137,7 +137,7 @@ function listPrescriptions() {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error +"Liste ikke indlæst rigtigt");
+			alert(error.responseJSON.message);
 		},
 	})
 }
@@ -176,34 +176,12 @@ function listPrescriptionComp() {
 		},
 		error: function (jqXHR, text, error) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error +"Liste ikke indlæst rigtigt");
+			alert(error.responseJSON.message);
 		},
 	})
 }
 
-async function getPrescription(id) {
-	$("#loaderID").show();
-	createPrescriptionModal("updatePrescription()");
 
-	await $.ajax({
-		url: `https://api.mama.sh/Prescriptions/ID/${id}`,
-		contentType: "application/json",
-		method: "GET",
-		success: function (response) {
-			$("#loaderID").hide();
-			$("#showPrescriptionName").val(response.prescription_name);
-			$("#showPrescriptionId").val(response.prescription_id);
-			applyModal();
-
-			$("#WeightPrescriptionName").text(response.prescription_name);
-
-		},
-		error: function (response) {
-			$("#loaderID").hide();
-			alert("Recept ikke hentet prøv et andet ID")
-		}
-	})
-}
 
 function updatePrescription() {
 	$("#loaderID").show();
@@ -223,9 +201,10 @@ function updatePrescription() {
 			alert("Recept opdateret");
 			listPrescriptions();
 		},
-		error: function (response) {
+		error: function (error) {
 			$("#loaderID").hide();
-			alert("Recept ikke opdateret")
+			alert(error.responseJSON.message);
+
 		}
 	})
 }
@@ -312,7 +291,7 @@ function getPrescriptionComp(prescription_id, commodity_id) {
 		},
 		error: function (response) {
 			$("#loaderID").hide();
-			alert("Recept ikke hentet prøv et andet ID")
+			alert(response.responseJSON.message);
 		}
 	})
 }
@@ -337,7 +316,7 @@ function createPrescription() {
 		},
 		error: function (response) {
 			$("#loaderID").hide();
-			alert("Recept ikke lavet")
+			alert(response.responseJSON.message);
 		}
 	})
 }
@@ -365,7 +344,7 @@ function updatePrescriptionComp() {
 		},
 		error: function (response) {
 			$("#loaderID").hide();
-			alert("Recept komponent ikke opdateret");
+			alert(response.responseJSON.message);
 		}
 	});
 }
@@ -393,7 +372,7 @@ function createPrescriptionComp() {
 		},
 		error: function (response) {
 			$("#loaderID").hide();
-			alert("Recept komponent ikke lavet");
+			alert(response.responseJSON.message);
 		}
 	});
 }
@@ -418,9 +397,9 @@ function createCommodity() {
 			listCommodities()
 			alert("Råvare lavet")
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error + "Råvare ikke lavet");
+			alert(response.responseJSON.message);
 		},
 	});
 }
@@ -446,10 +425,10 @@ function updateCommodity() {
 			listCommodities();
 			alert("Råvare opdateret")
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			toggleModal();
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error +" Råvare ikke opdateret");
+			alert(response.responseJSON.message);
 		},
 	});
 }
@@ -494,9 +473,10 @@ function listUsers() {
 
 			$("#listOfUsersTable").show();
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error+"Brugere ikke hentet");
+			alert(response.responseJSON.message);
+
 		},
 	});
 
@@ -504,7 +484,7 @@ function listUsers() {
 
 function UserModal(funktion) {
 	$("#modal-title").text("Brugere");
-//	toggleModal();
+	//	toggleModal();
 	$("#modal-body").html("");
 	$("#modal-body").append(`<form>
 <label>Bruger ID:</label>
@@ -543,9 +523,9 @@ function UserModal(funktion) {
 
 }
 
-function createCommodityModal(funktion) {
+function createCommodityModal(funktion, hasModal) {
 	$("#modal-title").text("Råvare");
-	toggleModal()
+	if (hasModal) toggleModal()
 	$("#modal-body").html("");
 	$("#modal-body").append(`<form>
 			<label>Råvare Navn:</label>
@@ -585,9 +565,9 @@ async function getUser(id, showBox = true) {
 		method: "GET",
 		success: function (response) {
 			$("#loaderID").hide();
-	//		if (showBox === true) {
-	//			toggleModal();
-	//		}
+			//		if (showBox === true) {
+			//			toggleModal();
+			//		}
 			$("#ShowUserID").val(response.userID);
 			$("#ShowUserFirstName").val(response.firstName);
 			$("#ShowUserLastName").val(response.surname);
@@ -625,10 +605,11 @@ async function getUser(id, showBox = true) {
 			applyModal();
 			return response;
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
 			document.getElementById("loaderID").style.display = "none";
-			alert(jqXHR.status + text + error+"Bruger ikke hentet prøv et andet ID");
+			alert(response.responseJSON.message);
+
 		},
 	});
 
@@ -647,10 +628,10 @@ function inactiveUser(id, state) {
 				$("#loaderID").hide();
 				alert("Bruger er blevet inaktiv");
 			},
-			error: function (jqXHR, text, error) {
+			error: function (response) {
 				$("#loaderID").hide();
 				document.getElementById("loaderID").style.display = "none";
-				alert(jqXHR.status + text + error+" Bruger er ikke blevet inaktiv");
+				alert(response.responseJSON.message);
 			},
 		});
 	}
@@ -675,10 +656,10 @@ function inactiveUser(id, state) {
 				}
 				alert("Bruger er inaktiv");
 			},
-			error: function (jqXHR, text, error) {
+			error: function (response) {
 				$("#loaderID").hide();
 				document.getElementById("loaderID").style.display = "none";
-				alert(jqXHR.status + text + error +"Bruger ikke opdateret");
+				alert(response.responseJSON.message);
 			},
 		});
 		//let user = JSON.parse(bruger);
@@ -691,18 +672,19 @@ function inactiveUser(id, state) {
 			success: function (response) {
 				alert("Bruger opdateret");
 			},
-			error: function (data, text, error) {
-				alert("fejl: bruger ikke opdateret");
+			error: function (response) {
+
+				alert(response.responseJSON.message);
 			}
 
 		});
 	}
 }
 
-async function getCommodity(id) {
+async function getCommodity(id, hasModal = true) {
 	$("#loaderID").show();
 	console.log("getuser Started");
-	createCommodityModal("updateCommodity()");
+	createCommodityModal("updateCommodity()", hasModal);
 	await $.ajax({
 		url: `https://api.mama.sh/commodity/${id}`,
 		contentType: "application/json",
@@ -718,9 +700,9 @@ async function getCommodity(id) {
 			applyModal();
 
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error +" Råvare ikke hentet prøv et andet ID");
+			alert(response.responseJSON.message);
 		},
 	});
 }
@@ -808,16 +790,16 @@ function createUser() {
 		data: JSON.stringify(user),
 		success: function (response) {
 			$("#loaderID").hide();
-		//	alert("Bruger Oprettet");
+			//	alert("Bruger Oprettet");
 			console.log("Bruger oprettet");
 			listUsers();
 			toggleModal();
 			alert("Bruger oprettet")
-			
+
 		},
-		error: function (data, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert("Bruger ikke oprettet");
+			alert(response.responseJSON.message);
 		}
 
 	});
@@ -836,9 +818,9 @@ function sendUpdateToServer(user) {
 			toggleModal();
 			alert("Bruger Opdateret");
 		},
-		error: function (data, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert("Bruger ikke opdateret");
+			alert(response.responseJSON.message);
 		}
 
 	});
@@ -946,9 +928,9 @@ function CreateProductBatch() {
 			getProductBatchList();
 			alert("Product Batch Oprettet");
 		},
-		error: function (data, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert("Product Batch ikke oprettet");
+			alert(response.responseJSON.message);
 		}
 
 	});
@@ -984,53 +966,15 @@ function getProductBatchList() {
 
 			$("#ListOfProductBatchTable").show();
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
 			document.getElementById("loaderID").style.display = "none";
-			alert(jqXHR.status + text + error+"Produkt Batch liste ikke hentet");
+			alert(response.responseJSON.message);
 		}
 	})
 }
 
-async function getProductBatch(id, hasToggleModal = true) {
-	$("#loaderID").show();
-	showProductModal(hasToggleModal);
-	console.log("getuser Started");
-	await $.ajax({
-		url: "https://api.mama.sh/ProductBatchs/ID/" + id,
-		contentType: "application/json",
-		method: "GET",
-		success: function (response) {
-			$("#loaderID").hide();
-			$("#showProductBatchID").text(response.productBatch_id);
-			$("#showPrescriptionID").text(response.prescription_id);
 
-			$("#showStartDate").html(new Date(response.startDate).toDateString());
-			if (response.endDate <= 0) {
-				$("#showEndDate").html("")
-			} else {
-				$("#showEndDate").html(new Date(response.endDate).toDateString());
-
-			}
-
-			switch (response.status) {
-				case 1:
-					$("#showInputStatus").text("Oprettet");
-					break;
-				case 2:
-					$("#showInputStatus").text("Under Produktion");
-					break;
-				case 3:
-					$("#showInputStatus").text("Afsluttet");
-					break;
-			}
-		},
-		error: function (jqXHR, text, error) {
-			$("#loaderID").hide();
-			alert(jqXHR.status + text + error+" Produkt Batch ikke hentet");
-		},
-	});
-}
 
 function productBatchCompModal(funktion) {
 	$("#modal-title").text("Produkt Batch Komponent");
@@ -1101,9 +1045,9 @@ function getProductBatchCompList() {
 
 			$("#listOfProductsCompTable").show();
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error+" Produkt Batch komponenter ikke hentet");
+			alert(response.responseJSON.message);
 		}
 	})
 }
@@ -1123,9 +1067,9 @@ function getOneProductBatchComp(CommodityID, ProductBatchID) {
 			$("#ViewTara").val(response.tara);
 			$("#ViewNetto").val(response.netto);
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error+"Produkt Batch komponent ikke hentet");
+			alert(response.responseJSON.message);
 		},
 	});
 }
@@ -1150,9 +1094,9 @@ function updateProductBatchComp() {
 			$("#loaderID").hide();
 			alert("Produkt Batch Comp Opdateret");
 		},
-		error: function (data, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert("Produkt Batch Comp ikke opdateret");
+			alert(response.responseJSON.message);
 		}
 
 	});
@@ -1214,9 +1158,9 @@ function getProductBatchCompListOneBatch() {
 
 			$("#listOfProductsCompTable").show();
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error+"Produkt Batch komponenter ikke hentet");
+			alert(response.responseJSON.message);
 		}
 	});
 }
@@ -1232,6 +1176,7 @@ function getCommodityBatchList() {
 		type: "GET",
 		success: function (response) {
 			$("#loaderID").hide();
+			$("#listOfCommodityBatchListTable").html("");
 			$("#listOfCommodityBatchTable").html("");
 			let html = `<thead>
 					<tr>
@@ -1254,9 +1199,9 @@ function getCommodityBatchList() {
 
 			$("#listOfCommodityBatchTable").show();
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error+" Råvare Batch liste ikke hentet");
+			alert(response.responseJSON.message);
 		}
 	});
 
@@ -1312,11 +1257,11 @@ function getCommodityBatch(commodityBatch_id) {
 			$('#commodity_id-input').val(response.commodity_id);
 			$('#weight-input').val(response.weight);
 			$('#supplier-input').val(response.supplier)
-			
+
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error +" Råvare Batch ikke hentet")
+			alert(response.responseJSON.message);
 		}
 	});
 
@@ -1351,9 +1296,9 @@ function updateCommodityBatch(commodityBatch_id) {
 			getCommodityBatchList();
 			alert(JSON.stringify(response))
 		},
-		error: function (jqXHR, textStatus, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert(jqXHR.responseText + textStatus + " Råvare Batch ikke opdateret ")
+			alert(response.responseJSON.message);
 		}
 	});
 }
@@ -1387,9 +1332,9 @@ function createCommodityBatch() {
 			// Display elements
 			getCommodityBatchList()
 		},
-		error: function (jqXHR, textStatus, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert(jqXHR.responseText + textStatus + "Råvare Batch ikke lavet")
+			alert(response.responseJSON.message);
 		}
 	});
 }
@@ -1406,6 +1351,8 @@ function getCommodityBatchListByCommodityId() {
 		success: function (response) {
 			$("#loaderID").hide();
 			$("#listOfCommodityBatchListTable").html("");
+			$("#listOfCommodityBatchTable").html("");
+
 			let html = `<thead>
 					<tr>
 					<th class="w-1/2 px-4 py-2">Råvare id</th>
@@ -1427,281 +1374,13 @@ function getCommodityBatchListByCommodityId() {
 			$("#listOfCommodityBatchListTable").show();
 
 		},
-		error: function (jqXHR, text, error) {
+		error: function (response) {
 			$("#loaderID").hide();
-			alert(jqXHR.status + text + error + " Råvare Batch liste ikke hentet");
+			alert(response.responseJSON.message);
 		}
 	});
 
 }
-
-
-async function openProductBatch() {
-	var productBatchID = $("#ProductBatchToWeight").val();
-	await getProductBatch(productBatchID, false);
-	//$("#EditProductBatchWindow").hide();
-
-	// Get status for productbatch
-	
-	var productBatchStatus;
-	/*if ($("#InputStatusBegin").is(`:checked`))
-		productBatchStatus = "Startet";
-	else if ($("#InputstatusProgress").is(`:checked`))
-		productBatchStatus = "Underproduktion";
-	else
-		productBatchStatus = "Afsluttet";*/
-	productBatchStatus = $("#showInputStatus").text();
-	
-
-	// show productBatch information
-	document.getElementById("WeightSumTara").innerHTML = "";
-	document.getElementById("WeightSumNetto").innerHTML = "";
-	document.getElementById("WeightProductBatchStatus").innerHTML = productBatchStatus;
-	document.getElementById("WeightProductBatchStartDate").innerHTML = document.getElementById("showStartDate").innerHTML;
-	document.getElementById("WeightProductBatchEndDate").innerHTML = document.getElementById("showEndDate").innerHTML;
-
-	var presID = $("#showPrescriptionID").html();
-	weightPriscriptiuonID = presID;
-	await getPrescription(presID);
-	$("#WeightPrescriptionID").html(presID);
-	getPrescriptionCompList(presID, productBatchID);
-	//document.getElementById("WeightPrescriptionName").innerHTML = ;
-}
-
-function WeightPrint() {
-	// 2 linjer taget fra nettet "https://tecadmin.net/get-current-date-time-javascript/"
-	var today = new Date();
-	var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
-	$("#PrintDate").html("Udskrevet: " + date);
-	$("#PrintDate").show();
-	$("#OpenProductBtn").hide();
-	$("#PrintBtn").hide();
-
-	window.print();
-
-
-	$("#PrintDate").hide();
-	$("#OpenProductBtn").show();
-	$("#PrintBtn").show();
-}
-
-async function CreateProductBatchComp(commodityID, number) {
-	$("#loaderID").show();
-	// work in progress
-	var productBatchID = $('#ProductBatchToWeight').val();
-
-	var productbatchcomp = {
-		productBatch_id: productBatchID,
-		commodityBatch_id: commodityID, //$('#WeightCommodityID').val(),
-		user_id: userobject.userID, // add current user
-		tara: $("#WeightTara" + commodityID).val(),
-		netto: $("#WeightNetto" + commodityID).val(),
-	};
-
-	// setup for weight tolerance
-	var weightLineNonNetto = $('#WeightLineNonNetto' + number).html();
-	var WeightLineTolerance = $('#WeightLineTolerance' + number).html();
-	console.log(weightLineNonNetto + ', ' + WeightLineTolerance);
-
-	// get the tollance weight
-	let minWeightTolerance = weightLineNonNetto * (1- (WeightLineTolerance/100));
-	let maxWeightTolerance = weightLineNonNetto * (1+ (WeightLineTolerance/100));
-
-	// test for variable
-	console.log(minWeightTolerance + ' , ' + maxWeightTolerance);
-
-	// test if weight is acceptable
-	if (minWeightTolerance < productbatchcomp.netto && maxWeightTolerance > productbatchcomp.netto) {
-		console.log("Netto weight: good to go");
-
-		await $.ajax ({
-			url: "https://api.mama.sh/productbatchcomp",
-			contentType: "application/json",
-			type: "POST",
-			data : JSON.stringify(productbatchcomp),
-			success : function (response) {
-				$("#loaderID").hide();
-				alert("ProductBatch Comp has been added");
-			},
-			error: function (jqXHR, text, error) {
-				$("#loaderID").hide();
-				alert(jqXHR.status + text + error);
-				console.log(productbatchcomp);
-
-			}
-
-		});
-
-		console.log("Not skipped!");
-
-		UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
-
-	}
-	else {
-		$("#loaderID").hide();
-		alert("Netto vægt ikke inden for tolerancen");
-		console.log("Netto weight: not accepted");
-	}
-
-
-}
-
-async function ShowPrescriptionCompToLab(PrescriptionComp, number, productBatchID) {
-	var commoditybatchList = document.getElementById("WeightCommodityBatchList");
-	var isShown = "none";
-	
-	
-	await getCommodity(PrescriptionComp.commodity_id);
-	
-	if (number == 1) {
-		isShown = "block";
-	}
-
-	var commodityName = $("#showRåvareNavn").val();
-
-	commoditybatchList.innerHTML += '<div > '
-		+ ' <h5>Råvare nr: <label id="WeightCommodityID">'+ PrescriptionComp.commodity_id+'</label></h5> '
-		+ '<h5>Råvare Navn: ' + commodityName + '</h5> '
-		+ ' <table id="ListOfProductBatchTable" class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white"> '
-		+ ' <tr> '
-		+ '<td>Del</td> '
-		+ '<td>Mængde</td>'
-		+ '<td>Tolerance</td>'
-		+ '<td>Tara</td>'
-		+ '<td>Netto (kg)</td>'
-		+ '<td>Batch</td>'
-		+ '<td>Opr</td>'
-		+ '<td>Terminal</td>'
-		+ '</tr>'
-		+ '<tr >'
-		+ '<td>1</td>'
-		+ '<td id="WeightLineNonNetto' + number + '">' + PrescriptionComp.nomNetto +'</td>'
-		+ '<td id="WeightLineTolerance' + number + '">' + PrescriptionComp.tolerance + '</td>'
-		+ '<td id="WeightLineTara' + number + '"><input type="text" id="WeightTara' + PrescriptionComp.commodity_id +'"></input></td>'
-		+ '<td id="WeightLineNetto' + number + '"><input type="text" id="WeightNetto' + PrescriptionComp.commodity_id + '"></input></td>'
-		+ '<td id="WeightLineBatch' + number + '"><input type="text"></input></td>'
-		+ '<td id="WeightLineOpr' + number + '">' + userobject.userID + '</input></td>'
-		+ '<td id="WeightLineTerminal' + number + '">1</td>'
-		+ '</tr>'
-		+ '</table>'
-		+ '<br>'
-		+ '<button style="display: ' + isShown +';" id="WeightSubmitBtn' + number +'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onclick="CreateProductBatchComp('+ PrescriptionComp.commodity_id+',' + number + ');"> submit Råvare: ' + PrescriptionComp.commodity_id + '</button>'
-		+ '</div> <br/>';
-
-		
-		//$(document).ready( function () {toggleModal();});
-	UpdateToSubmitedProductBatchComp(productBatchID, PrescriptionComp.commodity_id, number);
-
-}
-
-function UpdateToSubmitedProductBatchComp(productBatchID,commodityID,number) {
-	$("#loaderID").show();
-	console.log("starting update");
-
-	$.ajax ({
-		url: "https://api.mama.sh/productbatchcomp/component?productBatchId=" + productBatchID + "&commodityBatchId=" + commodityID,
-		contentType: "application/json",
-		type: "GET",
-		success : function (response) {
-			
-			//const promise1 = new Promise((resolve, reject) => {
-				$("#WeightLineTara" + number).html(response.tara);
-			$("#WeightLineNetto" + number).html(response.netto);
-			$("#WeightLineBatch" + number).html(response.commodityBatch_id);
-			$("#WeightLineOpr" + number).html(response.user_id);
-			$("#WeightLineTerminal" + number).html(1);
-			 // });
-			
-
-		//	promise1.then((value) => {
-			$(document).ready( function () {
-				
-			
-			// show and hide button stuff
-			console.log("started to show BTN");
-			$('#WeightSubmitBtn' + number).hide();
-			console.log("End og BTN")
-			// end of document ready
-
-			// test for last button
-			try {
-				document.getElementById("WeightSubmitBtn" + (number + 1)).style.display = "block";
-			}
-			catch { // end of commodity to productbatch
-				console.log ("done!");
-				
-				while ($('#WeightLineTara' + number).html() != Number(response.tara)) {
-					// test stuff
-					// end of while loop
-					console.log("while loop");
-				}
-			
-				// get all netto and tara weight
-				var weightNettoTotal = 0;
-				var weightTaraTotal = 0;
-				
-				for (let index = 1; index <= number; index++) {
-					
-					//sleep(500);
-					console.log(Number($('#WeightLineTara' + index).html()));
-					console.log($('#WeightLineTara' + index).html());
-					console.log(Number($('#WeightLineNetto' + index).html()));
-					console.log($('#WeightLineNetto' + index).html());
-
-					weightTaraTotal += Number($('#WeightLineTara' + index).html());
-
-					weightNettoTotal += Number($('#WeightLineNetto' + index).html());
-				}
-				console.log('Tara Total: ' + weightTaraTotal + ', Netto Total: ' + weightNettoTotal);
-
-				// print to screen
-				$('#WeightSumTara').html(weightTaraTotal);
-				$('#WeightSumNetto').html(weightNettoTotal);
-				
-				// update status to "Afsluttet" and update end date
-				updateProductBatchToFinish();
-				$("#loaderID").hide();
-			}
-		});
-	//	});
-		},
-		error: function (jqXHR, text, error) {
-			$("#loaderID").hide();
-			//  alert(jqXHR.status + text + error);
-			console.log("Doenst exit in database");
-		}
-
-
-
-
-		// end of document ready
-	});
-}
-
-async function getPrescriptionCompList(prescriptionID, productBatchID) {
-	$("#loaderID").show();
-	await $.ajax ( {
-		url: "https://api.mama.sh/PrescriptionComp/" + prescriptionID,
-		contentType: "application/json",
-		type: "GET",
-		success: function (response) {
-			$("#loaderID").hide();
-			var number = 0;
-			document.getElementById("WeightCommodityBatchList").innerHTML = "";
-			response.forEach(prescriptionComp => {
-				number++;
-				ShowPrescriptionCompToLab(prescriptionComp, number, productBatchID);
-
-			})
-		},
-		error: function (jqXHR, text, error) {
-			$("#loaderID").hide();
-			console.log(jqXHR.status + text + error);
-		}
-	});
-}
-
 
 async function login() {
 
@@ -1734,7 +1413,7 @@ async function login() {
 		// set user status
 
 		userID: $("#ShowUserID").val(),
-		firstName: 	$("#ShowUserFirstName").val(),
+		firstName: $("#ShowUserFirstName").val(),
 		surname: $("#ShowUserLastName").val(),
 		cpr: $("#ShowUserCPR").val(),
 		initials: $("#ShowUserIniTxt").val(),
@@ -1745,7 +1424,7 @@ async function login() {
 	};
 	//$("#userIDInsert").content = $("#ShowUserID").value;
 	console.log(userobject);
-	
+
 	// console.log("ready function");
 	if (!($("#ShowUserID").val() === "") && $("#ShowUserStatus").is(':checked')) {
 		console.log("du kan logge ind");
@@ -1816,42 +1495,417 @@ function logout() {
 	$("#ProductBatchPortal").show();
 	$("#WeightPortal").show();
 
-//	$("#logoutBtn").show();
+	//	$("#logoutBtn").show();
 }
 // setTimeout(
-
-function updateProductBatchToFinish() {
+async function getPrescription(id) {
 	$("#loaderID").show();
+	createPrescriptionModal("updatePrescription()");
 
-		var today = new Date();
-	
-		var productBatch = { 
-			prescription_id: weightPriscriptiuonID, // $("#showPrescriptionID").val(),
-			productBatch_id: $("#ProductBatchToWeight").val(),
-			status: 3,
-	//		startDate: 1,
-	//		endDate: 1
-		};
-	
-		$.ajax ({
-			url: "https://api.mama.sh/ProductBatchs",
-			contentType: "application/json",
-			method: "PUT",
-			data: JSON.stringify(productBatch),
-			success: function (response) {
-				$("#loaderID").hide();
-				// getProductBatch(productBatch.productBatch_id, false);
-				//$("#WeightProductBatchStartDate").html($("#showStartDate").html());
-				//$("#WeightProductBatchEndDate").html( $("#showEndDate").html());
-			},
-			error: function (data, text, error) {
-				$("#loaderID").hide();
-				console.log("fejl: Produkt Batch ikke opdateres");
+	await $.ajax({
+		url: `https://api.mama.sh/Prescriptions/ID/${id}`,
+		contentType: "application/json",
+		method: "GET",
+		success: function (response) {
+			$("#loaderID").hide();
+			$("#showPrescriptionName").val(response.prescription_name);
+			$("#showPrescriptionId").val(response.prescription_id);
+			applyModal();
+
+			$("#WeightPrescriptionName").text(response.prescription_name);
+
+		},
+		error: function (response) {
+			$("#loaderID").hide();
+			alert(response.responseJSON.message);
+		}
+	})
+}
+
+async function getProductBatch(id, hasToggleModal = true) {
+	$("#loaderID").show();
+	showProductModal(hasToggleModal);
+	await $.ajax({
+		url: "https://api.mama.sh/ProductBatchs/ID/" + id,
+		contentType: "application/json",
+		method: "GET",
+		success: function (response) {
+			$("#loaderID").hide();
+			$("#showProductBatchID").text(response.productBatch_id);
+			$("#showPrescriptionID").text(response.prescription_id);
+
+			$("#showStartDate").html(new Date(response.startDate).toDateString());
+			if (response.endDate <= 0) {
+				$("#showEndDate").html("")
+			} else {
+				$("#showEndDate").html(new Date(response.endDate).toDateString());
+
 			}
-	
-		});
+
+			switch (response.status) {
+				case 1:
+					$("#showInputStatus").text("Oprettet");
+					break;
+				case 2:
+					$("#showInputStatus").text("Under Produktion");
+					break;
+				case 3:
+					$("#showInputStatus").text("Afsluttet");
+					break;
+			}
+		},
+		error: function (response) {
+			$("#loaderID").hide();
+			alert(response.responseJSON.message);
+		},
+	});
 }
 
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
-  }
+}
+
+function WeightPrint() {
+	// 2 linjer taget fra nettet "https://tecadmin.net/get-current-date-time-javascript/"
+	var today = new Date();
+	var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+	$("#PrintDate").html("Udskrevet: " + date);
+	$("#PrintDate").show();
+	$("#OpenProductBtn").hide();
+	$("#PrintBtn").hide();
+	$("#finishBtn").hide();
+	$("#inputProductBatchID").hide();
+	$("#ProductBatchToWeight").hide();
+
+
+	window.print();
+
+
+	$("#PrintDate").hide();
+	$("#OpenProductBtn").show();
+	$("#PrintBtn").show();
+	$("#finishBtn").show();
+	$("#inputProductBatchID").show();
+	$("#ProductBatchToWeight").show();
+}
+
+async function openProductBatch() {
+	var productBatchID = $("#ProductBatchToWeight").val();
+	await getProductBatch(productBatchID, false);
+
+	//This is dumb do in one line instead
+	var productBatchStatus = $("#showInputStatus").text();
+
+
+
+	$("#WeightSumTara").html("");
+	$("#WeightSumNetto").html("");
+	$("#WeightProductBatchStatus").html(productBatchStatus);
+	$("#WeightProductBatchStartDate").html($("#showStartDate").html());
+	$("#WeightProductBatchEndDate").html($("#showEndDate").html());
+
+	var presID = $("#showPrescriptionID").html();
+	await getPrescription(presID);
+	var presName = $("#showPrescriptionName").val();
+	console.log("PRESNAME: " + presName);
+	console.log("PRESID: " + presID);
+	console.log($("#showPrescriptionName").html());
+	console.log($("#showPrescriptionName").text());
+	console.log($("#showPrescriptionName").val());
+
+	weightPriscriptiuonID = presID;
+	$("#WeightPrescriptionID").html(presID);
+	$("#WeightPrescriptionName").html(presName);
+	$("#WeightPrescriptionNummer").html(productBatchID);
+	let list = await getPrescriptionCompList(presID, productBatchID);
+	console.log("outside: " + list);
+	setupCommodityTable(list, productBatchID);
+
+
+}
+
+async function setupCommodityTable(list, productBatchID) {
+	//maybe list.entries()
+	let index = 1;
+	for (const element of list) {
+		const id = element.commodity_id
+		await getCommodity(element.commodity_id, false);
+		const commidityName = $('#showRåvareNavn').val();
+		let html =
+			`<h5>Råvare nr: <label id="WeightCommodityID"> ${id}</label></h5>
+		<h5>Råvare navn: ${commidityName}</h5>
+		<table class="table-fixed w-full mx-auto">
+			<thead>
+				<tr>
+					<th>Del</th>
+					<th>Mængde</th>
+					<th>Tolerance</th>
+					<th>Tara</th>
+					<th>Netto</th>
+					<th>Batch</th>
+					<th>Opr</th>
+					<th>Terminal</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="bg-gray-200">
+				<td>1</td>
+		 			<td id="WeightLineNonNetto${index}">${element.nomNetto}</td>
+		 			<td id="WeightLineTolerance${index}">${element.tolerance}</td>
+		 			<td id="WeightLineTara${index}"><input type="text" id="WeightTara${element.commodity_id}"></input></td>
+		 			<td id="WeightLineNetto${index}"><input type="text" id="WeightNetto${element.commodity_id}"></input></td>
+		 			<td id="WeightLineBatch${index}"><input type="text"></input></td>
+		 			<td id="WeightLineOpr${index}">${userobject.userID}</td>
+		 			<td id="WeightLineTerminal${index}">1</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+			<button id="WeightSubmitBtn${index}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onclick="CreateProductBatchComp(${element.commodity_id},${index});"> submit Råvare: ${element.commodity_id}</button>
+		</br>`
+
+		$("#WeightCommodityBatchList").append(html);
+		UpdateToSubmitedProductBatchComp(productBatchID, id, index);
+		index++;
+	}
+}
+
+async function getPrescriptionCompList(presID, productBatchID) {
+	var list = [];
+
+	await $.ajax({
+		url: `https://api.mama.sh/PrescriptionComp/${presID}`,
+		contentType: "application/json",
+		type: "GET",
+		async: false,
+		success: function (response) {
+			$("#loaderID").hide();
+			$("#WeightCommodityBatchList").html("");
+
+			response.forEach((element) => {
+				console.log("number");
+				list.push(element);
+			})
+			console.log(list);
+
+		},
+		error: function (response) {
+			$("#loaderID").hide();
+			alert(response.responseJSON.message);
+		}
+	});
+
+	return list;
+
+}
+
+
+async function UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number) {
+	$("#loaderID").show();
+	console.log("starting update");
+
+	await $.ajax({
+		url: "https://api.mama.sh/productbatchcomp/component?productBatchId=" + productBatchID + "&commodityBatchId=" + commodityID,
+		contentType: "application/json",
+		type: "GET",
+		success: function (response) {
+			$("#loaderID").hide();
+
+			//const promise1 = new Promise((resolve, reject) => {
+			$("#WeightLineTara" + number).html(response.tara);
+			$("#WeightLineNetto" + number).html(response.netto);
+			$("#WeightLineBatch" + number).html(response.commodityBatch_id);
+			$("#WeightLineOpr" + number).html(response.user_id);
+			$("#WeightLineTerminal" + number).html(1);
+			// });
+
+
+			//	promise1.then((value) => {
+
+
+			// show and hide button stuff
+			console.log("started to show BTN");
+			$('#WeightSubmitBtn' + number).hide();
+			console.log("End og BTN")
+			// end of document ready
+
+			// test for last button
+			try {
+				document.getElementById("WeightSubmitBtn" + (number + 1)).style.display = "block";
+			}
+			catch { // end of commodity to productbatch
+				console.log("done!");
+
+				while ($('#WeightLineTara' + number).html() != Number(response.tara)) {
+					// test stuff
+					// end of while loop
+					console.log("while loop");
+				}
+			}
+
+			// get all netto and tara weight
+			sumTotal(number);
+
+			// update status to "Afsluttet" and update end date
+			//updateProductBatchToFinish();
+			$("#loaderID").hide();
+			//}
+
+			//	}); 
+		},
+		error: function (response) {
+			$("#loaderID").hide();
+			//alert(response.responseJSON.message);
+		}
+
+
+
+
+		// end of document ready
+	});
+}
+
+function sumTotal(number) {
+	console.log("Hello world");
+	var weightNettoTotal = 0;
+	var weightTaraTotal = 0;
+
+	for (let index = 1; index <= number; index++) {
+
+		console.log(index + "Dtara: " + Number($('#WeightLineTara' + index).html()));
+		console.log(index + "tara: " + $('#WeightLineTara' + index).html());
+		console.log(index + "DNetto: " + Number($('#WeightLineNetto' + index).html()));
+		console.log(index + "Netto: " + $('#WeightLineNetto' + index).html());
+
+		weightTaraTotal += Number($('#WeightLineTara' + index).html());
+
+		weightNettoTotal += Number($('#WeightLineNetto' + index).html());
+	}
+	console.log('Tara Total: ' + weightTaraTotal + ', Netto Total: ' + weightNettoTotal);
+
+	// print to screen
+	$('#WeightSumTara').text(weightTaraTotal);
+	$('#WeightSumNetto').text(weightNettoTotal);
+
+}
+
+async function CreateProductBatchComp(commodityID, number) {
+	$("#loaderID").show();
+	console.log("input" + commodityID, number);
+	// work in progress
+	var productBatchID = $('#ProductBatchToWeight').val();
+
+	var productbatchcomp = {
+		productBatch_id: productBatchID,
+		commodityBatch_id: commodityID, //$('#WeightCommodityID').val(),
+		user_id: userobject.userID, // add current user
+		tara: $(`#WeightTara${commodityID}`).val(),
+		netto: $(`#WeightNetto${commodityID}`).val(),
+	};
+
+	// setup for weight tolerance
+	var weightLineNonNetto = $('#WeightLineNonNetto' + number).html();
+	var WeightLineTolerance = $('#WeightLineTolerance' + number).html();
+	console.log(weightLineNonNetto + ', ' + WeightLineTolerance);
+
+	// get the tollance weight
+	let minWeightTolerance = weightLineNonNetto * (1 - (WeightLineTolerance / 100));
+	let maxWeightTolerance = weightLineNonNetto * (1 + (WeightLineTolerance / 100));
+
+	// test for variable
+	console.log(minWeightTolerance + ' , ' + maxWeightTolerance);
+	console.log(productbatchcomp.netto);
+
+	// test if weight is acceptable
+	if (minWeightTolerance < productbatchcomp.netto && maxWeightTolerance > productbatchcomp.netto) {
+		console.log("Netto weight: good to go");
+
+		await $.ajax({
+			url: "https://api.mama.sh/productbatchcomp",
+			contentType: "application/json",
+			type: "POST",
+			data: JSON.stringify(productbatchcomp),
+			success: function (response) {
+				$("#loaderID").hide();
+				alert("ProductBatch Comp has been added");
+			},
+			error: function (error) {
+				$("#loaderID").hide();
+				console.log(error);
+				alert(error.responseJSON.message);
+				console.log(productbatchcomp);
+
+			}
+
+		});
+
+		console.log("Not skipped!");
+
+		UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
+		updateProductBatchToProduction();
+
+	}
+	else {
+		$("#loaderID").hide();
+		alert("Netto vægt ikke inden for tolerancen");
+		console.log("Netto weight: not accepted");
+	}
+}
+
+function updateProductBatchToFinish() {
+	$("#loaderID").show();
+
+
+	var productBatch = {
+		prescription_id: $("#WeightPrescriptionID").html(), // $("#showPrescriptionID").val(),
+		productBatch_id: $("#ProductBatchToWeight").val(),
+		status: 3,
+		//		startDate: 1,
+		//		endDate: 1
+	};
+	console.log("presID, færdog" + productBatch.prescription_id);
+
+	$.ajax({
+		url: "https://api.mama.sh/ProductBatchs",
+		contentType: "application/json",
+		method: "PUT",
+		data: JSON.stringify(productBatch),
+		success: function (response) {
+			$("#loaderID").hide();
+		},
+		error: function (response) {
+			$("#loaderID").hide();
+			alert(response.responseJSON.message);
+			console.log("fejl: Produkt Batch ikke opdateres");
+		}
+
+	});
+}
+
+function updateProductBatchToProduction() {
+	$("#loaderID").show();
+
+
+	var productBatch = {
+		prescription_id: $("#WeightPrescriptionID").html(), // $("#showPrescriptionID").val(),
+		productBatch_id: $("#ProductBatchToWeight").val(),
+		status: 2,
+	};
+
+	$.ajax({
+		url: "https://api.mama.sh/ProductBatchs",
+		contentType: "application/json",
+		method: "PUT",
+		data: JSON.stringify(productBatch),
+		success: function (response) {
+			$("#loaderID").hide();
+		},
+		error: function (response) {
+			$("#loaderID").hide();
+			alert(response.responseJSON.message);
+			console.log("fejl: Produkt Batch ikke opdateres");
+		}
+
+	});
+}
