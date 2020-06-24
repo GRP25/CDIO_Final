@@ -17,6 +17,23 @@ var userobject;
 
 var weightPriscriptiuonID;
 
+function hideTable() {
+	// Bruger Administration
+	document.getElementById('listOfUsersTable').innerText = ''
+
+	// Råvare Administration
+	document.getElementById('listOfCommoditiestable').innerText = ''
+	document.getElementById('listOfPrescriptionsTable').innerText = ''
+	document.getElementById('listOfPrescriptionCompTable').innerText = ''
+
+	// Råvarebatch Administration
+	document.getElementById('listOfCommodityBatchTable').innerText = ''
+
+	// Produktbatch Administration
+	document.getElementById('ListOfProductBatchTable').innerText = ''
+	document.getElementById('listOfProductsCompTable').innerText = ''
+}
+
 function listCommodities() {
 	event.preventDefault();
 	$("#loaderID").show();
