@@ -23,7 +23,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response activateUser(@PathParam("userID") int userID) throws SQLException{
         validateUserId(userID);
-        SuccessMessage msg = new SuccessMessage("User succesfully activated", 3003, "https://mama.sh/");
+        SuccessMessage msg = new SuccessMessage("User succesfully activated", 3003, "http://backup.mama.sh/cdio/api/");
         userService.activateUser(userID);
         return Response.status(Response.Status.OK).entity(msg).build();
     }
@@ -41,7 +41,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateUser(UserDTO user) throws UserException, SQLException {
         userService.updateUser(user);
-        SuccessMessage msg = new SuccessMessage("Updated", 3000, "https://mama.sh/doc");
+        SuccessMessage msg = new SuccessMessage("Updated", 3000, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 
@@ -50,7 +50,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(UserDTO user) throws UserException, SQLException{
         userService.createUser(user);
-        SuccessMessage msg = new SuccessMessage("Created", 3001, "https://mama.sh/doc");
+        SuccessMessage msg = new SuccessMessage("Created", 3001, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 
@@ -59,7 +59,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteUser(@PathParam("userID") int userID) throws SQLException {
         userService.deleteUser(userID);
-        SuccessMessage msg = new SuccessMessage("Deactivated", 3002, "https://mama.sh/doc");
+        SuccessMessage msg = new SuccessMessage("Deactivated", 3002, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 

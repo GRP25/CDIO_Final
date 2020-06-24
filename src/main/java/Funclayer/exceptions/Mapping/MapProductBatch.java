@@ -11,7 +11,7 @@ import javax.ws.rs.ext.Provider;
 public class MapProductBatch implements ExceptionMapper<NotProductBatchExeption> {
     @Override
     public Response toResponse(NotProductBatchExeption e) {
-        ErrorMessage err = new ErrorMessage(e.getMessage(), 6100, "https://mama.sh/");
+        ErrorMessage err = new ErrorMessage(e.getMessage(), 6100, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.NOT_ACCEPTABLE).entity(err).build();
     }
 

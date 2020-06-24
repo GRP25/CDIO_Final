@@ -21,7 +21,7 @@ function listCommodities() {
 	event.preventDefault();
 	$("#loaderID").show();
 	$.ajax({
-		url: "https://api.mama.sh/commodity",
+		url: "http://backup.mama.sh/cdio/api/commodity",
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -98,7 +98,7 @@ function listPrescriptions() {
 	$("#loaderID").show();
 	event.preventDefault();
 	$.ajax({
-		url: "https://api.mama.sh/Prescriptions",
+		url: "http://backup.mama.sh/cdio/api/Prescriptions",
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -134,7 +134,7 @@ function listPrescriptionComp() {
 	event.preventDefault();
 	$("#loaderID").show();
 	$.ajax({
-		url: "https://api.mama.sh/PrescriptionComp",
+		url: "http://backup.mama.sh/cdio/api/PrescriptionComp",
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -177,7 +177,7 @@ function updatePrescription() {
 	}
 
 	$.ajax({
-		url: `https://api.mama.sh/Prescriptions`,
+		url: `http://backup.mama.sh/cdio/api/Prescriptions`,
 		contentType: "application/json",
 		method: "PUT",
 		data: JSON.stringify(prescription),
@@ -261,7 +261,7 @@ function getPrescriptionComp(prescription_id, commodity_id) {
 	$("#loaderID").show();
 	prescriptionCompModal("updatePrescriptionComp()");
 	$.ajax({
-		url: `https://api.mama.sh/PrescriptionComp/component?presID=${prescription_id}&comID=${commodity_id}`,
+		url: `http://backup.mama.sh/cdio/api/PrescriptionComp/component?presID=${prescription_id}&comID=${commodity_id}`,
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -288,7 +288,7 @@ function createPrescription() {
 	}
 
 	$.ajax({
-		url: `https://api.mama.sh/Prescriptions`,
+		url: `http://backup.mama.sh/cdio/api/Prescriptions`,
 		contentType: "application/json",
 		method: "POST",
 		data: JSON.stringify(prescription),
@@ -315,7 +315,7 @@ function updatePrescriptionComp() {
 	}
 
 	$.ajax({
-		url: `https://api.mama.sh/PrescriptionComp`,
+		url: `http://backup.mama.sh/cdio/api/PrescriptionComp`,
 		contentType: "application/json",
 		method: "PUT",
 		data: JSON.stringify(prescriptionComp),
@@ -343,7 +343,7 @@ function createPrescriptionComp() {
 	}
 
 	$.ajax({
-		url: `https://api.mama.sh/PrescriptionComp`,
+		url: `http://backup.mama.sh/cdio/api/PrescriptionComp`,
 		contentType: "application/json",
 		method: "POST",
 		data: JSON.stringify(prescriptionComp),
@@ -368,7 +368,7 @@ function createCommodity() {
 	};
 
 	$.ajax({
-		url: "https://api.mama.sh/commodity",
+		url: "http://backup.mama.sh/cdio/api/commodity",
 		contentType: "application/json",
 		method: "POST",
 		data: JSON.stringify(commodity),
@@ -395,7 +395,7 @@ function updateCommodity() {
 
 
 	$.ajax({
-		url: `https://api.mama.sh/commodity`,
+		url: `http://backup.mama.sh/cdio/api/commodity`,
 		contentType: "application/json",
 		method: "PUT",
 		data: JSON.stringify(commodity),
@@ -415,7 +415,7 @@ function updateCommodity() {
 function listUsers() {
 	$("#loaderID").show();
 	$.ajax({
-		url: "https://api.mama.sh/userresource",
+		url: "http://backup.mama.sh/cdio/api/userresource",
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -532,7 +532,7 @@ async function getUser(id, showBox = true) {
 	UserModal("updateUser()")
 	$("#loaderID").show();
 	await $.ajax({
-		url: "https://api.mama.sh/userresource/" + id,
+		url: "http://backup.mama.sh/cdio/api/userresource/" + id,
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -588,7 +588,7 @@ function inactiveUser(id, state) {
 	$("#loaderID").show();
 	if (state == 1) {
 		$.ajax({
-			url: `https://api.mama.sh/userresource/${id}`,
+			url: `http://backup.mama.sh/cdio/api/userresource/${id}`,
 			contentType: "application/json",
 			method: "DELETE",
 			success: function (response) {
@@ -606,7 +606,7 @@ function inactiveUser(id, state) {
 		// use the update function
 		let bruger = {};
 		$.ajax({
-			url: `https://api.mama.sh/userresource/${id}`,
+			url: `http://backup.mama.sh/cdio/api/userresource/${id}`,
 			contentType: "application/json",
 			method: "GET",
 			success: function (response) {
@@ -630,7 +630,7 @@ function inactiveUser(id, state) {
 			},
 		});
 		$.ajax({
-			url: "https://api.mama.sh/userresource",
+			url: "http://backup.mama.sh/cdio/api/userresource",
 			contentType: "application/json",
 			method: "PUT",
 			data: JSON.stringify(bruger),
@@ -650,7 +650,7 @@ async function getCommodity(id, hasModal = true) {
 	$("#loaderID").show();
 	createCommodityModal("updateCommodity()", hasModal);
 	await $.ajax({
-		url: `https://api.mama.sh/commodity/${id}`,
+		url: `http://backup.mama.sh/cdio/api/commodity/${id}`,
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -745,7 +745,7 @@ function createUser() {
 	};
 
 	$.ajax({
-		url: "https://api.mama.sh/userresource",
+		url: "http://backup.mama.sh/cdio/api/userresource",
 		contentType: "application/json",
 		method: "POST",
 		data: JSON.stringify(user),
@@ -769,7 +769,7 @@ function createUser() {
 
 function sendUpdateToServer(user) {
 	$.ajax({
-		url: "https://api.mama.sh/userresource",
+		url: "http://backup.mama.sh/cdio/api/userresource",
 		contentType: "application/json",
 		method: "PUT",
 		data: JSON.stringify(user),
@@ -879,7 +879,7 @@ function CreateProductBatch() {
 	toggleModal();
 
 	$.ajax({
-		url: "https://api.mama.sh/ProductBatchs",
+		url: "http://backup.mama.sh/cdio/api/ProductBatchs",
 		contentType: "application/json",
 		method: "POST",
 		data: JSON.stringify(productBatch),
@@ -899,7 +899,7 @@ function CreateProductBatch() {
 function getProductBatchList() {
 	$("#loaderID").show();
 	$.ajax({
-		url: "https://api.mama.sh/ProductBatchs",
+		url: "http://backup.mama.sh/cdio/api/ProductBatchs",
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -977,7 +977,7 @@ function productBatchCompModal(funktion) {
 function getProductBatchCompList() {
 	$("#loaderID").show();
 	$.ajax({
-		url: "https://api.mama.sh/productbatchcomp",
+		url: "http://backup.mama.sh/cdio/api/productbatchcomp",
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -1014,7 +1014,7 @@ function getOneProductBatchComp(CommodityID, ProductBatchID) {
 	$("#loaderID").show();
 	productBatchCompModal("updateProductBatchComp()");
 	$.ajax({
-		url: "https://api.mama.sh/productbatchcomp/component?productBatchId=" + ProductBatchID + "&commodityBatchId=" + CommodityID,
+		url: "http://backup.mama.sh/cdio/api/productbatchcomp/component?productBatchId=" + ProductBatchID + "&commodityBatchId=" + CommodityID,
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -1044,7 +1044,7 @@ function updateProductBatchComp() {
 	};
 
 	$.ajax({
-		url: "https://api.mama.sh/productbatchcomp",
+		url: "http://backup.mama.sh/cdio/api/productbatchcomp",
 		contentType: "application/json",
 		method: "PUT",
 		data: JSON.stringify(productBachComp),
@@ -1088,7 +1088,7 @@ function getProductBatchCompListOneBatch() {
 	toggleModal();
 	let id = $('#inputCompId').val();
 	$.ajax({
-		url: "https://api.mama.sh/productbatchcomp/ID/" + id,
+		url: "http://backup.mama.sh/cdio/api/productbatchcomp/ID/" + id,
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -1127,7 +1127,7 @@ function getCommodityBatchList() {
 	elements = [];
 	let element;
 	$.ajax({
-		url: 'https://api.mama.sh/commodityBatch',
+		url: 'http://backup.mama.sh/cdio/api/commodityBatch',
 		contentType: "application/json",
 		type: "GET",
 		success: function (response) {
@@ -1203,7 +1203,7 @@ function getCommodityBatch(commodityBatch_id) {
 	$("#loaderID").show();
 	commodityBatchModal(`updateCommodityBatch(${commodityBatch_id})`);
 	$.ajax({
-		url: 'https://api.mama.sh/commodityBatch/' + commodityBatch_id,
+		url: 'http://backup.mama.sh/cdio/api/commodityBatch/' + commodityBatch_id,
 		contentType: "application/json",
 		type: "GET",
 		success: function (response) {
@@ -1240,7 +1240,7 @@ function updateCommodityBatch(commodityBatch_id) {
 
 
 	$.ajax({
-		url: 'https://api.mama.sh/commodityBatch',
+		url: 'http://backup.mama.sh/cdio/api/commodityBatch',
 		contentType: "application/json",
 		method: 'PUT',
 		data: JSON.stringify(element),
@@ -1275,7 +1275,7 @@ function createCommodityBatch() {
 	};
 
 	$.ajax({
-		url: 'https://api.mama.sh/commodityBatch',
+		url: 'http://backup.mama.sh/cdio/api/commodityBatch',
 		method: 'POST',
 		contentType: "application/json",
 		data: JSON.stringify(element),
@@ -1296,7 +1296,7 @@ function getCommodityBatchListByCommodityId() {
 	toggleModal();
 	let commodity_id = $('#inputCompId').val();
 	$.ajax({
-		url: 'https://api.mama.sh/commodityBatch/list/' + commodity_id,
+		url: 'http://backup.mama.sh/cdio/api/commodityBatch/list/' + commodity_id,
 		contentType: "application/json",
 		type: "GET",
 		success: function (response) {
@@ -1438,7 +1438,7 @@ async function getPrescription(id) {
 	createPrescriptionModal("updatePrescription()");
 
 	await $.ajax({
-		url: `https://api.mama.sh/Prescriptions/ID/${id}`,
+		url: `http://backup.mama.sh/cdio/api/Prescriptions/ID/${id}`,
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -1461,7 +1461,7 @@ async function getProductBatch(id, hasToggleModal = true) {
 	$("#loaderID").show();
 	showProductModal(hasToggleModal);
 	await $.ajax({
-		url: "https://api.mama.sh/ProductBatchs/ID/" + id,
+		url: "http://backup.mama.sh/cdio/api/ProductBatchs/ID/" + id,
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
@@ -1615,7 +1615,7 @@ async function getPrescriptionCompList(presID, productBatchID) {
 	var list = [];
 
 	await $.ajax({
-		url: `https://api.mama.sh/PrescriptionComp/${presID}`,
+		url: `http://backup.mama.sh/cdio/api/PrescriptionComp/${presID}`,
 		contentType: "application/json",
 		type: "GET",
 		async: false,
@@ -1643,7 +1643,7 @@ async function UpdateToSubmitedProductBatchComp(productBatchID, commodityID, num
 	$("#loaderID").show();
 
 	await $.ajax({
-		url: "https://api.mama.sh/productbatchcomp/component?productBatchId=" + productBatchID + "&commodityBatchId=" + commodityID,
+		url: "http://backup.mama.sh/cdio/api/productbatchcomp/component?productBatchId=" + productBatchID + "&commodityBatchId=" + commodityID,
 		contentType: "application/json",
 		type: "GET",
 		success: function (response) {
@@ -1710,7 +1710,7 @@ async function CreateProductBatchComp(commodityID, number) {
 	if (minWeightTolerance < productbatchcomp.netto && maxWeightTolerance > productbatchcomp.netto) {
 
 		await $.ajax({
-			url: "https://api.mama.sh/productbatchcomp",
+			url: "http://backup.mama.sh/cdio/api/productbatchcomp",
 			contentType: "application/json",
 			type: "POST",
 			data: JSON.stringify(productbatchcomp),
@@ -1748,7 +1748,7 @@ function updateProductBatchToFinish() {
 	};
 
 	$.ajax({
-		url: "https://api.mama.sh/ProductBatchs",
+		url: "http://backup.mama.sh/cdio/api/ProductBatchs",
 		contentType: "application/json",
 		method: "PUT",
 		data: JSON.stringify(productBatch),
@@ -1774,7 +1774,7 @@ function updateProductBatchToProduction() {
 	};
 
 	$.ajax({
-		url: "https://api.mama.sh/ProductBatchs",
+		url: "http://backup.mama.sh/cdio/api/ProductBatchs",
 		contentType: "application/json",
 		method: "PUT",
 		data: JSON.stringify(productBatch),

@@ -49,7 +49,7 @@ public class ProductBatchResource {
     public Response createProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
         productBatchValidationForCreate(productBatch);
         productBatchService.createProductBatch(productBatch);
-        SuccessMessage msg = new SuccessMessage("Product batch successfully created", 6000, "https://mama.sh/");
+        SuccessMessage msg = new SuccessMessage("Product batch successfully created", 6000, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 
@@ -58,7 +58,7 @@ public class ProductBatchResource {
     public Response updateProductBatch(ProductBatchDTO productBatch) throws SQLException, NotProductBatchExeption {
         productBatchValidationForUpdate(productBatch);
         productBatchService.updateProductBatch(productBatch);
-        SuccessMessage msg = new SuccessMessage("Product batch successfully updated", 6001, "https://mama.sh/");
+        SuccessMessage msg = new SuccessMessage("Product batch successfully updated", 6001, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 }

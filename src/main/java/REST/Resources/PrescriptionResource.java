@@ -23,7 +23,7 @@ public class PrescriptionResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createPrescription(PrescriptionDTO prescriptionDTO) throws SQLException {
 		prescriptionService.createPrescription(prescriptionDTO);
-		SuccessMessage msg = new SuccessMessage("Created new Prescription", 5000, "https://mama.sh/");
+		SuccessMessage msg = new SuccessMessage("Created new Prescription", 5000, "http://backup.mama.sh/cdio/api/");
 		return Response.status(Response.Status.OK).entity(msg).build();
 	}
 
@@ -32,7 +32,7 @@ public class PrescriptionResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updatePrescription(PrescriptionDTO prescriptionDTO) throws SQLException {
 		prescriptionService.updatePrescription(prescriptionDTO);
-		SuccessMessage msg = new SuccessMessage("Updated Prescription", 5001, "https://mama.sh");
+		SuccessMessage msg = new SuccessMessage("Updated Prescription", 5001, "http://backup.mama.sh/cdio/api/");
 		return Response.status(Response.Status.OK).entity(msg).build();
 	}
 

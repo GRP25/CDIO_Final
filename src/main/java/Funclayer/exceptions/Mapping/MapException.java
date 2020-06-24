@@ -12,7 +12,7 @@ public class MapException implements ExceptionMapper<Exception> {
 
     @Override
     public Response toResponse(Exception e) {
-        ErrorMessage err = new ErrorMessage(e.getMessage(), 1100, "https://mama.sh/");
+        ErrorMessage err = new ErrorMessage(e.getMessage(), 1100, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.NOT_ACCEPTABLE).entity(err).build();
     }
 }

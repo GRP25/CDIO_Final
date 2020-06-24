@@ -47,7 +47,7 @@ public class ProductBatchCompResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createProductBatchComp(ProductBatchCompDTO productBatchCompDTO) throws SQLException {
         productBatchCompService.createProductBatchComp(productBatchCompDTO);
-        SuccessMessage msg = new SuccessMessage("ProductBatchComp succesfully created", 6010, "https://mama.sh/");
+        SuccessMessage msg = new SuccessMessage("ProductBatchComp succesfully created", 6010, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 
@@ -56,7 +56,7 @@ public class ProductBatchCompResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateProductBatchComp(ProductBatchCompDTO productBatchComp) throws SQLException {
         productBatchCompService.updateProductBatchComp(productBatchComp);
-        SuccessMessage msg = new SuccessMessage("ProductBatchComp succesfully updated", 6011, "https://mama.sh/");
+        SuccessMessage msg = new SuccessMessage("ProductBatchComp succesfully updated", 6011, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 }

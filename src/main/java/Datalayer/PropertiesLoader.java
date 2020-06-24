@@ -1,6 +1,6 @@
 package Datalayer;
 public class PropertiesLoader {
-    static String jdbcUrl = "jdbc:mariadb://mama.sh:4123/pharmacy";
+    static String jdbcUrl = "jdbc:mariadb://pharmacy25.ccqdvtisatyp.us-east-2.rds.amazonaws.com:3306/pharmacy";
     static String dbUserName = "cdio";
     static String dbPassword = "HmDjHb0b4123";
 

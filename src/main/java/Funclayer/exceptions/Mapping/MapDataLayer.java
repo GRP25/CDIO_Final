@@ -11,7 +11,7 @@ import Funclayer.exceptions.exceptions.DataLayerException;
 public class MapDataLayer implements ExceptionMapper<DataLayerException> {
     @Override
     public Response toResponse(DataLayerException e) {
-        ErrorMessage err = new ErrorMessage(e.getMessage(), 2101, "https://mama.sh/");
+        ErrorMessage err = new ErrorMessage(e.getMessage(), 2101, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.NOT_ACCEPTABLE).entity(err).build();
     }
 }

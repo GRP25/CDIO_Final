@@ -43,7 +43,7 @@ public class CommodityBatchResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createCommodityBatch(CommodityBatchDTO commodityBatchDTO) throws SQLException {
         commodityBatchService.createCommodityBatch(commodityBatchDTO);
-        SuccessMessage msg = new SuccessMessage("Commodity batch successfully created", 4010, "https://mama.sh");
+        SuccessMessage msg = new SuccessMessage("Commodity batch successfully created", 4010, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 
@@ -52,7 +52,7 @@ public class CommodityBatchResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateCommodityBatch(CommodityBatchDTO commodityBatchDTO) throws SQLException {
         commodityBatchService.updateCommodityBatch(commodityBatchDTO);
-        SuccessMessage msg = new SuccessMessage("Commodity batch successfully updated", 4011, "https://mama.sh");
+        SuccessMessage msg = new SuccessMessage("Commodity batch successfully updated", 4011, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 }

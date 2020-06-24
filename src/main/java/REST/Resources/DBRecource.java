@@ -22,7 +22,7 @@ public class DBRecource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response activateUser() {
-        SuccessMessage msg = new SuccessMessage("Database succesfully changed", 1001, "https://mama.sh/");
+        SuccessMessage msg = new SuccessMessage("Database succesfully changed", 1001, "http://backup.mama.sh/cdio/api/");
         db.change();
         return Response.status(Response.Status.OK).entity(msg).build();
     }
@@ -32,9 +32,9 @@ public class DBRecource {
     public Response check() {
         SuccessMessage msg;
         if (db.checkIfDBisMain())
-            msg = new SuccessMessage("Database is main", 1002, "https://mama.sh/");
+            msg = new SuccessMessage("Database is main", 1002, "http://backup.mama.sh/cdio/api/");
         else
-            msg = new SuccessMessage("Database is backup", 1003, "https://mama.sh/");
+            msg = new SuccessMessage("Database is backup", 1003, "http://backup.mama.sh/cdio/api/");
         return Response.status(Response.Status.OK).entity(msg).build();
     }
 }
