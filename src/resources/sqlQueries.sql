@@ -140,7 +140,7 @@ CREATE TABLE Users
         (commodityBatchId, commodityId, weight, supplier )
     values(2, 2, 3.3, "MD Exports2");
     INSERT INTO ProductBatch
-        (productBatchId, prescriptionId, status)
+        (productBatchId, prescriptionId, status, startDate)
     values
         (1, 1, 2);
     INSERT INTO ProductBatch
