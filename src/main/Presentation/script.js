@@ -1460,6 +1460,7 @@ async function login() {
 
 	} else {
 		console.log("Du kan ikke logge ind i systemet");
+		$("#logindMsg").show();
 	}
 }
 
