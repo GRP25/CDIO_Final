@@ -27,16 +27,16 @@
 	<div class="flex items-end text-white justify-start bg-gray-900">
 		<a href="#" id="AdminPortal"
 			class="administration-1 administration inline-block px-3 hover:text-blue-500 hidden"
-			data-target=".userAdmin">Bruger administration </a>
+			data-target=".userAdmin" onclick="hideTable()">Bruger administration </a>
 		<a href="#" id="CommodityPortal"
 			class="administration-1 administration inline-block px-3 hover:text-blue-500 hidden"
-			data-target=".commodityAdmin">Råvare administration</a>
+			data-target=".commodityAdmin" onclick="hideTable()">Råvare administration</a>
 		<a href="#" id="CommodityBatchPortal"
 			class="administration-1 administration inline-block px-3 hover:text-blue-500 hidden"
-			data-target=".commodityBatchAdmin">Råvarebatch administration</a>
+			data-target=".commodityBatchAdmin" onclick="hideTable()">Råvarebatch administration</a>
 		<a href="#" id="ProductBatchPortal"
 			class="administration-1 administration inline-block px-3 hover:text-blue-500 hidden"
-			data-target=".productBatchAdmin">Produktbatch administration</a>
+			data-target=".productBatchAdmin" onclick="hideTable()">Produktbatch administration</a>
 		<a href="#" id="WeightPortal"
 			class="administration-1 administration inline-block px-3 hover:text-blue-500 hidden"
 			data-target=".afvejning">Afvejning </a>
@@ -66,7 +66,8 @@
 
 				<div class="block">
 					<a href="#" data-target=".user-window"
-						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center">Bruger</a>
+						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
+						onclick="hideTable()">Bruger</a>
 				</div>
 			</div>
 		</div>
@@ -105,13 +106,16 @@
 
 				<div class="block">
 					<a href="#" data-target=".commodity-window"
-						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center">Råvare</a>
+						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
+					   onclick="hideTable()">Råvare</a>
 					<a href=" #"
 						class="valgmulighed-2 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
-						data-target=".prescription-window">Recepter</a>
-					<a href=" #"
+						data-target=".prescription-window"
+					   onclick="hideTable()" >Recepter</a>
+					<a  href=" #"
 						class="valgmulighed-3 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
-						data-target=".prescriptionComp-window">Recept komponenter</a>
+						data-target=".prescriptionComp-window"
+						onclick="hideTable()">Recept komponenter</a>
 				</div>
 			</div>
 		</div>
@@ -192,8 +196,8 @@
 
 				<div class="block">
 					<a href="#" data-target=".råvareBatch-window"
-						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center">Råvare
-						Batch</a>
+						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
+						onclick="hideTable()">Råvare Batch</a>
 				</div>
 			</div>
 		</div>
@@ -238,11 +242,11 @@
 
 				<div class="block">
 					<a href="#" data-target=".product-window"
-						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center">Produkt
-						Batch</a>
+						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
+						onclick="hideTable()">Produkt Batch</a>
 					<a href=" #" data-target=".product-comp-window"
-						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center">Produkt
-						Batch Komp</a>
+						class="valgmulighed-1 valgmuligheder block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-8 rounded-full text-center"
+					   onclick="hideTable()">Produkt Batch Komp</a>
 				</div>
 			</div>
 		</div>
