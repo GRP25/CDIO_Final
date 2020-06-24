@@ -303,13 +303,19 @@
 				<a href="#" id="PrintBtn"
 					class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
 					onclick="WeightPrint();">Print</a>
+
+				<a href="#" id="finishBtn"
+					class="block button bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-4 m-5 rounded-full text-center"
+					onclick="updateProductBatchToFinish();">Afslut</a>
 			</div>
 
 			<label id="PrintDate" class="hidden">Udskrevet: </label> <br />
 
-			<label>Indtast Produktbatch nummer: </label><input id="ProductBatchToWeight" type="text"> </input>
+			<label id="inputProductBatchID">Indtast Produktbatch nummer: </label><input id="ProductBatchToWeight"
+				type="text"> </input>
 
 			<div class="w3-container">
+				<label>Produkt batch nummer: </label> <label id="WeightPrescriptionNummer"></label> <br />
 				<label>Recept id: </label> <label id="WeightPrescriptionID"></label> <br />
 				<label>Recept navn: </label> <label id="WeightPrescriptionName"></label>
 			</div>
