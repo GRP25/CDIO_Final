@@ -627,6 +627,7 @@ function inactiveUser(id, state) {
 			success: function (response) {
 				$("#loaderID").hide();
 				alert("Bruger er blevet inaktiv");
+				listUsers();
 			},
 			error: function (response) {
 				$("#loaderID").hide();
@@ -636,49 +637,22 @@ function inactiveUser(id, state) {
 		});
 	}
 	else {
-		// use the update function
-		let bruger = {};
 		$.ajax({
-			url: `https://api.mama.sh/userresource/${id}`,
+			url: "https://api.mama.sh/userresource/activate/" + id,
 			contentType: "application/json",
 			method: "GET",
 			success: function (response) {
 				$("#loaderID").hide();
-				bruger = {
-					userID: response.userID,
-					firstName: response.firstName,
-					surname: response.surname,
-					cpr: response.cpr,
-					initials: response.initials,
-					roles: response.roles,
-					status: 1
-
-				}
-				alert("Bruger er inaktiv");
+				alert("Bruger er blevet aktiv");
+				listUsers();
 			},
 			error: function (response) {
-				$("#loaderID").hide();
-				document.getElementById("loaderID").style.display = "none";
-				alert(response.responseJSON.message);
-			},
-		});
-		//let user = JSON.parse(bruger);
-		console.log("bruger", bruger);
-		$.ajax({
-			url: "https://api.mama.sh/userresource",
-			contentType: "application/json",
-			method: "PUT",
-			data: JSON.stringify(bruger),
-			success: function (response) {
-				alert("Bruger opdateret");
-			},
-			error: function (response) {
-
 				alert(response.responseJSON.message);
 			}
 
 		});
 	}
+
 }
 
 async function getCommodity(id, hasModal = true) {
