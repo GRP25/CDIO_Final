@@ -20,19 +20,14 @@ var weightPriscriptiuonID;
 function listCommodities() {
 	event.preventDefault();
 	$("#loaderID").show();
-	console.log("test");
-	// document.getElementById("loaderID").style.display = "block";
 	$.ajax({
 		url: "https://api.mama.sh/commodity",
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
 			$("#loaderID").hide();
-			console.log("test");
-			//document.getElementById("loaderID").style.display = "none";
 			$("#listOfCommoditiestable").html("");
 			let html = `<thead><tr><th class="w-1/2 px-4 py-2">Råvare navn</th><th class="w-1/2 px-4 py-2">Råvare id</th></tr></thead><tbody>`
-			//'<table class="tableOfUsers"> <tr><th>Name</th><th>Id</th></tr>';
 			jQuery.each(response, (i, item) => {
 				html += `<tr>`;
 				html += `<td class="border px-4 py-2"> <span class="float-left"> ${item.commodity_Name}</td>`;
@@ -48,7 +43,6 @@ function listCommodities() {
 				html += `</tr>`;
 			});
 			html += `</tbody>`
-			console.log(html);
 			$("#listOfCommoditiestable").append(html);
 			applyModal();
 
@@ -103,19 +97,14 @@ function toggleModal() {
 function listPrescriptions() {
 	$("#loaderID").show();
 	event.preventDefault();
-	console.log("test");
-	// document.getElementById("loaderID").style.display = "block";
 	$.ajax({
 		url: "https://api.mama.sh/Prescriptions",
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
 			$("#loaderID").hide();
-			console.log("test");
-			//document.getElementById("loaderID").style.display = "none";
 			$("#listOfPrescriptionsTable").html("");
 			let html = `<thead><tr><th class="w-1/2 px-4 py-2">Recept navn</th><th class="w-1/2 px-4 py-2">Råvare id</th></tr></thead><tbody>`
-			//'<table class="tableOfUsers"> <tr><th>Name</th><th>Id</th></tr>';
 			jQuery.each(response, (i, item) => {
 				html += `<tr>`;
 				html += `<td class="border px-4 py-2"> <span class="float-left"> ${item.prescription_name}</td>`;
@@ -129,7 +118,6 @@ function listPrescriptions() {
 				html += `</tr>`;
 			});
 			html += `</tbody>`
-			console.log(html);
 			$("#listOfPrescriptionsTable").append(html);
 			applyModal();
 
@@ -145,14 +133,12 @@ function listPrescriptions() {
 function listPrescriptionComp() {
 	event.preventDefault();
 	$("#loaderID").show();
-	// document.getElementById("loaderID").style.display = "block";
 	$.ajax({
 		url: "https://api.mama.sh/PrescriptionComp",
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
 			$("#loaderID").hide();
-			//document.getElementById("loaderID").style.display = "none";
 			$("#listOfPrescriptionCompTable").html("");
 			let html = `<thead><tr><th class="w-1/2 px-4 py-2">Recept id</th><th class="w-1/2 px-4 py-2">Råvare id</th></tr></thead><tbody>`
 			jQuery.each(response, (i, item) => {
@@ -168,7 +154,6 @@ function listPrescriptionComp() {
 				html += `</tr>`;
 			});
 			html += `</tbody>`
-			console.log(html);
 			$("#listOfPrescriptionCompTable").append(html);
 			applyModal();
 
@@ -211,7 +196,6 @@ function updatePrescription() {
 
 function createPrescriptionModal(funktion) {
 	$("#modal-title").text("Recept");
-	//toggleModal()
 	$("#modal-body").html("");
 	$("#modal-body").append(`<form>
 			<label>Recept Navn:</label>
@@ -241,7 +225,6 @@ function createPrescriptionModal(funktion) {
 
 function prescriptionCompModal(funktion) {
 	$("#modal-title").text("Recept komponent");
-	//toggleModal();
 	$("#modal-body").html("");
 	$("#modal-body").append(`<form>
 <label>Recept id:</label>
@@ -379,12 +362,10 @@ function createPrescriptionComp() {
 
 function createCommodity() {
 	$("#loaderID").show();
-	console.log("create commodity started");
 	const commodity = {
 		commodity_Name: $("#showRåvareNavn").val(),
 		commodity_id: $("#showRåvareId").val(),
 	};
-	console.log(commodity.commodity_Name);
 
 	$.ajax({
 		url: "https://api.mama.sh/commodity",
@@ -407,13 +388,11 @@ function createCommodity() {
 function updateCommodity() {
 	toggleModal();
 	$("#loaderID").show();
-	console.log("update started");
 	const commodity = {
 		commodity_Name: $("#showRåvareNavn").val(),
 		commodity_id: $("#showRåvareId").val(),
 	};
 
-	console.log(commodity.commodity_Name);
 
 	$.ajax({
 		url: `https://api.mama.sh/commodity`,
@@ -435,15 +414,12 @@ function updateCommodity() {
 
 function listUsers() {
 	$("#loaderID").show();
-	// document.getElementById("loaderID").style.display = "block";
-	console.log("Test");
 	$.ajax({
 		url: "https://api.mama.sh/userresource",
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
 			$("#loaderID").hide();
-			//document.getElementById("loaderID").style.display = "none";
 			$("#listOfUsersTable").html("");
 			let html = `<thead>
 			<tr>
@@ -453,7 +429,6 @@ function listUsers() {
 			</tr>
 			</thead>
 			<tbody>`;
-			//'<table class="tableOfUsers"> <tr><th>Name</th><th>Id</th></tr>';
 			jQuery.each(response, (i, item) => {
 				html += `<tr>`;
 				html += `<td class="border px-4 py-2">  <span class="float-left">${item.userID}</span></td>`
@@ -468,7 +443,6 @@ function listUsers() {
 				html += `</tr>`;
 			});
 			html += `</tbody>`;
-			console.log(html);
 			$("#listOfUsersTable").append(html);
 
 			$("#listOfUsersTable").show();
@@ -484,7 +458,6 @@ function listUsers() {
 
 function UserModal(funktion) {
 	$("#modal-title").text("Brugere");
-	//	toggleModal();
 	$("#modal-body").html("");
 	$("#modal-body").append(`<form>
 <label>Bruger ID:</label>
@@ -558,16 +531,12 @@ async function getUser(id, showBox = true) {
 
 	UserModal("updateUser()")
 	$("#loaderID").show();
-	console.log("getuser Started");
 	await $.ajax({
 		url: "https://api.mama.sh/userresource/" + id,
 		contentType: "application/json",
 		method: "GET",
 		success: function (response) {
 			$("#loaderID").hide();
-			//		if (showBox === true) {
-			//			toggleModal();
-			//		}
 			$("#ShowUserID").val(response.userID);
 			$("#ShowUserFirstName").val(response.firstName);
 			$("#ShowUserLastName").val(response.surname);
@@ -613,12 +582,10 @@ async function getUser(id, showBox = true) {
 		},
 	});
 
-	console.log("getuser done");
 }
 
 function inactiveUser(id, state) {
 	$("#loaderID").show();
-	console.log("inactive user");
 	if (state == 1) {
 		$.ajax({
 			url: `https://api.mama.sh/userresource/${id}`,
@@ -662,8 +629,6 @@ function inactiveUser(id, state) {
 				alert(response.responseJSON.message);
 			},
 		});
-		//let user = JSON.parse(bruger);
-		console.log("bruger", bruger);
 		$.ajax({
 			url: "https://api.mama.sh/userresource",
 			contentType: "application/json",
@@ -683,7 +648,6 @@ function inactiveUser(id, state) {
 
 async function getCommodity(id, hasModal = true) {
 	$("#loaderID").show();
-	console.log("getuser Started");
 	createCommodityModal("updateCommodity()", hasModal);
 	await $.ajax({
 		url: `https://api.mama.sh/commodity/${id}`,
@@ -691,9 +655,7 @@ async function getCommodity(id, hasModal = true) {
 		method: "GET",
 		success: function (response) {
 			$("#loaderID").hide();
-			console.log("Hej");
-			console.log(response.commodity_Name);
-			//toggleModal();
+			//if (hasModal) toggleModal();
 			$("#showRåvareNavn").val(response.commodity_Name);
 			$("#showRåvareId").val(response.commodity_id);
 
@@ -709,7 +671,6 @@ async function getCommodity(id, hasModal = true) {
 
 function updateUser() {
 	$("#loaderID").show();
-	console.log("Update user started");
 	let userRoles = [];//function () {
 	//if ($("#CreateUserRolesAdmin").checked == true) {
 	if (document.getElementById("ShowUserRolesAdmin").checked == true)
@@ -791,7 +752,6 @@ function createUser() {
 		success: function (response) {
 			$("#loaderID").hide();
 			//	alert("Bruger Oprettet");
-			console.log("Bruger oprettet");
 			listUsers();
 			toggleModal();
 			alert("Bruger oprettet")
@@ -841,23 +801,23 @@ function showProductModal(hasToggleModal) {
 	$("#modal-body").html("");
 	$("#modal-body").append(`
 <label>Produkt Batch ID:</label>
-<span class="shadow appearance-none border rounded text-gray-700 py-2 px-3" type="text"
+<span class="" type="text"
 	placeholder="" id="showProductBatchID"></span> <br />
 
 <label>Recept ID:</label>
-<span class="shadow appearance-none border rounded text-gray-700 py-2 px-3" type="text"
+<span class="" type="text"
 	placeholder="" id="showPrescriptionID"></span> <br />
 
 <label>Start Dato:</label>
-<span class="shadow appearance-none border rounded text-gray-700 py-2 px-3" type="text"
+<span class="" type="text"
 	placeholder="" id="showStartDate"></span> <br />
 
 <label>Slut Dato:</label>
-<span class="shadow appearance-none border rounded text-gray-700 py-2 px-3" type="text"
+<span class="" type="text"
 	placeholder="" id="showEndDate"></span> <br />
 
 	<label>Status:</label>
-<span class="shadow appearance-none border rounded text-gray-700 py-2 px-3" type="text"
+<span class="" type="text"
 	placeholder="" id="showInputStatus"></span> <br />
 
 `);
@@ -961,7 +921,6 @@ function getProductBatchList() {
 				</div></td>`
 				html += `</tr>`;
 			});
-			console.log(html);
 			$("#ListOfProductBatchTable").append(html);
 
 			$("#ListOfProductBatchTable").show();
@@ -1040,7 +999,6 @@ function getProductBatchCompList() {
 				</div></td>`
 				html += `</tr>`;
 			});
-			console.log(html);
 			$("#listOfProductsCompTable").append(html);
 
 			$("#listOfProductsCompTable").show();
@@ -1129,7 +1087,6 @@ function getProductBatchCompListOneBatch() {
 	$("#loaderID").show();
 	toggleModal();
 	let id = $('#inputCompId').val();
-	console.log(id);
 	$.ajax({
 		url: "https://api.mama.sh/productbatchcomp/ID/" + id,
 		contentType: "application/json",
@@ -1169,7 +1126,6 @@ function getCommodityBatchList() {
 	$("#loaderID").show();
 	elements = [];
 	let element;
-	console.log("getCommodityBatchList method")
 	$.ajax({
 		url: 'https://api.mama.sh/commodityBatch',
 		contentType: "application/json",
@@ -1245,7 +1201,6 @@ function commodityBatchModal(funktion) {
 
 function getCommodityBatch(commodityBatch_id) {
 	$("#loaderID").show();
-	console.log("getElement method");
 	commodityBatchModal(`updateCommodityBatch(${commodityBatch_id})`);
 	$.ajax({
 		url: 'https://api.mama.sh/commodityBatch/' + commodityBatch_id,
@@ -1265,13 +1220,11 @@ function getCommodityBatch(commodityBatch_id) {
 		}
 	});
 
-	// To hide other windows og show element information
 }
 
 function updateCommodityBatch(commodityBatch_id) {
 	$("#loaderID").show();
 	let element;
-
 	// Store user input in variables
 	let commodity_id = $('#commodity_id-input').val();
 	let weight = $('#weight-input').val();
@@ -1329,7 +1282,6 @@ function createCommodityBatch() {
 		success: function (response) {
 			$("#loaderID").hide();
 			alert("Råvare Batch lavet");
-			// Display elements
 			getCommodityBatchList()
 		},
 		error: function (response) {
@@ -1343,7 +1295,6 @@ function getCommodityBatchListByCommodityId() {
 	$("#loaderID").show();
 	toggleModal();
 	let commodity_id = $('#inputCompId').val();
-	console.log("getCommodityBatchList method")
 	$.ajax({
 		url: 'https://api.mama.sh/commodityBatch/list/' + commodity_id,
 		contentType: "application/json",
@@ -1383,9 +1334,7 @@ function getCommodityBatchListByCommodityId() {
 }
 
 async function login() {
-
 	var id = $("#LoginUserID").val();
-
 	await getUser(id, true);
 
 	var statusTemp = 0;
@@ -1423,13 +1372,9 @@ async function login() {
 		status: statusTemp
 	};
 	//$("#userIDInsert").content = $("#ShowUserID").value;
-	console.log(userobject);
 
-	// console.log("ready function");
 	if (!($("#ShowUserID").val() === "") && $("#ShowUserStatus").is(':checked')) {
-		console.log("du kan logge ind");
 		$("#loginContainer").hide();
-		//$("#logoutBtn").style.display = "block";
 		// admin portal
 		if ($("#ShowUserRolesAdmin").is(':checked')) {
 			// user portal
@@ -1452,14 +1397,13 @@ async function login() {
 			ProductionleaderAccess();
 		}
 
-		// Lab guy
+		// Lab personel
 		if ($("#ShowUserRolesLab").is(':checked')) {
 			// weight access
 			LabAccess();
 		}
 
 	} else {
-		console.log("Du kan ikke logge ind i systemet");
 		$("#logindMsg").show();
 	}
 }
@@ -1488,16 +1432,6 @@ function AdminAccess() {
 	$("#AdminPortal").show();
 }
 
-function logout() {
-	$("#AdminPortal").show();
-	$("#CommodityPortal").show();
-	$("#CommodityBatchPortal").show();
-
-	$("#ProductBatchPortal").show();
-	$("#WeightPortal").show();
-
-	//	$("#logoutBtn").show();
-}
 // setTimeout(
 async function getPrescription(id) {
 	$("#loaderID").show();
@@ -1578,6 +1512,11 @@ function WeightPrint() {
 	$("#finishBtn").hide();
 	$("#inputProductBatchID").hide();
 	$("#ProductBatchToWeight").hide();
+	$("#AdminPortal").hide();
+	$("#CommodityPortal").hide();
+	$("#CommodityBatchPortal").hide();
+	$("#ProductBatchPortal").hide();
+	$("#WeightPortal").hide();
 
 
 	window.print();
@@ -1589,16 +1528,19 @@ function WeightPrint() {
 	$("#finishBtn").show();
 	$("#inputProductBatchID").show();
 	$("#ProductBatchToWeight").show();
+	$("#AdminPortal").show();
+	$("#CommodityPortal").show();
+	$("#CommodityBatchPortal").show();
+	$("#ProductBatchPortal").show();
+	$("#WeightPortal").show();
 }
+
 
 async function openProductBatch() {
 	var productBatchID = $("#ProductBatchToWeight").val();
 	await getProductBatch(productBatchID, false);
 
-	//This is dumb do in one line instead
 	var productBatchStatus = $("#showInputStatus").text();
-
-
 
 	$("#WeightSumTara").html("");
 	$("#WeightSumNetto").html("");
@@ -1609,67 +1551,64 @@ async function openProductBatch() {
 	var presID = $("#showPrescriptionID").html();
 	await getPrescription(presID);
 	var presName = $("#showPrescriptionName").val();
-	console.log("PRESNAME: " + presName);
-	console.log("PRESID: " + presID);
-	console.log($("#showPrescriptionName").html());
-	console.log($("#showPrescriptionName").text());
-	console.log($("#showPrescriptionName").val());
 
 	weightPriscriptiuonID = presID;
 	$("#WeightPrescriptionID").html(presID);
 	$("#WeightPrescriptionName").html(presName);
 	$("#WeightPrescriptionNummer").html(productBatchID);
 	let list = await getPrescriptionCompList(presID, productBatchID);
-	console.log("outside: " + list);
 	setupCommodityTable(list, productBatchID);
 
 
 }
 
 async function setupCommodityTable(list, productBatchID) {
-	//maybe list.entries()
+	$("#loaderID").show();
 	let index = 1;
 	for (const element of list) {
 		const id = element.commodity_id
 		await getCommodity(element.commodity_id, false);
 		const commidityName = $('#showRåvareNavn').val();
 		let html =
-			`<h5>Råvare nr: <label id="WeightCommodityID"> ${id}</label></h5>
-		<h5>Råvare navn: ${commidityName}</h5>
+			`<div class="block p-2 m-2 bg-white max-w-full rounded border-black">
+		<h5 class="font-semibold">Råvare nr: <label id="WeightCommodityID"> ${id}</label></h5>
+		<h5 class="font-semibold">Råvare navn: ${commidityName}</h5>
 		<table class="table-fixed w-full mx-auto">
 			<thead>
 				<tr>
-					<th>Del</th>
-					<th>Mængde</th>
-					<th>Tolerance</th>
-					<th>Tara</th>
-					<th>Netto</th>
-					<th>Batch</th>
-					<th>Opr</th>
-					<th>Terminal</th>
+					<th class="w-1/8 px-2">Del</th>
+					<th class="w-1/8 px-2">Mængde</th>
+					<th class="w-1/8 px-2">Tolerance</th>
+					<th class="w-1/8 px-2">Tara</th>
+					<th class="w-1/8 px-2">Netto</th>
+					<th class="w-1/8 px-2">Batch</th>
+					<th class="w-1/8 px-2">Opr</th>
+					<th class="w-1/8 px-2">Terminal</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr class="bg-gray-200">
-				<td>1</td>
-		 			<td id="WeightLineNonNetto${index}">${element.nomNetto}</td>
-		 			<td id="WeightLineTolerance${index}">${element.tolerance}</td>
-		 			<td id="WeightLineTara${index}"><input type="text" id="WeightTara${element.commodity_id}"></input></td>
-		 			<td id="WeightLineNetto${index}"><input type="text" id="WeightNetto${element.commodity_id}"></input></td>
-		 			<td id="WeightLineBatch${index}"><input type="text"></input></td>
-		 			<td id="WeightLineOpr${index}">${userobject.userID}</td>
-		 			<td id="WeightLineTerminal${index}">1</td>
+					<td class="border px-4 py-2">1</td>
+		 			<td class="border px-4 py-2" id="WeightLineNonNetto${index}">${element.nomNetto}</td>
+		 			<td class="border px-4 py-2" id="WeightLineTolerance${index}">${element.tolerance}</td>
+		 			<td class="border px-4 py-2" id="WeightLineTara${index}"><input type="text" id="WeightTara${element.commodity_id}"></input></td>
+		 			<td class="border px-4 py-2" id="WeightLineNetto${index}"><input type="text" id="WeightNetto${element.commodity_id}"></input></td>
+		 			<td class="border px-4 py-2" id="WeightLineBatch${index}"><input type="text"></input></td>
+		 			<td class="border px-4 py-2" id="WeightLineOpr${index}">${userobject.userID}</td>
+		 			<td class="border px-4 py-2" id="WeightLineTerminal${index}">1</td>
 				</tr>
 			</tbody>
 		</table>
 		<br>
-			<button id="WeightSubmitBtn${index}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onclick="CreateProductBatchComp(${element.commodity_id},${index});"> submit Råvare: ${element.commodity_id}</button>
-		</br>`
+			<button id="WeightSubmitBtn${index}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 border border-purple-700 rounded" onclick="CreateProductBatchComp(${element.commodity_id},${index});"> submit Råvare: ${element.commodity_id}</button>
+		</br>
+		</div>`
 
 		$("#WeightCommodityBatchList").append(html);
 		UpdateToSubmitedProductBatchComp(productBatchID, id, index);
 		index++;
 	}
+	$("#loaderID").hide();
 }
 
 async function getPrescriptionCompList(presID, productBatchID) {
@@ -1685,10 +1624,8 @@ async function getPrescriptionCompList(presID, productBatchID) {
 			$("#WeightCommodityBatchList").html("");
 
 			response.forEach((element) => {
-				console.log("number");
 				list.push(element);
 			})
-			console.log(list);
 
 		},
 		error: function (response) {
@@ -1704,7 +1641,6 @@ async function getPrescriptionCompList(presID, productBatchID) {
 
 async function UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number) {
 	$("#loaderID").show();
-	console.log("starting update");
 
 	await $.ajax({
 		url: "https://api.mama.sh/productbatchcomp/component?productBatchId=" + productBatchID + "&commodityBatchId=" + commodityID,
@@ -1713,77 +1649,33 @@ async function UpdateToSubmitedProductBatchComp(productBatchID, commodityID, num
 		success: function (response) {
 			$("#loaderID").hide();
 
-			//const promise1 = new Promise((resolve, reject) => {
 			$("#WeightLineTara" + number).html(response.tara);
 			$("#WeightLineNetto" + number).html(response.netto);
 			$("#WeightLineBatch" + number).html(response.commodityBatch_id);
 			$("#WeightLineOpr" + number).html(response.user_id);
 			$("#WeightLineTerminal" + number).html(1);
-			// });
-
-
-			//	promise1.then((value) => {
-
-
-			// show and hide button stuff
-			console.log("started to show BTN");
 			$('#WeightSubmitBtn' + number).hide();
-			console.log("End og BTN")
-			// end of document ready
-
-			// test for last button
-			try {
-				document.getElementById("WeightSubmitBtn" + (number + 1)).style.display = "block";
-			}
-			catch { // end of commodity to productbatch
-				console.log("done!");
-
-				while ($('#WeightLineTara' + number).html() != Number(response.tara)) {
-					// test stuff
-					// end of while loop
-					console.log("while loop");
-				}
-			}
-
-			// get all netto and tara weight
 			sumTotal(number);
 
-			// update status to "Afsluttet" and update end date
-			//updateProductBatchToFinish();
 			$("#loaderID").hide();
-			//}
-
-			//	}); 
 		},
 		error: function (response) {
 			$("#loaderID").hide();
-			//alert(response.responseJSON.message);
 		}
-
-
-
-
-		// end of document ready
 	});
 }
 
 function sumTotal(number) {
-	console.log("Hello world");
 	var weightNettoTotal = 0;
 	var weightTaraTotal = 0;
 
 	for (let index = 1; index <= number; index++) {
 
-		console.log(index + "Dtara: " + Number($('#WeightLineTara' + index).html()));
-		console.log(index + "tara: " + $('#WeightLineTara' + index).html());
-		console.log(index + "DNetto: " + Number($('#WeightLineNetto' + index).html()));
-		console.log(index + "Netto: " + $('#WeightLineNetto' + index).html());
 
 		weightTaraTotal += Number($('#WeightLineTara' + index).html());
 
 		weightNettoTotal += Number($('#WeightLineNetto' + index).html());
 	}
-	console.log('Tara Total: ' + weightTaraTotal + ', Netto Total: ' + weightNettoTotal);
 
 	// print to screen
 	$('#WeightSumTara').text(weightTaraTotal);
@@ -1793,7 +1685,6 @@ function sumTotal(number) {
 
 async function CreateProductBatchComp(commodityID, number) {
 	$("#loaderID").show();
-	console.log("input" + commodityID, number);
 	// work in progress
 	var productBatchID = $('#ProductBatchToWeight').val();
 
@@ -1808,19 +1699,15 @@ async function CreateProductBatchComp(commodityID, number) {
 	// setup for weight tolerance
 	var weightLineNonNetto = $('#WeightLineNonNetto' + number).html();
 	var WeightLineTolerance = $('#WeightLineTolerance' + number).html();
-	console.log(weightLineNonNetto + ', ' + WeightLineTolerance);
 
 	// get the tollance weight
 	let minWeightTolerance = weightLineNonNetto * (1 - (WeightLineTolerance / 100));
 	let maxWeightTolerance = weightLineNonNetto * (1 + (WeightLineTolerance / 100));
 
 	// test for variable
-	console.log(minWeightTolerance + ' , ' + maxWeightTolerance);
-	console.log(productbatchcomp.netto);
 
 	// test if weight is acceptable
 	if (minWeightTolerance < productbatchcomp.netto && maxWeightTolerance > productbatchcomp.netto) {
-		console.log("Netto weight: good to go");
 
 		await $.ajax({
 			url: "https://api.mama.sh/productbatchcomp",
@@ -1833,15 +1720,12 @@ async function CreateProductBatchComp(commodityID, number) {
 			},
 			error: function (error) {
 				$("#loaderID").hide();
-				console.log(error);
 				alert(error.responseJSON.message);
-				console.log(productbatchcomp);
 
 			}
 
 		});
 
-		console.log("Not skipped!");
 
 		UpdateToSubmitedProductBatchComp(productBatchID, commodityID, number);
 		updateProductBatchToProduction();
@@ -1850,7 +1734,6 @@ async function CreateProductBatchComp(commodityID, number) {
 	else {
 		$("#loaderID").hide();
 		alert("Netto vægt ikke inden for tolerancen");
-		console.log("Netto weight: not accepted");
 	}
 }
 
@@ -1859,13 +1742,10 @@ function updateProductBatchToFinish() {
 
 
 	var productBatch = {
-		prescription_id: $("#WeightPrescriptionID").html(), // $("#showPrescriptionID").val(),
+		prescription_id: $("#WeightPrescriptionID").html(),
 		productBatch_id: $("#ProductBatchToWeight").val(),
 		status: 3,
-		//		startDate: 1,
-		//		endDate: 1
 	};
-	console.log("presID, færdog" + productBatch.prescription_id);
 
 	$.ajax({
 		url: "https://api.mama.sh/ProductBatchs",
@@ -1878,7 +1758,6 @@ function updateProductBatchToFinish() {
 		error: function (response) {
 			$("#loaderID").hide();
 			alert(response.responseJSON.message);
-			console.log("fejl: Produkt Batch ikke opdateres");
 		}
 
 	});
@@ -1889,7 +1768,7 @@ function updateProductBatchToProduction() {
 
 
 	var productBatch = {
-		prescription_id: $("#WeightPrescriptionID").html(), // $("#showPrescriptionID").val(),
+		prescription_id: $("#WeightPrescriptionID").html(),
 		productBatch_id: $("#ProductBatchToWeight").val(),
 		status: 2,
 	};
@@ -1905,8 +1784,6 @@ function updateProductBatchToProduction() {
 		error: function (response) {
 			$("#loaderID").hide();
 			alert(response.responseJSON.message);
-			console.log("fejl: Produkt Batch ikke opdateres");
 		}
-
 	});
 }
