@@ -36,8 +36,7 @@ function listCommodities() {
 					<div class="flex inline-block justify-end px-2 ">
 								<button
 									class="modal-open bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 mx-2 rounded float-right" onClick="getCommodity(${item.commodity_id});toggleModal();">vis</button>
-								<button
-									class="bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 mx-2 rounded float-right">slet</button>
+
 							</div>
 				</td>`;
 				html += `</tr>`;
