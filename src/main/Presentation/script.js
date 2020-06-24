@@ -1730,6 +1730,7 @@ function updateProductBatchToFinish() {
 		data: JSON.stringify(productBatch),
 		success: function (response) {
 			$("#loaderID").hide();
+			openProductBatch();
 		},
 		error: function (response) {
 			$("#loaderID").hide();
