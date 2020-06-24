@@ -22,10 +22,6 @@
 		</div>
 
 
-		<div>
-			<img class="h-8 fill-white " src="health.svg" alt="">
-
-		</div>
 	</header>
 	<!--Overhead fan containing links to the different administrations-->
 	<div class="flex items-end text-white justify-start bg-gray-900">
@@ -46,7 +42,11 @@
 			data-target=".afvejning">Afvejning </a>
 	</div>
 
+
 	<div id="loginContainer" class="content-center text-center m-8 ">
+		<div>
+			<p class="text-white">Bruger 1: Alle roller, Bruger 2: Produktionsleder/laborant</p>
+		</div>
 		<h5></h5>
 		<label id="logindMsg" class="text-red-500 font-bold hidden">Brugeren er ikke aktiv </label> <br />
 		<label class="text-white font-bold">Indtast bruger ID: </label><input type="text" id="LoginUserID"></input>
@@ -294,7 +294,6 @@
 	<!--AFVEJNING WINDOW-->
 	<div class="mainWindow afvejning hidden">
 		<div class=" mainScreen afvejning relative h-screen w-5/6 bg-gray-700 float-right hidden">
-
 			<!--Create and show list components-->
 			<div class="flex justify-start inline-block h-24 px-full mb-0">
 				<a href="#" id="OpenProductBtn"
@@ -310,6 +309,8 @@
 					onclick="updateProductBatchToFinish();">Afslut</a>
 			</div>
 
+			<!--class="flex block max-w-full mx-2 rounded overflow-hidden bg-white content-center"-->
+
 			<label id="PrintDate" class="hidden">Udskrevet: </label> <br />
 
 			<label id="inputProductBatchID">Indtast Produktbatch nummer: </label><input id="ProductBatchToWeight"
@@ -322,7 +323,7 @@
 			</div>
 
 			<!--Table for showing results-->
-			<div id="WeightCommodityBatchList" class="max-w-full mx-2 rounded overflow-hidden bg-white content-center">
+			<div id="WeightCommodityBatchList">
 				<!--Insert of table -->
 			</div>
 
